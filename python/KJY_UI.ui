@@ -70,7 +70,7 @@
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton{color: rgb(255, 255, 127) ; }</string>
+           <string notr="true"/>
           </property>
           <property name="text">
            <string>offGRP</string>
@@ -99,7 +99,7 @@
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton{color: rgb(170, 255, 255) ; }</string>
+           <string notr="true"/>
           </property>
           <property name="text">
            <string>bind skin copy</string>
@@ -154,7 +154,7 @@
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton{color: rgb(170, 170, 255) ; }</string>
+           <string notr="true"/>
           </property>
           <property name="text">
            <string>jnt hierarchy</string>
@@ -196,7 +196,7 @@
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton{color: rgb(170, 255, 127) ; }</string>
+           <string notr="true">QPushButton{color:rgb(143, 216, 255); }</string>
           </property>
           <property name="text">
            <string>AtoB</string>
@@ -275,7 +275,7 @@
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton{color: rgb(255, 170, 127) ; }</string>
+           <string notr="true"/>
           </property>
           <property name="text">
            <string>rewei</string>
@@ -489,7 +489,7 @@
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton{color: rgb(255, 170, 127) ; }</string>
+           <string notr="true"/>
           </property>
           <property name="text">
            <string>ngskin_tool</string>
