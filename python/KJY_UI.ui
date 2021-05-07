@@ -140,6 +140,9 @@
             <height>23</height>
            </rect>
           </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{color:rgb(143, 216, 255); }</string>
+          </property>
           <property name="text">
            <string>skin jnt select</string>
           </property>
@@ -489,7 +492,7 @@
            </rect>
           </property>
           <property name="styleSheet">
-           <string notr="true"/>
+           <string notr="true">QPushButton{color:rgb(255, 170, 127); }</string>
           </property>
           <property name="text">
            <string>ngskin_tool</string>
