@@ -12,24 +12,32 @@ def key_value_dic(list_):
     global CTL_dic_list
     CTL_dic_list = []
     
-    for body_CTL in list_:
-        attrs = cmds.listAttr(body_CTL, k=1) # 컨트롤러마다 keyable상태인 어트리뷰트들만 한세트씩 추출
+    for rig_CTL in list_:
+        
+        key_count = cmds.keyframe( rig_CTL, query=True, keyframeCount=True ) # 선택된 컨트롤러에 키프레임 갯수 카운트
 
-        keyable_value_dic_list=[]
+        if key_count > 0: # 키가 찍혀있는 컨트롤러만 추출
 
-        for keyable in attrs:
+            attrs = cmds.listAttr(rig_CTL, k=1) # 컨트롤러마다 keyable상태인 어트리뷰트들만 한세트씩 추출
 
-            body_CTL_keyable = '%s' %(body_CTL + '.' + keyable) # 컨트롤러네임 + .keyable 상태로 추출
+            keyable_value_dic_list=[]
+
+            for keyable in attrs:
+
+                rig_CTL_keyable = '%s' %(rig_CTL + '.' + keyable) # 컨트롤러네임 + .keyable 상태로 추출
                 
-            get_frame  = cmds.keyframe( body_CTL_keyable, query=True, absolute=True ) # 해당 컨트롤러의 키가 찍혀있는 프레임을 모두 추출    
-            get_keyvalue = cmds.keyframe( body_CTL_keyable, query=True, valueChange=True) # 해당 컨트롤러의 키밸류값을 모두 추출 
+                get_frame  = cmds.keyframe( rig_CTL_keyable, query=True, absolute=True ) # 해당 컨트롤러의 키가 찍혀있는 프레임을 모두 추출    
+                get_keyvalue = cmds.keyframe( rig_CTL_keyable, query=True, valueChange=True) # 해당 컨트롤러의 키밸류값을 모두 추출 
             
-            keyable_value_dic = {keyable : [ {'frame' : get_frame},{'keyvalue' : get_keyvalue} ] } # 어트리뷰트:{프레임:값,키밸류:값} 딕셔너리
+                keyable_value_dic = {keyable : [ {'frame' : get_frame},{'keyvalue' : get_keyvalue} ] } # 어트리뷰트:{프레임:값,키밸류:값} 딕셔너리
 
-            keyable_value_dic_list.append(keyable_value_dic)
+                keyable_value_dic_list.append(keyable_value_dic)
 
-        CTL_dic = {body_CTL : keyable_value_dic_list} # 컨트롤러: {어트리뷰트:{프레임:값,키밸류:값}} 딕셔너리
-        CTL_dic_list.append(CTL_dic)
+            CTL_dic = {body_CTL : keyable_value_dic_list} # 컨트롤러: {어트리뷰트:{프레임:값,키밸류:값}} 딕셔너리
+            CTL_dic_list.append(CTL_dic)
+            
+        else:
+            pass
 
     return CTL_dic_list
     
