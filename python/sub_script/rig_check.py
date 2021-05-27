@@ -21,13 +21,14 @@ def key_value_dic(list_):
 
             body_CTL_keyable = '%s' %(body_CTL + '.' + keyable) # 컨트롤러네임 + .keyable 상태로 추출
                 
-            get_values = cmds.keyframe( body_CTL_keyable, time=(0,1000), query=True, valueChange=True) # 해당 컨트롤러의 0~1000프레임 키값을 모두 추출 
+            get_frame  = cmds.keyframe( body_CTL_keyable, query=True, absolute=True ) # 해당 컨트롤러의 키가 찍혀있는 프레임을 모두 추출    
+            get_keyvalue = cmds.keyframe( body_CTL_keyable, query=True, valueChange=True) # 해당 컨트롤러의 키밸류값을 모두 추출 
             
-            keyable_value_dic = {keyable : get_values} # 어트리뷰트:키값 딕셔너리
+            keyable_value_dic = {keyable : [ {'frame' : get_frame},{'keyvalue' : get_keyvalue} ] } # 어트리뷰트:{프레임:값,키밸류:값} 딕셔너리
 
             keyable_value_dic_list.append(keyable_value_dic)
 
-        CTL_dic = {body_CTL : keyable_value_dic_list} # 컨트롤러: {어트리뷰트:키값 리스트} 딕셔너리
+        CTL_dic = {body_CTL : keyable_value_dic_list} # 컨트롤러: {어트리뷰트:{프레임:값,키밸류:값}} 딕셔너리
         CTL_dic_list.append(CTL_dic)
 
     return CTL_dic_list
@@ -67,32 +68,40 @@ def load_json_setkey(name_): #name_은 문자열로 입력, json에있는 딕셔
         json_data = json.load(json_file)
     
 
-    # 불러온 json파일을 이용하여 키프레임을 찍는다.
     for i in json_data:
 
-
-        for key_CTL,val_attr in i.items(): #json데이터 에서 키:밸류를 추출
+        for key_CTL,val_attr in i.items(): #json데이터 에서 딕셔너리 키:밸류를 추출
             #print(key_CTL,val_attr)
 
-
-            
             for ats in i.values():
-                print key_CTL
-                print('-' * 30)
 
                 for at in ats:
                 
                     for key_at, val_at in at.items():
                     
-                        print(key_at,val_at)
                         
                         CTL_at = ('%s.%s' %(key_CTL,key_at)) #해당 컨트롤러의 어트리뷰트 네임(test_01_CTL.translateX)
+ 
                         
-                        for count, val in enumerate(val_at): # value값 리스트를 개별로 뽑아내고 순차적으로 키에 넣어준다
-                            
+                        for val in val_at: # val_at는 {프레임:값,키밸류:값}
+                            key_name = val.keys()[0] 
                         
-                            cmds.setKeyframe(CTL_at, t=(count + 1), v=val) # count는 0부터시작하므로 +1을해준다, 컨트롤러 어트리뷰트에 밸류값을 넣어서 키를찍어줌
+                        
+                            if key_name == 'frame': #딕셔너리 키값이 frame이라면 frame의 밸류값 추출
+                                frame_list  = val.get('frame')
                             
+                            
+                            if key_name == 'keyvalue': #딕셔너리 키값이 keyvalue 이라면 keyvalue의 밸류값 추출
+                                keyvalue_list = val.get('keyvalue')
+
+                            
+                
+                        for frame_, keyvalue_  in zip(frame_list,keyvalue_list): 
+                            #print 'frame = %s' %(frame_) 
+                            #print 'value = %s' %(keyvalue_)
+                        
+                            cmds.setKeyframe(CTL_at, t= frame_, v= keyvalue_) 
+                                
                             
 load_json_setkey('bbbc')
                             
