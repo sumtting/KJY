@@ -338,3 +338,11 @@ ui.show()
 # 오브젝트에 키를찍을수있는 어트리뷰트 추출(keyable)
 a = cmds.listAttr('head_M_CTL', keyable=1) 
 print a
+
+
+
+
+#깃허브에 존재하는 내용과 로컬 repository의 차이를 없애서 push작업에서 발생할 오류를 방지합니다.
+
+git pull origin master --allow-unrelated-histories 
+터미널에 입력
