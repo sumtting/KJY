@@ -1,0 +1,14 @@
+import sys
+
+RIG_check_tool_path = 'D:/KJY/python/sub_script/RIG_check_tool'
+
+sys.path.append(RIG_check_tool_path)
+
+import RIG_check_tool_UI
+reload(RIG_check_tool_UI)
+
+
+RIG_check_tool_UI.RIG_check_tool_window()
+
+
+
