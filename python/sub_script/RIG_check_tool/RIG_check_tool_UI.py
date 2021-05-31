@@ -98,7 +98,7 @@ class RIG_check_tool_window(QtCore.QObject):
 
 #----------------------------------------------------------------------------------------------
 
-
+ 
         self.ui.key_test_btn.clicked.connect(pm.Callback( self.printCurrentItem))
         
 
