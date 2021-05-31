@@ -17,6 +17,9 @@ from shiboken2 import wrapInstance
 import xml.etree.ElementTree as ET
 
 
+#import RIG_checktool_command
+from RIG_checktool_command import *
+
 
 
 
@@ -99,9 +102,25 @@ class RIG_check_tool_window(QtCore.QObject):
 #----------------------------------------------------------------------------------------------
 
  
-        self.ui.key_test_btn.clicked.connect(pm.Callback( self.printCurrentItem))
+        self.ui.key_test_btn.clicked.connect(pm.Callback( self.UI_select_menu))
+        self.ui.key_clear_btn.clicked.connect(pm.Callback( self.key_clear_load))
+       
+
+
+    def UI_select_menu(self) :
         
+        select_ = (self.ui.listWidget.currentItem().text()) #리스트위젯에서 선택했을때
+        
+        if select_ == 'body_test':
+            RIG_checktool_command.load_json_setkey('body_jsonfile')
+
+        elif select_ == 'facial_test':
+            print "Not implemented"
+
+        elif select_ == 'walk_cycle':
+            print 'wa'
 
 
-    def printCurrentItem(self) :
-        print(self.ui.listWidget_Test.currentItem().text()) #리스트위젯에서 선택했을때
+
+    def key_clear_load(self):
+        RIG_checktool_command.key_clear(body_CTL_list)

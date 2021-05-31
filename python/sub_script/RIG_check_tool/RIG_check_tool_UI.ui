@@ -39,7 +39,7 @@
       <string>key_test</string>
      </property>
     </widget>
-    <widget class="QPushButton" name="pushButton_2">
+    <widget class="QPushButton" name="key_clear_btn">
      <property name="geometry">
       <rect>
        <x>90</x>
@@ -49,10 +49,10 @@
       </rect>
      </property>
      <property name="text">
-      <string>clear</string>
+      <string>key_clear</string>
      </property>
     </widget>
-    <widget class="QListWidget" name="listWidget_Test">
+    <widget class="QListWidget" name="listWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
