@@ -17,8 +17,9 @@ from shiboken2 import wrapInstance
 import xml.etree.ElementTree as ET
 
 
-#import RIG_checktool_command
+
 from RIG_checktool_command import *
+
 
 
 
@@ -112,7 +113,7 @@ class RIG_check_tool_window(QtCore.QObject):
         select_ = (self.ui.listWidget.currentItem().text()) #리스트위젯에서 선택했을때
         
         if select_ == 'body_test':
-            RIG_checktool_command.load_json_setkey('body_jsonfile')
+            RIG_checktool_command.load_json_setkey('body_test_json')
 
         elif select_ == 'facial_test':
             print "Not implemented"
