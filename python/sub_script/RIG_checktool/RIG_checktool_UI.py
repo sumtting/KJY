@@ -111,7 +111,11 @@ class RIG_checktool_window(QtCore.QObject):
 
         self.ui.key_clear_btn.clicked.connect(pm.Callback( self.key_clear_load))
        
+
+
     reload (RIG_checktool_command)
+
+
 
     def body_listWidget_menu(self) :
         RIG_checktool_command.key_clear(body_CTL_list)
