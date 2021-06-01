@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*- 
-import maya.mel as mel
-import maya.OpenMaya as om
-import re
+
+
+
 from maya import OpenMaya, cmds
 import maya.cmds as cmds
-import pymel.core as pm
-import os
+
+
 import sys
 import maya.OpenMayaUI as MayaUI
 
@@ -27,38 +27,6 @@ import RIG_checktool_command
 
 ##!--------------------------------------------------------------------------------------------------------------------------
 # [UI]
-
-## 버튼 눌렀을 경우 위젯 숨기기
-class FrameLayout(object):
- 
-    def __init__(self, titleBar, frame):
-        self.titleBar = titleBar    # 위의 버튼 위젯
-        self.frame = frame          # 개폐하는 위젯
-        self.collapse = True       # 개폐 상태 플래그
-        self.setSignals()           # 신호를 세트
- 
-    #-------------------------------------------------------------------------
-    ## 신호를 설정
-    def setSignals(self):
-        self.titleBar.clicked.connect(self.setCollapse)
- 
-    #-------------------------------------------------------------------------
-    ## 프레임을 개폐하는 액션
-    def setCollapse(self):
-        # 현재의 상태를 반전
-        self.collapse = not self.collapse
-        # 프레임의 비지빌리티를 변경하다
-        self.frame.setHidden(self.collapse)
- 
-        # 개폐 상황에 맞게 애로우 타입을 변경하다
-        if self.collapse:
-            # 닫혀있을 때
-            self.titleBar.setArrowType(QtCore.Qt.RightArrow)
-        else:
-            # 열려 있을 때
-  
-            self.titleBar.setArrowType(QtCore.Qt.DownArrow)
-
 
 def getMayaWindow():
     #MayaUI.MQtUtil.mainWindow()
@@ -104,12 +72,12 @@ class RIG_checktool_window(QtCore.QObject):
 #----------------------------------------------------------------------------------------------
 
  
-        self.ui.body_check_btn.clicked.connect(pm.Callback( self.body_listWidget_menu))
-        self.ui.facial_check_btn.clicked.connect(pm.Callback( self.facial_listWidget_menu))
-        self.ui.ani_check_btn.clicked.connect(pm.Callback( self.ani_listWidget_menu))
+        self.ui.body_check_btn.clicked.connect(self.body_listWidget_menu)
+        self.ui.facial_check_btn.clicked.connect(self.facial_listWidget_menu)
+        self.ui.ani_check_btn.clicked.connect(self.ani_listWidget_menu)
 
 
-        self.ui.key_clear_btn.clicked.connect(pm.Callback( self.key_clear_load))
+        self.ui.key_clear_btn.clicked.connect(self.key_clear_load)
        
 
 
