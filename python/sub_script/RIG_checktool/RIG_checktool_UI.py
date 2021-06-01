@@ -19,6 +19,7 @@ import xml.etree.ElementTree as ET
 
 
 from RIG_checktool_command import *
+import RIG_checktool_command
 
 
 
@@ -66,13 +67,13 @@ def getMayaWindow():
     
 
 
-class RIG_check_tool_window(QtCore.QObject):
+class RIG_checktool_window(QtCore.QObject):
     #def __init__(self, tap):
     def __init__(self):
-        self.PATH = "D:/KJY/python/sub_script/RIG_check_tool"
-        self.ui_path = "D:/KJY/python/sub_script/RIG_check_tool/RIG_check_tool_UI.ui"
+        self.PATH = "D:/KJY/python/sub_script/RIG_checktool"
+        self.ui_path = "D:/KJY/python/sub_script/RIG_checktool/RIG_checktool_UI.ui"
         #maya_main = shiboken.wrapInstance(long(MayaUI.MQtUtil.mainWindow()), QtGui.QWidget)
-        super(RIG_check_tool_window, self).__init__(getMayaWindow()) # maya main window parent
+        super(RIG_checktool_window, self).__init__(getMayaWindow()) # maya main window parent
         # Remove previous window
         # TODO: Delete window without title.
         doc = ET.parse(self.ui_path)
@@ -103,23 +104,53 @@ class RIG_check_tool_window(QtCore.QObject):
 #----------------------------------------------------------------------------------------------
 
  
-        self.ui.key_test_btn.clicked.connect(pm.Callback( self.UI_select_menu))
+        self.ui.body_check_btn.clicked.connect(pm.Callback( self.body_listWidget_menu))
+        self.ui.facial_check_btn.clicked.connect(pm.Callback( self.facial_listWidget_menu))
+        self.ui.ani_check_btn.clicked.connect(pm.Callback( self.ani_listWidget_menu))
+
+
         self.ui.key_clear_btn.clicked.connect(pm.Callback( self.key_clear_load))
        
+    reload (RIG_checktool_command)
 
-
-    def UI_select_menu(self) :
-        
-        select_ = (self.ui.listWidget.currentItem().text()) #리스트위젯에서 선택했을때
+    def body_listWidget_menu(self) :
+        RIG_checktool_command.key_clear(body_CTL_list)
+        select_ = (self.ui.body_listWidget.currentItem().text()) #리스트위젯에서 선택했을때
         
         if select_ == 'body_test':
             RIG_checktool_command.load_json_setkey('body_test_json')
 
-        elif select_ == 'facial_test':
+        elif select_ == 'hand_test':
             print "Not implemented"
 
-        elif select_ == 'walk_cycle':
-            print 'wa'
+  
+
+    def facial_listWidget_menu(self) :
+        RIG_checktool_command.key_clear(body_CTL_list)
+        select_ = (self.ui.facial_listWidget.currentItem().text()) #리스트위젯에서 선택했을때
+        
+        if select_ == 'facial_test':
+            print "Not implemented"
+
+
+
+    def ani_listWidget_menu(self) :
+        RIG_checktool_command.key_clear(body_CTL_list)
+        select_ = (self.ui.ani_listWidget.currentItem().text()) #리스트위젯에서 선택했을때
+        
+        if select_ == 'walk_cycle':
+            RIG_checktool_command.load_json_setkey('walk_cycle_json')
+
+        elif select_ == 'run_cycle':
+            print "Not implemented"
+
+     
+            
+
+
+
+
+
 
 
 

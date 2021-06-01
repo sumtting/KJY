@@ -65,7 +65,7 @@ key_value_dic(body_CTL_list)
 def cre_json(name_, dic_list):  #name_은 문자열로 입력    
     # json 파일 생성
 
-    file_path = 'd:/KJY/python/sub_script/RIG_check_tool/json_data/'
+    file_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
     file_name = name_ + '.json'
 
     with open(file_path + file_name,'w') as save_json:
@@ -81,7 +81,7 @@ cre_json('bbbc',CTL_dic_list)
 def load_json_setkey(name_): #name_은 문자열로 입력, json에있는 딕셔너리로 키프레임을 찍어준다.
     # json 파일 불러오기
  
-    file_path = 'd:/KJY/python/sub_script/RIG_check_tool/json_data/'
+    file_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
     file_name = name_ + '.json'
 
     with open(file_path + file_name,'r') as json_file:
