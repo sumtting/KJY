@@ -110,8 +110,8 @@ def load_json_setkey(name_): #name_은 문자열로 입력, json에있는 딕셔
                             #print 'frame = %s' %(frame_) 
                             #print 'value = %s' %(keyvalue_)
 
-                            try:
-                                cmds.setKeyframe(CTL_at, t= frame_, v= keyvalue_) 
+                            try: 
+                                cmds.setKeyframe(CTL_at, t= frame_, v= keyvalue_) # 맨위에서 정의한 컨트롤러 리스트와 겹치는 컨트롤러에 대해서만 키를 찍어준다.
                             except:
                                 pass
                                 
@@ -145,14 +145,17 @@ def key_clear(list_):
     except:
         pass
         
-    cmds.delete(keyframe_list)
+    if len(keyframe_list) > 0 : # key노드가 있을경우에만 지워줌
+        cmds.delete(keyframe_list)
+    else:
+        pass
 
 
 
 
-def keyframe_minmax(name_):
+def keyframe_minmax(name_): #프레임바의 min,max값을 지정해준다.
     if name_ == 'body_test':
-        cmds.playbackOptions (min=1, max=2000, animationStartTime=1, animationEndTime=2000)
+        cmds.playbackOptions (min=1, max=1600, animationStartTime=1, animationEndTime=1600)
 
     elif name_ == 'facial_test':
         pass
