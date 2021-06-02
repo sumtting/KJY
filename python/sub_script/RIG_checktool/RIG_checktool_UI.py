@@ -72,9 +72,7 @@ class RIG_checktool_window(QtCore.QObject):
 #----------------------------------------------------------------------------------------------
 
  
-        self.ui.body_check_btn.clicked.connect(self.body_listWidget_menu)
-        self.ui.facial_check_btn.clicked.connect(self.facial_listWidget_menu)
-        self.ui.ani_check_btn.clicked.connect(self.ani_listWidget_menu)
+        self.ui.RIG_check_btn.clicked.connect(self.UI_listWidget_menu)
 
 
         self.ui.key_clear_btn.clicked.connect(self.key_clear_load)
@@ -85,9 +83,9 @@ class RIG_checktool_window(QtCore.QObject):
 
 
 
-    def body_listWidget_menu(self) :
+    def UI_listWidget_menu(self) :
         RIG_checktool_command.key_clear(body_CTL_list)
-        select_ = (self.ui.body_listWidget.currentItem().text()) #리스트위젯에서 선택했을때
+        select_ = (self.ui.RIG_check_listWidget.currentItem().text()) #리스트위젯에서 선택했을때
         
         if select_ == 'body_test':
             RIG_checktool_command.load_json_setkey('body_test_json')
@@ -95,29 +93,17 @@ class RIG_checktool_window(QtCore.QObject):
         elif select_ == 'hand_test':
             print "Not implemented"
 
-  
-
-    def facial_listWidget_menu(self) :
-        RIG_checktool_command.key_clear(body_CTL_list)
-        select_ = (self.ui.facial_listWidget.currentItem().text()) #리스트위젯에서 선택했을때
-        
-        if select_ == 'facial_test':
+        elif select_ == 'facial_test':
             print "Not implemented"
 
-
-
-    def ani_listWidget_menu(self) :
-        RIG_checktool_command.key_clear(body_CTL_list)
-        select_ = (self.ui.ani_listWidget.currentItem().text()) #리스트위젯에서 선택했을때
-        
-        if select_ == 'walk_cycle':
+        elif select_ == 'walk_cycle':
             RIG_checktool_command.load_json_setkey('walk_cycle_json')
 
         elif select_ == 'run_cycle':
-            print "Not implemented"
+            print "Not implemented" 
 
-     
-            
+  
+
 
 
 

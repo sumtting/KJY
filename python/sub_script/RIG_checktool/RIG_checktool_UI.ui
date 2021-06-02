@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>191</width>
-    <height>509</height>
+    <width>271</width>
+    <height>337</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,19 +19,19 @@
      <rect>
       <x>10</x>
       <y>10</y>
-      <width>171</width>
-      <height>141</height>
+      <width>251</width>
+      <height>281</height>
      </rect>
     </property>
     <property name="title">
-     <string>Body</string>
+     <string>RIG_check</string>
     </property>
-    <widget class="QPushButton" name="body_check_btn">
+    <widget class="QPushButton" name="RIG_check_btn">
      <property name="geometry">
       <rect>
        <x>10</x>
-       <y>110</y>
-       <width>151</width>
+       <y>220</y>
+       <width>231</width>
        <height>23</height>
       </rect>
      </property>
@@ -39,118 +39,91 @@
       <string>check</string>
      </property>
     </widget>
-    <widget class="QListWidget" name="body_listWidget">
+    <widget class="QListWidget" name="RIG_check_listWidget">
      <property name="geometry">
       <rect>
        <x>10</x>
        <y>20</y>
-       <width>151</width>
-       <height>81</height>
+       <width>231</width>
+       <height>191</height>
       </rect>
      </property>
      <item>
       <property name="text">
        <string>body_test</string>
       </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
      </item>
      <item>
       <property name="text">
-       <string>hand_test</string>
+       <string>hand</string>
       </property>
      </item>
-    </widget>
-   </widget>
-   <widget class="QPushButton" name="key_clear_btn">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>440</y>
-      <width>171</width>
-      <height>23</height>
-     </rect>
-    </property>
-    <property name="styleSheet">
-     <string notr="true">QPushButton{color:rgb(143, 216, 255); }</string>
-    </property>
-    <property name="text">
-     <string>key_clear</string>
-    </property>
-   </widget>
-   <widget class="QGroupBox" name="groupBox_2">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>150</y>
-      <width>171</width>
-      <height>141</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Facial</string>
-    </property>
-    <widget class="QPushButton" name="facial_check_btn">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>110</y>
-       <width>151</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>check</string>
-     </property>
-    </widget>
-    <widget class="QListWidget" name="facial_listWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>151</width>
-       <height>81</height>
-      </rect>
-     </property>
+     <item>
+      <property name="text">
+       <string>leg</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>-----------------------------------</string>
+      </property>
+      <property name="foreground">
+       <brush brushstyle="NoBrush">
+        <color alpha="255">
+         <red>143</red>
+         <green>216</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </property>
+      <property name="flags">
+       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsUserCheckable</set>
+      </property>
+     </item>
      <item>
       <property name="text">
        <string>facial_test</string>
       </property>
+      <property name="font">
+       <font>
+        <weight>75</weight>
+        <bold>true</bold>
+       </font>
+      </property>
      </item>
-    </widget>
-   </widget>
-   <widget class="QGroupBox" name="groupBox_3">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>290</y>
-      <width>171</width>
-      <height>141</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Animation</string>
-    </property>
-    <widget class="QPushButton" name="ani_check_btn">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>110</y>
-       <width>151</width>
-       <height>23</height>
-      </rect>
-     </property>
-     <property name="text">
-      <string>check</string>
-     </property>
-    </widget>
-    <widget class="QListWidget" name="ani_listWidget">
-     <property name="geometry">
-      <rect>
-       <x>10</x>
-       <y>20</y>
-       <width>151</width>
-       <height>81</height>
-      </rect>
-     </property>
+     <item>
+      <property name="text">
+       <string>eye</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>lip</string>
+      </property>
+     </item>
+     <item>
+      <property name="text">
+       <string>-----------------------------------</string>
+      </property>
+      <property name="foreground">
+       <brush brushstyle="NoBrush">
+        <color alpha="255">
+         <red>143</red>
+         <green>216</green>
+         <blue>255</blue>
+        </color>
+       </brush>
+      </property>
+      <property name="flags">
+       <set>ItemIsSelectable|ItemIsDragEnabled|ItemIsUserCheckable</set>
+      </property>
+     </item>
      <item>
       <property name="text">
        <string>walk_cycle</string>
@@ -162,6 +135,22 @@
       </property>
      </item>
     </widget>
+    <widget class="QPushButton" name="key_clear_btn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>250</y>
+       <width>231</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="styleSheet">
+      <string notr="true"/>
+     </property>
+     <property name="text">
+      <string>key_clear</string>
+     </property>
+    </widget>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
@@ -169,7 +158,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>191</width>
+     <width>271</width>
      <height>21</height>
     </rect>
    </property>
