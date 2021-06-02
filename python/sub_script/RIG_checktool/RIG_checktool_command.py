@@ -109,8 +109,11 @@ def load_json_setkey(name_): #name_은 문자열로 입력, json에있는 딕셔
                         for frame_, keyvalue_  in zip(frame_list,keyvalue_list): 
                             #print 'frame = %s' %(frame_) 
                             #print 'value = %s' %(keyvalue_)
-                        
-                            cmds.setKeyframe(CTL_at, t= frame_, v= keyvalue_) 
+
+                            try:
+                                cmds.setKeyframe(CTL_at, t= frame_, v= keyvalue_) 
+                            except:
+                                pass
                                 
                             
  
@@ -143,7 +146,19 @@ def key_clear(list_):
         pass
         
     cmds.delete(keyframe_list)
-    
+
+
+
+
+def keyframe_minmax(name_):
+    if name_ == 'body_test':
+        cmds.playbackOptions (min=1, max=2000, animationStartTime=1, animationEndTime=2000)
+
+    elif name_ == 'facial_test':
+        pass
+
+    elif name_ == 'walk_cycle':
+        cmds.playbackOptions (min=1, max=310, animationStartTime=1, animationEndTime=310)
     
 
 

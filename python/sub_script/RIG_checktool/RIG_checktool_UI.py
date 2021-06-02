@@ -88,6 +88,7 @@ class RIG_checktool_window(QtCore.QObject):
         select_ = (self.ui.RIG_check_listWidget.currentItem().text()) #리스트위젯에서 선택했을때
         
         if select_ == 'body_test':
+            RIG_checktool_command.keyframe_minmax('body_test')
             RIG_checktool_command.load_json_setkey('body_test_json')
 
         elif select_ == 'hand_test':
@@ -97,6 +98,7 @@ class RIG_checktool_window(QtCore.QObject):
             print "Not implemented"
 
         elif select_ == 'walk_cycle':
+            RIG_checktool_command.keyframe_minmax('walk_cycle')
             RIG_checktool_command.load_json_setkey('walk_cycle_json')
 
         elif select_ == 'run_cycle':
