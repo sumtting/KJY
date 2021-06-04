@@ -43,12 +43,7 @@ def key_value_dic(list_):
 
     return CTL_dic_list
     
-    
-    
-           
 
-
-     
 
 
 
@@ -62,10 +57,6 @@ def cre_json(name_, dic_list):  #name_은 문자열로 입력
         json.dump(dic_list, save_json, ensure_ascii=False, indent=4, sort_keys=True)
         
         
-
-
-
-
 #--------------------------------------------------------------------------------------------------
 
 def load_json_setkey(name_): #name_은 문자열로 입력, json에있는 딕셔너리로 키프레임을 찍어준다.
