@@ -94,4 +94,17 @@ def key_value_dic(list_):
 
 
         
-        
+# 실행명령
+# import sys
+
+# json_UI_path = 'D:/KJY/python/sub_script/RIG_checktool'
+
+# sys.path.append(json_UI_path)
+
+# import RIG_checktool_json
+# reload(RIG_checktool_json)
+
+
+# RIG_checktool_json.RIG_checktool_json_UI()
+
+
