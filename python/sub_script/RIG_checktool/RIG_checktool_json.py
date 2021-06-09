@@ -1,13 +1,38 @@
 # -*- coding: utf-8 -*- 
 import maya.cmds as cmds
-import pymel.core as pm
+#import pymel.core as pm
 import json
 from collections import OrderedDict
 import sys
 import os
 
 json_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
-body_CTL_list = [u'ankle_FK_L_CTL', u'knee_FK_L_CTL', u'leg_FK_L_CTL', u'toeTip_FK_L_CTL', u'toeBall_FK_L_CTL', u'toes_FK_L_CTL', u'wrist_FK_L_CTL', u'elbow_FK_L_CTL', u'shoulder_FK_L_CTL', u'toes_FK_R_CTL', u'ankle_FK_R_CTL', u'knee_FK_R_CTL', u'leg_FK_R_CTL', u'toeTip_FK_R_CTL', u'toeBall_FK_R_CTL', u'wrist_FK_R_CTL', u'elbow_FK_R_CTL', u'shoulder_FK_R_CTL', u'main_M_CTL', u'world_M_CTL', u'middleFinger_01_R_CTL', u'middleFinger_04_R_CTL', u'middleFinger_03_R_CTL', u'ringFinger_01_R_CTL', u'ringFinger_04_R_CTL', u'ringFinger_03_R_CTL', u'ringFinger_02_R_CTL', u'pelvis_FK_L_CTL', u'leg_IK_pole_L_CTL', u'leg_IKFK_switch_L_CTL', u'wrist_IK_R_CTL', u'hipSwing_M_CTL', u'shoulder_IK_pole_L_CTL', u'shoulder_IKFK_switch_L_CTL', u'scapula_FK_L_CTL', u'ankle_IK_L_CTL', u'toes_IK_R_CTL', u'ankleSub_IK_R_CTL', u'toeTip_R_CTL', u'toeBall_IK_R_CTL', u'pelvis_FK_R_CTL', u'leg_IK_pole_R_CTL', u'leg_IKFK_switch_R_CTL', u'toes_IK_L_CTL', u'thumbFinger_01_R_CTL', u'wristSub_FK_R_CTL', u'ankleSub_IK_L_CTL', u'toeTip_L_CTL', u'toeBall_IK_L_CTL', u'ringFinger_02_L_CTL', u'middleFinger_01_L_CTL', u'middleFinger_04_L_CTL', u'middleFinger_03_L_CTL', u'ringFinger_01_L_CTL', u'ringFinger_04_L_CTL', u'ringFinger_03_L_CTL', u'ankle_IK_R_CTL', u'spine_IK_MU_CTL', u'spine_IK_MM_CTL', u'spine_IK_MD_CTL', u'rootMain_M_CTL', u'neck_M_CTL', u'head_M_CTL', u'neckSub_M_CTL', u'spine_FK_03_M_CTL', u'spine_FK_04_M_CTL', u'middleFinger_02_L_CTL', u'indexFinger_01_L_CTL', u'indexFinger_04_L_CTL', u'shoulder_IK_pole_R_CTL', u'shoulder_IKFK_switch_R_CTL', u'indexFinger_03_L_CTL', u'indexFinger_02_L_CTL', u'thumbFinger_03_L_CTL', u'spine_FK_01_M_CTL', u'spine_FK_02_M_CTL', u'root_FK_M_CTL', u'sky_M_CTL', u'scapula_FK_R_CTL', u'wrist_IK_L_CTL', u'indexFinger_02_R_CTL', u'thumbFinger_03_R_CTL', u'thumbFinger_02_R_CTL', u'middleFinger_02_R_CTL', u'indexFinger_01_R_CTL', u'indexFinger_04_R_CTL', u'indexFinger_03_R_CTL', u'weapon_R_CTL', u'pinkyFinger_01_R_CTL', u'pinkyFinger_04_R_CTL', u'pinkyFinger_03_R_CTL', u'pinkyFinger_02_R_CTL', u'thumbFinger_02_L_CTL', u'thumbFinger_01_L_CTL', u'wristSub_FK_L_CTL', u'fingers_R_CTL', u'weapon_L_CTL', u'pinkyFinger_01_L_CTL', u'pinkyFinger_04_L_CTL', u'pinkyFinger_03_L_CTL', u'pinkyFinger_02_L_CTL', u'fingers_L_CTL']
+
+
+
+def load_CTL_list(): #name_은 문자열로 입력, json에있는 딕셔너리로 키프레임을 찍어준다.
+    # json 파일 불러오기
+    #global ani_CTL_list
+
+    file_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
+    file_name = 'ani_CTL_list' + '.json'
+
+    with open(file_path + file_name,'r') as json_file:
+        json_data = json.load(json_file)
+        
+
+    for i in json_data:
+        
+        ani_CTL_list = i.values()[0] #json데이터 에서 딕셔너리 키:밸류를 추출
+
+    return ani_CTL_list
+
+
+
+ani_CTL_list=load_CTL_list()
+
+        
+
 
 
 
@@ -51,20 +76,26 @@ def RIG_checktool_Json_manager():
 
 
     cmds.rowLayout('json_FromTo_rowLayout', nc=100)
-    cmds.columnLayout('json_From_columnLayout')
-    cmds.text('json_FromText', w=95, l='Json', h=20)
-    cmds.textScrollList('json_FromList',p='json_From_columnLayout', w=100, h=200, append=json_file_list)
-    cmds.rowLayout('json_FromList_btn_layout', p='json_From_columnLayout', nc=100)
-    cmds.button('json_FromListAdd_btn', w=98, l='Show CTL',c='RIG_checktool_json.json_info_query("json_FromList")')
+    #cmds.columnLayout('json_From_columnLayout')
+    # cmds.text('json_FromText', w=95, l='Json', h=20)
+    # cmds.textScrollList('json_FromList',p='json_From_columnLayout', w=100, h=200, append=json_file_list)
+    # cmds.rowLayout('json_FromList_btn_layout', p='json_From_columnLayout', nc=100)
+    # cmds.button('json_FromListAdd_btn', w=98, l='Show CTL',c='RIG_checktool_json.json_info_query("json_FromList")')
     
     
-    cmds.text('json_FromToText', p='json_FromTo_rowLayout', l='=>')
+    #cmds.text('json_FromToText', p='json_FromTo_rowLayout', l='=>')
     cmds.columnLayout('json_To_columnLayout', p='json_FromTo_rowLayout')
-    cmds.text('json_ToText', w=150, l='              CTL_list', h=20)
-    cmds.textScrollList('json_ToList', p='json_To_columnLayout', w=200, h=200, allowMultiSelection=1)
+    cmds.text('json_ToText', w=235, l='CTL_list', h=20)
+    cmds.textScrollList('json_ToList', p='json_To_columnLayout', w=250, h=400, allowMultiSelection=1,append=ani_CTL_list)
     cmds.rowLayout('json_FromList_btn_layout', p='json_To_columnLayout', nc=100)
-    cmds.button('json_FromListAdd_btn', w=98, l='Add' )
-    cmds.button('json_FromListRemove_btn', w=98, l='Remove')
+    cmds.button('json_FromListAdd_btn', w=122, l='Add' , c='RIG_checktool_json.CTL_list_btn("add")')
+    cmds.button('json_FromListRemove_btn', w=122, l='Remove', c='RIG_checktool_json.CTL_list_btn("remove")')
+    cmds.setParent (master)
+    cmds.rowColumnLayout( nr=1 )
+    cmds.text(l = ' ')
+    cmds.textField('json_FromListRename' , w = 122 )
+    cmds.text(l = ' ')
+    cmds.button('json_FromListRename_btn', w = 121, l='Rename', c='RIG_checktool_json.CTL_list_btn("rename")')
 
 
 
@@ -73,18 +104,17 @@ def RIG_checktool_Json_manager():
     cmds.rowColumnLayout( nr=1 )
     cmds.setParent (master)
     cmds.rowColumnLayout( nr=1 )
-    cmds.text('json_create', w=320, l='-' * 90, h=30)
+    cmds.text('line_text', w=252, l='-' * 60, h=30)
     cmds.setParent (master)
     cmds.rowColumnLayout( nr=1 )
     
   
-    cmds.text(l = '    ')
-    cmds.text(l = u'JsonFile_name' ,w = 80)
-    cmds.text(l = '    ')
-    cmds.textField('jsonfile_name' , w = 150 , h = 20 )
+    
+    cmds.text(l = u'Jsonfile_name' ,w = 80)
+    cmds.textField('jsonfile_name' , w = 115 , h = 20 )
     
     cmds.text(l = ' ')
-    cmds.button(l=u'create' , w = 60 , h = 20 , c = 'RIG_checktool_json.key_value_dic(body_CTL_list)')
+    cmds.button(l=u'create' , w = 50 , h = 20 , c = 'RIG_checktool_json.key_value_dic(ani_CTL_list)')
     cmds.setParent (master)
     cmds.rowColumnLayout( nr=1 )
     cmds.text(l = '      ')
@@ -145,33 +175,114 @@ def key_value_dic(list_):
 
 
 
-def json_info_query(title):
-    'textScrollList의 선택한 value를 qury 한다. '
-    text = cmds.textScrollList( title, q=1, si=1)[0]
+# def json_info_query(title):
+#     'textScrollList의 선택한 value를 qury 한다. '
+#     text = cmds.textScrollList( title, q=1, si=1)[0]
 
         
-    file_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
-    file_name = '%s'%(text)
+#     file_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
+#     file_name = '%s'%(text)
 
-    with open(file_path + file_name,'r') as json_file:
-        json_data = json.load(json_file)
+#     with open(file_path + file_name,'r') as json_file:
+#         json_data = json.load(json_file)
     
-    global json_CTL_list
-    json_CTL_list = []
+#     global json_CTL_list
+#     json_CTL_list = []
 
 
-    cmds.textScrollList('json_ToList', e=True, removeAll=True)
-    for i in json_data:
+#     cmds.textScrollList('json_ToList', e=True, removeAll=True)
+#     for i in json_data:
         
-        for CTL in i.keys(): #json데이터 에서 딕셔너리 키:밸류를 추출
+#         for CTL in i.keys(): #json데이터 에서 딕셔너리 키:밸류를 추출
             
-            cmds.textScrollList('json_ToList', e=True, append=CTL)
+#             cmds.textScrollList('json_ToList', e=True, append=CTL)
     
 
  
+def CTL_list_btn(command_):
+    
+    if command_ == 'add' :
+        sels = cmds.ls(sl=1)
+        if len(sels) > 0 :
+            for sel in sels:
+                if sel in ani_CTL_list:
+                    pass
+                else :
+                    ani_CTL_list.append(sel)
+
+            cmds.textScrollList('json_ToList', e=True, removeAll=True,append=ani_CTL_list)
+
+            new_dic_list = [{'ani_CTL_list':ani_CTL_list}]
+            file_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
+            file_name = 'ani_CTL_list' + '.json'
+            with open(file_path + file_name,'w') as save_json:
+                json.dump(new_dic_list, save_json, ensure_ascii=False, indent=4, sort_keys=True)
+
+            
+        else:
+            pass
+
+        
+
+
+
+
+    elif command_ == 'remove' :
+        sels_item = cmds.textScrollList('json_ToList', si=True,q=True)
+        
+        try:
+            for sel_item in sels_item:
+                ani_CTL_list.remove(sel_item)
+
+            cmds.textScrollList('json_ToList', e=True, removeAll=True,append=ani_CTL_list)
+
+            new_dic_list = [{'ani_CTL_list':ani_CTL_list}]
+            file_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
+            file_name = 'ani_CTL_list' + '.json'
+            with open(file_path + file_name,'w') as save_json:
+                json.dump(new_dic_list, save_json, ensure_ascii=False, indent=4, sort_keys=True)
+
+        except:
+            pass
+
+
+        
+
+    elif command_ == 'rename' :
+
+        sels_item = cmds.textScrollList('json_ToList', si=True,q=True)
+        print sels_item
+
+        rename_text = cmds.textField('json_FromListRename', text=1, q=1)
+        print rename_text
+
+       
+        ani_CTL_list.replace(sels_item,rename_text)
+                
+        cmds.textScrollList('json_ToList', e=True, removeAll=True,append=ani_CTL_list)
+
+        new_dic_list = [{'ani_CTL_list':ani_CTL_list}]
+        file_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
+        file_name = 'ani_CTL_list' + '.json'
+        with open(file_path + file_name,'w') as save_json:
+            json.dump(new_dic_list, save_json, ensure_ascii=False, indent=4, sort_keys=True)
+       
+
+
+        
+        
+
+        
+
     
 
 
+    
+    
+
+
+        
+        
 
 
 
@@ -196,3 +307,17 @@ def json_info_query(title):
 # RIG_checktool_json.RIG_checktool_Json_manager()
 
 
+
+
+
+
+# ani_CTL_list.json 의 기본 컨트롤러 항목 추출
+# def CTL_json_cre():
+
+#     CTL_dic_list = [{'ani_CTL_list' : [u'ankle_FK_L_CTL', u'knee_FK_L_CTL', u'leg_FK_L_CTL', u'toeTip_FK_L_CTL', u'toeBall_FK_L_CTL', u'toes_FK_L_CTL', u'wrist_FK_L_CTL', u'elbow_FK_L_CTL', u'shoulder_FK_L_CTL', u'toes_FK_R_CTL', u'ankle_FK_R_CTL', u'knee_FK_R_CTL', u'leg_FK_R_CTL', u'toeTip_FK_R_CTL', u'toeBall_FK_R_CTL', u'wrist_FK_R_CTL', u'elbow_FK_R_CTL', u'shoulder_FK_R_CTL', u'main_M_CTL', u'world_M_CTL', u'middleFinger_01_R_CTL', u'middleFinger_04_R_CTL', u'middleFinger_03_R_CTL', u'ringFinger_01_R_CTL', u'ringFinger_04_R_CTL', u'ringFinger_03_R_CTL', u'ringFinger_02_R_CTL', u'pelvis_FK_L_CTL', u'leg_IK_pole_L_CTL', u'leg_IKFK_switch_L_CTL', u'wrist_IK_R_CTL', u'hipSwing_M_CTL', u'shoulder_IK_pole_L_CTL', u'shoulder_IKFK_switch_L_CTL', u'scapula_FK_L_CTL', u'ankle_IK_L_CTL', u'toes_IK_R_CTL', u'ankleSub_IK_R_CTL', u'toeTip_R_CTL', u'toeBall_IK_R_CTL', u'pelvis_FK_R_CTL', u'leg_IK_pole_R_CTL', u'leg_IKFK_switch_R_CTL', u'toes_IK_L_CTL', u'thumbFinger_01_R_CTL', u'wristSub_FK_R_CTL', u'ankleSub_IK_L_CTL', u'toeTip_L_CTL', u'toeBall_IK_L_CTL', u'ringFinger_02_L_CTL', u'middleFinger_01_L_CTL', u'middleFinger_04_L_CTL', u'middleFinger_03_L_CTL', u'ringFinger_01_L_CTL', u'ringFinger_04_L_CTL', u'ringFinger_03_L_CTL', u'ankle_IK_R_CTL', u'spine_IK_MU_CTL', u'spine_IK_MM_CTL', u'spine_IK_MD_CTL', u'rootMain_M_CTL', u'neck_M_CTL', u'head_M_CTL', u'neckSub_M_CTL', u'spine_FK_03_M_CTL', u'spine_FK_04_M_CTL', u'middleFinger_02_L_CTL', u'indexFinger_01_L_CTL', u'indexFinger_04_L_CTL', u'shoulder_IK_pole_R_CTL', u'shoulder_IKFK_switch_R_CTL', u'indexFinger_03_L_CTL', u'indexFinger_02_L_CTL', u'thumbFinger_03_L_CTL', u'spine_FK_01_M_CTL', u'spine_FK_02_M_CTL', u'root_FK_M_CTL', u'sky_M_CTL', u'scapula_FK_R_CTL', u'wrist_IK_L_CTL', u'indexFinger_02_R_CTL', u'thumbFinger_03_R_CTL', u'thumbFinger_02_R_CTL', u'middleFinger_02_R_CTL', u'indexFinger_01_R_CTL', u'indexFinger_04_R_CTL', u'indexFinger_03_R_CTL', u'weapon_R_CTL', u'pinkyFinger_01_R_CTL', u'pinkyFinger_04_R_CTL', u'pinkyFinger_03_R_CTL', u'pinkyFinger_02_R_CTL', u'thumbFinger_02_L_CTL', u'thumbFinger_01_L_CTL', u'wristSub_FK_L_CTL', u'fingers_R_CTL', u'weapon_L_CTL', u'pinkyFinger_01_L_CTL', u'pinkyFinger_04_L_CTL', u'pinkyFinger_03_L_CTL', u'pinkyFinger_02_L_CTL', u'fingers_L_CTL']}]
+
+#     file_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
+#     file_name = 'ani_CTL_list' + '.json'
+
+#     with open(file_path + file_name,'w') as save_json:
+#         json.dump(CTL_dic_list, save_json, ensure_ascii=False, indent=4, sort_keys=True)
