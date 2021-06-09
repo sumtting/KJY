@@ -250,22 +250,25 @@ def CTL_list_btn(command_):
 
     elif command_ == 'rename' :
 
-        sels_item = cmds.textScrollList('json_ToList', si=True,q=True)
-        print sels_item
+        
+    
+        try:
+            sels_item = cmds.textScrollList('json_ToList', si=True,q=True)[0]
+            rename_text = cmds.textField('json_FromListRename', text=1, q=1)
+            
+            i = ani_CTL_list.index(sels_item)
+            ani_CTL_list[i] = rename_text
+                    
+            cmds.textScrollList('json_ToList', e=True, removeAll=True,append=ani_CTL_list)
 
-        rename_text = cmds.textField('json_FromListRename', text=1, q=1)
-        print rename_text
-
-       
-        ani_CTL_list.replace(sels_item,rename_text)
-                
-        cmds.textScrollList('json_ToList', e=True, removeAll=True,append=ani_CTL_list)
-
-        new_dic_list = [{'ani_CTL_list':ani_CTL_list}]
-        file_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
-        file_name = 'ani_CTL_list' + '.json'
-        with open(file_path + file_name,'w') as save_json:
-            json.dump(new_dic_list, save_json, ensure_ascii=False, indent=4, sort_keys=True)
+            new_dic_list = [{'ani_CTL_list':ani_CTL_list}]
+            file_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
+            file_name = 'ani_CTL_list' + '.json'
+            with open(file_path + file_name,'w') as save_json:
+                json.dump(new_dic_list, save_json, ensure_ascii=False, indent=4, sort_keys=True)
+        
+        except:
+            pass
        
 
 
