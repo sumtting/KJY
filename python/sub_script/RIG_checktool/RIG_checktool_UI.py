@@ -18,8 +18,11 @@ import xml.etree.ElementTree as ET
 
 
 
+
 from RIG_checktool_command import *
 import RIG_checktool_command
+import RIG_checktool_json
+
 
 
 
@@ -71,38 +74,58 @@ class RIG_checktool_window(QtCore.QObject):
 
 #----------------------------------------------------------------------------------------------
 
- 
+
+    
+
+        self.listwidget_addItem()
+
         self.ui.RIG_check_btn.clicked.connect(self.UI_listWidget_menu)
 
 
         self.ui.key_clear_btn.clicked.connect(self.key_clear_load)
+
+
+        self.ui.action_json_manager.triggered.connect(self.json_manager_load)
+
+
        
-
-
+       
     reload (RIG_checktool_command)
+    reload (RIG_checktool_json)
 
 
+    def listwidget_addItem(self):
+        json_list = RIG_checktool_command.folderlist(json_path)
+        
 
+        for json_ in json_list:
+            json_ = json_.split('.')[0]
+            if json_ == 'ani_CTL_list':
+                pass
+            else:
+                self.ui.RIG_check_listWidget.addItem(json_)
+
+       
     def UI_listWidget_menu(self) :
         RIG_checktool_command.key_clear(body_CTL_list)
         select_ = (self.ui.RIG_check_listWidget.currentItem().text()) #리스트위젯에서 선택했을때
         
-        if select_ == 'body_test':
-            RIG_checktool_command.keyframe_minmax('body_test')
-            RIG_checktool_command.load_json_setkey('body_test_json')
+        RIG_checktool_command.load_json_setkey(select_)
 
-        elif select_ == 'hand_test':
-            print "Not implemented"
+            
 
-        elif select_ == 'facial_test':
-            print "Not implemented"
 
-        elif select_ == 'walk_cycle':
-            RIG_checktool_command.keyframe_minmax('walk_cycle')
-            RIG_checktool_command.load_json_setkey('walk_cycle_json')
+    def key_clear_load(self):
+        RIG_checktool_command.key_clear(body_CTL_list)
 
-        elif select_ == 'run_cycle':
-            print "Not implemented" 
+
+    def json_manager_load(self):
+        RIG_checktool_json.RIG_checktool_Json_manager()
+
+
+
+
+
 
   
 
@@ -113,6 +136,4 @@ class RIG_checktool_window(QtCore.QObject):
 
 
 
-
-    def key_clear_load(self):
-        RIG_checktool_command.key_clear(body_CTL_list)
+    

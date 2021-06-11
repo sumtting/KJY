@@ -6,8 +6,8 @@ from collections import OrderedDict
 import sys
 import os
 
-json_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
 
+json_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
 
 
 def load_CTL_list(): #name_은 문자열로 입력, json에있는 딕셔너리로 키프레임을 찍어준다.
@@ -36,30 +36,30 @@ ani_CTL_list=load_CTL_list()
 
 
 
-def folderlist(path, include=False): # include - False = 모든 파일, folder = 폴더만, ['.ma', '.mb'] = 리스트 내용만 
-    '경로 위치의 file 이름 list 반환'
-    try:
-        file_list = os.listdir(path)
-    except:
-        file_list = []
-    folder_list = []
-    for file_ in file_list: # 파일 위치의 리스트 반환
-        if include.__class__ == list: # include가 리스트 일경우 리스트의 파일 형식만 리스트 반환
-            for incl in include:
-                if incl in file_[-1*len(incl):]:
-                    folder_list.append(file_)
-        else: # include가 리스트가 아닐 경우
-            if include == False: # include가 False 일경우 모든 파일 리스트 반환
-                folder_list.append(file_)
-            elif include == 'folder': # include가 'folder'일경우 폴더 이름만 리스트 반환
-                if not '.' in file_:
-                    folder_list.append(file_)
-            else:
-                pass
-    return folder_list
+# def folderlist(path, include=False): # include - False = 모든 파일, folder = 폴더만, ['.ma', '.mb'] = 리스트 내용만 
+#     '경로 위치의 file 이름 list 반환'
+#     try:
+#         file_list = os.listdir(path)
+#     except:
+#         file_list = []
+#     folder_list = []
+#     for file_ in file_list: # 파일 위치의 리스트 반환
+#         if include.__class__ == list: # include가 리스트 일경우 리스트의 파일 형식만 리스트 반환
+#             for incl in include:
+#                 if incl in file_[-1*len(incl):]:
+#                     folder_list.append(file_)
+#         else: # include가 리스트가 아닐 경우
+#             if include == False: # include가 False 일경우 모든 파일 리스트 반환
+#                 folder_list.append(file_)
+#             elif include == 'folder': # include가 'folder'일경우 폴더 이름만 리스트 반환
+#                 if not '.' in file_:
+#                     folder_list.append(file_)
+#             else:
+#                 pass
+#     return folder_list
 
 
-json_file_list = folderlist(json_path)
+# json_file_list = folderlist(json_path)
 
 
 
@@ -114,7 +114,7 @@ def RIG_checktool_Json_manager():
     cmds.textField('jsonfile_name' , w = 115 , h = 20 )
     
     cmds.text(l = ' ')
-    cmds.button(l=u'create' , w = 50 , h = 20 , c = 'RIG_checktool_json.key_value_dic(ani_CTL_list)')
+    cmds.button(l=u'create' , w = 50 , h = 20 , c = 'RIG_checktool_json.key_value_dic(RIG_checktool_json.load_CTL_list())')
     cmds.setParent (master)
     cmds.rowColumnLayout( nr=1 )
     cmds.text(l = '      ')
@@ -256,16 +256,20 @@ def CTL_list_btn(command_):
             sels_item = cmds.textScrollList('json_ToList', si=True,q=True)[0]
             rename_text = cmds.textField('json_FromListRename', text=1, q=1)
             
-            i = ani_CTL_list.index(sels_item)
-            ani_CTL_list[i] = rename_text
-                    
-            cmds.textScrollList('json_ToList', e=True, removeAll=True,append=ani_CTL_list)
+            if rename_text in ani_CTL_list :
+                print '%s'%(rename_text) + " match name!"
 
-            new_dic_list = [{'ani_CTL_list':ani_CTL_list}]
-            file_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
-            file_name = 'ani_CTL_list' + '.json'
-            with open(file_path + file_name,'w') as save_json:
-                json.dump(new_dic_list, save_json, ensure_ascii=False, indent=4, sort_keys=True)
+            else :
+                i = ani_CTL_list.index(sels_item)
+                ani_CTL_list[i] = rename_text
+                
+                cmds.textScrollList('json_ToList', e=True, removeAll=True,append=ani_CTL_list)
+
+                new_dic_list = [{'ani_CTL_list':ani_CTL_list}]
+                file_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
+                file_name = 'ani_CTL_list' + '.json'
+                with open(file_path + file_name,'w') as save_json:
+                    json.dump(new_dic_list, save_json, ensure_ascii=False, indent=4, sort_keys=True)
         
         except:
             pass
