@@ -70,14 +70,10 @@ class RIG_checktool_window(QtCore.QObject):
         self.ui.setAttribute(QtCore.Qt.WA_DeleteOnClose, True)          
         self.ui.show()
 
-
-
 #----------------------------------------------------------------------------------------------
 
-
-    
-
         self.listwidget_addItem()
+
 
         self.ui.RIG_check_btn.clicked.connect(self.UI_listWidget_menu)
 
@@ -87,36 +83,31 @@ class RIG_checktool_window(QtCore.QObject):
 
         self.ui.action_json_manager.triggered.connect(self.json_manager_load)
 
-
-       
-       
+        
     reload (RIG_checktool_command)
     reload (RIG_checktool_json)
 
 
-    def listwidget_addItem(self):
-        json_list = RIG_checktool_command.folderlist(json_path)
+    def listwidget_addItem(self): # UI 리스트위젯에 add item
+        json_list = RIG_checktool_command.folderlist(json_path) # folderlist 함수 쿼리(json_path 경로 폴더에있는 파일 모두 추출)
         
-
         for json_ in json_list:
             json_ = json_.split('.')[0]
-            if json_ == 'ani_CTL_list':
+            if json_ == 'ani_CTL_list': #ani_CTL_list는 컨트롤러 리스트이므로 제외
                 pass
             else:
-                self.ui.RIG_check_listWidget.addItem(json_)
+                self.ui.RIG_check_listWidget.addItem(json_) # json_path 경로 폴더에 있는 파일들을 add item
 
        
-    def UI_listWidget_menu(self) :
-        RIG_checktool_command.key_clear(body_CTL_list)
-        select_ = (self.ui.RIG_check_listWidget.currentItem().text()) #리스트위젯에서 선택했을때
+    def UI_listWidget_menu(self) : # UI 리스트위젯 item에 연결된 함수
+        RIG_checktool_command.key_clear(ani_CTL_list)
+        select_ = (self.ui.RIG_check_listWidget.currentItem().text()) #리스트위젯에서 item 선택
         
         RIG_checktool_command.load_json_setkey(select_)
 
             
-
-
     def key_clear_load(self):
-        RIG_checktool_command.key_clear(body_CTL_list)
+        RIG_checktool_command.key_clear(ani_CTL_list)
 
 
     def json_manager_load(self):

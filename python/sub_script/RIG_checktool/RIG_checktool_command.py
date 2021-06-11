@@ -4,8 +4,14 @@ import json
 from collections import OrderedDict
 import os
 
+import RIG_checktool_json
+reload (RIG_checktool_json)
+
 
 json_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
+
+ani_CTL_list = RIG_checktool_json.load_CTL_list() # ani_CTL_list.json 에서 CTL리스트만 쿼리
+
 
 
 # body의 모든 컨트롤러 리스트
@@ -106,7 +112,8 @@ def load_json_setkey(name_): #name_은 문자열로 입력, json에있는 딕셔
                                 cmds.setKeyframe(CTL_at, t= frame_, v= keyvalue_) # 맨위에서 정의한 컨트롤러 리스트와 겹치는 컨트롤러에 대해서만 키를 찍어준다.
                             except:
                                 pass
-    
+
+    # 키값에 맞게 프레임바를 조절
     if name_ == 'body_test':
         cmds.playbackOptions (min=1, max=1600, animationStartTime=1, animationEndTime=1600)
 
@@ -116,13 +123,6 @@ def load_json_setkey(name_): #name_은 문자열로 입력, json에있는 딕셔
     elif name_ == 'walk_cycle':
         cmds.playbackOptions (min=1, max=101, animationStartTime=1, animationEndTime=101)
                                 
-                            
- 
-                            
-
-       
-        
-        
 #-------------------------------------------------------------------------------------------------
 
 def key_clear(list_):
@@ -151,21 +151,7 @@ def key_clear(list_):
     else:
         pass
 
-    cmds.playbackOptions (min=1, max=10, animationStartTime=1, animationEndTime=10)
-
-
-
-
-def keyframe_minmax(name_): #프레임바의 min,max값을 지정해준다.
-    if name_ == 'body_test':
-        cmds.playbackOptions (min=1, max=1600, animationStartTime=1, animationEndTime=1600)
-
-    elif name_ == 'facial_test':
-        pass
-
-    elif name_ == 'walk_cycle':
-        cmds.playbackOptions (min=1, max=310, animationStartTime=1, animationEndTime=310)
-    
+    cmds.playbackOptions (min=1, max=200, animationStartTime=1, animationEndTime=200)
 
 
 
@@ -191,3 +177,14 @@ def folderlist(path, include=False): # include - False = 모든 파일, folder =
                 pass
     return folder_list
 
+
+
+# def keyframe_minmax(name_): #프레임바의 min,max값을 지정해준다.
+#     if name_ == 'body_test':
+#         cmds.playbackOptions (min=1, max=1600, animationStartTime=1, animationEndTime=1600)
+
+#     elif name_ == 'facial_test':
+#         pass
+
+#     elif name_ == 'walk_cycle':
+#         cmds.playbackOptions (min=1, max=310, animationStartTime=1, animationEndTime=310)
