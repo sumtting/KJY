@@ -152,6 +152,7 @@ def key_clear(list_):
         pass
 
     cmds.playbackOptions (min=1, max=200, animationStartTime=1, animationEndTime=200)
+    cmds.currentTime(1)
 
 
 

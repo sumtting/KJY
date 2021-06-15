@@ -61,7 +61,7 @@ def RIG_checktool_Json_manager(): # json_manager UI
     cmds.rowColumnLayout( nr=1 )
     cmds.setParent (master)
     cmds.rowColumnLayout( nr=1 )
-    cmds.text('line_text', w=252, l='-' * 60, h=30)
+    cmds.text('line_text', w=252, l='---------------------- Create Json ----------------------', h=30)
     cmds.setParent (master)
     cmds.rowColumnLayout( nr=1 )
     cmds.text(l = u'Jsonfile_name' ,w = 80)

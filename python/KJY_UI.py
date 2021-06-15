@@ -123,6 +123,7 @@ class KJY_window(QtCore.QObject):
         self.ui.rename_btn.clicked.connect(pm.Callback( self.rename_load))
         self.ui.jnt_on_btn.clicked.connect(pm.Callback( self.joint_on_off_load, 1))
         self.ui.jnt_off_btn.clicked.connect(pm.Callback( self.joint_on_off_load, 2))
+        self.ui.jnt_ps_btn.clicked.connect(pm.Callback( self.jnt_ps_load))
         
         
 
@@ -330,6 +331,12 @@ class KJY_window(QtCore.QObject):
     def joint_on_off_load(self,vis):
         Rig_command.joint_on_off(vis)
 
+    
+    def jnt_ps_load(self):
+        parent_check = self.ui.jnt_ps_p_cb.isChecked() # joint constraintParent 체크박스 선택
+        scale_check = self.ui.jnt_ps_s_cb.isChecked() # joint constraintSacale 체크박스 선택
+
+        Rig_command.jnt_ps(parent_check, scale_check)
 
 ## --------------------------------------------------------------------------------------------------------------------------
 # [blend]

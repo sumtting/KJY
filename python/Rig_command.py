@@ -749,6 +749,38 @@ def joint_on_off(i):
 
 
 
+def jnt_ps(parent, scale):
+    '선택한 object에 joint, joint group 을 만들고 parent 한다.'
+    a=cmds.ls(sl=1)
+    if len(a) == 0:
+        grp = cmds.group(em=1, w=1, n=  'base_skinJNT_GRP')
+        cmds.joint(n='base_skinJNT')        
+    else:
+        grp_list=[]
+        for c in a:          
+            rot = cmds.xform(c, q=1, ws=1, ro=1)
+            pos = cmds.xform(c, q=1, ws=1, rp=1)
+            if '_CTL' == c[-5:]:
+                pixed_name = c.replace('_CTL', '')
+            else :
+                pixed_name = c
+            grp = cmds.group(em=1, w=1, n= pixed_name + '_skinJNT_GRP')
+            cmds.joint(n= pixed_name + '_skinJNT')        
+            cmds.xform(grp, ws=1, ro= rot)
+            cmds.move(pos[0],pos[1], pos[2] ,grp,rpr=1)          
+            if parent :
+                cmds.parentConstraint( c,grp , mo=1, w=1)
+            else :
+                pass
+            if scale :
+                cmds.scaleConstraint( c,grp , mo=1, w=1)
+            else :
+                pass
+            grp_list.append(grp)
+        cmds.group(grp_list, n = grp_list[0] + '_GRP')
+
+
+
 ##-------------------------------------------------------------------------------------------------------------------------------------------------------
 # [follicle]
 

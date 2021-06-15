@@ -69,6 +69,9 @@
             <height>23</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 object를 '_offGRP' setting을 만들고 '_JNTGRP'을 만들어 constrain한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="styleSheet">
            <string notr="true"/>
           </property>
@@ -85,6 +88,9 @@
             <height>23</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;rename tool 실행&lt;br/&gt;#은 숫자, @는 알파벳, 띄어쓰기는 _로 대체됨&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>rename</string>
           </property>
@@ -97,6 +103,9 @@
             <width>101</width>
             <height>23</height>
            </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 skin된 object와 동일하게 bindskin 및 skincopy한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="styleSheet">
            <string notr="true"/>
@@ -114,6 +123,9 @@
             <height>23</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 object를 먼저 선택한 object의 위치에 copy한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>position copy</string>
           </property>
@@ -127,6 +139,9 @@
             <height>23</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 skin된 objec 또는 vtxt에 skincopy한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>skin copy many</string>
           </property>
@@ -139,6 +154,9 @@
             <width>101</width>
             <height>23</height>
            </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 skin된 object의 skin joint을 모두 select한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="styleSheet">
            <string notr="true">QPushButton{color:rgb(143, 216, 255); }</string>
@@ -156,6 +174,9 @@
             <height>23</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 object의 하위 joint를 모두 select한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="styleSheet">
            <string notr="true"/>
           </property>
@@ -172,6 +193,9 @@
             <height>23</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 geomtry의 같은 위치에 있는 vtx를 sets한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>same vtx set</string>
           </property>
@@ -185,6 +209,9 @@
             <height>23</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;모든 joint의 draw style을 Bone으로 바꿔준다.&lt;/p&gt;&lt;p&gt;(display unhide)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>jnt on</string>
           </property>
@@ -197,6 +224,9 @@
             <width>51</width>
             <height>23</height>
            </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 object로 위치와 방향으로 이동한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="styleSheet">
            <string notr="true">QPushButton{color:rgb(143, 216, 255); }</string>
@@ -214,6 +244,9 @@
             <height>23</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 object의 pivot을 복사한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>AtoBpv</string>
           </property>
@@ -226,6 +259,9 @@
             <width>51</width>
             <height>23</height>
            </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;모든 joint의 draw style을 None으로 바꿔준다.&lt;/p&gt;&lt;p&gt;(display hide)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
            <string>jnt off</string>
@@ -276,6 +312,9 @@
             <width>51</width>
             <height>20</height>
            </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 skin object 또는 vtx를 fix한 값만큼 weight를 지운다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="styleSheet">
            <string notr="true"/>
@@ -361,6 +400,9 @@
             <height>20</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 curve의 cv를 'fix'한 값만큼 x축으로 rotate한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>RX</string>
           </property>
@@ -373,6 +415,9 @@
             <width>50</width>
             <height>20</height>
            </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 curve의 cv를 'fix'한 값만큼 y축으로 rotate한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
            <string>RY</string>
@@ -387,6 +432,9 @@
             <height>20</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 curve의 cv를 'fix'한 값만큼 z축으로 rotate한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>RZ</string>
           </property>
@@ -399,6 +447,9 @@
             <width>34</width>
             <height>20</height>
            </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 curve의 cv를 'fix'한 값만큼 x축으로 scale한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
            <string>SX</string>
@@ -413,6 +464,9 @@
             <height>20</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 curve의 cv를 'fix'한 값만큼 xyz축으로 scale한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>SXYZ</string>
           </property>
@@ -425,6 +479,9 @@
             <width>34</width>
             <height>20</height>
            </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 curve의 cv를 'fix'한 값만큼 y축으로 scale한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
            <string>SY</string>
@@ -439,6 +496,9 @@
             <height>20</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 curve의 cv를 'fix'한 값만큼 z축으로 scale한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>SZ</string>
           </property>
@@ -451,6 +511,9 @@
             <width>101</width>
             <height>23</height>
            </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 nurbs에 follicle 1개 생성해서 붙인다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
            <string>one follicle</string>
@@ -465,6 +528,9 @@
             <height>23</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 nurbs에 follicle을 여러개 생성해서 붙인다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>many follicle</string>
           </property>
@@ -478,6 +544,9 @@
             <height>23</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 object에 group을 한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>object grp</string>
           </property>
@@ -490,6 +559,9 @@
             <width>101</width>
             <height>23</height>
            </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;ngSkin tool을 실행한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="styleSheet">
            <string notr="true">QPushButton{color:rgb(255, 170, 127); }</string>
@@ -507,6 +579,9 @@
             <height>23</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;레퍼런스로 불러온 object를 원본object에 bindskin &amp;amp; skincopy&lt;/p&gt;&lt;p&gt;스킨을 옮길 '레퍼런스 object' 를 선택하고 실행.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="styleSheet">
            <string notr="true"/>
           </property>
@@ -523,8 +598,56 @@
             <height>23</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 joint의 스킨된 object를 모두 select한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>geo of jnt</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="jnt_ps_btn">
+          <property name="geometry">
+           <rect>
+            <x>180</x>
+            <y>126</y>
+            <width>41</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 object의 위치에 'Prifix_jnt_grp', 'Prifix_jnt'를 생성한다.&lt;/p&gt;&lt;p&gt;아무것도 선택을 안했을 경우 'base_skin_jnt_grp'을 생성한다.&lt;/p&gt;&lt;p&gt;※P:'constrainParent', S:'constrainScale&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>jnt</string>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="jnt_ps_p_cb">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>130</y>
+            <width>31</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>P</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="jnt_ps_s_cb">
+          <property name="geometry">
+           <rect>
+            <x>150</x>
+            <y>130</y>
+            <width>31</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>S</string>
           </property>
          </widget>
         </widget>
@@ -563,6 +686,9 @@
             <height>23</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;같은 이름을 sets로 묶어준다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>matchname_set</string>
           </property>
@@ -575,6 +701,9 @@
             <width>101</width>
             <height>23</height>
            </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;모든 polygon object의 cleanup check&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
            <string>cleanup</string>
@@ -589,6 +718,9 @@
             <height>23</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;namespace Editor의 namespace를 모두 지워준다. ※reference 제외&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>ns remove</string>
           </property>
@@ -602,6 +734,9 @@
             <height>23</height>
            </rect>
           </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 object의 Attribute를 모두 unlock&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
           <property name="text">
            <string>attribute unlock</string>
           </property>
@@ -614,6 +749,9 @@
             <width>101</width>
             <height>23</height>
            </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 object와 동일하게 blend target을 옮겨준다.&lt;/p&gt;&lt;p&gt;* 모양이 다른 object도 가능&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
            <string>blend_copy</string>
