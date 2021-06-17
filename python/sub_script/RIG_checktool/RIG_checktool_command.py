@@ -3,6 +3,9 @@ import maya.cmds as cmds
 import json
 from collections import OrderedDict
 import os
+import maya.OpenMaya as om
+import maya.mel as mel
+
 
 import RIG_checktool_json
 reload (RIG_checktool_json)
@@ -103,7 +106,7 @@ def load_json_setkey(name_): #name_은 문자열로 입력, json에있는 딕셔
                                 keyvalue_list = val.get('keyvalue')
 
                             
-                
+
                         for frame_, keyvalue_  in zip(frame_list,keyvalue_list): 
                             #print 'frame = %s' %(frame_) 
                             #print 'value = %s' %(keyvalue_)
@@ -114,13 +117,13 @@ def load_json_setkey(name_): #name_은 문자열로 입력, json에있는 딕셔
                                 pass
 
     # 키값에 맞게 프레임바를 조절
-    if name_ == 'body_test':
-        cmds.playbackOptions (min=1, max=1600, animationStartTime=1, animationEndTime=1600)
+    if name_ == 'body parts':
+        cmds.playbackOptions (min=1, max=1900, animationStartTime=1, animationEndTime=1900)
 
     elif name_ == 'facial_test':
         pass
 
-    elif name_ == 'walk_cycle':
+    elif name_ == 'walk cycle':
         cmds.playbackOptions (min=1, max=101, animationStartTime=1, animationEndTime=101)
                                 
 #-------------------------------------------------------------------------------------------------
@@ -189,3 +192,97 @@ def folderlist(path, include=False): # include - False = 모든 파일, folder =
 
 #     elif name_ == 'walk_cycle':
 #         cmds.playbackOptions (min=1, max=310, animationStartTime=1, animationEndTime=310)
+
+
+
+# 같은 이름을 set으로 잡는다.
+def getInstances():
+    '인스턴스 같은이름'
+    
+    # 인스턴스 추출
+    instances = []
+    iterDag = om.MItDag(om.MItDag.kBreadthFirst)
+    while not iterDag.isDone():
+        instanced = om.MItDag.isInstanced(iterDag)
+        if instanced:
+            instances.append(iterDag.fullPathName())
+        iterDag.next()
+
+
+    new_instance_list = []
+    object_instance_list = []
+    for instance in instances:
+        obTy = cmds.objectType( instance )
+        if obTy == 'mesh':
+            pass
+        elif obTy == 'VRayMeshPreview':
+            pass
+        else: # object instance 만 추출
+            if '|' in instance:
+                split_instance = instance.split('|') # 경로와 이름 분리
+                new_instance = split_instance[-1] # 경로 없는 이름만 추출
+                
+                new_instance_list.append(new_instance) # 경로 없는 이름을 리스트 묶음
+                object_instance_list.append(instance)
+
+    
+    t=set([x for x in new_instance_list if new_instance_list.count(x) > 1])
+
+
+    j=list(t)
+    k=cmds.ls(j)
+    if len(k) != 0:
+        cmds.sets(object_instance_list, n='instance_matches_sets')
+    else:
+        pass
+
+
+    print(u'인스턴스 같은 이름 개수: ' + str(len(j)))
+
+
+
+def object_matches_sets():
+    'object 같은이름'
+    print('-----------------------------------------\n[match name]')
+    sels = cmds.ls()
+    d=[]
+    for sel in sels:
+        if '|' in sel:
+            g = sel.split('|')
+            k=g[-1]
+
+            d.append(k)
+
+    t=set([x for x in d if d.count(x) > 1])
+
+    j=list(t)
+    k=cmds.ls(j)
+    if len(k) != 0:
+        cmds.sets(k, n='matchname_set')
+        print(j)
+    else:
+        pass
+    
+    print(u'같은 이름 개수: ' + str(len(j)))
+
+
+
+def matchname_set():
+    object_matches_sets()
+    getInstances()
+
+
+
+def unused_node(): # unused node 삭제
+    print '-----------------------------------------\n[unused node]'
+    un_node = mel.eval ( 'MLdeleteUnused;')
+
+    if un_node == 0:
+        print (u'삭제된 노드 없음')
+
+    else:
+        print (u'삭제된 노드 개수: %d'%(un_node))
+    
+
+
+

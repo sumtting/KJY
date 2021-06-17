@@ -7,6 +7,7 @@ import sys
 import os
 
 
+
 json_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/' # json 폴더 경로
 
 
@@ -74,6 +75,8 @@ def RIG_checktool_Json_manager(): # json_manager UI
     cmds.setParent (master)
     cmds.showWindow(windowID)
 
+    
+
 
 
 def key_value_dic(list_):
@@ -97,10 +100,14 @@ def key_value_dic(list_):
                 
                 get_frame  = cmds.keyframe( rig_CTL_keyable, query=True, absolute=True ) # 해당 컨트롤러의 키가 찍혀있는 프레임을 모두 추출    
                 get_keyvalue = cmds.keyframe( rig_CTL_keyable, query=True, valueChange=True) # 해당 컨트롤러의 키밸류값을 모두 추출 
-            
-                keyable_value_dic = {keyable : [ {'frame' : get_frame},{'keyvalue' : get_keyvalue} ] } # 어트리뷰트:{프레임:값,키밸류:값} 딕셔너리
+                
+                if get_frame == None and get_keyvalue == None :
+                    pass
 
-                keyable_value_dic_list.append(keyable_value_dic)
+                else:
+                    keyable_value_dic = {keyable : [ {'frame' : get_frame},{'keyvalue' : get_keyvalue} ] } # 어트리뷰트:{프레임:값,키밸류:값} 딕셔너리
+
+                    keyable_value_dic_list.append(keyable_value_dic)
 
             CTL_dic = {rig_CTL : keyable_value_dic_list} # 컨트롤러: {어트리뷰트:{프레임:값,키밸류:값}} 딕셔너리
             CTL_dic_list.append(CTL_dic)
@@ -122,6 +129,7 @@ def key_value_dic(list_):
     
 def CTL_list_btn(command_): # json_manager UI에서 버튼을 눌렀을때 실행되는 함수 (ani_CTL_list.json에 대한 수정)
     # 누른버튼에 대한 코드를 실행하고 textScrollList 과 json파일을 새로 업데이트 시켜준다.
+    
     
     if command_ == 'add' : # 선택한 오브젝트를 ani_CTL_list에 추가
         sels = cmds.ls(sl=1) 

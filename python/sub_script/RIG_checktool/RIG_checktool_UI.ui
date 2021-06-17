@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>276</width>
-    <height>329</height>
+    <height>358</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -20,16 +20,16 @@
       <x>10</x>
       <y>0</y>
       <width>251</width>
-      <height>281</height>
+      <height>311</height>
      </rect>
     </property>
     <property name="layoutDirection">
      <enum>Qt::LeftToRight</enum>
     </property>
     <property name="title">
-     <string>check_list</string>
+     <string>key preset</string>
     </property>
-    <widget class="QPushButton" name="RIG_check_btn">
+    <widget class="QPushButton" name="key_check_btn">
      <property name="geometry">
       <rect>
        <x>10</x>
@@ -39,7 +39,7 @@
       </rect>
      </property>
      <property name="text">
-      <string>check</string>
+      <string>key check</string>
      </property>
     </widget>
     <widget class="QListWidget" name="RIG_check_listWidget">
@@ -65,7 +65,26 @@
       <string notr="true"/>
      </property>
      <property name="text">
-      <string>key_clear</string>
+      <string>key clear</string>
+     </property>
+    </widget>
+    <widget class="QPushButton" name="final_check_btn">
+     <property name="geometry">
+      <rect>
+       <x>10</x>
+       <y>280</y>
+       <width>231</width>
+       <height>23</height>
+      </rect>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;1. match name&lt;br/&gt;2. unused node&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="styleSheet">
+      <string notr="true">QPushButton{color:rgb(143, 216, 255); }</string>
+     </property>
+     <property name="text">
+      <string>final check</string>
      </property>
     </widget>
    </widget>

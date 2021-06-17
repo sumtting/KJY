@@ -27,6 +27,8 @@ import RIG_checktool_json
 
 
 
+
+
 ##!--------------------------------------------------------------------------------------------------------------------------
 # [UI]
 
@@ -74,10 +76,13 @@ class RIG_checktool_window(QtCore.QObject):
         self.listwidget_addItem()
 
 
-        self.ui.RIG_check_btn.clicked.connect(self.UI_listWidget_menu)
+        self.ui.key_check_btn.clicked.connect(self.UI_listWidget_menu)
 
 
         self.ui.key_clear_btn.clicked.connect(self.key_clear_load)
+
+
+        self.ui.final_check_btn.clicked.connect(self.final_check_load)
 
 
         self.ui.action_json_manager.triggered.connect(self.json_manager_load)
@@ -107,6 +112,11 @@ class RIG_checktool_window(QtCore.QObject):
             
     def key_clear_load(self):
         RIG_checktool_command.key_clear(ani_CTL_list)
+
+
+    def final_check_load(self):
+        RIG_checktool_command.matchname_set()
+        RIG_checktool_command.unused_node()
 
 
     def json_manager_load(self):
