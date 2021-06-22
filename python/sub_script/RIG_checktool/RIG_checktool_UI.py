@@ -100,7 +100,15 @@ class RIG_checktool_window(QtCore.QObject):
             if json_ == 'ani_CTL_list': #ani_CTL_list는 컨트롤러 리스트이므로 제외
                 pass
             else:
-                self.ui.RIG_check_listWidget.addItem(json_) # json_path 경로 폴더에 있는 파일들을 add item
+                self.ui.RIG_check_listWidget.addItem(json_)
+                # if "body" in json_:
+                #     self.ui.RIG_check_listWidget.insertItem(1,json_) # json_path 경로 폴더에 있는 파일들을 add item
+                
+                # elif "facial" in json_:
+                #     self.ui.RIG_check_listWidget.insertItem(4,json_) # json_path 경로 폴더에 있는 파일들을 add item
+
+                # elif "cycle" in json_:
+                #     self.ui.RIG_check_listWidget.insertItem(7,json_) # json_path 경로 폴더에 있는 파일들을 add item 
 
        
     def UI_listWidget_menu(self) : # UI 리스트위젯 item에 연결된 함수
