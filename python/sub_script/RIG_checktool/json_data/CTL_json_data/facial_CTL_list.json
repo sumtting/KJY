@@ -1,0 +1,18 @@
+[
+    {
+        "RIG_CTL_list": [
+            "eyebrow_L_CTL", 
+            "eyelash_L_CTL",
+            "eyebrow_R_CTL", 
+            "eyelash_R_CTL", 
+            "lip_M_CTL", 
+            "lip_L_CTL", 
+            "lip_R_CTL", 
+            "cheek_L_CTL", 
+            "cheek_R_CTL", 
+            "jaw_01_CTL", 
+            "jaw_02_CTL", 
+            "head_CTL"
+        ]
+    }
+]

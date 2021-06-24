@@ -1,0 +1,17 @@
+[
+    {
+        "RIG_CTL_list": [
+            "knee_FK_L_CTL", 
+            "leg_FK_L_CTL", 
+            "ankle_FK_R_CTL", 
+            "knee_FK_R_CTL", 
+            "leg_FK_R_CTL", 
+            "toeTip_FK_R_CTL", 
+            "toeBall_FK_R_CTL", 
+            "toes_FK_R_CTL", 
+            "toeTip_FK_L_CTL", 
+            "toeBall_FK_L_CTL", 
+            "toes_FK_L_CTL"
+        ]
+    }
+]

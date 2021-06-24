@@ -93,22 +93,49 @@ class RIG_checktool_window(QtCore.QObject):
 
 
     def listwidget_addItem(self): # UI 리스트위젯에 add item
+        scene_list = cmds.ls(type='objectSet')
+
         json_list = RIG_checktool_command.folderlist(json_path) # folderlist 함수 쿼리(json_path 경로 폴더에있는 파일 모두 추출)
         
         for json_ in json_list:
             json_ = json_.split('.')[0]
-            if json_ == 'ani_CTL_list': #ani_CTL_list는 컨트롤러 리스트이므로 제외
-                pass
-            else:
-                self.ui.RIG_check_listWidget.addItem(json_)
-                # if "body" in json_:
-                #     self.ui.RIG_check_listWidget.insertItem(1,json_) # json_path 경로 폴더에 있는 파일들을 add item
-                
-                # elif "facial" in json_:
-                #     self.ui.RIG_check_listWidget.insertItem(4,json_) # json_path 경로 폴더에 있는 파일들을 add item
 
-                # elif "cycle" in json_:
-                #     self.ui.RIG_check_listWidget.insertItem(7,json_) # json_path 경로 폴더에 있는 파일들을 add item 
+            if 'human_set' in scene_list:
+                
+                if 'facial_set' in scene_list:
+
+                    if "body" in json_:
+                        self.ui.RIG_check_listWidget.addItem(json_) # json_path 경로 폴더에 있는 파일들을 add item
+
+                    elif "facial" in json_:
+                        self.ui.RIG_check_listWidget.addItem(json_) 
+
+                else:
+                    if "body" in json_:
+                        self.ui.RIG_check_listWidget.addItem(json_) 
+
+
+
+            elif 'facial_set' in scene_list:
+                if "facial" in json_:
+                    self.ui.RIG_check_listWidget.addItem(json_) 
+
+
+            elif 'quadruped_set' in scene_list:
+                if "quadruped" in json_:
+                    self.ui.RIG_check_listWidget.addItem(json_) 
+
+
+            elif 'vehicle_set' in scene_list:
+                if "vehicle" in json_:
+                    self.ui.RIG_check_listWidget.addItem(json_)                        
+
+
+
+
+                        
+
+
 
        
     def UI_listWidget_menu(self) : # UI 리스트위젯 item에 연결된 함수

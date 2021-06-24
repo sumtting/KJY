@@ -12,8 +12,75 @@ reload (RIG_checktool_json)
 
 
 json_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
+RIG_CTL_list_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/CTL_json_data/'
 
-ani_CTL_list = RIG_checktool_json.load_CTL_list() # ani_CTL_list.json 에서 CTL리스트만 쿼리
+# def find_rigset():
+    
+#     scene_list = cmds.ls(type='objectSet')
+
+#     if 'human_set' in scene_list:
+            
+#         if 'facial_set' in scene_list:
+#             human_set_index = scene_list.index('human_set')
+#             human_set = scene_list[human_set_index]
+
+#             facial_set_index = scene_list.index('facial_set')
+#             facial_set = scene_list[facial_set_index]
+
+#         else:
+#             human_set_index = scene_list.index('human_set')
+#             human_set = scene_list[human_set_index]
+
+#     elif 'facial_set' in scene_list:
+#         facial_set_index = scene_list.index('facial_set')
+#         facial_set = scene_list[facial_set_index]
+
+#     elif 'quadruped_set' in scene_list :
+#         quadruped_set_index = scene_list.index('quadruped_set')
+#         quadruped_set = scene_list[quadruped_set_index]
+
+
+#     return human_set
+#     return facial_set
+#     return quadruped_set
+
+
+def load_CTL_list(): # ani_CTL_list.json에서 밸류값(CTL_list)만 추출
+    global ani_CTL_list
+    
+
+    scene_list = cmds.ls(type='objectSet')
+    
+    if 'human_set' in scene_list:
+        file_name = 'body_CTL_list' + '.json'
+
+    elif 'quadruped_set' in scene_list:
+        file_name = 'quadruped_CTL_list' + '.json'
+
+    elif 'vehicle_set' in scene_list:
+        file_name = 'vehicle_CTL_list' + '.json'
+
+
+    
+    
+    file_path = RIG_CTL_list_path
+    
+    with open(file_path + file_name,'r') as json_file:
+        json_data = json.load(json_file)
+    
+
+    for i in json_data:
+        
+        ani_CTL_list = i.values()[0] #json데이터 에서 밸류를 추출
+
+    return ani_CTL_list
+
+ani_CTL_list=load_CTL_list() #ani_CTL_list를 정의해준다(ani_CTL_list.json에서 CTL만 추출)
+
+
+
+
+
 
 
 
@@ -282,7 +349,7 @@ def unused_node(): # unused node 삭제
 
     else:
         print (u'삭제된 노드 개수: %d'%(un_node))
-    
 
+    
 
 
