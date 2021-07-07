@@ -12,34 +12,9 @@ reload (RIG_checktool_command)
 
 
 json_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/' # json 폴더 경로
-RIG_CTL_list_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/CTL_json_data/'
 
 
-def load_CTL_list(): # ani_CTL_list.json에서 밸류값(CTL_list)만 추출
-    global ani_CTL_list
-
-    scene_list = cmds.ls(type='objectSet')
-    
-    if 'human_set' in scene_list:
-        file_name = 'body_CTL_list' + '.json'
-
-    elif 'quadruped_set' in scene_list:
-        file_name = 'quadruped_CTL_list' + '.json'
-
-
-    
-    file_path = RIG_CTL_list_path
-    
-    with open(file_path + file_name,'r') as json_file:
-        json_data = json.load(json_file)
-    
-
-    for i in json_data:
-        
-        ani_CTL_list = i.values()[0] #json데이터 에서 밸류를 추출
-
-    return ani_CTL_list
-
+load_CTL_list_re = RIG_checktool_command.load_CTL_list()
 
 
 
@@ -95,11 +70,11 @@ def RIG_checktool_Json_manager(): # json_manager UI
     ##master layer
     master = cmds.columnLayout()
     cmds.columnLayout()
-    cmds.text('line_text', w=252, l='RIG CTL Json', h=20)
+    cmds.text('line_text', w=252, l='CTL List', h=20)
     cmds.rowLayout('json_FromTo_rowLayout', nc=100)
     cmds.columnLayout('json_list_columnLayout', p='json_FromTo_rowLayout')
     cmds.textScrollList('json_list', p='json_list_columnLayout', w=250 , h=100, allowMultiSelection=0, append=textScrollList_addItem()) # textScrollList에 ani_CTL_list를 표시
-    cmds.button('json_list_btn', w=250, l=u'View' , c='RIG_checktool_json.RIG_CTL_Json_btn("check")') #CTL_list add 버튼
+    cmds.button('json_list_btn', w=250, l=u'View' , c='RIG_checktool_json.RIG_CTL_Json_btn("view")') #CTL_list add 버튼
     cmds.text(l = ' ')
     cmds.columnLayout('json_To_columnLayout', p='json_list_columnLayout')
     cmds.textScrollList('json_ToList', p='json_To_columnLayout', w=250, h=400) # textScrollList에 ani_CTL_list를 표시
@@ -121,7 +96,7 @@ def RIG_checktool_Json_manager(): # json_manager UI
     cmds.text(l = u'Jsonfile name' ,w = 80)
     cmds.textField('jsonfile_name' , w = 115 , h = 20 )
     cmds.text(l = ' ')
-    cmds.button(l=u'create' , w = 50 , h = 20 , c = 'RIG_checktool_json.key_value_dic(RIG_checktool_json.load_CTL_list())') #json파일 생성 command
+    cmds.button(l=u'create' , w = 50 , h = 20 , c = 'RIG_checktool_json.key_value_dic(RIG_checktool_json.load_CTL_list_re)') #json파일 생성 command
     cmds.setParent (master)
     cmds.rowColumnLayout( nr=1 )
     cmds.text(l = '      ')
@@ -172,10 +147,13 @@ def key_value_dic(list_):
     # Json 파일 생성 ---------------------------------------------------------------------
     jsonfile_name = cmds.textField('jsonfile_name' , q = 1 , text = True )
 
-    file_path = json_path
+    sels_json = cmds.textScrollList('json_list', si=True,q=True)[0]
+    sels_ = sels_json.split('_CTL')[0]
+
+    file_path = json_path + sels_ + '_set/'
     file_name = jsonfile_name + '.json'
 
-    keypreset_json_list = RIG_checktool_command.folderlist(json_path)
+    keypreset_json_list = RIG_checktool_command.folderlist(file_path)
 
     if file_name in keypreset_json_list:
         sub_windowID='message_box'
@@ -203,10 +181,14 @@ def key_value_dic(list_):
 
 
 def message_yes_btn(CTL_list,ID):
-    key_value_dic_create(load_CTL_list()) # CTL_dic_list을 정의하기 위해 호출
+    sels_json = cmds.textScrollList('json_list', si=True,q=True)[0]
+    sels_ = sels_json.split('_CTL')[0]
+    file_path = json_path + sels_ + '_set/'
+
+    key_value_dic_create(load_CTL_list_re) # CTL_dic_list을 정의하기 위해 호출
     file_name = cmds.textField('jsonfile_name' , q = 1 , text = True )
     file_name = file_name + '.json'
-    with open(json_path + file_name,'w') as save_json:
+    with open(file_path + file_name,'w') as save_json:
             json.dump(CTL_dic_list, save_json, ensure_ascii=False, indent=4, sort_keys=True)
     cmds.deleteUI(ID)
     
@@ -223,9 +205,12 @@ def message_no_btn(ID):
     
 def CTL_list_btn(command_): # json_manager UI에서 버튼을 눌렀을때 실행되는 함수 (ani_CTL_list.json에 대한 수정)
     # 누른버튼에 대한 코드를 실행하고 textScrollList 과 json파일을 새로 업데이트 시켜준다.
-    
+    sels_json = cmds.textScrollList('json_list', si=True,q=True)[0]
+    sels_ = sels_json.split('_CTL')[0]
+    file_path = json_path + sels_ + '_set/'
     
     if command_ == 'add' : # 선택한 오브젝트를 ani_CTL_list에 추가
+
         sels = cmds.ls(sl=1) 
         if len(sels) > 0 : 
             for sel in sels:
@@ -237,7 +222,6 @@ def CTL_list_btn(command_): # json_manager UI에서 버튼을 눌렀을때 실�
             cmds.textScrollList('json_ToList', e=True, removeAll=True,append=RIG_CTL_list) # 기존 textScrollList를 지우고 새로 업데이트
 
             new_dic_list = [{'RIG_CTL_list':RIG_CTL_list}] # 새로 딕셔너리를 정의해주고 json을 다시 만든다.
-            file_path = RIG_CTL_list_path
             file_name = sels_json + '.json'
             with open(file_path + file_name,'w') as save_json:
                 json.dump(new_dic_list, save_json, ensure_ascii=False, indent=4, sort_keys=True)
@@ -257,7 +241,7 @@ def CTL_list_btn(command_): # json_manager UI에서 버튼을 눌렀을때 실�
             cmds.textScrollList('json_ToList', e=True, removeAll=True,append=RIG_CTL_list)
 
             new_dic_list = [{'RIG_CTL_list':RIG_CTL_list}]
-            file_path = RIG_CTL_list_path
+
             file_name = sels_json + '.json'
             with open(file_path + file_name,'w') as save_json:
                 json.dump(new_dic_list, save_json, ensure_ascii=False, indent=4, sort_keys=True)
@@ -283,7 +267,7 @@ def CTL_list_btn(command_): # json_manager UI에서 버튼을 눌렀을때 실�
                 cmds.textScrollList('json_ToList', e=True, removeAll=True,append=RIG_CTL_list)
 
                 new_dic_list = [{'RIG_CTL_list':RIG_CTL_list}]
-                file_path = RIG_CTL_list_path
+                
                 file_name = sels_json + '.json'
                 with open(file_path + file_name,'w') as save_json:
                     json.dump(new_dic_list, save_json, ensure_ascii=False, indent=4, sort_keys=True)
@@ -293,48 +277,23 @@ def CTL_list_btn(command_): # json_manager UI에서 버튼을 눌렀을때 실�
        
 
 def textScrollList_addItem(): 
-        scene_list = cmds.ls(type='objectSet')
-
-        json_list = RIG_checktool_command.folderlist(RIG_CTL_list_path) # folderlist 함수 쿼리(json_path 경로 폴더에있는 파일 모두 추출)
-       
+        scene_list = cmds.ls(type='objectSet') # 씬에있는 모든 set을 쿼리
+        json_list = RIG_checktool_command.folderlist(json_path) # folderlist 함수 쿼리(json_path 경로 폴더에있는 파일 모두 추출)
+        same_result = [x for x in scene_list if x in json_list] # 오토리깅을 불러왔을때 잡혀있는 set의 이름과 겹치는 json폴더만 쿼리
         CTL_list_json = []
 
-        for json_ in json_list:
-            json_ = json_.split('.')[0]
+        for same_ in same_result:
+            json_list = RIG_checktool_command.folderlist(json_path + same_)
 
-            if 'human_set' in scene_list:
+            for json_ in json_list:
+                json_ = json_.split('.json')[0]
+
+                if '_CTL' in json_: # 오토리깅의 CTL리스트는 addItem항목에서 제외시킨다.(리스트위젯에는 키프리셋만 표기하기위함)
+                    CTL_list_json.append(json_)
                 
-                if 'facial_set' in scene_list:
-
-                    if "body" in json_:
-                        CTL_list_json.append(json_)
-
-                    elif "facial" in json_:
-                        CTL_list_json.append(json_)
-
                 else:
-                    if "body" in json_:
-                        CTL_list_json.append(json_)
+                    pass
 
-
-            elif 'facial_set' in scene_list:
-                if "facial" in json_:
-                    CTL_list_json.append(json_)
-
-
-            elif 'quadruped_set' in scene_list:
-                if "quadruped" in json_:
-                    CTL_list_json.append(json_)
-
-
-            elif 'vehicle_set' in scene_list:
-                if "vehicle" in json_:
-                    CTL_list_json.append(json_)                 
-
-
-
-
-            #CTL_list_json.append(json_)
         return CTL_list_json
                 
         
@@ -344,11 +303,11 @@ def RIG_CTL_Json_btn(command_): # json_manager UI에서 버튼을 눌렀을때 �
     global sels_json
     global RIG_CTL_list
     
-    if command_ == 'check' : # 선택한 오브젝트를 ani_CTL_list에 추가
+    if command_ == 'view' : 
         sels_json = cmds.textScrollList('json_list', si=True,q=True)[0]
+        sels_ = sels_json.split('_CTL')[0]
         
-        
-        file_path = RIG_CTL_list_path
+        file_path = json_path + sels_ + '_set/'
         file_name = sels_json + '.json'
 
         with open(file_path + file_name,'r') as json_file:
@@ -369,39 +328,3 @@ def RIG_CTL_Json_btn(command_): # json_manager UI에서 버튼을 눌렀을때 �
         
 
         
-#-----------------------------------------------------------------------------------------------------------------------------------------------------        
-
-
-# def CTL_json_cre(): # ani_CTL_list.json 의 기본 컨트롤러 항목 추출
-
-#     CTL_dic_list = [{'ani_CTL_list' : [u'ankle_FK_L_CTL', u'knee_FK_L_CTL', u'leg_FK_L_CTL', u'toeTip_FK_L_CTL', u'toeBall_FK_L_CTL', u'toes_FK_L_CTL', u'wrist_FK_L_CTL', u'elbow_FK_L_CTL', u'shoulder_FK_L_CTL', u'toes_FK_R_CTL', u'ankle_FK_R_CTL', u'knee_FK_R_CTL', u'leg_FK_R_CTL', u'toeTip_FK_R_CTL', u'toeBall_FK_R_CTL', u'wrist_FK_R_CTL', u'elbow_FK_R_CTL', u'shoulder_FK_R_CTL', u'main_M_CTL', u'world_M_CTL', u'middleFinger_01_R_CTL', u'middleFinger_04_R_CTL', u'middleFinger_03_R_CTL', u'ringFinger_01_R_CTL', u'ringFinger_04_R_CTL', u'ringFinger_03_R_CTL', u'ringFinger_02_R_CTL', u'pelvis_FK_L_CTL', u'leg_IK_pole_L_CTL', u'leg_IKFK_switch_L_CTL', u'wrist_IK_R_CTL', u'hipSwing_M_CTL', u'shoulder_IK_pole_L_CTL', u'shoulder_IKFK_switch_L_CTL', u'scapula_FK_L_CTL', u'ankle_IK_L_CTL', u'toes_IK_R_CTL', u'ankleSub_IK_R_CTL', u'toeTip_R_CTL', u'toeBall_IK_R_CTL', u'pelvis_FK_R_CTL', u'leg_IK_pole_R_CTL', u'leg_IKFK_switch_R_CTL', u'toes_IK_L_CTL', u'thumbFinger_01_R_CTL', u'wristSub_FK_R_CTL', u'ankleSub_IK_L_CTL', u'toeTip_L_CTL', u'toeBall_IK_L_CTL', u'ringFinger_02_L_CTL', u'middleFinger_01_L_CTL', u'middleFinger_04_L_CTL', u'middleFinger_03_L_CTL', u'ringFinger_01_L_CTL', u'ringFinger_04_L_CTL', u'ringFinger_03_L_CTL', u'ankle_IK_R_CTL', u'spine_IK_MU_CTL', u'spine_IK_MM_CTL', u'spine_IK_MD_CTL', u'rootMain_M_CTL', u'neck_M_CTL', u'head_M_CTL', u'neckSub_M_CTL', u'spine_FK_03_M_CTL', u'spine_FK_04_M_CTL', u'middleFinger_02_L_CTL', u'indexFinger_01_L_CTL', u'indexFinger_04_L_CTL', u'shoulder_IK_pole_R_CTL', u'shoulder_IKFK_switch_R_CTL', u'indexFinger_03_L_CTL', u'indexFinger_02_L_CTL', u'thumbFinger_03_L_CTL', u'spine_FK_01_M_CTL', u'spine_FK_02_M_CTL', u'root_FK_M_CTL', u'sky_M_CTL', u'scapula_FK_R_CTL', u'wrist_IK_L_CTL', u'indexFinger_02_R_CTL', u'thumbFinger_03_R_CTL', u'thumbFinger_02_R_CTL', u'middleFinger_02_R_CTL', u'indexFinger_01_R_CTL', u'indexFinger_04_R_CTL', u'indexFinger_03_R_CTL', u'weapon_R_CTL', u'pinkyFinger_01_R_CTL', u'pinkyFinger_04_R_CTL', u'pinkyFinger_03_R_CTL', u'pinkyFinger_02_R_CTL', u'thumbFinger_02_L_CTL', u'thumbFinger_01_L_CTL', u'wristSub_FK_L_CTL', u'fingers_R_CTL', u'weapon_L_CTL', u'pinkyFinger_01_L_CTL', u'pinkyFinger_04_L_CTL', u'pinkyFinger_03_L_CTL', u'pinkyFinger_02_L_CTL', u'fingers_L_CTL']}]
-
-#     file_path = RIG_CTL_list_path
-#     file_name = 'ani_CTL_list' + '.json'
-
-#     with open(file_path + file_name,'w') as save_json:
-#         json.dump(CTL_dic_list, save_json, ensure_ascii=False, indent=4, sort_keys=True)
-
-
-
-# def json_info_query(title):
-#     'textScrollList의 선택한 value를 qury 한다. '
-#     text = cmds.textScrollList( title, q=1, si=1)[0]
-
-        
-#     file_path = RIG_CTL_list_path
-#     file_name = '%s'%(text)
-
-#     with open(file_path + file_name,'r') as json_file:
-#         json_data = json.load(json_file)
-    
-#     global json_CTL_list
-#     json_CTL_list = []
-
-
-#     cmds.textScrollList('json_ToList', e=True, removeAll=True)
-#     for i in json_data:
-        
-#         for CTL in i.keys(): #json데이터 에서 딕셔너리 키:밸류를 추출
-            
-#             cmds.textScrollList('json_ToList', e=True, append=CTL)

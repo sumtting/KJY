@@ -93,47 +93,26 @@ class RIG_checktool_window(QtCore.QObject):
 
 
     def listwidget_addItem(self): # UI 리스트위젯에 add item
-        scene_list = cmds.ls(type='objectSet')
+        scene_list = cmds.ls(type='objectSet') # 씬에있는 모든 set을 쿼리
+        
 
         json_list = RIG_checktool_command.folderlist(json_path) # folderlist 함수 쿼리(json_path 경로 폴더에있는 파일 모두 추출)
         
-        for json_ in json_list:
-            json_ = json_.split('.')[0]
 
-            if 'human_set' in scene_list:
-                
-                if 'facial_set' in scene_list:
+        same_result = [x for x in scene_list if x in json_list] # 오토리깅을 불러왔을때 잡혀있는 set의 이름과 겹치는 json폴더만 쿼리
+        
+        for same_ in same_result:
+            json_list = RIG_checktool_command.folderlist(json_path + same_ + '/')
 
-                    if "body" in json_:
-                        self.ui.RIG_check_listWidget.addItem(json_) # json_path 경로 폴더에 있는 파일들을 add item
+            for json_ in json_list:
+                json_ = json_.split('.json')[0]
 
-                    elif "facial" in json_:
-                        self.ui.RIG_check_listWidget.addItem(json_) 
+                if '_CTL' in json_: # 오토리깅의 CTL리스트는 addItem항목에서 제외시킨다.(리스트위젯에는 키프리셋만 표기하기위함)
+                    pass
 
                 else:
-                    if "body" in json_:
-                        self.ui.RIG_check_listWidget.addItem(json_) 
-
-
-
-            elif 'facial_set' in scene_list:
-                if "facial" in json_:
-                    self.ui.RIG_check_listWidget.addItem(json_) 
-
-
-            elif 'quadruped_set' in scene_list:
-                if "quadruped" in json_:
-                    self.ui.RIG_check_listWidget.addItem(json_) 
-
-
-            elif 'vehicle_set' in scene_list:
-                if "vehicle" in json_:
-                    self.ui.RIG_check_listWidget.addItem(json_)                        
-
-
-
-
-                        
+                    self.ui.RIG_check_listWidget.addItem(json_)
+            
 
 
 
@@ -143,6 +122,7 @@ class RIG_checktool_window(QtCore.QObject):
         select_ = (self.ui.RIG_check_listWidget.currentItem().text()) #리스트위젯에서 item 선택
         
         RIG_checktool_command.load_json_setkey(select_)
+        RIG_checktool_command.key_framebar(ani_CTL_list)
 
             
     def key_clear_load(self):

@@ -2,7 +2,7 @@ a = cmds.xform(sel,q=1,rp=1, ws=1) #트랜스값 추출
 
 a = cmds.xform(sel,q=1,ro=1, ws=1) #로테이션값 추출
 
-cmds.xform(fk_ofs, ws=1, t= pos) # fk_ofs을 pos의위치로 이동
+#cmds.xform(fk_ofs, ws=1, t= pos) # fk_ofs을 pos의위치로 이동
 
 ㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡㅡ
 
