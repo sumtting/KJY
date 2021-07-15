@@ -102,7 +102,7 @@ class RIG_checktool_window(QtCore.QObject):
         same_result = [x for x in scene_list if x in json_list] # 오토리깅을 불러왔을때 잡혀있는 set의 이름과 겹치는 json폴더만 쿼리
         
         for same_ in same_result:
-            json_list = RIG_checktool_command.folderlist(json_path + same_ + '/')
+            json_list = RIG_checktool_command.folderlist(json_path + same_ + '/') #set과 이름이 겹치는 폴더를 경로로 지정하게된다.
 
             for json_ in json_list:
                 json_ = json_.split('.json')[0]
@@ -112,6 +112,7 @@ class RIG_checktool_window(QtCore.QObject):
 
                 else:
                     self.ui.RIG_check_listWidget.addItem(json_)
+                    # 해당되는 오토리깅set에 맞는 키프리셋json 파일만 리스트위젯에 addItem해준다.
             
 
 
@@ -119,7 +120,7 @@ class RIG_checktool_window(QtCore.QObject):
        
     def UI_listWidget_menu(self) : # UI 리스트위젯 item에 연결된 함수
         RIG_checktool_command.key_clear(ani_CTL_list)
-        select_ = (self.ui.RIG_check_listWidget.currentItem().text()) #리스트위젯에서 item 선택
+        select_ = (self.ui.RIG_check_listWidget.currentItem().text()) #리스트위젯에서 선택한 item 쿼리
         
         RIG_checktool_command.load_json_setkey(select_)
         RIG_checktool_command.key_framebar(ani_CTL_list)

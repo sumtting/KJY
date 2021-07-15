@@ -121,7 +121,7 @@ class KJY_window(QtCore.QObject):
 # [rig]
 
         self.ui.rename_btn.clicked.connect(pm.Callback( self.rename_load))
-        self.ui.jnt_on_btn.clicked.connect(pm.Callback( self.joint_on_off_load, 1))
+        self.ui.jnt_on_btn.clicked.connect(pm.Callback( self.joint_on_off_load, 0))
         self.ui.jnt_off_btn.clicked.connect(pm.Callback( self.joint_on_off_load, 2))
         self.ui.jnt_ps_btn.clicked.connect(pm.Callback( self.jnt_ps_load))
         

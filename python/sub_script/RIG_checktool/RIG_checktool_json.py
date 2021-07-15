@@ -155,7 +155,7 @@ def key_value_dic(list_):
 
     keypreset_json_list = RIG_checktool_command.folderlist(file_path)
 
-    if file_name in keypreset_json_list:
+    if file_name in keypreset_json_list: #만들 json파일의 이름이 중복이라면 선택메세지 출력
         sub_windowID='message_box'
         ##windows reset
         if cmds.window(sub_windowID, ex=True):
@@ -179,7 +179,7 @@ def key_value_dic(list_):
 
 
 
-
+# 중복일경우 선택메세지 버튼 함수
 def message_yes_btn(CTL_list,ID):
     sels_json = cmds.textScrollList('json_list', si=True,q=True)[0]
     sels_ = sels_json.split('_CTL')[0]
@@ -196,6 +196,7 @@ def message_yes_btn(CTL_list,ID):
 def message_no_btn(ID):
     cmds.deleteUI(ID)    
 
+#-------------------------------------------------------------------------------------------------------
 
 
 
