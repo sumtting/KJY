@@ -356,29 +356,30 @@ def reference_copy():
     '레퍼런스 -> 원본오브젝트로 바인드 및 스킨카피(name동일해야함)'
 
     reference_objs = cmds.ls(sl=1) # 레퍼런스 오브젝트만 선택(스킨이 되어있는)
-        
     
     for reference_obj in reference_objs:
         
         ori_obj = reference_obj.split(':')[-1] # 레퍼런스 오브젝트를 스플릿 ':'으로 나눠주어 오리지날 오브젝트를 추출
             
-        
-            
         reference_skincluster=mel.eval('findRelatedSkinCluster(\"' + reference_obj + '\")')
         reference_joint = cmds.skinCluster( reference_skincluster, q=1,inf=1) # 선택한 레퍼런스 오브젝트에 스킨된 조인트 추출
         reference_skin_method = cmds.skinCluster(reference_skincluster , q=1, sm=1) # 스킨매소드 추출(클래식,듀얼,웨이트블렌드)
 
-        ori_joint_list = [] 
-        for i in reference_joint:
-            ori_joint = i.split(':')[-1] # 위에서 뽑은 레퍼런스조인트를 이용하여 원본 조인트 추출
+        ori_joint_list = []
+
+        try: 
+            for i in reference_joint:
+                ori_joint = i.split(':')[-1] # 위에서 뽑은 레퍼런스조인트를 이용하여 원본 조인트 추출
+                
+                ori_joint_list.append(ori_joint)
+                
+                
+            cmds.skinCluster( ori_joint_list , ori_obj ,tsb = 1, sm = reference_skin_method ) # 원본조인트->원본오브젝트 바인드
             
-            ori_joint_list.append(ori_joint)
-            
-            
-        cmds.skinCluster( ori_joint_list , ori_obj ,tsb = 1, sm = reference_skin_method ) # 원본조인트->원본오브젝트 바인드
+            cmds.copySkinWeights(reference_obj,ori_obj, noMirror =1,surfaceAssociation ='closestPoint',influenceAssociation ='closestJoint') # 레퍼런스->원본 스킨카피
         
-        cmds.copySkinWeights(reference_obj,ori_obj, noMirror =1,surfaceAssociation ='closestPoint',influenceAssociation ='closestJoint') # 레퍼런스->원본 스킨카피
-        
+        except:
+            pass
 
 
 def ngskin_tool():
