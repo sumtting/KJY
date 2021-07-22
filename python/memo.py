@@ -346,3 +346,4 @@ print a
 
 git pull origin master --allow-unrelated-histories 
 터미널에 입력
+
