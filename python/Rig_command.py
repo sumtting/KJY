@@ -298,7 +298,6 @@ def bind_skin_copy():
 
 
 
-
 def remove_skin_weight(weight_amount):
     '선택한 object의 지정한 값의 skinWeight를 지운다. '
 
@@ -380,6 +379,7 @@ def reference_copy():
         
         except:
             pass
+
 
 
 def ngskin_tool():
@@ -779,6 +779,84 @@ def jnt_ps(parent, scale):
                 pass
             grp_list.append(grp)
         cmds.group(grp_list, n = grp_list[0] + '_GRP')
+
+
+
+def constraint_copy() :
+    # 원본 MOD(리깅안된상태) + RIG 그룹이 갖춰진상태에서 
+    # 리깅이 완성돼있는 씬을 레퍼런스로 불러온뒤 MOD그룹을 선택하고 스크립트 실행을 하면 
+    # 레퍼런스 MOD -> 원본MOD로 컨스트레인 리깅을 옮길수있다.
+    # 컨스트레인리깅을 옮길때 사용 *
+    
+    sel_mod_grp = cmds.ls(sl=1) # 레퍼런스(컨스트레인 리깅이 되어있는)로 불러온 MOD최상위 그룹을 선택
+    reference_mod = cmds.listRelatives( sel_mod_grp, allDescendents=True ) # 선택한 MOD그룹의 하위항목을 모두쿼리(컨스트레인 포함)
+
+    for reference_mod_ in reference_mod:
+        if 'Constraint' in reference_mod_: # 위에서 쿼리한 항목중 Constraint이 포함된 항목만 다시 쿼리
+            
+            
+            if cmds.objectType(reference_mod_) == 'parentConstraint' : # 오브젝트 타입이 parentConstraint 이면
+                find_constraint = reference_mod_.split(':')[-1] # 스플릿으로 레퍼런스의 네임스페이스 삭제
+                
+                find_mod = find_constraint.split('_parentConstraint')[0] # 스플릿으로 컨스트레인이 걸려있는 모델링의 네임만 쿼리
+                
+                target_controller = cmds.parentConstraint(reference_mod_ , targetList=1, q=1)[0] # 컨스트레인을 걸고있는 컨트롤러 쿼리
+                find_target_controller = target_controller.split(':')[-1] # 마찬가지로 스플릿을 이용해 레퍼런스 네임스페이스 삭제
+                
+                
+                cmds.parentConstraint( find_target_controller, find_mod, mo=1, w=1 ) # 다시 원본씬에서 컨스트레인을 똑같이 걸어준다
+                
+            
+            elif cmds.objectType(reference_mod_) == 'scaleConstraint' :
+                find_constraint = reference_mod_.split(':')[-1]
+                
+                find_mod = find_constraint.split('_scaleConstraint')[0]
+                
+                
+                target_controller = cmds.scaleConstraint(reference_mod_ , targetList=1, q=1)[0]
+                find_target_controller = target_controller.split(':')[-1]
+                
+                cmds.scaleConstraint( find_target_controller, find_mod, mo=1, w=1 )
+        
+                
+            elif cmds.objectType(reference_mod_) == 'pointConstraint' :
+                find_constraint = reference_mod_.split(':')[-1]
+                
+                find_mod = find_constraint.split('_pointConstraint')[0]
+                
+                
+                target_controller = cmds.pointConstraint(reference_mod_ , targetList=1, q=1)[0]
+                find_target_controller = target_controller.split(':')[-1]
+                
+                cmds.pointConstraint( find_target_controller, find_mod, mo=1, w=1 )
+    
+                
+            elif cmds.objectType(reference_mod_) == 'orientConstraint' : 
+                find_constraint = reference_mod_.split(':')[-1]
+                
+                find_mod = find_constraint.split('_orientConstraint')[0]
+                
+            
+                target_controller = cmds.orientConstraint(reference_mod_ , targetList=1, q=1)[0]   
+                find_target_controller = target_controller.split(':')[-1]   
+                
+                cmds.orientConstraint( find_target_controller, find_mod, mo=1, w=1 )
+    
+                
+            elif cmds.objectType(reference_mod_) == 'aimConstraint' :  
+                find_constraint = reference_mod_.split(':')[-1]
+                
+                find_mod = find_constraint.split('_aimConstraint')[0]
+                
+            
+                target_controller = cmds.aimConstraint(reference_mod_ , targetList=1, q=1)[0]    
+                find_target_controller = target_controller.split(':')[-1]
+                
+                cmds.aimConstraint( find_target_controller, find_mod, mo=1, w=1 )
+                
+                
+            else:
+                pass
 
 
 
