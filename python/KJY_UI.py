@@ -20,6 +20,7 @@ import xml.etree.ElementTree as ET
 import Rig_command
 import External_command
 import Asset_command
+import Set_command
 
 
 
@@ -27,6 +28,7 @@ import Asset_command
 reload(Rig_command)
 reload(External_command)
 reload(Asset_command)
+reload(Set_command)
 
 
 
@@ -201,10 +203,18 @@ class KJY_window(QtCore.QObject):
 
 ## --------------------------------------------------------------------------------------------------------------------------
 # [external]
-
-        self.ui.action_kk_controllers.triggered.connect(pm.Callback( self.kk_controllers_load))
+        #UI에서 메뉴를 사용하려면 triggered 명령어를 사용
+        self.ui.action_kk_controllers.triggered.connect(pm.Callback( self.kk_controllers_load)) 
         self.ui.action_cv_shape_color.triggered.connect(pm.Callback( self.cv_shape_color_load))
         self.ui.action_symmetry_tool.triggered.connect(pm.Callback( self.symmetry_tool_load))
+
+
+
+## --------------------------------------------------------------------------------------------------------------------------
+# [set]
+        self.ui.vehicle_set_btn.clicked.connect(pm.Callback( self.vehicle_set_load))
+
+
         
 
 
@@ -383,6 +393,17 @@ class KJY_window(QtCore.QObject):
 
     def symmetry_tool_load(self):
         External_command.symmetry_tool()
+
+
+## --------------------------------------------------------------------------------------------------------------------------
+# [set]
+
+    def vehicle_set_load(self):
+        Set_command.vehicle_set()
+
+
+
+
 
 
 

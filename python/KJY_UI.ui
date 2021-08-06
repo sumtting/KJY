@@ -957,6 +957,19 @@
            <string>hair_set</string>
           </property>
          </widget>
+         <widget class="QPushButton" name="vehicle_set_btn">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>60</y>
+            <width>91</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>vehicle_set</string>
+          </property>
+         </widget>
         </widget>
        </item>
       </layout>
