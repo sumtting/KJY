@@ -1022,6 +1022,11 @@
     <string>symmetry tool</string>
    </property>
   </action>
+  <action name="action_CurveUtils">
+   <property name="text">
+    <string>CurveUtils</string>
+   </property>
+  </action>
  </widget>
  <resources/>
  <connections/>
