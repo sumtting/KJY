@@ -4506,7 +4506,7 @@
         ]
     }, 
     {
-        "scale_kneeMid_L_CTL": [
+        "scale_calf_L_CTL": [
             {
                 "visibility": [
                     {
@@ -4578,7 +4578,7 @@
         ]
     }, 
     {
-        "scale_kneeMid_R_CTL": [
+        "scale_calf_R_CTL": [
             {
                 "visibility": [
                     {
@@ -11906,7 +11906,7 @@
         ]
     }, 
     {
-        "hand_L_CTL": [
+        "wrist_L_CTL": [
             {
                 "fkIkSwitch": [
                     {
@@ -13832,7 +13832,7 @@
         ]
     }, 
     {
-        "foot_R_CTL": [
+        "ankle_R_CTL": [
             {
                 "fkIkSwitch": [
                     {
@@ -16304,7 +16304,7 @@
         ]
     }, 
     {
-        "hand_R_CTL": [
+        "wrist_R_CTL": [
             {
                 "fkIkSwitch": [
                     {
@@ -16660,7 +16660,7 @@
         ]
     }, 
     {
-        "foot_L_CTL": [
+        "ankle_L_CTL": [
             {
                 "fkIkSwitch": [
                     {

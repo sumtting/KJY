@@ -6598,7 +6598,7 @@
         ]
     }, 
     {
-        "hand_L_CTL": [
+        "wrist_L_CTL": [
             {
                 "fkIkSwitch": [
                     {
@@ -10586,7 +10586,7 @@
         ]
     }, 
     {
-        "hand_R_CTL": [
+        "wrist_R_CTL": [
             {
                 "fkIkSwitch": [
                     {
