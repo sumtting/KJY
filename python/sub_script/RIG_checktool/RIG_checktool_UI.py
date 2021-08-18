@@ -92,7 +92,7 @@ class RIG_checktool_window(QtCore.QObject):
     reload (RIG_checktool_json)
 
 
-    def listwidget_addItem(self): # UI 리스트위젯에 add item
+    def listwidget_addItem(self): # UI 리스트위젯에 add item 
         scene_list = cmds.ls(type='objectSet') # 씬에있는 모든 set을 쿼리
         
 
