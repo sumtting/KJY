@@ -94,6 +94,11 @@ class RIG_checktool_window(QtCore.QObject):
 
     def listwidget_addItem(self): # UI 리스트위젯에 add item 
         scene_list = cmds.ls(type='objectSet') # 씬에있는 모든 set을 쿼리
+
+        if 'crowd_set' in scene_list : # crowd_set은 human_set과 동일하게 취급
+            scene_list.append('human_set')
+        else:
+            pass
         
 
         json_list = RIG_checktool_command.folderlist(json_path) # folderlist 함수 쿼리(json_path 경로 폴더에있는 파일 모두 추출)

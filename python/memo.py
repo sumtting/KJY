@@ -120,7 +120,7 @@ def normalize_float(num):
         result = 0.0
     return result
 
-    vtx_pos = [ normalize_float(num) for num in vtx_pos ] # 소수점 자리 정리, -0.0 => 0.0
+vtx_pos = [ normalize_float(num) for num in vtx_pos ] # 소수점 자리 정리, -0.0 => 0.0
 
 
 
@@ -347,3 +347,14 @@ print a
 git pull origin master --allow-unrelated-histories 
 터미널에 입력
 
+
+
+
+# 오브젝트 노트 쿼리,수정
+cmds.getAttr( 'nurbsCircleShape1' + '.notes')
+cmds.setAttr('nurbsCircleShape1' + '.notes', type= 'string')
+
+
+
+#기본어트리뷰트 이름 변경(블렌드쉐입 어트리뷰트도 이렇게되어있음)
+cmds.aliasAttr( 'tuck', 'pCube2.translateX' )
