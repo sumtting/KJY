@@ -660,7 +660,7 @@
            </rect>
           </property>
           <property name="toolTip">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;레퍼런스로 불러온 object를 원본object에 bindskin &amp;amp; skincopy&lt;/p&gt;&lt;p&gt;스킨을 옮길 '레퍼런스 object' 를 선택하고 실행.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;레퍼런스로 불러온 object를 원본object에 constraint copy 해준다&lt;/p&gt;&lt;p&gt;컨스트레인을 옮길 '레퍼런스 MOD의 그룹 최상단' 을 선택하고 실행.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="styleSheet">
            <string notr="true"/>
