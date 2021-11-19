@@ -1,0 +1,1046 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>255</width>
+    <height>418</height>
+   </rect>
+  </property>
+  <property name="minimumSize">
+   <size>
+    <width>255</width>
+    <height>418</height>
+   </size>
+  </property>
+  <property name="maximumSize">
+   <size>
+    <width>255</width>
+    <height>418</height>
+   </size>
+  </property>
+  <property name="windowTitle">
+   <string>KJY_UI</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QTabWidget" name="tabWidget">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>2</y>
+      <width>235</width>
+      <height>371</height>
+     </rect>
+    </property>
+    <property name="currentIndex">
+     <number>0</number>
+    </property>
+    <widget class="QWidget" name="Rig_tab">
+     <attribute name="title">
+      <string>Rig</string>
+     </attribute>
+     <widget class="QWidget" name="verticalLayoutWidget">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>231</width>
+        <height>341</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QGroupBox" name="groupBox">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="title">
+          <string>Rig_Tool</string>
+         </property>
+         <widget class="QPushButton" name="offGRP_btn">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>16</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 object를 '_offGRP' setting을 만들고 '_JNTGRP'을 만들어 constrain한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>offGRP</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="rename_btn">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>170</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;rename tool 실행&lt;br/&gt;#은 숫자, @는 알파벳, 띄어쓰기는 _로 대체됨&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>rename</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="bind_skin_copy_btn">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>16</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 skin된 object와 동일하게 bindskin 및 skincopy한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>bind skin copy</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="position_copy_btn">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>192</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 object를 먼저 선택한 object의 위치에 copy한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>position copy</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="skin_copy_many_btn">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>38</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 skin된 objec 또는 vtxt에 skincopy한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>skin copy many</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="skin_jnt_select_btn">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>60</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 skin된 object의 skin joint을 모두 select한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{color:rgb(143, 216, 255); }</string>
+          </property>
+          <property name="text">
+           <string>skin jnt select</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="jnt_hierarchy_btn">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>82</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 object의 하위 joint를 모두 select한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>jnt hierarchy</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="same_vtx_set_btn">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>126</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 geomtry의 같은 위치에 있는 vtx를 sets한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>same vtx set</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="jnt_on_btn">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>126</y>
+            <width>51</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;모든 joint의 draw style을 Bone으로 바꿔준다.&lt;/p&gt;&lt;p&gt;(display unhide)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>jnt on</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="AtoB_btn">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>104</y>
+            <width>51</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 object로 위치와 방향으로 이동한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{color:rgb(143, 216, 255); }</string>
+          </property>
+          <property name="text">
+           <string>AtoB</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="AtoBpv_btn">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>104</y>
+            <width>51</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 object의 pivot을 복사한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>AtoBpv</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="jnt_off_btn">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>126</y>
+            <width>51</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;모든 joint의 draw style을 None으로 바꿔준다.&lt;/p&gt;&lt;p&gt;(display hide)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>jnt off</string>
+          </property>
+         </widget>
+         <widget class="QDoubleSpinBox" name="rewei_box">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>170</y>
+            <width>51</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="cursor">
+           <cursorShape>ArrowCursor</cursorShape>
+          </property>
+          <property name="frame">
+           <bool>true</bool>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
+          <property name="correctionMode">
+           <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+          </property>
+          <property name="keyboardTracking">
+           <bool>true</bool>
+          </property>
+          <property name="decimals">
+           <number>3</number>
+          </property>
+          <property name="maximum">
+           <double>1.000000000000000</double>
+          </property>
+          <property name="singleStep">
+           <double>0.000100000000000</double>
+          </property>
+          <property name="value">
+           <double>0.005000000000000</double>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="rewei_btn">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>170</y>
+            <width>51</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 skin object 또는 vtx를 fix한 값만큼 weight를 지운다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>rewei</string>
+          </property>
+         </widget>
+         <widget class="QDoubleSpinBox" name="ro_xyz_box">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>290</y>
+            <width>61</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="cursor">
+           <cursorShape>ArrowCursor</cursorShape>
+          </property>
+          <property name="frame">
+           <bool>true</bool>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
+          <property name="correctionMode">
+           <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+          </property>
+          <property name="keyboardTracking">
+           <bool>true</bool>
+          </property>
+          <property name="decimals">
+           <number>1</number>
+          </property>
+          <property name="singleStep">
+           <double>5.000000000000000</double>
+          </property>
+          <property name="value">
+           <double>45.000000000000000</double>
+          </property>
+         </widget>
+         <widget class="QDoubleSpinBox" name="sc_xyz_box">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>310</y>
+            <width>61</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="cursor">
+           <cursorShape>ArrowCursor</cursorShape>
+          </property>
+          <property name="frame">
+           <bool>true</bool>
+          </property>
+          <property name="buttonSymbols">
+           <enum>QAbstractSpinBox::NoButtons</enum>
+          </property>
+          <property name="correctionMode">
+           <enum>QAbstractSpinBox::CorrectToNearestValue</enum>
+          </property>
+          <property name="keyboardTracking">
+           <bool>true</bool>
+          </property>
+          <property name="decimals">
+           <number>1</number>
+          </property>
+          <property name="singleStep">
+           <double>0.100000000000000</double>
+          </property>
+          <property name="value">
+           <double>0.800000000000000</double>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="RX_btn">
+          <property name="geometry">
+           <rect>
+            <x>71</x>
+            <y>290</y>
+            <width>50</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 curve의 cv를 'fix'한 값만큼 x축으로 rotate한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>RX</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="RY_btn">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>290</y>
+            <width>50</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 curve의 cv를 'fix'한 값만큼 y축으로 rotate한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>RY</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="RZ_btn">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>290</y>
+            <width>50</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 curve의 cv를 'fix'한 값만큼 z축으로 rotate한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>RZ</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="SX_btn">
+          <property name="geometry">
+           <rect>
+            <x>71</x>
+            <y>310</y>
+            <width>34</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 curve의 cv를 'fix'한 값만큼 x축으로 scale한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>SX</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="SXYZ_btn">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>310</y>
+            <width>50</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 curve의 cv를 'fix'한 값만큼 xyz축으로 scale한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>SXYZ</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="SY_btn">
+          <property name="geometry">
+           <rect>
+            <x>104</x>
+            <y>310</y>
+            <width>34</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 curve의 cv를 'fix'한 값만큼 y축으로 scale한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>SY</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="SZ_btn">
+          <property name="geometry">
+           <rect>
+            <x>137</x>
+            <y>310</y>
+            <width>34</width>
+            <height>20</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 curve의 cv를 'fix'한 값만큼 z축으로 scale한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>SZ</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="one_follicle_btn">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>258</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 nurbs에 follicle 1개 생성해서 붙인다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>one follicle</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="many_follicle_btn">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>258</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 nurbs에 follicle을 여러개 생성해서 붙인다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>many follicle</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="object_grp_btn">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>38</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 object에 group을 한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>object grp</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="ngskin_tool_btn">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>148</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;ngSkin tool을 실행한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{color:rgb(255, 170, 127); }</string>
+          </property>
+          <property name="text">
+           <string>ngskin_tool</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="reference_copy_btn">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>60</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;레퍼런스로 불러온 object를 원본object에 bindskin &amp;amp; skincopy&lt;/p&gt;&lt;p&gt;스킨을 옮길 '레퍼런스 object' 를 선택하고 실행.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>reference_copy</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="geo_of_jnt_btn">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>104</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 joint의 스킨된 object를 모두 select한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>geo of jnt</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="jnt_ps_btn">
+          <property name="geometry">
+           <rect>
+            <x>180</x>
+            <y>148</y>
+            <width>41</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 object의 위치에 'Prifix_jnt_grp', 'Prifix_jnt'를 생성한다.&lt;/p&gt;&lt;p&gt;아무것도 선택을 안했을 경우 'base_skin_jnt_grp'을 생성한다.&lt;/p&gt;&lt;p&gt;※P:'constrainParent', S:'constrainScale&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>jnt</string>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="jnt_ps_p_cb">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>152</y>
+            <width>31</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>P</string>
+          </property>
+          <property name="checked">
+           <bool>true</bool>
+          </property>
+         </widget>
+         <widget class="QCheckBox" name="jnt_ps_s_cb">
+          <property name="geometry">
+           <rect>
+            <x>150</x>
+            <y>152</y>
+            <width>31</width>
+            <height>16</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>S</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="constraint_copy_btn">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>82</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;레퍼런스로 불러온 object를 원본object에 constraint copy 해준다&lt;/p&gt;&lt;p&gt;컨스트레인을 옮길 '레퍼런스 MOD의 그룹 최상단' 을 선택하고 실행.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true"/>
+          </property>
+          <property name="text">
+           <string>constraint_copy</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="rename_btn_2">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>192</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;rename tool 실행&lt;br/&gt;#은 숫자, @는 알파벳, 띄어쓰기는 _로 대체됨&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>--------</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="rename_btn_3">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>214</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;rename tool 실행&lt;br/&gt;#은 숫자, @는 알파벳, 띄어쓰기는 _로 대체됨&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>--------</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="position_copy_btn_2">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>214</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 object를 먼저 선택한 object의 위치에 copy한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>--------</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="rename_btn_4">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>236</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;rename tool 실행&lt;br/&gt;#은 숫자, @는 알파벳, 띄어쓰기는 _로 대체됨&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>--------</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="position_copy_btn_3">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>236</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 object를 먼저 선택한 object의 위치에 copy한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>--------</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="Asset_tab">
+     <attribute name="title">
+      <string>Asset</string>
+     </attribute>
+     <widget class="QWidget" name="verticalLayoutWidget_2">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>231</width>
+        <height>341</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
+       <item>
+        <widget class="QGroupBox" name="groupBox_2">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="title">
+          <string>Asset_Tool</string>
+         </property>
+         <widget class="QPushButton" name="matchname_set_btn">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>16</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;같은 이름을 sets로 묶어준다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>matchname_set</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="cleanup_btn">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>16</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;모든 polygon object의 cleanup check&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>cleanup</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="ns_remove_btn">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>38</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;namespace Editor의 namespace를 모두 지워준다. ※reference 제외&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>ns remove</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="attribute_unlock_btn">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>38</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 object의 Attribute를 모두 unlock&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>attribute unlock</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="blend_copy_btn">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>220</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 object와 동일하게 blend target을 옮겨준다.&lt;/p&gt;&lt;p&gt;* 모양이 다른 object도 가능&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>blend_copy</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+    <widget class="QWidget" name="Set_tab">
+     <attribute name="title">
+      <string>Set</string>
+     </attribute>
+     <widget class="QWidget" name="verticalLayoutWidget_5">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>10</y>
+        <width>231</width>
+        <height>51</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_5">
+       <item>
+        <widget class="QGroupBox" name="groupBox_5">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="title">
+          <string>Character</string>
+         </property>
+         <widget class="QPushButton" name="bind_skin_copy_btn_3">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>16</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>body_set</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="bind_skin_copy_btn_4">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>16</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>facial_set</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+     <widget class="QWidget" name="verticalLayoutWidget_6">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>60</y>
+        <width>231</width>
+        <height>291</height>
+       </rect>
+      </property>
+      <layout class="QVBoxLayout" name="verticalLayout_6">
+       <item>
+        <widget class="QGroupBox" name="groupBox_6">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="title">
+          <string>Rig_Set</string>
+         </property>
+         <widget class="QPushButton" name="pushButton_15">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>20</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>short_skirt</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_18">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>40</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>hair_set</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="vehicle_set_btn">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>60</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>vehicle_set</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="pushButton_16">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>20</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="text">
+           <string>long_skirt</string>
+          </property>
+         </widget>
+        </widget>
+       </item>
+      </layout>
+     </widget>
+    </widget>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>255</width>
+     <height>21</height>
+    </rect>
+   </property>
+   <widget class="QMenu" name="menuMenu">
+    <property name="title">
+     <string>External</string>
+    </property>
+    <addaction name="action_kk_controllers"/>
+    <addaction name="action_cv_shape_color"/>
+    <addaction name="action_symmetry_tool"/>
+   </widget>
+   <addaction name="menuMenu"/>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+  <action name="action_kk_controllers">
+   <property name="text">
+    <string>kk controllers</string>
+   </property>
+  </action>
+  <action name="actionOut_Tool">
+   <property name="text">
+    <string>----Out_Tool----</string>
+   </property>
+  </action>
+  <action name="action_ngskin_tool">
+   <property name="text">
+    <string>ngskin tool</string>
+   </property>
+  </action>
+  <action name="action_cv_shape_color">
+   <property name="text">
+    <string>cv shape color</string>
+   </property>
+  </action>
+  <action name="action_symmetry_tool">
+   <property name="text">
+    <string>symmetry tool</string>
+   </property>
+  </action>
+  <action name="action_CurveUtils">
+   <property name="text">
+    <string>CurveUtils</string>
+   </property>
+  </action>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

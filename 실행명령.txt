@@ -1,0 +1,18 @@
+import sys
+
+kjy_path = 'D:/KJY/python'
+
+sys.path.append(kjy_path)
+
+import KJY_UI
+reload(KJY_UI)
+
+
+KJY_UI.KJY_window()
+
+#UI_Instance = KJY_UI.KJY_window
+#UI_Instance()
+
+
+
+
