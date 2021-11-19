@@ -12,8 +12,11 @@ reload (RIG_checktool_command)
 
 
 json_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/' # json 폴더 경로
+<<<<<<< HEAD
 #json_path = 'Z:/_LIB/02_RIG/_RND/RIG0009_RigPreview/RIG_checktool/json_data/' #미르경로
 
+=======
+>>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
 
 
 load_CTL_list_re = RIG_checktool_command.load_CTL_list()

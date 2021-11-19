@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
+<<<<<<< HEAD
  <class>MainWindow_check</class>
  <widget class="QMainWindow" name="MainWindow_check">
+=======
+ <class>MainWindow</class>
+ <widget class="QMainWindow" name="MainWindow">
+>>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
   <property name="geometry">
    <rect>
     <x>0</x>
