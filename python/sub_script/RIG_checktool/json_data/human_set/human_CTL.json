@@ -1,10 +1,6 @@
 [
     {
-<<<<<<< HEAD
         "RIG_CTL_list": [
-=======
-        "ani_CTL_list": [
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
             "knee_FK_L_CTL", 
             "leg_FK_L_CTL", 
             "ankle_FK_R_CTL", 
@@ -135,13 +131,9 @@
             "armMid_R_CTL", 
             "pelvis_FK_L_CTL", 
             "legMid_L_CTL", 
-<<<<<<< HEAD
             "armMid_L_CTL", 
             "fingers_L_CTL", 
             "fingers_R_CTL"
-=======
-            "armMid_L_CTL"
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
         ]
     }
 ]

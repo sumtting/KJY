@@ -1,7 +1,6 @@
 [
     {
         "RIG_CTL_list": [
-<<<<<<< HEAD
             "lipCorner_R_CTL", 
             "lipCorner_L_CTL", 
             "cheekRaise_R_CTL", 
@@ -108,20 +107,6 @@
             "brow_R_BS_CTL", 
             "brow_L_BS_CTL", 
             "lipCorner_R_BS_CTL"
-=======
-            "eyebrow_L_CTL", 
-            "eyelash_L_CTL", 
-            "eyebrow_R_CTL", 
-            "eyelash_R_CTL", 
-            "lip_M_CTL", 
-            "lip_L_CTL", 
-            "lip_R_CTL", 
-            "cheek_L_CTL", 
-            "cheek_R_CTL", 
-            "jaw_01_CTL", 
-            "jaw_02_CTL", 
-            "head_CTL"
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
         ]
     }
 ]

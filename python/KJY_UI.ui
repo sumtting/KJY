@@ -301,11 +301,7 @@
            <double>0.000100000000000</double>
           </property>
           <property name="value">
-<<<<<<< HEAD
            <double>0.005000000000000</double>
-=======
-           <double>0.001000000000000</double>
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
           </property>
          </widget>
          <widget class="QPushButton" name="rewei_btn">
@@ -768,11 +764,7 @@
         <x>0</x>
         <y>10</y>
         <width>231</width>
-<<<<<<< HEAD
         <height>341</height>
-=======
-        <height>271</height>
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_2">
@@ -927,11 +919,7 @@
         <x>0</x>
         <y>60</y>
         <width>231</width>
-<<<<<<< HEAD
         <height>291</height>
-=======
-        <height>221</height>
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_6">
@@ -948,20 +936,12 @@
            <rect>
             <x>10</x>
             <y>20</y>
-<<<<<<< HEAD
             <width>101</width>
-=======
-            <width>91</width>
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
             <height>23</height>
            </rect>
           </property>
           <property name="text">
-<<<<<<< HEAD
            <string>short_skirt</string>
-=======
-           <string>skt_set</string>
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
           </property>
          </widget>
          <widget class="QPushButton" name="pushButton_18">
@@ -969,11 +949,7 @@
            <rect>
             <x>10</x>
             <y>40</y>
-<<<<<<< HEAD
             <width>101</width>
-=======
-            <width>91</width>
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
             <height>23</height>
            </rect>
           </property>
@@ -986,11 +962,7 @@
            <rect>
             <x>10</x>
             <y>60</y>
-<<<<<<< HEAD
             <width>101</width>
-=======
-            <width>91</width>
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
             <height>23</height>
            </rect>
           </property>
@@ -998,7 +970,6 @@
            <string>vehicle_set</string>
           </property>
          </widget>
-<<<<<<< HEAD
          <widget class="QPushButton" name="pushButton_16">
           <property name="geometry">
            <rect>
@@ -1012,8 +983,6 @@
            <string>long_skirt</string>
           </property>
          </widget>
-=======
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
         </widget>
        </item>
       </layout>

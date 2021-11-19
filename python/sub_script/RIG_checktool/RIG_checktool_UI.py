@@ -43,14 +43,10 @@ class RIG_checktool_window(QtCore.QObject):
     #def __init__(self, tap):
     def __init__(self):
         self.PATH = "D:/KJY/python/sub_script/RIG_checktool"
-<<<<<<< HEAD
         #self.PATH = "Z:/_LIB/02_RIG/_RND/RIG0009_RigPreview/RIG_checktool" #미르경로
         self.ui_path = "D:/KJY/python/sub_script/RIG_checktool/RIG_checktool_UI.ui"
         #self.ui_path = "Z:/_LIB/02_RIG/_RND/RIG0009_RigPreview/RIG_checktool/RIG_checktool_UI.ui" #미르경로
 
-=======
-        self.ui_path = "D:/KJY/python/sub_script/RIG_checktool/RIG_checktool_UI.ui"
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
         #maya_main = shiboken.wrapInstance(long(MayaUI.MQtUtil.mainWindow()), QtGui.QWidget)
         super(RIG_checktool_window, self).__init__(getMayaWindow()) # maya main window parent
         # Remove previous window

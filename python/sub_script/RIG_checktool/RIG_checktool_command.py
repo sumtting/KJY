@@ -12,11 +12,8 @@ import RIG_checktool_json
 
 
 json_path = 'd:/KJY/python/sub_script/RIG_checktool/json_data/'
-<<<<<<< HEAD
 #json_path = 'Z:/_LIB/02_RIG/_RND/RIG0009_RigPreview/RIG_checktool/json_data/' #미르경로
 
-=======
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
 
 
 def folderlist(path, include=False): # include - False = 모든 파일, folder = 폴더만, ['.ma', '.mb'] = 리스트 내용만 
@@ -46,7 +43,6 @@ def folderlist(path, include=False): # include - False = 모든 파일, folder =
 
 def load_CTL_list(): # ani_CTL_list.json에서 밸류값(CTL_list)만 추출
     global ani_CTL_list
-<<<<<<< HEAD
 
     scene_list = cmds.ls(type='objectSet')
 
@@ -59,11 +55,6 @@ def load_CTL_list(): # ani_CTL_list.json에서 밸류값(CTL_list)만 추출
     else:
         pass
 
-=======
-    
-    
-    scene_list = cmds.ls(type='objectSet')
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
     json_list = folderlist(json_path) # folderlist 함수 쿼리(json_path 경로 폴더에있는 파일 모두 추출)
     same_result = [x for x in scene_list if x in json_list] # 오토리깅을 불러왔을때 잡혀있는 set의 이름과 겹치는 json폴더만 쿼리
     
@@ -91,12 +82,6 @@ ani_CTL_list=load_CTL_list() #ani_CTL_list를 정의해준다(ani_CTL_list.json�
 
 
 
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
 # body의 모든 컨트롤러 리스트
 
 # def key_value_dic(list_):
@@ -151,7 +136,6 @@ ani_CTL_list=load_CTL_list() #ani_CTL_list를 정의해준다(ani_CTL_list.json�
 
 def load_json_setkey(name_): #name_은 문자열로 입력, json에있는 딕셔너리로 키프레임을 찍어준다.
     # json 파일 불러오기
-<<<<<<< HEAD
 
     if 'Body' in name_:
         scene_list = cmds.ls(type='objectSet')
@@ -172,12 +156,6 @@ def load_json_setkey(name_): #name_은 문자열로 입력, json에있는 딕셔
     same_result = [x for x in scene_list if x in json_list] # 오토리깅을 불러왔을때 잡혀있는 set의 이름과 겹치는 json폴더만 쿼리
     
     
-=======
-    scene_list = cmds.ls(type='objectSet')
-    json_list = folderlist(json_path) # folderlist 함수 쿼리(json_path 경로 폴더에있는 파일 모두 추출)
-    same_result = [x for x in scene_list if x in json_list] # 오토리깅을 불러왔을때 잡혀있는 set의 이름과 겹치는 json폴더만 쿼리
-    
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
     for same_ in same_result:
         json_list = folderlist(json_path + same_)
 
@@ -199,15 +177,8 @@ def load_json_setkey(name_): #name_은 문자열로 입력, json에있는 딕셔
                     
                         for key_at, val_at in at.items():
                         
-<<<<<<< HEAD
                             CTL_at = ('%s.%s' %(key_CTL,key_at)) #해당 컨트롤러의 어트리뷰트 네임(test_01_CTL.translateX)
     
-=======
-                            
-                            CTL_at = ('%s.%s' %(key_CTL,key_at)) #해당 컨트롤러의 어트리뷰트 네임(test_01_CTL.translateX)
-    
-                            
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
                             for val in val_at: # val_at는 {프레임:값,키밸류:값}
                                 key_name = val.keys()[0] 
                             
@@ -267,7 +238,6 @@ def key_framebar(list_): #키가 찍혀있는 가장 마지막 프레임에 맞�
     
     max_get_frame_list = []
     for CTL_ in list_:
-<<<<<<< HEAD
         try:
             get_frame  = cmds.keyframe( CTL_, query=True, absolute=True )
             if get_frame is not None: # 키가 찍혀있지않은 CTL은 프레임이 None으로 쿼리되기때문에 if문을 넣어준다.
@@ -275,12 +245,6 @@ def key_framebar(list_): #키가 찍혀있는 가장 마지막 프레임에 맞�
                 max_get_frame_list.append(max_get_frame)
         except:
             pass
-=======
-        get_frame  = cmds.keyframe( CTL_, query=True, absolute=True )
-        if get_frame is not None: # 키가 찍혀있지않은 CTL은 프레임이 None으로 쿼리되기때문에 if문을 넣어준다.
-            max_get_frame = max(get_frame)
-            max_get_frame_list.append(max_get_frame)
->>>>>>> b304869b3829ada38c196d36d871278cb2755fe3
         
     
     final_max_frame = max(max_get_frame_list) # 쿼리한 프레임 리스트중 가장 큰값을 맥스프레임으로 지정
