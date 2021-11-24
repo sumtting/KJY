@@ -167,7 +167,8 @@ class long_skirt_set():
         cmds.rowColumnLayout( nr=1 )
         cmds.text(l = u'total' ,w = 100)
         cmds.textField('total_tex_box' , w = 150 , h = 20 , tx = 'world_M_CTL')
-        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex('ss')))
+        bb = 'abc'
+        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, bb))
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
         cmds.text(l = u'hip' , w = 100)
@@ -255,7 +256,7 @@ class long_skirt_set():
         cmds.move(pos[0],pos[1], pos[2] ,first,rpr=1)
 
 
-    def sels_tex(self,yo):
+    def sels_tex(self,part):
         #print 'sel_import'
         # sels = cmds.ls(sl=1)
         # if part == "total":cmds.textField('total_tex_box'  , edit =1, tx= sels[0] )
@@ -267,7 +268,7 @@ class long_skirt_set():
         # if part == "R_leg":cmds.textField('R_leg_tex_box'  , edit =1, tx= sels[0] )
         # if part == "R_knee":cmds.textField('R_knee_tex_box'  , edit =1, tx= sels[0] )
         # if part == "R_ankle":cmds.textField('R_ankle_tex_box'  , edit =1, tx= sels[0] )
-        print yo
+        print part
        
 
 
