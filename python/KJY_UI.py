@@ -213,6 +213,8 @@ class KJY_window(QtCore.QObject):
 ## --------------------------------------------------------------------------------------------------------------------------
 # [set]
         self.ui.vehicle_set_btn.clicked.connect(pm.Callback( self.vehicle_set_load))
+        self.ui.long_skirt_set_btn.clicked.connect(pm.Callback( self.long_skirt_set_load))
+
 
 
         
@@ -400,6 +402,9 @@ class KJY_window(QtCore.QObject):
 
     def vehicle_set_load(self):
         Set_command.vehicle_set()
+
+    def long_skirt_set_load(self):
+        Set_command.long_skirt_set()
 
 
 

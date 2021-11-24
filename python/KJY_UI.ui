@@ -931,7 +931,7 @@
          <property name="title">
           <string>Rig_Set</string>
          </property>
-         <widget class="QPushButton" name="pushButton_15">
+         <widget class="QPushButton" name="short_skirt_set_btn">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -970,7 +970,7 @@
            <string>vehicle_set</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="pushButton_16">
+         <widget class="QPushButton" name="long_skirt_set_btn">
           <property name="geometry">
            <rect>
             <x>120</x>
