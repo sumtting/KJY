@@ -167,48 +167,47 @@ class long_skirt_set():
         cmds.rowColumnLayout( nr=1 )
         cmds.text(l = u'total' ,w = 100)
         cmds.textField('total_tex_box' , w = 150 , h = 20 , tx = 'world_M_CTL')
-        bb = 'abc'
-        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, bb))
+        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'total'))
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
         cmds.text(l = u'hip' , w = 100)
         cmds.textField('hip_tex_box' , w = 150 , h = 20 , tx = 'root_M_skinJNT')
-        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex))
+        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'hip'))
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
         cmds.text(l = u'spline01' , w = 100)
         cmds.textField('spn_01_tex_box' , w = 150 , h = 20 , tx = 'spine_01_M_skinJNT') 
-        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex))
+        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'spn'))
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
         cmds.text(l = u'L_Leg' , w = 100)
         cmds.textField( 'L_leg_tex_box' , w = 150 , h = 20 , tx = 'leg_L_skinJNT')
-        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex))
+        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'L_leg'))
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
         cmds.text(l = u'L_Knee' , w = 100)
         cmds.textField( 'L_knee_tex_box' , w = 150 , h = 20 , tx = 'knee_L_skinJNT')
-        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex))
+        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'L_knee'))
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
         cmds.text(l = u'L_Ankle' , w = 100)
         cmds.textField( 'L_ankle_tex_box' , w = 150 , h = 20 , tx = 'ankle_L_skinJNT')
-        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex))
+        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'L_ankle'))
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
         cmds.text(l = u'R_Leg' , w = 100)
         cmds.textField( 'R_leg_tex_box' , w = 150 , h = 20 , tx = 'leg_R_skinJNT')
-        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex))
+        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'R_leg'))
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
         cmds.text(l = u'R_Knee' , w = 100)
         cmds.textField( 'R_knee_tex_box' , w = 150 , h = 20 , tx = 'knee_R_skinJNT')
-        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex))
+        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'R_knee'))
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
         cmds.text(l = u'R_Ankle' , w = 100)
         cmds.textField( 'R_ankle_tex_box' , w = 150 , h = 20 , tx = 'ankle_R_skinJNT')
-        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex))
+        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'R_ankle'))
         cmds.setParent (master)
         cmds.button(l=u'배치' , w = 301 , h = 30 , c = pm.Callback(self.pose_position))
         cmds.setParent (master)
@@ -251,24 +250,23 @@ class long_skirt_set():
     def move_point(self, first, second ):
         'first_list 가 second로 이동한다.'
 
-        pos = pm.Callback(self.position_xform(second))
+        pos = self.position_xform(second)
         
         cmds.move(pos[0],pos[1], pos[2] ,first,rpr=1)
 
 
     def sels_tex(self,part):
-        #print 'sel_import'
-        # sels = cmds.ls(sl=1)
-        # if part == "total":cmds.textField('total_tex_box'  , edit =1, tx= sels[0] )
-        # if part == "hip":cmds.textField('hip_tex_box'  , edit =1, tx= sels[0] )
-        # if part == "spn":cmds.textField('spn_01_tex_box'  , edit =1, tx= sels[0] )
-        # if part == "L_leg":cmds.textField('L_leg_tex_box'  , edit =1, tx= sels[0] )
-        # if part == "L_knee":cmds.textField('L_knee_tex_box'  , edit =1, tx= sels[0] )
-        # if part == "L_ankle":cmds.textField('L_ankle_tex_box'  , edit =1, tx= sels[0] )
-        # if part == "R_leg":cmds.textField('R_leg_tex_box'  , edit =1, tx= sels[0] )
-        # if part == "R_knee":cmds.textField('R_knee_tex_box'  , edit =1, tx= sels[0] )
-        # if part == "R_ankle":cmds.textField('R_ankle_tex_box'  , edit =1, tx= sels[0] )
-        print part
+        sels = cmds.ls(sl=1)
+        if part == "total":cmds.textField('total_tex_box'  , edit =1, tx= sels[0] )
+        if part == "hip":cmds.textField('hip_tex_box'  , edit =1, tx= sels[0] )
+        if part == "spn":cmds.textField('spn_01_tex_box'  , edit =1, tx= sels[0] )
+        if part == "L_leg":cmds.textField('L_leg_tex_box'  , edit =1, tx= sels[0] )
+        if part == "L_knee":cmds.textField('L_knee_tex_box'  , edit =1, tx= sels[0] )
+        if part == "L_ankle":cmds.textField('L_ankle_tex_box'  , edit =1, tx= sels[0] )
+        if part == "R_leg":cmds.textField('R_leg_tex_box'  , edit =1, tx= sels[0] )
+        if part == "R_knee":cmds.textField('R_knee_tex_box'  , edit =1, tx= sels[0] )
+        if part == "R_ankle":cmds.textField('R_ankle_tex_box'  , edit =1, tx= sels[0] )
+        
        
 
 
@@ -408,7 +406,6 @@ class long_skirt_set():
 
         low_loc_y = cmds.xform('low_01_loc',q=1,rp=1, ws=1)[1] # low loc의 Y축값만 쿼리
         low_loc_y = pm.Callback(self.normalize_float(low_loc_y))
-
 
         use_num = pm.Callback(self.change_number) #사용자 지정 컨트롤러 갯수
         num = (use_num-3) / 2 #허벅지 ~ 무릎, 무릎 ~ 발목 파트를 2개로 나눈다 (지정한 컨트롤러갯수 - 고정된컨트롤러(top,mid,low) / 2(윗다리,아랫다리)
