@@ -681,7 +681,8 @@ def blend_copy():
         else:
             pass
                 
-    cmds.group( main_target_list_re, inbetween_target_list, n='new_target_GRP' )
+    new_GRP = cmds.group( main_target_list_re, inbetween_target_list, n='new_target_GRP' )
+    cmds.parent(w=1) # new_target 그룹을 아웃라이너 가장 바깥으로 빼줌
 
     find_deform_list = cmds.findDeformers(new_obj)
     wrap_deform_list = []
