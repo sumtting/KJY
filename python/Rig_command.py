@@ -695,6 +695,7 @@ def blend_copy():
             
     new_obj_wrap = wrap_deform_list[0]
     cmds.delete (new_obj_wrap)
+    cmds.delete (new_GRP) # 타켓그룹을 지워준다
 
 
 

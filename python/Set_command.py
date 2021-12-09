@@ -229,7 +229,6 @@ class long_skirt_set():
 
 
     def change_number(self):
-        #base_num = cmds.textField('number_tex_box'  , text =1, q=1)
         base_num = cmds.textField('number_tex_box'  , text =1, q=1)
         base_num = int(base_num)
         return base_num
@@ -309,8 +308,8 @@ class long_skirt_set():
     def move(self, first_list, second ):
         'first_list 가 second로 이동한다.'
     
-        rot = pm.Callback(self.rotate_xform(second))
-        pos = pm.Callback(self.position_xform(second))
+        rot = self.rotate_xform(second)
+        pos = self.position_xform(second)
         
         for first in first_list:        
         
@@ -399,15 +398,15 @@ class long_skirt_set():
         mid_loc_list = cmds.listRelatives('mid_loc_GRP', c=1)
 
         top_loc_y = cmds.xform('top_01_loc',q=1,rp=1, ws=1)[1] # top loc의 Y축값만 쿼리
-        top_loc_y = pm.Callback(self.normalize_float(top_loc_y)) # 소수점정리
+        top_loc_y = self.normalize_float(top_loc_y) # 소수점정리
 
         mid_loc_y = cmds.xform('mid_01_loc',q=1,rp=1, ws=1)[1] # mid loc의 Y축값만 쿼리
-        mid_loc_y = pm.Callback(self.normalize_float(mid_loc_y))
+        mid_loc_y = self.normalize_float(mid_loc_y)
 
         low_loc_y = cmds.xform('low_01_loc',q=1,rp=1, ws=1)[1] # low loc의 Y축값만 쿼리
-        low_loc_y = pm.Callback(self.normalize_float(low_loc_y))
+        low_loc_y = self.normalize_float(low_loc_y)
 
-        use_num = pm.Callback(self.change_number) #사용자 지정 컨트롤러 갯수
+        use_num = self.change_number() #사용자 지정 컨트롤러 갯수
         num = (use_num-3) / 2 #허벅지 ~ 무릎, 무릎 ~ 발목 파트를 2개로 나눈다 (지정한 컨트롤러갯수 - 고정된컨트롤러(top,mid,low) / 2(윗다리,아랫다리)
         top_con_num = (top_loc_y - mid_loc_y) / (num + 1)# 허벅지에서 무릎
         # top Y축과 mid Y축 사이 (허벅지~무릎)에 컨트롤러갯수(num)+1 을 해주어야 등분갯수가 나온다(컨트롤러를 일정한간격으로 배치하기위함)
@@ -444,8 +443,8 @@ class long_skirt_set():
             top_loc_x_list.append(po[0]) #x축의 값
             top_loc_z_list.append(po[2]) #z축의 값
 
-        top_loc_x_list = [ pm.Callback(self.normalize_float(num)) for num in top_loc_x_list ] #소수점 자리 정리
-        top_loc_z_list = [ pm.Callback(self.normalize_float(num)) for num in top_loc_z_list ] 
+        top_loc_x_list = [ self.normalize_float(num) for num in top_loc_x_list ] #소수점 자리 정리
+        top_loc_z_list = [ self.normalize_float(num) for num in top_loc_z_list ] 
 
     # ------------------------------- mid_loc_GRP 에서 트랜스 X,Z를 쿼리 (무릎 - 발목)
         mid_loc_x_list = []
@@ -459,8 +458,8 @@ class long_skirt_set():
             mid_loc_x_list.append(po[0]) #x축의 값
             mid_loc_z_list.append(po[2]) #z축의 값
 
-        mid_loc_x_list = [ pm.Callback(self.normalize_float(num)) for num in mid_loc_x_list ] #소수점 자리 정리
-        mid_loc_z_list = [ pm.Callback(self.normalize_float(num)) for num in mid_loc_z_list ] 
+        mid_loc_x_list = [ self.normalize_float(num) for num in mid_loc_x_list ] #소수점 자리 정리
+        mid_loc_z_list = [ self.normalize_float(num) for num in mid_loc_z_list ] 
 
 
 
@@ -478,7 +477,7 @@ class long_skirt_set():
                 top_FK_con = cmds.duplicate('FK_con', n= con_name + '_FK_%02d_CTL'%(i+2))
                 cmds.move(loc_x, top_loc_y, loc_z,  top_FK_con)
 
-                fix_rotate = pm.Callback(self.rotate_xform(con_name + '_FK_01_CTL')) # 만들어질 컨트롤러의 기준 로테이션은 FK_01 컨트롤러에서 추출
+                fix_rotate = self.rotate_xform(con_name + '_FK_01_CTL') # 만들어질 컨트롤러의 기준 로테이션은 FK_01 컨트롤러에서 추출
                 cmds.xform(top_FK_con, ws=1, ro= fix_rotate)
                 
                 pm.Callback(self.offGRP_command_CTL(top_FK_con))
@@ -493,7 +492,7 @@ class long_skirt_set():
                 top_IK_con = cmds.duplicate('IK_con', n= con_name + '_IK_%02d_CTL'%(i+2))
                 cmds.move(loc_x, top_loc_y, loc_z,  top_IK_con)
 
-                fix_rotate = pm.Callback(self.rotate_xform(con_name + '_FK_01_CTL')) # 만들어질 컨트롤러의 기준 로테이션은 FK_01 컨트롤러에서 추출
+                fix_rotate = self.rotate_xform(con_name + '_FK_01_CTL') # 만들어질 컨트롤러의 기준 로테이션은 FK_01 컨트롤러에서 추출
                 cmds.xform(top_IK_con, ws=1, ro= fix_rotate)
 
                 pm.Callback(self.offGRP_command(top_IK_con))
@@ -516,7 +515,7 @@ class long_skirt_set():
                 low_FK_con = cmds.duplicate('FK_con', n= 'down_' + con_name + '_FK_%02d_CTL'%(i+2))
                 cmds.move(loc_x, low_loc_y, loc_z,  low_FK_con)
 
-                fix_rotate = pm.Callback(self.rotate_xform('down_' + con_name + '_FK_01_CTL')) # 만들어질 컨트롤러의 기준 로테이션은 FK_01 컨트롤러에서 추출
+                fix_rotate = self.rotate_xform('down_' + con_name + '_FK_01_CTL') # 만들어질 컨트롤러의 기준 로테이션은 FK_01 컨트롤러에서 추출
                 cmds.xform(low_FK_con, ws=1, ro= fix_rotate)
                 
                 pm.Callback(self.offGRP_command_CTL(low_FK_con))
@@ -527,7 +526,7 @@ class long_skirt_set():
                 low_IK_con = cmds.duplicate('IK_con', n= 'down_' + con_name + '_IK_%02d_CTL'%(i+2))
                 cmds.move(loc_x, low_loc_y, loc_z,  low_IK_con)
 
-                fix_rotate = pm.Callback(self.rotate_xform('down_' + con_name + '_FK_01_CTL')) # 만들어질 컨트롤러의 기준 로테이션은 FK_01 컨트롤러에서 추출
+                fix_rotate = self.rotate_xform('down_' + con_name + '_FK_01_CTL') # 만들어질 컨트롤러의 기준 로테이션은 FK_01 컨트롤러에서 추출
                 cmds.xform(low_IK_con, ws=1, ro= fix_rotate)
                 
                 pm.Callback(self.offGRP_command(low_IK_con))
