@@ -134,7 +134,124 @@ class vehicle_set():
                             pm.setAttr(ctlList[i] + '.' + s, 0)
 
 
+
+# [skirt_def]
+
+def move_point( first, second ):
+    'first_list 가 second로 이동한다.'
+
+    pos = position_xform(second)
     
+    cmds.move(pos[0],pos[1], pos[2] ,first,rpr=1)
+
+def position_xform(transform):
+    'world position 추출'
+    return cmds.xform( transform, q=1, ws=1, rp=1)
+
+
+
+def change_number():
+    base_num = cmds.textField('number_tex_box'  , text =1, q=1)
+    base_num = int(base_num)
+    return base_num
+
+
+def normalize_float(num):
+    '0.0000000123 => 0.0, -0.0 => 0.0'
+    result = float('%.5f' % num)
+    if result == -0.0:
+        result = 0.0
+    return result
+
+
+def rotate_xform(transform):
+    'world rotate 추출'
+    return cmds.xform(transform, q=1, ws=1, ro=1)
+
+
+def move(first_list, second ):
+    'first_list 가 second로 이동한다.'
+
+    rot = rotate_xform(second)
+    pos = position_xform(second)
+    
+    for first in first_list:        
+    
+        cmds.xform(first, ws=1, ro= rot)
+        cmds.move(pos[0],pos[1], pos[2] ,first,rpr=1)
+
+
+def offGRP_command(curve):
+    '선택한 컨트롤러에 offGRP 생성'
+    sels = cmds.ls(curve)
+
+    ctrl_list = []
+    skin_jnt_list = []
+
+    for i in sels:
+
+        target_grp = cmds.group(em=1, n= '%s%s'%(i, '_GRP'))
+        target_ofs = cmds.group(em=1, n= '%s%s'%(i, '_offGRP'))
+        
+        cmds.parent(target_grp, target_ofs)
+        
+        i_po = cmds.xform(i, q=1, ws=1, rp=1)
+        i_ro = cmds.xform(i, q=1, ws=1, ro=1)
+        i_sc = cmds.xform(i, q=1, ws=1, s=1)   # 컨트롤러의 trans,rotate,scale 값 추출
+        
+        cmds.move(i_po[0], i_po[1], i_po[2], target_ofs, rpr=1 )  #ofs그룹을 원본컨트롤러의 위치로 이동
+        cmds.xform(target_ofs, ws=1, ro=i_ro, s=i_sc)
+        
+        cmds.parent(i, target_grp)
+        
+        cmds.makeIdentity(i, apply=1, t=1, r=1, s=1, n=0, pn=1) #프리즈
+        
+        ctrl_list.append(target_ofs)
+
+        
+        cmds.select(cl=1) #select 클리어
+        name_re = i.replace('_CTL', '_')
+        cre_jnt = cmds.joint(n= '%s%s'%(name_re,'skinJNT'), p=(0,0,0))
+        #cre_jnt_grp = cmds.group(em=1, n= '%s%s'%(cre_jnt, '_GRP'))
+        #cmds.parent(cre_jnt, cre_jnt_grp)
+        
+        cmds.move(i_po[0], i_po[1], i_po[2], cre_jnt, rpr=1 )
+        cmds.xform(cre_jnt, ws=1, ro=i_ro)
+            
+        cmds.parentConstraint(i, cre_jnt, mo=1)
+        cmds.scaleConstraint(i, cre_jnt, mo=1)
+
+        skin_jnt_list.append(cre_jnt)
+
+
+def offGRP_command_CTL(curve):
+    '선택한 컨트롤러에 CTL_offGRP만생성'
+    sels = cmds.ls(curve)
+
+    ctrl_list = []
+
+    for i in sels:
+
+        target_grp = cmds.group(em=1, n= '%s%s'%(i, '_GRP'))
+        target_ofs = cmds.group(em=1, n= '%s%s'%(i, '_offGRP'))
+        
+        cmds.parent(target_grp, target_ofs)
+        
+        i_po = cmds.xform(i, q=1, ws=1, rp=1)
+        i_ro = cmds.xform(i, q=1, ws=1, ro=1)
+        i_sc = cmds.xform(i, q=1, ws=1, s=1)   # 컨트롤러의 trans,rotate,scale 값 추출
+        
+        cmds.move(i_po[0], i_po[1], i_po[2], target_ofs, rpr=1 )  #ofs그룹을 원본컨트롤러의 위치로 이동
+        cmds.xform(target_ofs, ws=1, ro=i_ro, s=i_sc)
+        
+        cmds.parent(i, target_grp)
+        
+        cmds.makeIdentity(i, apply=1, t=1, r=1, s=1, n=0, pn=1) #프리즈
+        
+        ctrl_list.append(target_ofs)
+
+
+
 # [long_skirt_set]
 
 
@@ -146,11 +263,11 @@ class long_skirt_set():
 
     def create_UI(self):
         ## 윈도우 ID##
-        windowID='skirt_UI'
+        windowID='long_UI'
         ##windows reset
         if cmds.window(windowID, ex=True):
             cmds.deleteUI(windowID)
-        cmds.window(windowID, t='skirt_UI', rtf=True, s=True, mnb=True, mxb=True,wh=(30,30))
+        cmds.window(windowID, t='long_UI', rtf=True, s=True, mnb=True, mxb=True,wh=(30,30))
         ##master layer
         master = cmds.columnLayout()
         cmds.columnLayout()
@@ -211,47 +328,14 @@ class long_skirt_set():
         cmds.setParent (master)
         cmds.button(l=u'배치' , w = 301 , h = 30 , c = pm.Callback(self.pose_position))
         cmds.setParent (master)
-        cmds.button(l=u'연결' , w = 301 , h = 30 , c = pm.Callback(self.skirt_go))
+        cmds.button(l=u'연결' , w = 301 , h = 30 , c = pm.Callback(self.skirt_connect))
         cmds.setParent (master)
         cmds.showWindow(windowID)
         
         
-
     def import_long_skirt(self):
         long_skirt_bindpose = Set_route + 'long_skirt_pos.ma'
         cmds.file( long_skirt_bindpose, i = 1 , f = 1  )
-
-
-
-
-
-
-
-
-    def change_number(self):
-        base_num = cmds.textField('number_tex_box'  , text =1, q=1)
-        base_num = int(base_num)
-        return base_num
-
-        
-
-
-
-
-
-
-    def position_xform(self, transform):
-        'world position 추출'
-        return cmds.xform( transform, q=1, ws=1, rp=1)
-
-
-
-    def move_point(self, first, second ):
-        'first_list 가 second로 이동한다.'
-
-        pos = self.position_xform(second)
-        
-        cmds.move(pos[0],pos[1], pos[2] ,first,rpr=1)
 
 
     def sels_tex(self,part):
@@ -267,146 +351,42 @@ class long_skirt_set():
         if part == "R_ankle":cmds.textField('R_ankle_tex_box'  , edit =1, tx= sels[0] )
         
        
-
-
-
-
     def pose_position(self):
     
         hip_JNT = cmds.textField( 'hip_tex_box' , q = 1 , text = 1)
-        pm.Callback(self.move_point('skirt_total_CTL_offGRP', hip_JNT))
+        move_point('skirt_total_CTL_offGRP', hip_JNT)
 
         L_up_leg_JNT = cmds.textField( 'L_leg_tex_box' , q = 1 , text = 1)
-        pm.Callback(self.move_point('L_skirt_total_CTL', L_up_leg_JNT))
+        move_point('L_skirt_total_CTL', L_up_leg_JNT)
 
         L_low_leg_JNT = cmds.textField( 'L_knee_tex_box' , q = 1 , text = 1)
-        pm.Callback(self.move_point('L_leg_CTL', L_low_leg_JNT))
+        move_point('L_leg_CTL', L_low_leg_JNT)
 
         # L_low_leg_JNT = cmds.textField( 'L_knee_tex_box' , q = 1 , text = 1)
         # move_point('down_L_skirt_total_CTL', L_low_leg_JNT)
 
         L_ankle_JNT = cmds.textField( 'L_ankle_tex_box' , q = 1 , text = 1)
-        pm.Callback(self.move_point('down_L_leg_CTL', L_ankle_JNT))
+        move_point('down_L_leg_CTL', L_ankle_JNT)
 
         spn_JNT = cmds.textField( 'spn_01_tex_box' , q = 1 , text = 1)
-        pm.Callback(self.move_point('waist_total_CTL', spn_JNT))
+        move_point('waist_total_CTL', spn_JNT)
 
 
-    def normalize_float(self, num):
-        '0.0000000123 => 0.0, -0.0 => 0.0'
-        result = float('%.5f' % num)
-        if result == -0.0:
-            result = 0.0
-        return result
-
-
-    def rotate_xform(self, transform):
-        'world rotate 추출'
-        return cmds.xform(transform, q=1, ws=1, ro=1)
-
-
-    def move(self, first_list, second ):
-        'first_list 가 second로 이동한다.'
-    
-        rot = self.rotate_xform(second)
-        pos = self.position_xform(second)
-        
-        for first in first_list:        
-        
-            cmds.xform(first, ws=1, ro= rot)
-            cmds.move(pos[0],pos[1], pos[2] ,first,rpr=1)
-
-
-    def offGRP_command(self, curve):
-        '선택한 컨트롤러에 offGRP 생성'
-        sels = cmds.ls(curve)
-
-        ctrl_list = []
-        skin_jnt_list = []
-
-        for i in sels:
-
-            target_grp = cmds.group(em=1, n= '%s%s'%(i, '_GRP'))
-            target_ofs = cmds.group(em=1, n= '%s%s'%(i, '_offGRP'))
-            
-            cmds.parent(target_grp, target_ofs)
-            
-            i_po = cmds.xform(i, q=1, ws=1, rp=1)
-            i_ro = cmds.xform(i, q=1, ws=1, ro=1)
-            i_sc = cmds.xform(i, q=1, ws=1, s=1)   # 컨트롤러의 trans,rotate,scale 값 추출
-            
-            cmds.move(i_po[0], i_po[1], i_po[2], target_ofs, rpr=1 )  #ofs그룹을 원본컨트롤러의 위치로 이동
-            cmds.xform(target_ofs, ws=1, ro=i_ro, s=i_sc)
-            
-            cmds.parent(i, target_grp)
-            
-            cmds.makeIdentity(i, apply=1, t=1, r=1, s=1, n=0, pn=1) #프리즈
-            
-            ctrl_list.append(target_ofs)
-
-            
-            cmds.select(cl=1) #select 클리어
-            name_re = i.replace('_CTL', '_')
-            cre_jnt = cmds.joint(n= '%s%s'%(name_re,'skinJNT'), p=(0,0,0))
-            #cre_jnt_grp = cmds.group(em=1, n= '%s%s'%(cre_jnt, '_GRP'))
-            #cmds.parent(cre_jnt, cre_jnt_grp)
-            
-            cmds.move(i_po[0], i_po[1], i_po[2], cre_jnt, rpr=1 )
-            cmds.xform(cre_jnt, ws=1, ro=i_ro)
-                
-            cmds.parentConstraint(i, cre_jnt, mo=1)
-            cmds.scaleConstraint(i, cre_jnt, mo=1)
-
-            skin_jnt_list.append(cre_jnt)
-
-
-    def offGRP_command_CTL(self, curve):
-        '선택한 컨트롤러에 CTL_offGRP만생성'
-        sels = cmds.ls(curve)
-
-        ctrl_list = []
-
-        for i in sels:
-
-            target_grp = cmds.group(em=1, n= '%s%s'%(i, '_GRP'))
-            target_ofs = cmds.group(em=1, n= '%s%s'%(i, '_offGRP'))
-            
-            cmds.parent(target_grp, target_ofs)
-            
-            i_po = cmds.xform(i, q=1, ws=1, rp=1)
-            i_ro = cmds.xform(i, q=1, ws=1, ro=1)
-            i_sc = cmds.xform(i, q=1, ws=1, s=1)   # 컨트롤러의 trans,rotate,scale 값 추출
-            
-            cmds.move(i_po[0], i_po[1], i_po[2], target_ofs, rpr=1 )  #ofs그룹을 원본컨트롤러의 위치로 이동
-            cmds.xform(target_ofs, ws=1, ro=i_ro, s=i_sc)
-            
-            cmds.parent(i, target_grp)
-            
-            cmds.makeIdentity(i, apply=1, t=1, r=1, s=1, n=0, pn=1) #프리즈
-            
-            ctrl_list.append(target_ofs)
-
-            
-
-
-
-        
-
-    def skirt_go(self):
+    def skirt_connect(self):
             
         top_loc_list = cmds.listRelatives('top_loc_GRP', c=1)
         mid_loc_list = cmds.listRelatives('mid_loc_GRP', c=1)
 
         top_loc_y = cmds.xform('top_01_loc',q=1,rp=1, ws=1)[1] # top loc의 Y축값만 쿼리
-        top_loc_y = self.normalize_float(top_loc_y) # 소수점정리
+        top_loc_y = normalize_float(top_loc_y) # 소수점정리
 
         mid_loc_y = cmds.xform('mid_01_loc',q=1,rp=1, ws=1)[1] # mid loc의 Y축값만 쿼리
-        mid_loc_y = self.normalize_float(mid_loc_y)
+        mid_loc_y = normalize_float(mid_loc_y)
 
         low_loc_y = cmds.xform('low_01_loc',q=1,rp=1, ws=1)[1] # low loc의 Y축값만 쿼리
-        low_loc_y = self.normalize_float(low_loc_y)
+        low_loc_y = normalize_float(low_loc_y)
 
-        use_num = self.change_number() #사용자 지정 컨트롤러 갯수
+        use_num = change_number() #사용자 지정 컨트롤러 갯수
         num = (use_num-3) / 2 #허벅지 ~ 무릎, 무릎 ~ 발목 파트를 2개로 나눈다 (지정한 컨트롤러갯수 - 고정된컨트롤러(top,mid,low) / 2(윗다리,아랫다리)
         top_con_num = (top_loc_y - mid_loc_y) / (num + 1)# 허벅지에서 무릎
         # top Y축과 mid Y축 사이 (허벅지~무릎)에 컨트롤러갯수(num)+1 을 해주어야 등분갯수가 나온다(컨트롤러를 일정한간격으로 배치하기위함)
@@ -443,8 +423,8 @@ class long_skirt_set():
             top_loc_x_list.append(po[0]) #x축의 값
             top_loc_z_list.append(po[2]) #z축의 값
 
-        top_loc_x_list = [ self.normalize_float(num) for num in top_loc_x_list ] #소수점 자리 정리
-        top_loc_z_list = [ self.normalize_float(num) for num in top_loc_z_list ] 
+        top_loc_x_list = [ normalize_float(num) for num in top_loc_x_list ] #소수점 자리 정리
+        top_loc_z_list = [ normalize_float(num) for num in top_loc_z_list ] 
 
     # ------------------------------- mid_loc_GRP 에서 트랜스 X,Z를 쿼리 (무릎 - 발목)
         mid_loc_x_list = []
@@ -458,8 +438,8 @@ class long_skirt_set():
             mid_loc_x_list.append(po[0]) #x축의 값
             mid_loc_z_list.append(po[2]) #z축의 값
 
-        mid_loc_x_list = [ self.normalize_float(num) for num in mid_loc_x_list ] #소수점 자리 정리
-        mid_loc_z_list = [ self.normalize_float(num) for num in mid_loc_z_list ] 
+        mid_loc_x_list = [ normalize_float(num) for num in mid_loc_x_list ] #소수점 자리 정리
+        mid_loc_z_list = [ normalize_float(num) for num in mid_loc_z_list ] 
 
 
 
@@ -477,10 +457,10 @@ class long_skirt_set():
                 top_FK_con = cmds.duplicate('FK_con', n= con_name + '_FK_%02d_CTL'%(i+2))
                 cmds.move(loc_x, top_loc_y, loc_z,  top_FK_con)
 
-                fix_rotate = self.rotate_xform(con_name + '_FK_01_CTL') # 만들어질 컨트롤러의 기준 로테이션은 FK_01 컨트롤러에서 추출
+                fix_rotate = rotate_xform(con_name + '_FK_01_CTL') # 만들어질 컨트롤러의 기준 로테이션은 FK_01 컨트롤러에서 추출
                 cmds.xform(top_FK_con, ws=1, ro= fix_rotate)
                 
-                pm.Callback(self.offGRP_command_CTL(top_FK_con))
+                offGRP_command_CTL(top_FK_con)
                 cmds.parent( con_name + '_FK_%02d_CTL_offGRP'%(i+2), con_name + '_FK_%02d_CTL'%(i+1) ) # FK컨트롤러 하이라키 정리
             top_FK_last_list.append(top_FK_con[0])
             # top fk컨트롤러의 마지막 컨트롤러를 리스트화시킨다(쿼리해서 point_loc가 그 밑에 하이라키로 들어갈수있게하기 위함)
@@ -492,10 +472,10 @@ class long_skirt_set():
                 top_IK_con = cmds.duplicate('IK_con', n= con_name + '_IK_%02d_CTL'%(i+2))
                 cmds.move(loc_x, top_loc_y, loc_z,  top_IK_con)
 
-                fix_rotate = self.rotate_xform(con_name + '_FK_01_CTL') # 만들어질 컨트롤러의 기준 로테이션은 FK_01 컨트롤러에서 추출
+                fix_rotate = rotate_xform(con_name + '_FK_01_CTL') # 만들어질 컨트롤러의 기준 로테이션은 FK_01 컨트롤러에서 추출
                 cmds.xform(top_IK_con, ws=1, ro= fix_rotate)
 
-                pm.Callback(self.offGRP_command(top_IK_con))
+                offGRP_command(top_IK_con)
                 cmds.parent( con_name + '_IK_%02d_CTL_offGRP'%(i+2), con_name + '_FK_%02d_CTL'%(i+2) ) # IK컨트롤러 하이라키 정리
                 cmds.parent( con_name + '_IK_%02d_skinJNT'%(i+2), con_name + '_IK_%02d_skinJNT'%(i+1) ) # IK스킨조인트 하이라키 정리
 
@@ -515,10 +495,10 @@ class long_skirt_set():
                 low_FK_con = cmds.duplicate('FK_con', n= 'down_' + con_name + '_FK_%02d_CTL'%(i+2))
                 cmds.move(loc_x, low_loc_y, loc_z,  low_FK_con)
 
-                fix_rotate = self.rotate_xform('down_' + con_name + '_FK_01_CTL') # 만들어질 컨트롤러의 기준 로테이션은 FK_01 컨트롤러에서 추출
+                fix_rotate = rotate_xform('down_' + con_name + '_FK_01_CTL') # 만들어질 컨트롤러의 기준 로테이션은 FK_01 컨트롤러에서 추출
                 cmds.xform(low_FK_con, ws=1, ro= fix_rotate)
                 
-                pm.Callback(self.offGRP_command_CTL(low_FK_con))
+                offGRP_command_CTL(low_FK_con)
                 cmds.parent( 'down_' + con_name + '_FK_%02d_CTL_offGRP'%(i+2), 'down_' + con_name + '_FK_%02d_CTL'%(i+1) ) # down FK컨트롤러 하이라키 정리
 
             # 무릎 - 발목 / IK컨트롤러 생성
@@ -526,10 +506,10 @@ class long_skirt_set():
                 low_IK_con = cmds.duplicate('IK_con', n= 'down_' + con_name + '_IK_%02d_CTL'%(i+2))
                 cmds.move(loc_x, low_loc_y, loc_z,  low_IK_con)
 
-                fix_rotate = self.rotate_xform('down_' + con_name + '_FK_01_CTL') # 만들어질 컨트롤러의 기준 로테이션은 FK_01 컨트롤러에서 추출
+                fix_rotate = rotate_xform('down_' + con_name + '_FK_01_CTL') # 만들어질 컨트롤러의 기준 로테이션은 FK_01 컨트롤러에서 추출
                 cmds.xform(low_IK_con, ws=1, ro= fix_rotate)
                 
-                pm.Callback(self.offGRP_command(low_IK_con))
+                offGRP_command(low_IK_con)
                 cmds.parent( 'down_' + con_name + '_IK_%02d_CTL_offGRP'%(i+2), 'down_' + con_name + '_FK_%02d_CTL'%(i+2) ) # down IK컨트롤러 하이라키 정리
                 cmds.parent( 'down_' + con_name + '_IK_%02d_skinJNT'%(i+2), 'down_' + con_name + '_IK_%02d_skinJNT'%(i+1) ) # down IK스킨조인트 하이라키 정리
 
@@ -546,7 +526,7 @@ class long_skirt_set():
             # point로케이터를 생성(loc -> down fk의 첫번째 컨트롤러에 포인트 컨스트레인을 하기위함)
 
             down_FK_firt = ('down_' + con_name + '_FK_01_CTL_offGRP') # down FK 의 첫번째 컨트롤러
-            pm.Callback(self.move( point_loc, down_FK_firt )) # down FK 의 첫번째 컨트롤러와 위치를 똑같이 맞춰준다
+            move( point_loc, down_FK_firt ) # down FK 의 첫번째 컨트롤러와 위치를 똑같이 맞춰준다
             point_loc_list.append(point_loc)# point_loc 리스트화(하이라키 구조로 전부 넣기 위함)
 
         down_FK_firt_list = []
@@ -631,8 +611,8 @@ class long_skirt_set():
         cmds.scaleConstraint( R_ankle_ui , 'down_R_leg_CTL_offGRP' , mo=1, w=1)
 
 
-        pm.Callback(self.move_point('L_ankle_loc', L_ankle_ui))
-        pm.Callback(self.move_point('R_ankle_loc', R_ankle_ui))
+        move_point('L_ankle_loc', L_ankle_ui)
+        move_point('R_ankle_loc', R_ankle_ui)
         cmds.parentConstraint( L_ankle_ui , 'L_ankle_loc' , mo=1, w=1)
         cmds.parentConstraint( R_ankle_ui , 'R_ankle_loc' , mo=1, w=1)
 
@@ -723,7 +703,138 @@ class long_skirt_set():
         cmds.setAttr ('down_R_leg_CTL.visibility', 0)
         cmds.setAttr ('ankle_M_skirt_total_CTL_offGRP.visibility', 0)
 
+
+
+# [short_skirt_set]
+
+
+class short_skirt_set():
+
+    def __init__(self):
+        self.create_UI()
+
+
+    def create_UI(self):
+        ## 윈도우 ID##
+        windowID='short_UI'
+        ##windows reset
+        if cmds.window(windowID, ex=True):
+            cmds.deleteUI(windowID)
+        cmds.window(windowID, t='short_UI', rtf=True, s=True, mnb=True, mxb=True,wh=(30,30))
+        ##master layer
+        master = cmds.columnLayout()
+        cmds.columnLayout()
+        ##싱글 텍스트필드
+        #cmds.rowColumnLayout( nc=1 )
+        cmds.button(l=u'pose import' , w = 300 , h = 30 , c = pm.Callback(self.import_short_skirt))
+        #cmds.rowColumnLayout( nc=1 )
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.text(l = u'controller count' ,w = 100)
+        #cmds.textField('number_tex_box' , w = 30 , h = 20 , tx = '9', textChangedCommand='skirt_command.change_number()') # textChangedCommand는 ui에서 text를 바꿀때 커멘드입력이 안돼도 실시간으로 쿼리가능
+        cmds.textField('number_tex_box' , w = 30 , h = 20 , tx = '7')
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.text(l = u'total' ,w = 100)
+        cmds.textField('total_tex_box' , w = 150 , h = 20 , tx = 'world_M_CTL')
+        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'total'))
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.text(l = u'hip' , w = 100)
+        cmds.textField('hip_tex_box' , w = 150 , h = 20 , tx = 'root_M_skinJNT')
+        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'hip'))
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.text(l = u'spline01' , w = 100)
+        cmds.textField('spn_01_tex_box' , w = 150 , h = 20 , tx = 'spine_01_M_skinJNT') 
+        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'spn'))
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.text(l = u'L_Leg' , w = 100)
+        cmds.textField( 'L_leg_tex_box' , w = 150 , h = 20 , tx = 'leg_L_skinJNT')
+        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'L_leg'))
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.text(l = u'L_Knee' , w = 100)
+        cmds.textField( 'L_knee_tex_box' , w = 150 , h = 20 , tx = 'knee_L_skinJNT')
+        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'L_knee'))
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.text(l = u'R_Leg' , w = 100)
+        cmds.textField( 'R_leg_tex_box' , w = 150 , h = 20 , tx = 'leg_R_skinJNT')
+        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'R_leg'))
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.text(l = u'R_Knee' , w = 100)
+        cmds.textField( 'R_knee_tex_box' , w = 150 , h = 20 , tx = 'knee_R_skinJNT')
+        cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'R_knee'))
+        cmds.setParent (master)
+        cmds.button(l=u'배치' , w = 301 , h = 30 , c = pm.Callback(self.pose_position))
+        cmds.setParent (master)
+        cmds.button(l=u'연결' , w = 301 , h = 30 , c = pm.Callback(self.skirt_connect))
+        cmds.setParent (master)
+        cmds.showWindow(windowID)
+
+
+    def import_short_skirt(self):
+            short_skirt_bindpose = Set_route + 'short_skirt_pos.ma'
+            cmds.file( short_skirt_bindpose, i = 1 , f = 1  )
+
+
+    def sels_tex(self, part):
+        print 'sel_import'
+        sels = cmds.ls(sl=1)
+        if part == "total":cmds.textField('total_tex_box'  , edit =1, tx= sels[0] )
+        if part == "hip":cmds.textField('hip_tex_box'  , edit =1, tx= sels[0] )
+        if part == "spn":cmds.textField('spn_01_tex_box'  , edit =1, tx= sels[0] )
+        if part == "L_leg":cmds.textField('L_leg_tex_box'  , edit =1, tx= sels[0] )
+        if part == "L_knee":cmds.textField('L_knee_tex_box'  , edit =1, tx= sels[0] )
+        if part == "R_leg":cmds.textField('R_leg_tex_box'  , edit =1, tx= sels[0] )
+        if part == "R_knee":cmds.textField('R_knee_tex_box'  , edit =1, tx= sels[0] )
+
         
+    def pose_position(self):
+    
+        hip_JNT = cmds.textField( 'hip_tex_box' , q = 1 , text = 1)
+        move_point('skirt_total_CTL_offGRP', hip_JNT)
+
+        L_up_leg_JNT = cmds.textField( 'L_leg_tex_box' , q = 1 , text = 1)
+        move_point('L_skirt_total_CTL', L_up_leg_JNT)
+
+        L_low_leg_JNT = cmds.textField( 'L_knee_tex_box' , q = 1 , text = 1)
+        move_point('L_leg_CTL', L_low_leg_JNT)
+
+        spn_JNT = cmds.textField( 'spn_01_tex_box' , q = 1 , text = 1)
+        move_point('waist_total_CTL', spn_JNT)
+
+
+    def skirt_connect(self):
+        total_ui = cmds.textField( 'total_tex_box' , q = 1 , text = 1)
+        hip_ui = cmds.textField( 'hip_tex_box' , q = 1 , text = 1)
+        spn_ui = cmds.textField( 'spn_01_tex_box' , q = 1 , text = 1) 
+        L_up_leg_ui = cmds.textField( 'L_leg_tex_box' , q = 1 , text = 1)
+        L_low_leg_ui = cmds.textField( 'L_knee_tex_box' , q = 1 , text = 1)
+        R_up_leg_ui = cmds.textField( 'R_leg_tex_box' , q = 1 , text = 1)
+        R_low_leg_ui = cmds.textField( 'R_knee_tex_box' , q = 1 , text = 1)
+        sels=cmds.sets( 'delete_set',int='delete_set')
+        cmds.delete(sels)
+        cmds.parentConstraint( 'skirt_sub_total_CTL' , 'skirt_sub_front_M_fk_01_rot_pin' , mo=1, w=1)
+        cmds.parentConstraint( 'skirt_sub_total_CTL' , 'skirt_sub_back_M_fk_01_rot_pin' , mo=1, w=1)
+        cmds.parentConstraint( total_ui , 'skirt_total_CTL' , mo=1, w=1)
+        cmds.scaleConstraint( total_ui , 'skirt_total_CTL' , mo=1, w=1)
+        cmds.parentConstraint( hip_ui , 'skirt_sub_total_CTL' , mo=1, w=1)
+        cmds.parentConstraint( spn_ui , 'waist_total_CTL' , mo=1, w=1)
+        cmds.pointConstraint( L_up_leg_ui , 'L_skirt_total_CTL' , mo=1, w=1)
+        cmds.pointConstraint( R_up_leg_ui , 'R_skirt_total_CTL' , mo=1, w=1)
+        cmds.pointConstraint( L_low_leg_ui , 'L_leg_CTL' , mo=1, w=1)
+        cmds.pointConstraint( R_low_leg_ui , 'R_leg_CTL' , mo=1, w=1)
+        i=1
+        for b in range(7):
+            cmds.parentConstraint( 'skirt_sub_total_CTL' , 'skirt_sub_side_L_%02d_fk_01_rot_pin'%i , mo=1, w=1)
+            cmds.parentConstraint( 'skirt_sub_total_CTL' , 'skirt_sub_side_R_%02d_fk_01_rot_pin'%i , mo=1, w=1)
+            
+            i=i+1
+
 
 
 
