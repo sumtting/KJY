@@ -141,6 +141,7 @@ class RIG_checktool_window(QtCore.QObject):
     def final_check_load(self):
         RIG_checktool_command.matchname_set()
         RIG_checktool_command.unused_node()
+        RIG_checktool_command.MOD_GRP_vis()
 
 
     def json_manager_load(self):

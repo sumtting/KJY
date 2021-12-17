@@ -318,7 +318,7 @@ def object_matches_sets():
     j=list(t)
     k=cmds.ls(j)
     if len(k) != 0:
-        cmds.sets(k, n='matchname_set')
+        #cmds.sets(k, n='matchname_set')
         print(j)
     else:
         pass
@@ -342,6 +342,18 @@ def unused_node(): # unused node 삭제
 
     else:
         print (u'삭제된 노드 개수: %d'%(un_node))
+
+
+
+def MOD_GRP_vis(): # MOD 그룹 vix on
+    scene_list = cmds.ls(type='transform')
+    for i in scene_list:
+        if 'MOD_' in i:  
+            cmds.setAttr(i + '.visibility' , 1)
+            
+        else :
+            pass
+
 
     
 
