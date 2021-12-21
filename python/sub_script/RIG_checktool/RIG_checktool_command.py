@@ -292,7 +292,8 @@ def getInstances():
     j=list(t)
     k=cmds.ls(j)
     if len(k) != 0:
-        cmds.sets(object_instance_list, n='instance_matches_sets')
+        #cmds.sets(object_instance_list, n='instance_matches_sets')
+        print j
     else:
         pass
 
