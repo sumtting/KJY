@@ -127,7 +127,7 @@ class RIG_checktool_window(QtCore.QObject):
 
        
     def UI_listWidget_menu(self) : # UI 리스트위젯 item에 연결된 함수
-        RIG_checktool_command.key_clear(ani_CTL_list)
+        RIG_checktool_command.key_clear()
         select_ = (self.ui.RIG_check_listWidget.currentItem().text()) #리스트위젯에서 선택한 item 쿼리
         
         RIG_checktool_command.load_json_setkey(select_)
