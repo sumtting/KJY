@@ -204,34 +204,54 @@ def load_json_setkey(name_): #name_은 문자열로 입력, json에있는 딕셔
 
 #-------------------------------------------------------------------------------------------------
 
-def key_clear(list_):
+def key_clear():
     # 현재프레임위치를 0으로 되돌리고 모든키값을 지워준다.
-         
-    mySel = cmds.ls(list_)
-    
-    cmds.currentTime(0)
-        
-    keyframe_list = []
-    try:
-        keyframe_list += cmds.listConnections(mySel,s=True, type="animCurveTU")
-    except:
-        pass
-    try:
-        keyframe_list += cmds.listConnections(mySel,s=True, type="animCurveTL")
-    except:
-        pass
-    try:
-        keyframe_list += cmds.listConnections(mySel,s=True, type="animCurveTA")
-    except:
-        pass
-        
-    if len(keyframe_list) > 0 : # key노드가 있을경우에만 지워줌
-        cmds.delete(keyframe_list)
-    else:
-        pass
+    scene_list = cmds.ls(type='objectSet')
 
-    cmds.playbackOptions (min=1, max=200, animationStartTime=1, animationEndTime=200)
-    cmds.currentTime(1)
+    json_list = folderlist(json_path) # folderlist 함수 쿼리(json_path 경로 폴더에있는 파일 모두 추출)
+    same_result = [x for x in scene_list if x in json_list] # 오토리깅을 불러왔을때 잡혀있는 set의 이름과 겹치는 json폴더만 쿼리
+    
+    for same_ in same_result:
+        json_list = folderlist(json_path + same_)
+        name_ = same_.split('_set')[0]
+
+        file_name = name_ + '_CTL.json'
+        file_path = json_path + same_ + '/'
+        
+        with open(file_path + file_name,'r') as json_file:
+            json_data = json.load(json_file)
+        
+
+        for i in json_data:
+            
+            ani_CTL_list = i.values()[0] #json데이터 에서 밸류를 추출
+
+         
+            mySel = cmds.ls(ani_CTL_list)
+            
+            cmds.currentTime(0)
+                
+            keyframe_list = []
+            try:
+                keyframe_list += cmds.listConnections(mySel,s=True, type="animCurveTU")
+            except:
+                pass
+            try:
+                keyframe_list += cmds.listConnections(mySel,s=True, type="animCurveTL")
+            except:
+                pass
+            try:
+                keyframe_list += cmds.listConnections(mySel,s=True, type="animCurveTA")
+            except:
+                pass
+                
+            if len(keyframe_list) > 0 : # key노드가 있을경우에만 지워줌
+                cmds.delete(keyframe_list)
+            else:
+                pass
+
+            cmds.playbackOptions (min=1, max=200, animationStartTime=1, animationEndTime=200)
+            cmds.currentTime(1)
 
 
 def key_framebar(list_): #키가 찍혀있는 가장 마지막 프레임에 맞게 프레임바를 셋팅해준다.

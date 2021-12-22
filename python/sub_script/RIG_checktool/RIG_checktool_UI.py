@@ -135,7 +135,7 @@ class RIG_checktool_window(QtCore.QObject):
 
             
     def key_clear_load(self):
-        RIG_checktool_command.key_clear(ani_CTL_list)
+        RIG_checktool_command.key_clear()
 
 
     def final_check_load(self):
