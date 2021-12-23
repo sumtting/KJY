@@ -127,6 +127,8 @@ class KJY_window(QtCore.QObject):
         self.ui.jnt_off_btn.clicked.connect(pm.Callback( self.joint_on_off_load, 2))
         self.ui.jnt_ps_btn.clicked.connect(pm.Callback( self.jnt_ps_load))
         self.ui.constraint_copy_btn.clicked.connect(pm.Callback( self.constraint_copy_load))
+        self.ui.LR_copy_btn.clicked.connect(pm.Callback( self.LR_copy_load))
+
         
         
 
@@ -356,6 +358,10 @@ class KJY_window(QtCore.QObject):
 
     def constraint_copy_load(self):
         Rig_command.constraint_copy()
+
+
+    def LR_copy_load(self):
+        Rig_command.LR_copy()
 
 ## --------------------------------------------------------------------------------------------------------------------------
 # [blend]

@@ -862,6 +862,30 @@ def constraint_copy() :
 
 
 
+def LR_copy(): # 선택한 컨트롤러의 어트리뷰트 값을 반대편 컨트롤러로 copy
+
+    sel_list = cmds.ls(sl=1) # 선택한 컨트롤러 리스트
+    sel_list_revers = [] 
+
+    for sel in sel_list: # 선택한 컨트롤러의 반대편 리스트를 만들어준다 (ex. L -> R)
+        if '_L_' in sel:
+            sel_revers = sel.replace('_L_', '_R_')
+            sel_list_revers.append(sel_revers)
+
+        elif '_R_' in sel:
+            sel.replace('_R_', '_L_')
+            sel_list_revers.append(sel_revers)
+
+    for sel, sel_reverse in zip(sel_list, sel_list_revers): # 선택한 컨트롤러에서 반대편 컨트롤러로 값을 옮겨준다.
+        sel_tr = cmds.xform(sel, translation=1,q=1)
+        sel_ro = cmds.xform(sel, rotation=1,q=1)
+
+        cmds.setAttr(sel_reverse + '.translate' , sel_tr[0], sel_tr[1], sel_tr[2])
+        cmds.setAttr(sel_reverse + '.rotate' , sel_ro[0], sel_ro[1], sel_ro[2])
+
+
+
+
 ##-------------------------------------------------------------------------------------------------------------------------------------------------------
 # [follicle]
 
