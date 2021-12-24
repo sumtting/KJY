@@ -872,18 +872,20 @@ def LR_copy(): # 선택한 컨트롤러의 어트리뷰트 값을 반대편 컨�
             sel_revers = sel.replace('_L_', '_R_')
             sel_list_revers.append(sel_revers)
 
+
         elif '_R_' in sel:
             sel.replace('_R_', '_L_')
             sel_list_revers.append(sel_revers)
 
+    
     for sel, sel_reverse in zip(sel_list, sel_list_revers): # 선택한 컨트롤러에서 반대편 컨트롤러로 값을 옮겨준다.
-        sel_tr = cmds.xform(sel, translation=1,q=1)
-        sel_ro = cmds.xform(sel, rotation=1,q=1)
-
-        cmds.setAttr(sel_reverse + '.translate' , sel_tr[0], sel_tr[1], sel_tr[2])
-        cmds.setAttr(sel_reverse + '.rotate' , sel_ro[0], sel_ro[1], sel_ro[2])
-
-
+        sel_keyable = cmds.listAttr(sel, k=1) # keyable 상태인 어트리뷰트만 쿼리
+        sel_reverse_keyable = cmds.listAttr(sel_reverse, k=1)
+        
+        for attr in sel_keyable:
+            sel_attr = cmds.getAttr(sel + '.' + attr) # 위에서 쿼리한 어트리뷰트의 값을 추출
+            sel_reverse_attr = cmds.setAttr(sel_reverse + '.' + attr , sel_attr) # 반대편 컨트롤러 어트리뷰트에 추출한 값을 똑같이 넣어준다
+    
 
 
 ##-------------------------------------------------------------------------------------------------------------------------------------------------------
