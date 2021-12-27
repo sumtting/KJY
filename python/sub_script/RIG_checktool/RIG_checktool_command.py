@@ -208,8 +208,14 @@ def key_clear():
     # 현재프레임위치를 0으로 되돌리고 모든키값을 지워준다.
     scene_list = cmds.ls(type='objectSet')
 
+    if 'crowd_set' in scene_list : # crowd_set은 human_set과 동일하게 취급
+        scene_list.append('human_set')
+    else:
+        pass
+
     json_list = folderlist(json_path) # folderlist 함수 쿼리(json_path 경로 폴더에있는 파일 모두 추출)
     same_result = [x for x in scene_list if x in json_list] # 오토리깅을 불러왔을때 잡혀있는 set의 이름과 겹치는 json폴더만 쿼리
+    
     
     for same_ in same_result:
         json_list = folderlist(json_path + same_)
