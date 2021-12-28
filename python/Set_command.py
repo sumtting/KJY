@@ -587,12 +587,8 @@ class long_skirt_set():
         cmds.delete(sels)
         cmds.parentConstraint( 'skirt_sub_total_CTL' , 'skirt_sub_front_M_FK_01_rot_pin' , mo=1, w=1)
         cmds.parentConstraint( 'skirt_sub_total_CTL' , 'skirt_sub_back_M_FK_01_rot_pin' , mo=1, w=1)
-        cmds.parentConstraint( total_ui , 'skirt_total_CTL' , mo=1, w=1)
-        cmds.scaleConstraint( total_ui , 'skirt_total_CTL' , mo=1, w=1)
-        cmds.parentConstraint( hip_ui , 'skirt_sub_total_CTL_offGRP' , mo=1, w=1)
-
-        cmds.disconnectAttr ('skirt_sub_total_CTL_offGRP_parentConstraint1.constraintRotateX' , 'skirt_sub_total_CTL_offGRP.rotateX')
-        cmds.disconnectAttr ('skirt_sub_total_CTL_offGRP_parentConstraint1.constraintRotateZ' , 'skirt_sub_total_CTL_offGRP.rotateZ')
+        cmds.parentConstraint( hip_ui , 'skirt_total_CTL_offGRP' , mo=1, w=1)
+        cmds.scaleConstraint( hip_ui , 'skirt_total_CTL_offGRP' , mo=1, w=1)
 
         cmds.parentConstraint( spn_ui , 'waist_total_CTL' , mo=1, w=1)
         cmds.pointConstraint( L_up_leg_ui , 'L_skirt_total_CTL' , mo=1, w=1)
@@ -603,12 +599,11 @@ class long_skirt_set():
         cmds.parentConstraint( R_low_leg_ui , 'R_leg_CTL' , mo=1, w=1)
         cmds.parentConstraint( 'R_skirt_total_CTL' , 'R_leg_CTL' , mo=1, w=1)
 
-        cmds.parentConstraint( L_ankle_ui , 'down_L_leg_CTL_offGRP' , mo=1, w=1) # skirt_auto on/off 시 전환
-        cmds.parentConstraint( 'L_leg_CTL' , 'down_L_leg_CTL_offGRP' , mo=1, w=1) # skirt_auto on/off 시 전환
-        cmds.parentConstraint( R_ankle_ui , 'down_R_leg_CTL_offGRP' , mo=1, w=1)
-        cmds.parentConstraint( 'R_leg_CTL' , 'down_R_leg_CTL_offGRP' , mo=1, w=1)
-        cmds.scaleConstraint( L_ankle_ui , 'down_L_leg_CTL_offGRP' , mo=1, w=1) # 스케일 연결
-        cmds.scaleConstraint( R_ankle_ui , 'down_R_leg_CTL_offGRP' , mo=1, w=1)
+        cmds.parentConstraint( L_ankle_ui , 'down_L_leg_CTL' , mo=1, w=1) # skirt_auto on/off 시 전환
+        cmds.parentConstraint( 'down_L_skirt_total_CTL' , 'down_L_leg_CTL' , mo=1, w=1) # skirt_auto on/off 시 전환
+        cmds.parentConstraint( R_ankle_ui , 'down_R_leg_CTL' , mo=1, w=1)
+        cmds.parentConstraint( 'down_R_skirt_total_CTL' , 'down_R_leg_CTL' , mo=1, w=1)
+
 
 
         move_point('L_ankle_loc', L_ankle_ui)
@@ -617,12 +612,12 @@ class long_skirt_set():
         cmds.parentConstraint( R_ankle_ui , 'R_ankle_loc' , mo=1, w=1)
 
         # leg_follow
-        cmds.parentConstraint('skirt_sub_total_CTL', 'down_L_skirt_total_CTL_offGRP', mo=1, w=1)
-        cmds.parentConstraint('skirt_sub_total_CTL', 'down_R_skirt_total_CTL_offGRP', mo=1, w=1)
+        cmds.parentConstraint('L_skirt_total_CTL', 'down_L_skirt_total_CTL_offGRP', mo=1, w=1)
+        cmds.parentConstraint('R_skirt_total_CTL', 'down_R_skirt_total_CTL_offGRP', mo=1, w=1)
         cmds.connectAttr ('down_skirt_RIG_setup_CTL.legFollow', 'down_L_skirt_total_CTL_offGRP_parentConstraint1.L_leg_CTLW0')
         cmds.connectAttr ('down_skirt_RIG_setup_CTL.legFollow', 'down_R_skirt_total_CTL_offGRP_parentConstraint1.R_leg_CTLW0')
-        cmds.connectAttr ('leg_follow_reverse.outputX', 'down_L_skirt_total_CTL_offGRP_parentConstraint1.skirt_sub_total_CTLW1')
-        cmds.connectAttr ('leg_follow_reverse.outputX', 'down_R_skirt_total_CTL_offGRP_parentConstraint1.skirt_sub_total_CTLW1')
+        cmds.connectAttr ('leg_follow_reverse.outputX', 'down_L_skirt_total_CTL_offGRP_parentConstraint1.L_skirt_total_CTLW1')
+        cmds.connectAttr ('leg_follow_reverse.outputX', 'down_R_skirt_total_CTL_offGRP_parentConstraint1.R_skirt_total_CTLW1')
 
         cmds.pointConstraint('down_L_front_skirt_trans_sub_CTL', 'down_skirt_sub_side_L_01_FK_01_CTL_offGRP', mo=1, w=1)
         cmds.pointConstraint('down_L_side_L_01_skirt_trans_sub_CTL', 'down_skirt_sub_side_L_02_FK_01_CTL_offGRP', mo=1, w=1)
@@ -642,14 +637,6 @@ class long_skirt_set():
 
 
 
-
-        #cmds.connectAttr('down_skirt_RIG_setup_CTL.legFollow', 'down_L_leg_CTL_pointConstraint1.ankle_L_skinJNTW0')
-        #cmds.connectAttr('down_skirt_RIG_setup_CTL.legFollow', 'down_R_leg_CTL_pointConstraint1.ankle_R_skinJNTW0')
-
-        #cmds.disconnectAttr('down_L_leg_CTL_offGRP_pointConstraint1.constraintTranslate.constraintTranslateZ', 'down_L_leg_CTL_offGRP.translate.translateZ')
-        #cmds.disconnectAttr('down_R_leg_CTL_offGRP_pointConstraint1.constraintTranslate.constraintTranslateZ', 'down_R_leg_CTL_offGRP.translate.translateZ')
-        #cmds.connectAttr ('L_ankle_loc_con.outColorR', 'down_L_leg_CTL_offGRP.translateZ')
-        #cmds.connectAttr ('R_ankle_loc_con.outColorR', 'down_R_leg_CTL_offGRP.translateZ')
 
         i=1
         for b in range(7):
@@ -674,34 +661,57 @@ class long_skirt_set():
         #skirt_auto on
         cmds.connectAttr('down_skirt_RIG_setup_CTL.skirtAuto', 'L_leg_CTL_parentConstraint1.knee_L_skinJNTW0')
         cmds.connectAttr('down_skirt_RIG_setup_CTL.skirtAuto', 'R_leg_CTL_parentConstraint1.knee_R_skinJNTW0')
-        cmds.connectAttr('down_skirt_RIG_setup_CTL.skirtAuto', 'down_L_leg_CTL_offGRP_parentConstraint1.ankle_L_skinJNTW0')
-        cmds.connectAttr('down_skirt_RIG_setup_CTL.skirtAuto', 'down_R_leg_CTL_offGRP_parentConstraint1.ankle_R_skinJNTW0')
+        cmds.connectAttr('down_skirt_RIG_setup_CTL.skirtAuto', 'down_L_leg_CTL_parentConstraint1.ankle_L_skinJNTW0')
+        cmds.connectAttr('down_skirt_RIG_setup_CTL.skirtAuto', 'down_R_leg_CTL_parentConstraint1.ankle_R_skinJNTW0')
 
         #skirt_auto off
         cmds.connectAttr('down_skirt_RIG_setup_CTL.skirtAuto', 'skirt_auto_reverse.inputX')
         cmds.connectAttr('skirt_auto_reverse.outputX', 'L_leg_CTL_parentConstraint1.L_skirt_total_CTLW1')
         cmds.connectAttr('skirt_auto_reverse.outputX', 'R_leg_CTL_parentConstraint1.R_skirt_total_CTLW1')
-        cmds.connectAttr('skirt_auto_reverse.outputX', 'down_L_leg_CTL_offGRP_parentConstraint1.L_leg_CTLW1')
-        cmds.connectAttr('skirt_auto_reverse.outputX', 'down_R_leg_CTL_offGRP_parentConstraint1.R_leg_CTLW1')
+        cmds.connectAttr('skirt_auto_reverse.outputX', 'down_L_leg_CTL_parentConstraint1.down_L_skirt_total_CTLW1')
+        cmds.connectAttr('skirt_auto_reverse.outputX', 'down_R_leg_CTL_parentConstraint1.down_R_skirt_total_CTLW1')
 
         # 빌드 후 옵션
+        cmds.disconnectAttr ('L_leg_CTL_parentConstraint1.constraintRotateX', 'L_leg_CTL.rotateX') # 로테이트 브레이크커넥션
+        cmds.disconnectAttr ('L_leg_CTL_parentConstraint1.constraintRotateY', 'L_leg_CTL.rotateY')
+        cmds.disconnectAttr ('L_leg_CTL_parentConstraint1.constraintRotateZ', 'L_leg_CTL.rotateZ')
+        cmds.disconnectAttr ('R_leg_CTL_parentConstraint1.constraintRotateX', 'R_leg_CTL.rotateX')
+        cmds.disconnectAttr ('R_leg_CTL_parentConstraint1.constraintRotateY', 'R_leg_CTL.rotateY')
+        cmds.disconnectAttr ('R_leg_CTL_parentConstraint1.constraintRotateZ', 'R_leg_CTL.rotateZ')
+
+        cmds.disconnectAttr ('down_L_leg_CTL_parentConstraint1.constraintRotateX', 'down_L_leg_CTL.rotateX') # 로테이트 브레이크커넥션
+        cmds.disconnectAttr ('down_L_leg_CTL_parentConstraint1.constraintRotateY', 'down_L_leg_CTL.rotateY')
+        cmds.disconnectAttr ('down_L_leg_CTL_parentConstraint1.constraintRotateZ', 'down_L_leg_CTL.rotateZ')
+        cmds.disconnectAttr ('down_R_leg_CTL_parentConstraint1.constraintRotateX', 'down_R_leg_CTL.rotateX')
+        cmds.disconnectAttr ('down_R_leg_CTL_parentConstraint1.constraintRotateY', 'down_R_leg_CTL.rotateY')
+        cmds.disconnectAttr ('down_R_leg_CTL_parentConstraint1.constraintRotateZ', 'down_R_leg_CTL.rotateZ')
+
+        cmds.disconnectAttr ('root_M_skinJNT.rotateX', 'skirt_total_CTL_offGRP.rotateX') # root조인트와 skirt_total_CTL_offGRP의 로테이트를 끊고 Y축만 커넥션
+        cmds.disconnectAttr ('root_M_skinJNT.rotateY', 'skirt_total_CTL_offGRP.rotateY')
+        cmds.disconnectAttr ('root_M_skinJNT.rotateZ', 'skirt_total_CTL_offGRP.rotateZ')
+        cmds.connectAttr ('root_M_skinJNT.rotateY', 'skirt_total_CTL_offGRP.rotateY')
+
+
+
+
 
 
 
         cmds.setAttr ('down_skirt_RIG_setup_CTL.skirtAuto', 1)
-        cmds.setAttr ('skirt_total_CTLShape.visibility', 0)
-        cmds.setAttr ('waist_total_CTL.visibility', 0)
-        cmds.setAttr ('L_skirt_total_CTL.visibility', 0)
-        cmds.setAttr ('R_skirt_total_CTL.visibility', 0)
-        cmds.setAttr ('M_skirt_total_CTL.visibility', 0)
-        cmds.setAttr ('L_leg_CTL.visibility', 0)
-        cmds.setAttr ('R_leg_CTL.visibility', 0)
-        cmds.setAttr ('down_L_skirt_total_CTL.visibility', 0)
-        cmds.setAttr ('down_R_skirt_total_CTL.visibility', 0)
-        cmds.setAttr ('down_M_skirt_total_CTL.visibility', 0)
-        cmds.setAttr ('down_L_leg_CTL.visibility', 0)
-        cmds.setAttr ('down_R_leg_CTL.visibility', 0)
-        cmds.setAttr ('ankle_M_skirt_total_CTL_offGRP.visibility', 0)
+
+        cmds.setAttr ('skirt_total_CTLShape.visibility', 1)
+        cmds.setAttr ('waist_total_CTL.visibility', 1)
+        cmds.setAttr ('L_skirt_total_CTL.visibility', 1)
+        cmds.setAttr ('R_skirt_total_CTL.visibility', 1)
+        cmds.setAttr ('M_skirt_total_CTL.visibility', 1)
+        cmds.setAttr ('L_leg_CTL.visibility', 1)
+        cmds.setAttr ('R_leg_CTL.visibility', 1)
+        cmds.setAttr ('down_L_skirt_total_CTL.visibility', 1)
+        cmds.setAttr ('down_R_skirt_total_CTL.visibility', 1)
+        cmds.setAttr ('down_M_skirt_total_CTL.visibility', 1)
+        cmds.setAttr ('down_L_leg_CTL.visibility', 1)
+        cmds.setAttr ('down_R_leg_CTL.visibility', 1)
+        cmds.setAttr ('ankle_M_skirt_total_CTL_offGRP.visibility', 1)
 
 
 
