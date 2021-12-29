@@ -380,7 +380,10 @@ def MOD_GRP_vis(): # MOD 그룹 vix on
             
         else :
             pass
-
+    
+    cmds.setAttr('BS_GRP' + '.visibility' , 0)
+    cmds.setAttr('shadowMesh_GRP' + '.visibility' , 0)
+    cmds.setAttr('targetMesh_GRP' + '.visibility' , 0)
 
     
 
