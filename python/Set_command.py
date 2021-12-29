@@ -707,19 +707,19 @@ class long_skirt_set():
 
         cmds.setAttr ('down_skirt_RIG_setup_CTL.skirtAuto', 1)
 
-        cmds.setAttr ('skirt_total_CTLShape.visibility', 1)
-        cmds.setAttr ('waist_total_CTL.visibility', 1)
-        cmds.setAttr ('L_skirt_total_CTL.visibility', 1)
-        cmds.setAttr ('R_skirt_total_CTL.visibility', 1)
-        cmds.setAttr ('M_skirt_total_CTL.visibility', 1)
-        cmds.setAttr ('L_leg_CTL.visibility', 1)
-        cmds.setAttr ('R_leg_CTL.visibility', 1)
-        cmds.setAttr ('down_L_skirt_total_CTL.visibility', 1)
-        cmds.setAttr ('down_R_skirt_total_CTL.visibility', 1)
-        cmds.setAttr ('down_M_skirt_total_CTL.visibility', 1)
-        cmds.setAttr ('down_L_leg_CTL.visibility', 1)
-        cmds.setAttr ('down_R_leg_CTL.visibility', 1)
-        cmds.setAttr ('ankle_M_skirt_total_CTL_offGRP.visibility', 1)
+        cmds.setAttr ('skirt_total_CTLShape.visibility', 0)
+        cmds.setAttr ('waist_total_CTL.visibility', 0)
+        cmds.setAttr ('L_skirt_total_CTL.visibility', 0)
+        cmds.setAttr ('R_skirt_total_CTL.visibility', 0)
+        cmds.setAttr ('M_skirt_total_CTL.visibility', 0)
+        cmds.setAttr ('L_leg_CTL.visibility', 0)
+        cmds.setAttr ('R_leg_CTL.visibility', 0)
+        cmds.setAttr ('down_L_skirt_total_CTL.visibility', 0)
+        cmds.setAttr ('down_R_skirt_total_CTL.visibility', 0)
+        cmds.setAttr ('down_M_skirt_total_CTL.visibility', 0)
+        cmds.setAttr ('down_L_leg_CTL.visibility', 0)
+        cmds.setAttr ('down_R_leg_CTL.visibility', 0)
+        cmds.setAttr ('ankle_M_skirt_total_CTL_offGRP.visibility', 0)
 
 
 
