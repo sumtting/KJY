@@ -587,8 +587,10 @@ class long_skirt_set():
         cmds.delete(sels)
         cmds.parentConstraint( 'skirt_sub_total_CTL' , 'skirt_sub_front_M_FK_01_rot_pin' , mo=1, w=1)
         cmds.parentConstraint( 'skirt_sub_total_CTL' , 'skirt_sub_back_M_FK_01_rot_pin' , mo=1, w=1)
-        cmds.parentConstraint( hip_ui , 'skirt_total_CTL_offGRP' , mo=1, w=1)
-        cmds.scaleConstraint( hip_ui , 'skirt_total_CTL_offGRP' , mo=1, w=1)
+        cmds.parentConstraint( total_ui , 'skirt_total_CTL_offGRP' , mo=1, w=1)
+        cmds.scaleConstraint( total_ui , 'skirt_total_CTL_offGRP' , mo=1, w=1)
+        cmds.pointConstraint( hip_ui , 'skirt_total_CTL_GRP' , mo=1, w=1)
+
 
         cmds.parentConstraint( spn_ui , 'waist_total_CTL' , mo=1, w=1)
         cmds.pointConstraint( L_up_leg_ui , 'L_skirt_total_CTL' , mo=1, w=1)
@@ -686,10 +688,16 @@ class long_skirt_set():
         cmds.disconnectAttr ('down_R_leg_CTL_parentConstraint1.constraintRotateY', 'down_R_leg_CTL.rotateY')
         cmds.disconnectAttr ('down_R_leg_CTL_parentConstraint1.constraintRotateZ', 'down_R_leg_CTL.rotateZ')
 
-        cmds.disconnectAttr ('root_M_skinJNT.rotateX', 'skirt_total_CTL_offGRP.rotateX') # root조인트와 skirt_total_CTL_offGRP의 로테이트를 끊고 Y축만 커넥션
-        cmds.disconnectAttr ('root_M_skinJNT.rotateY', 'skirt_total_CTL_offGRP.rotateY')
-        cmds.disconnectAttr ('root_M_skinJNT.rotateZ', 'skirt_total_CTL_offGRP.rotateZ')
-        cmds.connectAttr ('root_M_skinJNT.rotateY', 'skirt_total_CTL_offGRP.rotateY')
+        cmds.connectAttr ('root_M_skinJNT.rotateY', 'skirt_total_CTL_GRP.rotateY')
+        cmds.createNode('plusMinusAverage', n='main_world_plus')
+        cmds.createNode('multiplyDivide', n='main_world_plus_reverse')
+        cmds.setAttr ("main_world_plus_reverse.input2X", -1)
+
+        cmds.connectAttr ('main_M_CTL.rotateY', 'main_world_plus.input1D[0]')
+        cmds.connectAttr ('world_M_CTL.rotateY', 'main_world_plus.input1D[1]')
+        cmds.connectAttr ('main_world_plus.output1D', 'main_world_plus_reverse.input1X')
+        cmds.connectAttr ('main_world_plus_reverse.outputX', 'skirt_total_CTL_GRP_reverse.rotateY')
+
 
 
 
