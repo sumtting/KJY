@@ -1,6 +1,6 @@
 //Maya ASCII 2019 scene
 //Name: long_skirt_pos.ma
-//Last modified: Wed, Jan 19, 2022 02:51:27 PM
+//Last modified: Wed, Jan 19, 2022 05:59:06 PM
 //Codeset: 949
 requires maya "2019";
 requires -nodeType "decomposeMatrix" "matrixNodes" "1.0";
@@ -20,13 +20,13 @@ fileInfo "vrayBuild" "5.00.20 c176659";
 createNode transform -s -n "persp";
 	rename -uid "D2F9C9F0-4966-226A-A98A-F69B62515B42";
 	setAttr ".v" no;
-	setAttr ".t" -type "double3" 9.0983427677927331 8.6993214977867801 -30.078627197411784 ;
-	setAttr ".r" -type "double3" -15.338353140792051 3763.4000000020728 0 ;
+	setAttr ".t" -type "double3" -16.18145196325052 11.82028621125497 26.247747521360722 ;
+	setAttr ".r" -type "double3" -21.338353141159054 3930.5999999873252 9.1267913836514615e-16 ;
 createNode camera -s -n "perspShape" -p "persp";
 	rename -uid "3C95D0B9-4B79-F753-AA62-9F84200DAE09";
 	setAttr -k off ".v" no;
 	setAttr ".fl" 34.999999999999993;
-	setAttr ".coi" 33.671869368219781;
+	setAttr ".coi" 33.671869368217521;
 	setAttr ".imn" -type "string" "persp";
 	setAttr ".den" -type "string" "persp_depth";
 	setAttr ".man" -type "string" "persp_mask";
@@ -86,62 +86,6 @@ createNode camera -s -n "sideShape" -p "side";
 	setAttr ".hc" -type "string" "viewSet -s %camera";
 	setAttr ".o" yes;
 	setAttr ".ai_translator" -type "string" "orthographic";
-createNode transform -n "con_shape";
-	rename -uid "7D045BE4-4EDB-4A1B-90C6-A183A780E30E";
-	setAttr ".v" no;
-createNode transform -n "FK_con" -p "con_shape";
-	rename -uid "3536A276-4D7B-AF5A-9088-529EC44EDB02";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 17;
-createNode nurbsCurve -n "FK_con_Shape" -p "FK_con";
-	rename -uid "B89E26BE-460C-1C97-213E-14B480CF3318";
-	setAttr -k off ".v";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 14;
-	setAttr ".cc" -type "nurbsCurve" 
-		1 7 0 no 3
-		8 0 1 2 3 4 5 6 7
-		8
-		1.7763568394002506e-16 -0.52428800000000031 0
-		-8.8817841970012528e-17 0.26214400000000015 0.2621440000000001
-		-8.8817841970012528e-17 0.26214400000000015 -0.2621440000000001
-		1.7763568394002506e-16 -0.52428800000000031 0
-		-0.26214400000000021 0.26214400000000004 0
-		-8.8817841970012528e-17 0.26214400000000015 0
-		0.26214400000000004 0.26214400000000021 0
-		1.7763568394002506e-16 -0.52428800000000031 0
-		;
-createNode transform -n "IK_con" -p "con_shape";
-	rename -uid "9A68A366-4D53-6A15-2145-1A9A9199304A";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 15;
-createNode nurbsCurve -n "IK_conShape" -p "IK_con";
-	rename -uid "0D020151-43EF-230D-F6A4-4CAB40692A29";
-	setAttr -k off ".v";
-	setAttr ".ove" yes;
-	setAttr ".ovc" 18;
-	setAttr ".cc" -type "nurbsCurve" 
-		1 16 0 no 3
-		17 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
-		17
-		-0.25929170093743564 0.25929170093743564 0.25929170093743564
-		-0.25929170093743564 0.25929170093743564 -0.25929170093743564
-		0.25929170093743564 0.25929170093743564 -0.25929170093743564
-		0.25929170093743564 0.25929170093743564 0.25929170093743564
-		-0.25929170093743564 0.25929170093743564 0.25929170093743564
-		-0.25929170093743564 -0.25929170093743564 0.25929170093743564
-		-0.25929170093743564 -0.25929170093743564 -0.25929170093743564
-		-0.25929170093743564 0.25929170093743564 -0.25929170093743564
-		-0.25929170093743564 0.25929170093743564 0.25929170093743564
-		-0.25929170093743564 -0.25929170093743564 0.25929170093743564
-		0.25929170093743564 -0.25929170093743564 0.25929170093743564
-		0.25929170093743564 0.25929170093743564 0.25929170093743564
-		0.25929170093743564 0.25929170093743564 -0.25929170093743564
-		0.25929170093743564 -0.25929170093743564 -0.25929170093743564
-		0.25929170093743564 -0.25929170093743564 0.25929170093743564
-		0.25929170093743564 -0.25929170093743564 -0.25929170093743564
-		-0.25929170093743564 -0.25929170093743564 -0.25929170093743564
-		;
 createNode transform -n "long_skirt_RIG_GRP";
 	rename -uid "CEABFD00-4DBA-88E7-5B22-B1A67E280C5C";
 createNode transform -n "skirt_RIG_GRP" -p "long_skirt_RIG_GRP";
@@ -2883,7 +2827,7 @@ createNode transform -n "skirt_RIG_setup_CTL_GRP" -p "skirt_RIG_setup_CTL_offGRP
 	setAttr ".sp" -type "double3" 0 1.2630511956007013 0 ;
 	setAttr -k on ".skirt_upper_pin_X" 1;
 	setAttr -k on ".skirt_upper_pin_Z";
-	setAttr -k on ".Leg_skirt_strength" 0.5;
+	setAttr -k on ".Leg_skirt_strength";
 	setAttr -k on ".middle_skirt_strength" 0.5;
 createNode transform -n "skirt_RIG_setup_CTL" -p "skirt_RIG_setup_CTL_GRP";
 	rename -uid "87453001-4B4E-C611-7A2C-3BB5E25C4AE4";
@@ -6544,9 +6488,9 @@ createNode transform -n "down_skirt_L_A_FK_01_CTL" -p "down_skirt_L_A_FK_01_CTL_
 	addAttr -ci true -sn "zValue" -ln "zValue" -at "double";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 17;
-	setAttr -k on ".xValue" 1;
-	setAttr -k on ".yValue" 1;
-	setAttr -k on ".zValue" 1;
+	setAttr -k on ".xValue" 0.7;
+	setAttr -k on ".yValue" 0.7;
+	setAttr -k on ".zValue" 0.7;
 createNode nurbsCurve -n "down_skirt_L_A_FK_01_CTL_Shape" -p "down_skirt_L_A_FK_01_CTL";
 	rename -uid "667CDE61-4DF1-F77F-C834-88B638CCEE93";
 	setAttr -k off ".v";
@@ -6669,9 +6613,9 @@ createNode transform -n "down_skirt_L_B_FK_01_CTL" -p "down_skirt_L_B_FK_01_CTL_
 	addAttr -ci true -sn "zValue" -ln "zValue" -at "double";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 17;
-	setAttr -k on ".xValue" 1;
-	setAttr -k on ".yValue" 1;
-	setAttr -k on ".zValue" 1;
+	setAttr -k on ".xValue" 0.7;
+	setAttr -k on ".yValue" 0.7;
+	setAttr -k on ".zValue" 0.7;
 createNode nurbsCurve -n "down_skirt_L_B_FK_01_CTL_Shape" -p "down_skirt_L_B_FK_01_CTL";
 	rename -uid "0EF74026-4066-9B5D-A0E7-E0AE08559088";
 	setAttr -k off ".v";
@@ -6800,9 +6744,9 @@ createNode transform -n "down_skirt_L_D_FK_01_CTL" -p "down_skirt_L_D_FK_01_CTL_
 	addAttr -ci true -sn "zValue" -ln "zValue" -at "double";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 17;
-	setAttr -k on ".xValue" 1;
-	setAttr -k on ".yValue" 1;
-	setAttr -k on ".zValue" 1;
+	setAttr -k on ".xValue" 0.7;
+	setAttr -k on ".yValue" 0.7;
+	setAttr -k on ".zValue" 0.7;
 createNode nurbsCurve -n "down_skirt_L_D_FK_01_CTL_Shape" -p "down_skirt_L_D_FK_01_CTL";
 	rename -uid "C6D47109-4B8F-6189-3FCA-F7B830688A9F";
 	setAttr -k off ".v";
@@ -6931,9 +6875,9 @@ createNode transform -n "down_skirt_L_F_FK_01_CTL" -p "down_skirt_L_F_FK_01_CTL_
 	addAttr -ci true -sn "zValue" -ln "zValue" -at "double";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 17;
-	setAttr -k on ".xValue" 1;
-	setAttr -k on ".yValue" 1;
-	setAttr -k on ".zValue" 1;
+	setAttr -k on ".xValue" 0.7;
+	setAttr -k on ".yValue" 0.7;
+	setAttr -k on ".zValue" 0.7;
 createNode nurbsCurve -n "down_skirt_L_F_FK_01_CTL_Shape" -p "down_skirt_L_F_FK_01_CTL";
 	rename -uid "DD2B45C0-40A0-510E-A367-2AAB1E24AAE6";
 	setAttr -k off ".v";
@@ -7058,9 +7002,9 @@ createNode transform -n "down_skirt_L_G_FK_01_CTL" -p "down_skirt_L_G_FK_01_CTL_
 	addAttr -ci true -sn "zValue" -ln "zValue" -at "double";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 17;
-	setAttr -k on ".xValue" 1;
-	setAttr -k on ".yValue" 1;
-	setAttr -k on ".zValue" 1;
+	setAttr -k on ".xValue" 0.7;
+	setAttr -k on ".yValue" 0.7;
+	setAttr -k on ".zValue" 0.7;
 createNode nurbsCurve -n "down_skirt_L_G_FK_01_CTL_Shape" -p "down_skirt_L_G_FK_01_CTL";
 	rename -uid "F5DF432A-4FC0-055D-A5AC-66B32B8A0DF8";
 	setAttr -k off ".v";
@@ -7183,9 +7127,9 @@ createNode transform -n "down_skirt_R_A_FK_01_CTL" -p "down_skirt_R_A_FK_01_CTL_
 	addAttr -ci true -sn "zValue" -ln "zValue" -at "double";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 17;
-	setAttr -k on ".xValue" 1;
-	setAttr -k on ".yValue" 1;
-	setAttr -k on ".zValue" 1;
+	setAttr -k on ".xValue" 0.7;
+	setAttr -k on ".yValue" 0.7;
+	setAttr -k on ".zValue" 0.7;
 createNode nurbsCurve -n "down_skirt_R_A_FK_01_CTL_Shape" -p "down_skirt_R_A_FK_01_CTL";
 	rename -uid "4422D69D-4576-85DB-9C26-91A6E0CF8A22";
 	setAttr -k off ".v";
@@ -7307,9 +7251,9 @@ createNode transform -n "down_skirt_R_B_FK_01_CTL" -p "down_skirt_R_B_FK_01_CTL_
 	addAttr -ci true -sn "zValue" -ln "zValue" -at "double";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 17;
-	setAttr -k on ".xValue" 1;
-	setAttr -k on ".yValue" 1;
-	setAttr -k on ".zValue" 1;
+	setAttr -k on ".xValue" 0.7;
+	setAttr -k on ".yValue" 0.7;
+	setAttr -k on ".zValue" 0.7;
 createNode nurbsCurve -n "down_skirt_R_B_FK_01_CTL_Shape" -p "down_skirt_R_B_FK_01_CTL";
 	rename -uid "4735983F-45F8-678B-91DC-CBB1DB580066";
 	setAttr -k off ".v";
@@ -7437,9 +7381,9 @@ createNode transform -n "down_skirt_R_D_FK_01_CTL" -p "down_skirt_R_D_FK_01_CTL_
 	addAttr -ci true -sn "zValue" -ln "zValue" -at "double";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 17;
-	setAttr -k on ".xValue" 1;
-	setAttr -k on ".yValue" 1;
-	setAttr -k on ".zValue" 1;
+	setAttr -k on ".xValue" 0.7;
+	setAttr -k on ".yValue" 0.7;
+	setAttr -k on ".zValue" 0.7;
 createNode nurbsCurve -n "down_skirt_R_D_FK_01_CTL_Shape" -p "down_skirt_R_D_FK_01_CTL";
 	rename -uid "C43783AB-4EA0-54C1-D5A9-599208C04508";
 	setAttr -k off ".v";
@@ -7569,9 +7513,9 @@ createNode transform -n "down_skirt_R_F_FK_01_CTL" -p "down_skirt_R_F_FK_01_CTL_
 	addAttr -ci true -sn "zValue" -ln "zValue" -at "double";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 17;
-	setAttr -k on ".xValue" 1;
-	setAttr -k on ".yValue" 1;
-	setAttr -k on ".zValue" 1;
+	setAttr -k on ".xValue" 0.7;
+	setAttr -k on ".yValue" 0.7;
+	setAttr -k on ".zValue" 0.7;
 createNode nurbsCurve -n "down_skirt_R_F_FK_01_CTL_Shape" -p "down_skirt_R_F_FK_01_CTL";
 	rename -uid "F61F6139-4A66-01CC-384C-729B93448743";
 	setAttr -k off ".v";
@@ -7700,9 +7644,9 @@ createNode transform -n "down_skirt_R_G_FK_01_CTL" -p "down_skirt_R_G_FK_01_CTL_
 	addAttr -ci true -sn "zValue" -ln "zValue" -at "double";
 	setAttr ".ove" yes;
 	setAttr ".ovc" 17;
-	setAttr -k on ".xValue" 1;
-	setAttr -k on ".yValue" 1;
-	setAttr -k on ".zValue" 1;
+	setAttr -k on ".xValue" 0.7;
+	setAttr -k on ".yValue" 0.7;
+	setAttr -k on ".zValue" 0.7;
 createNode nurbsCurve -n "down_skirt_R_G_FK_01_CTL_Shape" -p "down_skirt_R_G_FK_01_CTL";
 	rename -uid "7772112C-44EE-4A34-2CA0-4F8ABA892CD4";
 	setAttr -k off ".v";
@@ -13747,7 +13691,9 @@ createNode scaleConstraint -n "down_skirt_R_G_IK_01_skinJNT_scaleConstraint1" -p
 	setAttr -k off ".sz";
 	setAttr ".erp" yes;
 	setAttr -k on ".w0";
-createNode transform -n "ankle_loc_GRP" -p "long_skirt_RIG_GRP";
+createNode transform -n "skirt_pin_GRP" -p "long_skirt_RIG_GRP";
+	rename -uid "6451551E-44F6-7D04-7EE5-D89FDDEF454C";
+createNode transform -n "ankle_loc_GRP" -p "skirt_pin_GRP";
 	rename -uid "EFED0A19-4092-874F-8E60-61AB6726F7CE";
 	setAttr ".v" no;
 createNode transform -n "L_ankle_loc" -p "ankle_loc_GRP";
@@ -13798,7 +13744,7 @@ createNode pointConstraint -n "R_ankle_loc_pointConstraint1" -p "R_ankle_loc";
 	setAttr -k off ".sz";
 	setAttr ".erp" yes;
 	setAttr -k on ".w0";
-createNode transform -n "skirt_box_long_tmp" -p "long_skirt_RIG_GRP";
+createNode transform -n "skirt_box_long_tmp" -p "skirt_pin_GRP";
 	rename -uid "24B7579A-4BDF-5BD2-08AB-64AF263DF622";
 	setAttr -l on ".tx";
 	setAttr -l on ".ty";
@@ -15620,7 +15566,7 @@ createNode mesh -n "skirt_box_long_tmpShapeOrig5" -p "skirt_box_long_tmp";
 	setAttr ".covm[0]"  0 1 1;
 	setAttr ".cdvm[0]"  0 1 1;
 	setAttr ".ai_translator" -type "string" "polymesh";
-createNode transform -n "bindpose_loc_GRP" -p "long_skirt_RIG_GRP";
+createNode transform -n "bindpose_loc_GRP" -p "skirt_pin_GRP";
 	rename -uid "8BC27F8F-482B-6373-CF2C-ADA1C1E99454";
 	setAttr ".v" no;
 createNode transform -n "top_loc_GRP" -p "bindpose_loc_GRP";
@@ -19034,20 +18980,890 @@ createNode scaleConstraint -n "low_12_loc_skinJNT_GRP_scaleConstraint1" -p "low_
 	setAttr ".erp" yes;
 	setAttr ".o" -type "double3" 1.0000000000000002 1 1 ;
 	setAttr -k on ".w0";
+createNode transform -n "ankle_skirt_CTL_delete_GRP" -p "skirt_pin_GRP";
+	rename -uid "E80F7DB2-4673-E9FE-8966-41BB6FECB90F";
+createNode transform -n "ankle_skirt_F_M_FK_01_CTL_offGRP" -p "ankle_skirt_CTL_delete_GRP";
+	rename -uid "4A0EA05B-4546-F4DF-25B0-94AE7C350A95";
+createNode transform -n "ankle_skirt_F_M_FK_01_CTL_GRP" -p "ankle_skirt_F_M_FK_01_CTL_offGRP";
+	rename -uid "BBFC1F62-44A8-AF2D-2FA1-BFB98E964056";
+createNode transform -n "ankle_skirt_F_M_FK_01_CTL" -p "ankle_skirt_F_M_FK_01_CTL_GRP";
+	rename -uid "CAFA8412-4BFB-309C-A24C-3F91DEBC38AD";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+createNode nurbsCurve -n "ankle_skirt_F_M_FK_01_CTL_Shape" -p "ankle_skirt_F_M_FK_01_CTL";
+	rename -uid "907A982A-4044-2170-1EBF-3F936AF0D5CE";
+	setAttr -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".cc" -type "nurbsCurve" 
+		1 7 0 no 3
+		8 0 1 2 3 4 5 6 7
+		8
+		1.7763568394002506e-16 -0.52428800000000031 0
+		-8.8817841970012528e-17 0.26214400000000015 0.2621440000000001
+		-8.8817841970012528e-17 0.26214400000000015 -0.2621440000000001
+		1.7763568394002506e-16 -0.52428800000000031 0
+		-0.26214400000000021 0.26214400000000004 0
+		-8.8817841970012528e-17 0.26214400000000015 0
+		0.26214400000000004 0.26214400000000021 0
+		1.7763568394002506e-16 -0.52428800000000031 0
+		;
+createNode parentConstraint -n "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1" 
+		-p "ankle_skirt_F_M_FK_01_CTL_offGRP";
+	rename -uid "193762EC-42C2-4498-88F8-56AC91098DC8";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_M_front_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr ".tg[0].tot" -type "double3" -3.8909931195200247e-15 0.00022833251953180422 
+		4.4408920985006262e-16 ;
+	setAttr ".rst" -type "double3" -7.3881956470892678e-15 -5.0009999999999994 1.8353287318616611 ;
+	setAttr -k on ".w0";
+createNode scaleConstraint -n "ankle_skirt_F_M_FK_01_CTL_offGRP_scaleConstraint1" 
+		-p "ankle_skirt_F_M_FK_01_CTL_offGRP";
+	rename -uid "030C092D-44CA-6121-4451-06B245AFA6FD";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_M_front_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr -k on ".w0";
+createNode transform -n "ankle_skirt_B_M_FK_01_CTL_offGRP" -p "ankle_skirt_CTL_delete_GRP";
+	rename -uid "6D2AD7C5-47A7-4924-EAB0-A79E7895A181";
+createNode transform -n "ankle_skirt_B_M_FK_01_CTL_GRP" -p "ankle_skirt_B_M_FK_01_CTL_offGRP";
+	rename -uid "9EECBD63-4A5F-85C1-48D9-8CB577E0FDEE";
+createNode transform -n "ankle_skirt_B_M_FK_01_CTL" -p "ankle_skirt_B_M_FK_01_CTL_GRP";
+	rename -uid "18A3D501-4CB4-CE4D-E36B-7BA0D2C66F92";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+createNode nurbsCurve -n "ankle_skirt_B_M_FK_01_CTL_Shape" -p "ankle_skirt_B_M_FK_01_CTL";
+	rename -uid "DE7CD708-4724-9A48-C6BA-FF847B6656BF";
+	setAttr -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".cc" -type "nurbsCurve" 
+		1 7 0 no 3
+		8 0 1 2 3 4 5 6 7
+		8
+		1.7763568394002506e-16 -0.52428800000000031 0
+		-8.8817841970012528e-17 0.26214400000000015 0.2621440000000001
+		-8.8817841970012528e-17 0.26214400000000015 -0.2621440000000001
+		1.7763568394002506e-16 -0.52428800000000031 0
+		-0.26214400000000021 0.26214400000000004 0
+		-8.8817841970012528e-17 0.26214400000000015 0
+		0.26214400000000004 0.26214400000000021 0
+		1.7763568394002506e-16 -0.52428800000000031 0
+		;
+createNode parentConstraint -n "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1" 
+		-p "ankle_skirt_B_M_FK_01_CTL_offGRP";
+	rename -uid "033F6368-4626-7EA3-5925-8290B632F5C0";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_M_side_back_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr ".tg[0].tot" -type "double3" -3.8716295204862557e-15 0.00022833251953180422 
+		4.4408920985006262e-16 ;
+	setAttr ".lr" -type "double3" 0 180 0 ;
+	setAttr ".rst" -type "double3" -5.4150700239874156e-16 -5.0009999999999994 -1.8349999999999977 ;
+	setAttr ".rsrr" -type "double3" 0 180 0 ;
+	setAttr -k on ".w0";
+createNode scaleConstraint -n "ankle_skirt_B_M_FK_01_CTL_offGRP_scaleConstraint1" 
+		-p "ankle_skirt_B_M_FK_01_CTL_offGRP";
+	rename -uid "B1E78B74-4D48-BBA3-8414-DDA5D42B55FF";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_M_side_back_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr -k on ".w0";
+createNode transform -n "ankle_skirt_L_A_FK_01_CTL_offGRP" -p "ankle_skirt_CTL_delete_GRP";
+	rename -uid "06FBECA5-42AD-74AE-F7E5-478C6776155F";
+createNode transform -n "ankle_skirt_L_A_FK_01_CTL_GRP" -p "ankle_skirt_L_A_FK_01_CTL_offGRP";
+	rename -uid "6EA445D6-4656-DA67-966A-B68155D2CEFB";
+createNode transform -n "ankle_skirt_L_A_FK_01_CTL" -p "ankle_skirt_L_A_FK_01_CTL_GRP";
+	rename -uid "F53C5081-4952-07D1-B9EA-168F9D5A7CC9";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+createNode nurbsCurve -n "ankle_skirt_L_A_FK_01_CTL_Shape" -p "ankle_skirt_L_A_FK_01_CTL";
+	rename -uid "999012B3-4C00-515F-07FC-D195A0A58053";
+	setAttr -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".cc" -type "nurbsCurve" 
+		1 7 0 no 3
+		8 0 1 2 3 4 5 6 7
+		8
+		1.7763568394002506e-16 -0.52428800000000031 0
+		-8.8817841970012528e-17 0.26214400000000015 0.2621440000000001
+		-8.8817841970012528e-17 0.26214400000000015 -0.2621440000000001
+		1.7763568394002506e-16 -0.52428800000000031 0
+		-0.26214400000000021 0.26214400000000004 0
+		-8.8817841970012528e-17 0.26214400000000015 0
+		0.26214400000000004 0.26214400000000021 0
+		1.7763568394002506e-16 -0.52428800000000031 0
+		;
+createNode parentConstraint -n "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1" 
+		-p "ankle_skirt_L_A_FK_01_CTL_offGRP";
+	rename -uid "CA164A26-4412-12EA-7DB3-73A71E9CBF10";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_L_front_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr ".tg[0].tot" -type "double3" -3.7747582837255322e-15 -7.2479247492651666e-08 
+		2.2204460492503131e-16 ;
+	setAttr ".rst" -type "double3" 1.9999999999999931 -5.0009999999999994 1.8353287318616611 ;
+	setAttr -k on ".w0";
+createNode scaleConstraint -n "ankle_skirt_L_A_FK_01_CTL_offGRP_scaleConstraint1" 
+		-p "ankle_skirt_L_A_FK_01_CTL_offGRP";
+	rename -uid "4F233D71-45B5-FC15-592D-8DBE414E1D42";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_L_front_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr -k on ".w0";
+createNode transform -n "ankle_skirt_L_B_FK_01_CTL_offGRP" -p "ankle_skirt_CTL_delete_GRP";
+	rename -uid "BD38F90C-40B0-19C3-1440-FE9080168A96";
+createNode transform -n "ankle_skirt_L_B_FK_01_CTL_GRP" -p "ankle_skirt_L_B_FK_01_CTL_offGRP";
+	rename -uid "4C9E2344-4CD2-EAB2-2CF8-25BD7A6945F0";
+createNode transform -n "ankle_skirt_L_B_FK_01_CTL" -p "ankle_skirt_L_B_FK_01_CTL_GRP";
+	rename -uid "8F9C3BC8-4BF4-83BA-CC44-1FB8BF61A37E";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".rp" -type "double3" 0 1.7763568394002505e-15 0 ;
+	setAttr ".sp" -type "double3" 0 1.7763568394002505e-15 0 ;
+createNode nurbsCurve -n "ankle_skirt_L_B_FK_01_CTL_Shape" -p "ankle_skirt_L_B_FK_01_CTL";
+	rename -uid "F43CABA8-4026-096B-5CAB-B9953C1379ED";
+	setAttr -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".cc" -type "nurbsCurve" 
+		1 7 0 no 3
+		8 0 1 2 3 4 5 6 7
+		8
+		1.7763568394002506e-16 -0.52428799999999942 0
+		-8.8817841970012528e-17 0.26214400000000104 0.2621440000000001
+		-8.8817841970012528e-17 0.26214400000000104 -0.2621440000000001
+		1.7763568394002506e-16 -0.52428799999999942 0
+		-0.26214400000000021 0.26214400000000093 0
+		-8.8817841970012528e-17 0.26214400000000104 0
+		0.26214400000000004 0.2621440000000011 0
+		1.7763568394002506e-16 -0.52428799999999942 0
+		;
+createNode parentConstraint -n "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1" 
+		-p "ankle_skirt_L_B_FK_01_CTL_offGRP";
+	rename -uid "5F7A89D8-404D-5C4A-FE10-B1A3A1ADE915";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_L_side_L_01_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr ".tg[0].tot" -type "double3" -4.2188474935755949e-15 -7.2479248380830086e-08 
+		4.4408920985006262e-16 ;
+	setAttr ".lr" -type "double3" 0 45.000000000000014 0 ;
+	setAttr ".rst" -type "double3" 3.2977733920058814 -5.001 1.2977733920058878 ;
+	setAttr ".rsrr" -type "double3" 0 45.000000000000014 0 ;
+	setAttr -k on ".w0";
+createNode scaleConstraint -n "ankle_skirt_L_B_FK_01_CTL_offGRP_scaleConstraint1" 
+		-p "ankle_skirt_L_B_FK_01_CTL_offGRP";
+	rename -uid "41C3A9C9-4548-5E59-09FC-B8B2DCEB5BFC";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_L_side_L_01_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr -k on ".w0";
+createNode transform -n "ankle_skirt_L_D_FK_01_CTL_offGRP" -p "ankle_skirt_CTL_delete_GRP";
+	rename -uid "C1DCBA70-4AF0-8BC6-354A-5AB326667B4B";
+createNode transform -n "ankle_skirt_L_D_FK_01_CTL_GRP" -p "ankle_skirt_L_D_FK_01_CTL_offGRP";
+	rename -uid "AC1A8E3B-40E4-5AAB-1B26-68A8D79618E4";
+createNode transform -n "ankle_skirt_L_D_FK_01_CTL" -p "ankle_skirt_L_D_FK_01_CTL_GRP";
+	rename -uid "A9C1EDFF-435A-D90D-A7F0-C59DFA6A33C4";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".rp" -type "double3" -7.8886090522101181e-31 1.7763568394002505e-15 0 ;
+	setAttr ".sp" -type "double3" -7.8886090522101181e-31 1.7763568394002505e-15 0 ;
+createNode nurbsCurve -n "ankle_skirt_L_D_FK_01_CTL_Shape" -p "ankle_skirt_L_D_FK_01_CTL";
+	rename -uid "677922C8-414D-DCFD-5F0B-469407C1DFC0";
+	setAttr -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".cc" -type "nurbsCurve" 
+		1 7 0 no 3
+		8 0 1 2 3 4 5 6 7
+		8
+		1.7763568394002461e-16 -0.52428799999999942 0
+		-8.8817841970012898e-17 0.26214400000000104 0.26214400000000004
+		-8.8817841970012898e-17 0.26214400000000104 -0.26214400000000004
+		1.7763568394002461e-16 -0.52428799999999942 0
+		-0.26214400000000015 0.26214400000000093 0
+		-8.8817841970012898e-17 0.26214400000000104 0
+		0.26214399999999999 0.2621440000000011 0
+		1.7763568394002461e-16 -0.52428799999999942 0
+		;
+createNode parentConstraint -n "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1" 
+		-p "ankle_skirt_L_D_FK_01_CTL_offGRP";
+	rename -uid "84631479-4E38-355E-036A-BFBF2F38A475";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_L_side_L_03_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr ".tg[0].tot" -type "double3" -5.367251160480337e-15 -7.2479248380830086e-08 
+		-4.4408920985006262e-16 ;
+	setAttr ".lr" -type "double3" 0 89.999999999999986 0 ;
+	setAttr ".rst" -type "double3" 3.8353287318616553 -5.001 2.9525160819206231e-15 ;
+	setAttr ".rsrr" -type "double3" 0 89.999999999999986 0 ;
+	setAttr -k on ".w0";
+createNode scaleConstraint -n "ankle_skirt_L_D_FK_01_CTL_offGRP_scaleConstraint1" 
+		-p "ankle_skirt_L_D_FK_01_CTL_offGRP";
+	rename -uid "7DCC0471-4784-4C8E-0C70-078F335057D1";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_L_side_L_03_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr -k on ".w0";
+createNode transform -n "ankle_skirt_L_F_FK_01_CTL_offGRP" -p "ankle_skirt_CTL_delete_GRP";
+	rename -uid "BD540777-4F65-5D21-C34F-978AF01D8D3A";
+createNode transform -n "ankle_skirt_L_F_FK_01_CTL_GRP" -p "ankle_skirt_L_F_FK_01_CTL_offGRP";
+	rename -uid "59CAAD10-4BCA-1110-CE3A-04B720C92D7E";
+createNode transform -n "ankle_skirt_L_F_FK_01_CTL" -p "ankle_skirt_L_F_FK_01_CTL_GRP";
+	rename -uid "42496C95-44ED-8E97-1E64-3A8B0953E954";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".rp" -type "double3" 0 1.7763568394002505e-15 0 ;
+	setAttr ".sp" -type "double3" 0 1.7763568394002505e-15 0 ;
+createNode nurbsCurve -n "ankle_skirt_L_F_FK_01_CTL_Shape" -p "ankle_skirt_L_F_FK_01_CTL";
+	rename -uid "6154FC95-4AA0-6F3F-9D2B-82AD1B6F1693";
+	setAttr -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".cc" -type "nurbsCurve" 
+		1 7 0 no 3
+		8 0 1 2 3 4 5 6 7
+		8
+		1.7763568394002506e-16 -0.52428799999999942 0
+		-8.8817841970012528e-17 0.26214400000000104 0.2621440000000001
+		-8.8817841970012528e-17 0.26214400000000104 -0.2621440000000001
+		1.7763568394002506e-16 -0.52428799999999942 0
+		-0.26214400000000021 0.26214400000000093 0
+		-8.8817841970012528e-17 0.26214400000000104 0
+		0.26214400000000004 0.2621440000000011 0
+		1.7763568394002506e-16 -0.52428799999999942 0
+		;
+createNode parentConstraint -n "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1" 
+		-p "ankle_skirt_L_F_FK_01_CTL_offGRP";
+	rename -uid "86C74C5F-4457-058C-077E-0099CFBC977E";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_L_side_L_05_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr ".tg[0].tot" -type "double3" -3.3306690738754696e-15 -7.2479248380830086e-08 
+		3.1086244689504383e-15 ;
+	setAttr ".lr" -type "double3" 0 135 0 ;
+	setAttr ".rst" -type "double3" 3.2977733920058858 -5.001 -1.297773392005886 ;
+	setAttr ".rsrr" -type "double3" 0 135 0 ;
+	setAttr -k on ".w0";
+createNode scaleConstraint -n "ankle_skirt_L_F_FK_01_CTL_offGRP_scaleConstraint1" 
+		-p "ankle_skirt_L_F_FK_01_CTL_offGRP";
+	rename -uid "78C432DC-44B8-FC6F-F7FA-6EB297C13FD4";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_L_side_L_05_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr -k on ".w0";
+createNode transform -n "ankle_skirt_L_G_FK_01_CTL_offGRP" -p "ankle_skirt_CTL_delete_GRP";
+	rename -uid "A8AF78AC-40C7-00ED-7581-6D9C967D555B";
+createNode transform -n "ankle_skirt_L_G_FK_01_CTL_GRP" -p "ankle_skirt_L_G_FK_01_CTL_offGRP";
+	rename -uid "5005D995-4BD1-5BD1-8A44-C0BC9B9BF472";
+createNode transform -n "ankle_skirt_L_G_FK_01_CTL" -p "ankle_skirt_L_G_FK_01_CTL_GRP";
+	rename -uid "3A6EA148-4813-35F6-A294-25BEEE78707F";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+createNode nurbsCurve -n "ankle_skirt_L_G_FK_01_CTL_Shape" -p "ankle_skirt_L_G_FK_01_CTL";
+	rename -uid "8DEDDE57-418B-E9E5-2C5F-AEB756ECAC20";
+	setAttr -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".cc" -type "nurbsCurve" 
+		1 7 0 no 3
+		8 0 1 2 3 4 5 6 7
+		8
+		1.7763568394002506e-16 -0.52428800000000031 0
+		-8.8817841970012528e-17 0.26214400000000015 0.2621440000000001
+		-8.8817841970012528e-17 0.26214400000000015 -0.2621440000000001
+		1.7763568394002506e-16 -0.52428800000000031 0
+		-0.26214400000000021 0.26214400000000004 0
+		-8.8817841970012528e-17 0.26214400000000015 0
+		0.26214400000000004 0.26214400000000021 0
+		1.7763568394002506e-16 -0.52428800000000031 0
+		;
+createNode parentConstraint -n "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1" 
+		-p "ankle_skirt_L_G_FK_01_CTL_offGRP";
+	rename -uid "9314FB33-46EA-A0B1-5A2F-E8868C497F4E";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_L_side_back_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr ".tg[0].tot" -type "double3" -3.3306690738754696e-15 -7.2479248380830086e-08 
+		0 ;
+	setAttr ".lr" -type "double3" 0 180 0 ;
+	setAttr ".rst" -type "double3" 1.9999999999999993 -5.001 -1.8353287318616585 ;
+	setAttr ".rsrr" -type "double3" 0 180 0 ;
+	setAttr -k on ".w0";
+createNode scaleConstraint -n "ankle_skirt_L_G_FK_01_CTL_offGRP_scaleConstraint1" 
+		-p "ankle_skirt_L_G_FK_01_CTL_offGRP";
+	rename -uid "AABDAB1C-4A45-4C96-4E23-53B0C0F6C425";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_L_side_back_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr -k on ".w0";
+createNode transform -n "ankle_skirt_R_A_FK_01_CTL_offGRP" -p "ankle_skirt_CTL_delete_GRP";
+	rename -uid "0D835A90-4490-A7C8-D4D6-5993C31DE5FA";
+createNode transform -n "ankle_skirt_R_A_FK_01_CTL_GRP" -p "ankle_skirt_R_A_FK_01_CTL_offGRP";
+	rename -uid "55EA88BC-4525-FEF8-B24E-70B436F3FFC4";
+createNode transform -n "ankle_skirt_R_A_FK_01_CTL" -p "ankle_skirt_R_A_FK_01_CTL_GRP";
+	rename -uid "FADA5188-4366-67D7-1419-AD8553743DB8";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+createNode nurbsCurve -n "ankle_skirt_R_A_FK_01_CTL_Shape" -p "ankle_skirt_R_A_FK_01_CTL";
+	rename -uid "85F5CD99-4653-3AED-0343-AB80BF668EC0";
+	setAttr -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".cc" -type "nurbsCurve" 
+		1 7 0 no 3
+		8 0 1 2 3 4 5 6 7
+		8
+		1.7763568394002506e-16 -0.52428800000000031 0
+		-8.8817841970012528e-17 0.26214400000000015 0.2621440000000001
+		-8.8817841970012528e-17 0.26214400000000015 -0.2621440000000001
+		1.7763568394002506e-16 -0.52428800000000031 0
+		-0.26214400000000021 0.26214400000000004 0
+		-8.8817841970012528e-17 0.26214400000000015 0
+		0.26214400000000004 0.26214400000000021 0
+		1.7763568394002506e-16 -0.52428800000000031 0
+		;
+createNode parentConstraint -n "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1" 
+		-p "ankle_skirt_R_A_FK_01_CTL_offGRP";
+	rename -uid "1D111801-431F-66AA-BBEB-D18CE545C800";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_R_front_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr ".tg[0].tot" -type "double3" 2.2204460492503131e-15 -7.2479247492651666e-08 
+		4.4408920985006262e-16 ;
+	setAttr ".rst" -type "double3" -2.0000000000000018 -5.0009999999999994 1.8353287318616613 ;
+	setAttr -k on ".w0";
+createNode scaleConstraint -n "ankle_skirt_R_A_FK_01_CTL_offGRP_scaleConstraint1" 
+		-p "ankle_skirt_R_A_FK_01_CTL_offGRP";
+	rename -uid "DFFD7DCC-4F6F-A570-CF2F-33BA6F4B7A13";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_R_front_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr -k on ".w0";
+createNode transform -n "ankle_skirt_R_B_FK_01_CTL_offGRP" -p "ankle_skirt_CTL_delete_GRP";
+	rename -uid "9065744D-4E34-9B00-4210-15ABED031C25";
+createNode transform -n "ankle_skirt_R_B_FK_01_CTL_GRP" -p "ankle_skirt_R_B_FK_01_CTL_offGRP";
+	rename -uid "BBBE2FC2-4CE2-09A0-7F4D-8F8EE2EA0506";
+createNode transform -n "ankle_skirt_R_B_FK_01_CTL" -p "ankle_skirt_R_B_FK_01_CTL_GRP";
+	rename -uid "89EBAB0B-4D4F-D4C6-92D6-7F8CB1A7ED98";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".rp" -type "double3" 0 1.7763568394002505e-15 0 ;
+	setAttr ".sp" -type "double3" 0 1.7763568394002505e-15 0 ;
+createNode nurbsCurve -n "ankle_skirt_R_B_FK_01_CTL_Shape" -p "ankle_skirt_R_B_FK_01_CTL";
+	rename -uid "C48C4154-4420-63B8-C6FA-7C8C7F3E43A5";
+	setAttr -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".cc" -type "nurbsCurve" 
+		1 7 0 no 3
+		8 0 1 2 3 4 5 6 7
+		8
+		1.7763568394002506e-16 -0.52428799999999942 0
+		-8.8817841970012528e-17 0.26214400000000104 0.2621440000000001
+		-8.8817841970012528e-17 0.26214400000000104 -0.2621440000000001
+		1.7763568394002506e-16 -0.52428799999999942 0
+		-0.26214400000000021 0.26214400000000093 0
+		-8.8817841970012528e-17 0.26214400000000104 0
+		0.26214400000000004 0.2621440000000011 0
+		1.7763568394002506e-16 -0.52428799999999942 0
+		;
+createNode parentConstraint -n "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1" 
+		-p "ankle_skirt_R_B_FK_01_CTL_offGRP";
+	rename -uid "1BA3A27A-4169-F835-AE96-2BB549A497DB";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_R_side_R_01_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr ".tg[0].tot" -type "double3" -8.8817841970012523e-16 -7.2479248380830086e-08 
+		-4.4408920985006262e-15 ;
+	setAttr ".lr" -type "double3" 0 -45.000000000000014 0 ;
+	setAttr ".rst" -type "double3" -3.2977733920058885 -5.001 1.2977733920058885 ;
+	setAttr ".rsrr" -type "double3" 0 -45.000000000000014 0 ;
+	setAttr -k on ".w0";
+createNode scaleConstraint -n "ankle_skirt_R_B_FK_01_CTL_offGRP_scaleConstraint1" 
+		-p "ankle_skirt_R_B_FK_01_CTL_offGRP";
+	rename -uid "FAC1AA63-4AD6-9A02-6419-D39262E8A3A5";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_R_side_R_01_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr ".o" -type "double3" 0.99999999999999978 1 0.99999999999999978 ;
+	setAttr -k on ".w0";
+createNode transform -n "ankle_skirt_R_D_FK_01_CTL_offGRP" -p "ankle_skirt_CTL_delete_GRP";
+	rename -uid "F1A2F384-42F7-5F73-D44D-1DBEF37CBCBC";
+createNode transform -n "ankle_skirt_R_D_FK_01_CTL_GRP" -p "ankle_skirt_R_D_FK_01_CTL_offGRP";
+	rename -uid "C0F4ED0D-4AFE-579E-854B-DCBFB71FB7CE";
+createNode transform -n "ankle_skirt_R_D_FK_01_CTL" -p "ankle_skirt_R_D_FK_01_CTL_GRP";
+	rename -uid "8F5DD0EB-408F-AB71-FD1E-94BDA5E43C89";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".rp" -type "double3" -2.9582283945787943e-31 1.7763568394002505e-15 0 ;
+	setAttr ".sp" -type "double3" -2.9582283945787943e-31 1.7763568394002505e-15 0 ;
+createNode nurbsCurve -n "ankle_skirt_R_D_FK_01_CTL_Shape" -p "ankle_skirt_R_D_FK_01_CTL";
+	rename -uid "D3AC25EA-4A56-DF7F-CC32-15BC6F6F0576";
+	setAttr -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".cc" -type "nurbsCurve" 
+		1 7 0 no 3
+		8 0 1 2 3 4 5 6 7
+		8
+		1.7763568394002491e-16 -0.52428799999999942 0
+		-8.8817841970012602e-17 0.26214400000000104 0.26214400000000004
+		-8.8817841970012602e-17 0.26214400000000104 -0.26214400000000004
+		1.7763568394002491e-16 -0.52428799999999942 0
+		-0.26214400000000015 0.26214400000000093 0
+		-8.8817841970012602e-17 0.26214400000000104 0
+		0.26214399999999999 0.2621440000000011 0
+		1.7763568394002491e-16 -0.52428799999999942 0
+		;
+createNode parentConstraint -n "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1" 
+		-p "ankle_skirt_R_D_FK_01_CTL_offGRP";
+	rename -uid "356F9101-4B2B-FAE5-5ADD-1FB12DFB3A00";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_R_side_R_03_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr ".tg[0].tot" -type "double3" -4.5345838920114696e-15 -7.2479248380830086e-08 
+		-4.8849813083506888e-15 ;
+	setAttr ".lr" -type "double3" 0 -89.999999999999986 0 ;
+	setAttr ".rst" -type "double3" -3.8353287318616602 -5.001 1.2108202604237139e-15 ;
+	setAttr ".rsrr" -type "double3" 0 -89.999999999999986 0 ;
+	setAttr -k on ".w0";
+createNode scaleConstraint -n "ankle_skirt_R_D_FK_01_CTL_offGRP_scaleConstraint1" 
+		-p "ankle_skirt_R_D_FK_01_CTL_offGRP";
+	rename -uid "52883C00-402F-A3A3-5DCE-81A7AE6D710A";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_R_side_R_03_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr -k on ".w0";
+createNode transform -n "ankle_skirt_R_F_FK_01_CTL_offGRP" -p "ankle_skirt_CTL_delete_GRP";
+	rename -uid "35E92203-4CB5-1DE9-3055-E085CAC3FAFA";
+createNode transform -n "ankle_skirt_R_F_FK_01_CTL_GRP" -p "ankle_skirt_R_F_FK_01_CTL_offGRP";
+	rename -uid "F0877F85-47A3-289E-A675-8D80CD12016F";
+createNode transform -n "ankle_skirt_R_F_FK_01_CTL" -p "ankle_skirt_R_F_FK_01_CTL_GRP";
+	rename -uid "482CD70F-43F2-92DD-5775-138255C1BD87";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".rp" -type "double3" 2.2204460492503131e-16 0 4.4408920985006262e-16 ;
+	setAttr ".sp" -type "double3" 2.2204460492503131e-16 0 4.4408920985006262e-16 ;
+createNode nurbsCurve -n "ankle_skirt_R_F_FK_01_CTL_Shape" -p "ankle_skirt_R_F_FK_01_CTL";
+	rename -uid "55727EF0-472B-5CA3-7B44-11A1E045A063";
+	setAttr -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".cc" -type "nurbsCurve" 
+		1 7 0 no 3
+		8 0 1 2 3 4 5 6 7
+		8
+		3.9968028886505641e-16 -0.52428800000000031 4.4408920985006262e-16
+		1.3322676295501876e-16 0.26214400000000015 0.2621440000000006
+		1.3322676295501876e-16 0.26214400000000015 -0.26214399999999971
+		3.9968028886505641e-16 -0.52428800000000031 4.4408920985006262e-16
+		-0.26214400000000004 0.26214400000000004 4.4408920985006262e-16
+		1.3322676295501876e-16 0.26214400000000015 4.4408920985006262e-16
+		0.26214400000000032 0.26214400000000021 4.4408920985006262e-16
+		3.9968028886505641e-16 -0.52428800000000031 4.4408920985006262e-16
+		;
+createNode parentConstraint -n "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1" 
+		-p "ankle_skirt_R_F_FK_01_CTL_offGRP";
+	rename -uid "BEA20CD6-4708-A54A-B1CE-11B9B7D71C40";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_R_side_R_05_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr ".tg[0].tot" -type "double3" -6.4392935428259079e-15 -7.2479248380830086e-08 
+		-4.4408920985006262e-16 ;
+	setAttr ".lr" -type "double3" 0 -135 0 ;
+	setAttr ".rst" -type "double3" -3.2977733920058867 -5.001 -1.2977733920058878 ;
+	setAttr ".rsrr" -type "double3" 0 -135 0 ;
+	setAttr -k on ".w0";
+createNode scaleConstraint -n "ankle_skirt_R_F_FK_01_CTL_offGRP_scaleConstraint1" 
+		-p "ankle_skirt_R_F_FK_01_CTL_offGRP";
+	rename -uid "570F322D-4456-CD0D-9DBC-C3A9F71C206E";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_R_side_R_05_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr ".o" -type "double3" 0.99999999999999967 1 0.99999999999999967 ;
+	setAttr -k on ".w0";
+createNode transform -n "ankle_skirt_R_G_FK_01_CTL_offGRP" -p "ankle_skirt_CTL_delete_GRP";
+	rename -uid "5EE14B45-4334-55C7-68D5-3B9591C9B00F";
+createNode transform -n "ankle_skirt_R_G_FK_01_CTL_GRP" -p "ankle_skirt_R_G_FK_01_CTL_offGRP";
+	rename -uid "D8FC0206-45E6-B30A-58EF-BAA18DE58FCB";
+createNode transform -n "ankle_skirt_R_G_FK_01_CTL" -p "ankle_skirt_R_G_FK_01_CTL_GRP";
+	rename -uid "AF761956-4872-1DD3-B0D4-74BB6D4C3F9C";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+createNode nurbsCurve -n "ankle_skirt_R_G_FK_01_CTL_Shape" -p "ankle_skirt_R_G_FK_01_CTL";
+	rename -uid "31F58AB8-4777-3576-6B4A-419166B8CB9C";
+	setAttr -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+	setAttr ".cc" -type "nurbsCurve" 
+		1 7 0 no 3
+		8 0 1 2 3 4 5 6 7
+		8
+		1.7763568394002506e-16 -0.52428800000000031 0
+		-8.8817841970012528e-17 0.26214400000000015 0.2621440000000001
+		-8.8817841970012528e-17 0.26214400000000015 -0.2621440000000001
+		1.7763568394002506e-16 -0.52428800000000031 0
+		-0.26214400000000021 0.26214400000000004 0
+		-8.8817841970012528e-17 0.26214400000000015 0
+		0.26214400000000004 0.26214400000000021 0
+		1.7763568394002506e-16 -0.52428800000000031 0
+		;
+createNode parentConstraint -n "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1" 
+		-p "ankle_skirt_R_G_FK_01_CTL_offGRP";
+	rename -uid "0BDDA89D-4325-0E8F-D938-2190B190DE8A";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_R_side_back_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr ".tg[0].tot" -type "double3" -6.8833827526759706e-15 -7.2479248380830086e-08 
+		8.8817841970012523e-16 ;
+	setAttr ".lr" -type "double3" 0 180 0 ;
+	setAttr ".rst" -type "double3" -1.9999999999999976 -5.001 -1.8353287318616593 ;
+	setAttr ".rsrr" -type "double3" 0 180 0 ;
+	setAttr -k on ".w0";
+createNode scaleConstraint -n "ankle_skirt_R_G_FK_01_CTL_offGRP_scaleConstraint1" 
+		-p "ankle_skirt_R_G_FK_01_CTL_offGRP";
+	rename -uid "E3E4B6CE-4386-8BC8-B08A-6A8BC0AAE9A2";
+	addAttr -dcb 0 -ci true -k true -sn "w0" -ln "ankle_R_side_back_skirt_trans_sub_CTLW0" 
+		-dv 1 -min 0 -at "double";
+	setAttr -k on ".nds";
+	setAttr -k off ".v";
+	setAttr -k off ".tx";
+	setAttr -k off ".ty";
+	setAttr -k off ".tz";
+	setAttr -k off ".rx";
+	setAttr -k off ".ry";
+	setAttr -k off ".rz";
+	setAttr -k off ".sx";
+	setAttr -k off ".sy";
+	setAttr -k off ".sz";
+	setAttr ".erp" yes;
+	setAttr -k on ".w0";
+createNode transform -n "con_shape" -p "skirt_pin_GRP";
+	rename -uid "7D045BE4-4EDB-4A1B-90C6-A183A780E30E";
+	setAttr ".v" no;
+createNode transform -n "FK_con" -p "con_shape";
+	rename -uid "3536A276-4D7B-AF5A-9088-529EC44EDB02";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 17;
+createNode nurbsCurve -n "FK_con_Shape" -p "FK_con";
+	rename -uid "B89E26BE-460C-1C97-213E-14B480CF3318";
+	setAttr -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 14;
+	setAttr ".cc" -type "nurbsCurve" 
+		1 7 0 no 3
+		8 0 1 2 3 4 5 6 7
+		8
+		1.7763568394002506e-16 -0.52428800000000031 0
+		-8.8817841970012528e-17 0.26214400000000015 0.2621440000000001
+		-8.8817841970012528e-17 0.26214400000000015 -0.2621440000000001
+		1.7763568394002506e-16 -0.52428800000000031 0
+		-0.26214400000000021 0.26214400000000004 0
+		-8.8817841970012528e-17 0.26214400000000015 0
+		0.26214400000000004 0.26214400000000021 0
+		1.7763568394002506e-16 -0.52428800000000031 0
+		;
+createNode transform -n "IK_con" -p "con_shape";
+	rename -uid "9A68A366-4D53-6A15-2145-1A9A9199304A";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 15;
+createNode nurbsCurve -n "IK_conShape" -p "IK_con";
+	rename -uid "0D020151-43EF-230D-F6A4-4CAB40692A29";
+	setAttr -k off ".v";
+	setAttr ".ove" yes;
+	setAttr ".ovc" 18;
+	setAttr ".cc" -type "nurbsCurve" 
+		1 16 0 no 3
+		17 0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16
+		17
+		-0.25929170093743564 0.25929170093743564 0.25929170093743564
+		-0.25929170093743564 0.25929170093743564 -0.25929170093743564
+		0.25929170093743564 0.25929170093743564 -0.25929170093743564
+		0.25929170093743564 0.25929170093743564 0.25929170093743564
+		-0.25929170093743564 0.25929170093743564 0.25929170093743564
+		-0.25929170093743564 -0.25929170093743564 0.25929170093743564
+		-0.25929170093743564 -0.25929170093743564 -0.25929170093743564
+		-0.25929170093743564 0.25929170093743564 -0.25929170093743564
+		-0.25929170093743564 0.25929170093743564 0.25929170093743564
+		-0.25929170093743564 -0.25929170093743564 0.25929170093743564
+		0.25929170093743564 -0.25929170093743564 0.25929170093743564
+		0.25929170093743564 0.25929170093743564 0.25929170093743564
+		0.25929170093743564 0.25929170093743564 -0.25929170093743564
+		0.25929170093743564 -0.25929170093743564 -0.25929170093743564
+		0.25929170093743564 -0.25929170093743564 0.25929170093743564
+		0.25929170093743564 -0.25929170093743564 -0.25929170093743564
+		-0.25929170093743564 -0.25929170093743564 -0.25929170093743564
+		;
 createNode lightLinker -s -n "lightLinker1";
-	rename -uid "6360E81F-49CA-265F-F31A-8790216E4C23";
+	rename -uid "BA60C07C-4D80-9A48-3CE4-41B012BFC4A4";
 	setAttr -s 2 ".lnk";
 	setAttr -s 2 ".slnk";
 createNode shapeEditorManager -n "shapeEditorManager";
-	rename -uid "93CE367F-4891-F99B-11B1-7BB70EB04754";
+	rename -uid "BC45D9DD-47CF-EEAA-FACA-388490A58864";
 createNode poseInterpolatorManager -n "poseInterpolatorManager";
-	rename -uid "D9C72BAB-4FE5-2C22-7028-73964AEE64B7";
+	rename -uid "866EC5F8-4F18-9687-52E4-CEB4052D3B15";
 createNode displayLayerManager -n "layerManager";
-	rename -uid "FA5F13D3-429E-E41E-EC46-E5BAA6D6FFCD";
+	rename -uid "22C1B7E0-419D-FF15-546F-CB99F84905A3";
 createNode displayLayer -n "defaultLayer";
 	rename -uid "3FDF7DF6-4D03-5EB7-C196-39B23434807F";
 createNode renderLayerManager -n "renderLayerManager";
-	rename -uid "B8F2A13A-4BF9-BE1B-71BB-AA84513B5D9D";
+	rename -uid "41B3FDE8-47C4-585A-6E04-A5AE796722E9";
 createNode renderLayer -n "defaultRenderLayer";
 	rename -uid "63FFB557-4C12-6EA3-08E1-70821B99BFC1";
 	setAttr ".g" yes;
@@ -21742,17 +22558,17 @@ createNode script -n "uiConfigurationScriptNode";
 		"// Maya Mel UI Configuration File.\n//\n//  This script is machine generated.  Edit at your own risk.\n//\n//\n\nglobal string $gMainPane;\nif (`paneLayout -exists $gMainPane`) {\n\n\tglobal int $gUseScenePanelConfig;\n\tint    $useSceneConfig = $gUseScenePanelConfig;\n\tint    $nodeEditorPanelVisible = stringArrayContains(\"nodeEditorPanel1\", `getPanel -vis`);\n\tint    $nodeEditorWorkspaceControlOpen = (`workspaceControl -exists nodeEditorPanel1Window` && `workspaceControl -q -visible nodeEditorPanel1Window`);\n\tint    $menusOkayInPanels = `optionVar -q allowMenusInPanels`;\n\tint    $nVisPanes = `paneLayout -q -nvp $gMainPane`;\n\tint    $nPanes = 0;\n\tstring $editorName;\n\tstring $panelName;\n\tstring $itemFilterName;\n\tstring $panelConfig;\n\n\t//\n\t//  get current state of the UI\n\t//\n\tsceneUIReplacement -update $gMainPane;\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Top View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Top View\")) -mbv $menusOkayInPanels  $panelName;\n"
 		+ "\t\t$editorName = $panelName;\n        modelEditor -e \n            -docTag \"RADRENDER\" \n            -editorChanged \"onModelChange3dc\" \n            -camera \"top\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 1\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 1\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n"
 		+ "            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n"
-		+ "            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n            -width 784\n            -height 328\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Side View\")) `;\n"
+		+ "            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n            -width 937\n            -height 704\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Side View\")) `;\n"
 		+ "\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Side View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -docTag \"RADRENDER\" \n            -editorChanged \"onModelChange3dc\" \n            -camera \"side\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 1\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 1\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n"
 		+ "            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n"
-		+ "            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n            -width 784\n            -height 328\n            -sceneRenderFilter 0\n"
+		+ "            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1\n            -height 1\n            -sceneRenderFilter 0\n"
 		+ "            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Front View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Front View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -docTag \"RADRENDER\" \n            -editorChanged \"onModelChange3dc\" \n            -camera \"front\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"wireframe\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 1\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 1\n"
 		+ "            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n"
 		+ "            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n"
-		+ "            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1579\n            -height 704\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Perspective\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Perspective\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -docTag \"RADRENDER\" \n            -camera \"persp\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n"
-		+ "            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 1\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 1\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n"
-		+ "            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 0\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 0\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n"
-		+ "            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1\n            -height 1\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"outlinerPanel\" (localizedPanelLabel(\"MG_outLiner\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"MG_outLiner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -docTag \"isolOutln_fromSeln\" \n            -showShapes 0\n            -showAssignedMaterials 0\n"
+		+ "            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1\n            -height 1\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Persp View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Persp View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -docTag \"RADRENDER\" \n            -editorChanged \"onModelChange3dc\" \n            -camera \"persp\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"wireframe\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 1\n            -headsUpDisplay 1\n"
+		+ "            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n"
+		+ "            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n"
+		+ "            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1579\n            -height 704\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"outlinerPanel\" (localizedPanelLabel(\"MG_outLiner\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"MG_outLiner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -docTag \"isolOutln_fromSeln\" \n            -showShapes 0\n            -showAssignedMaterials 0\n"
 		+ "            -showTimeEditor 1\n            -showReferenceNodes 0\n            -showReferenceMembers 0\n            -showAttributes 0\n            -showConnected 0\n            -showAnimCurvesOnly 0\n            -showMuteInfo 0\n            -organizeByLayer 1\n            -organizeByClip 1\n            -showAnimLayerWeight 1\n            -autoExpandLayers 1\n            -autoExpand 0\n            -showDagOnly 1\n            -showAssets 1\n            -showContainedOnly 1\n            -showPublishedAsConnected 0\n            -showParentContainers 0\n            -showContainerContents 1\n            -ignoreDagHierarchy 0\n            -expandConnections 0\n            -showUpstreamCurves 1\n            -showUnitlessCurves 1\n            -showCompounds 1\n            -showLeafs 1\n            -showNumericAttrsOnly 0\n            -highlightActive 1\n            -autoSelectNewObjects 0\n            -doNotSelectNewObjects 0\n            -dropIsParent 1\n            -transmitFilters 0\n            -setFilter \"defaultSetFilter\" \n            -showSetMembers 1\n"
 		+ "            -allowMultiSelection 1\n            -alwaysToggleSelect 0\n            -directSelect 0\n            -isSet 0\n            -isSetMember 0\n            -displayMode \"DAG\" \n            -expandObjects 0\n            -setsIgnoreFilters 1\n            -containersIgnoreFilters 0\n            -editAttrName 0\n            -showAttrValues 0\n            -highlightSecondary 0\n            -showUVAttrsOnly 0\n            -showTextureNodesOnly 0\n            -attrAlphaOrder \"default\" \n            -animLayerFilterOptions \"allAffecting\" \n            -sortOrder \"none\" \n            -longNames 0\n            -niceNames 1\n            -selectCommand \"print(\\\"\\\")\" \n            -showNamespace 1\n            -showPinIcons 0\n            -mapMotionTrails 0\n            -ignoreHiddenAttribute 0\n            -ignoreOutlinerColor 0\n            -renderFilterVisible 0\n            -renderFilterIndex 0\n            -selectionOrder \"chronological\" \n            -expandAttribute 0\n            $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n"
 		+ "\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"outlinerPanel\" (localizedPanelLabel(\"Outliner\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\toutlinerPanel -edit -l (localizedPanelLabel(\"Outliner\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        outlinerEditor -e \n            -docTag \"isolOutln_fromSeln\" \n            -showShapes 0\n            -showAssignedMaterials 0\n            -showTimeEditor 1\n            -showReferenceNodes 0\n            -showReferenceMembers 0\n            -showAttributes 0\n            -showConnected 0\n            -showAnimCurvesOnly 0\n            -showMuteInfo 0\n            -organizeByLayer 1\n            -organizeByClip 1\n            -showAnimLayerWeight 1\n            -autoExpandLayers 1\n            -autoExpand 0\n            -showDagOnly 1\n            -showAssets 1\n            -showContainedOnly 1\n            -showPublishedAsConnected 0\n            -showParentContainers 0\n            -showContainerContents 1\n            -ignoreDagHierarchy 0\n"
@@ -21775,9 +22591,9 @@ createNode script -n "uiConfigurationScriptNode";
 		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"posePanel\" (localizedPanelLabel(\"Pose Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tposePanel -edit -l (localizedPanelLabel(\"Pose Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dynRelEdPanel\" (localizedPanelLabel(\"Dynamic Relationships\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Dynamic Relationships\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"relationshipPanel\" (localizedPanelLabel(\"Relationship Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Relationship Editor\")) -mbv $menusOkayInPanels  $panelName;\n"
 		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"referenceEditorPanel\" (localizedPanelLabel(\"Reference Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Reference Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"componentEditorPanel\" (localizedPanelLabel(\"Component Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Component Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"dynPaintScriptedPanelType\" (localizedPanelLabel(\"Paint Effects\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Paint Effects\")) -mbv $menusOkayInPanels  $panelName;\n"
 		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"scriptEditorPanel\" (localizedPanelLabel(\"Script Editor\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Script Editor\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"profilerPanel\" (localizedPanelLabel(\"Profiler Tool\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Profiler Tool\")) -mbv $menusOkayInPanels  $panelName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"contentBrowserPanel\" (localizedPanelLabel(\"Content Browser\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Content Browser\")) -mbv $menusOkayInPanels  $panelName;\n"
-		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Persp View\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Persp View\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -docTag \"RADRENDER\" \n            -editorChanged \"onModelChange3dc\" \n            -camera \"persp\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"wireframe\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 1\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 0\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 0\n            -activeComponentsXray 0\n            -displayTextures 0\n"
-		+ "            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 1\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n"
-		+ "            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 1\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n"
+		+ "\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextPanel \"modelPanel\" (localizedPanelLabel(\"Perspective\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tmodelPanel -edit -l (localizedPanelLabel(\"Perspective\")) -mbv $menusOkayInPanels  $panelName;\n\t\t$editorName = $panelName;\n        modelEditor -e \n            -docTag \"RADRENDER\" \n            -editorChanged \"CgAbBlastPanelOptChangeCallback\" \n            -camera \"persp\" \n            -useInteractiveMode 0\n            -displayLights \"default\" \n            -displayAppearance \"smoothShaded\" \n            -activeOnly 0\n            -ignorePanZoom 0\n            -wireframeOnShaded 0\n            -headsUpDisplay 1\n            -holdOuts 1\n            -selectionHiliteDisplay 1\n            -useDefaultMaterial 0\n            -bufferMode \"double\" \n            -twoSidedLighting 1\n            -backfaceCulling 0\n            -xray 0\n            -jointXray 1\n            -activeComponentsXray 0\n            -displayTextures 0\n"
+		+ "            -smoothWireframe 0\n            -lineWidth 1\n            -textureAnisotropic 0\n            -textureHilight 1\n            -textureSampling 2\n            -textureDisplay \"modulate\" \n            -textureMaxSize 32768\n            -fogging 0\n            -fogSource \"fragment\" \n            -fogMode \"linear\" \n            -fogStart 0\n            -fogEnd 100\n            -fogDensity 0.1\n            -fogColor 0.5 0.5 0.5 1 \n            -depthOfFieldPreview 1\n            -maxConstantTransparency 1\n            -rendererName \"vp2Renderer\" \n            -objectFilterShowInHUD 1\n            -isFiltered 0\n            -colorResolution 256 256 \n            -bumpResolution 512 512 \n            -textureCompression 0\n            -transparencyAlgorithm \"frontAndBackCull\" \n            -transpInShadows 0\n            -cullingOverride \"none\" \n            -lowQualityLighting 0\n            -maximumNumHardwareLights 0\n            -occlusionCulling 0\n            -shadingModel 0\n            -useBaseRenderer 0\n            -useReducedRenderer 0\n"
+		+ "            -smallObjectCulling 0\n            -smallObjectThreshold -1 \n            -interactiveDisableShadows 0\n            -interactiveBackFaceCull 0\n            -sortTransparent 1\n            -controllers 1\n            -nurbsCurves 1\n            -nurbsSurfaces 1\n            -polymeshes 1\n            -subdivSurfaces 1\n            -planes 1\n            -lights 1\n            -cameras 1\n            -controlVertices 1\n            -hulls 1\n            -grid 0\n            -imagePlane 1\n            -joints 1\n            -ikHandles 1\n            -deformers 1\n            -dynamics 1\n            -particleInstancers 1\n            -fluids 1\n            -hairSystems 1\n            -follicles 1\n            -nCloths 1\n            -nParticles 1\n            -nRigids 1\n            -dynamicConstraints 1\n            -locators 1\n            -manipulators 1\n            -pluginShapes 1\n            -dimensions 1\n            -handles 1\n            -pivots 1\n            -textures 1\n            -strokes 1\n            -motionTrails 1\n            -clipGhosts 1\n"
 		+ "            -greasePencils 1\n            -shadows 0\n            -captureSequenceNumber -1\n            -width 1579\n            -height 704\n            -sceneRenderFilter 0\n            $editorName;\n        modelEditor -e -viewSelected 0 $editorName;\n\t\tif (!$useSceneConfig) {\n\t\t\tpanel -e -l $label $panelName;\n\t\t}\n\t}\n\n\n\t$panelName = `sceneUIReplacement -getNextScriptedPanel \"Stereo\" (localizedPanelLabel(\"Stereo\")) `;\n\tif (\"\" != $panelName) {\n\t\t$label = `panel -q -label $panelName`;\n\t\tscriptedPanel -edit -l (localizedPanelLabel(\"Stereo\")) -mbv $menusOkayInPanels  $panelName;\n{ string $editorName = ($panelName+\"Editor\");\n            stereoCameraView -e \n                -editorChanged \"updateModelPanelBar\" \n                -camera \"persp\" \n                -useInteractiveMode 0\n                -displayLights \"default\" \n                -displayAppearance \"smoothShaded\" \n                -activeOnly 0\n                -ignorePanZoom 0\n                -wireframeOnShaded 0\n                -headsUpDisplay 1\n                -holdOuts 1\n"
 		+ "                -selectionHiliteDisplay 1\n                -useDefaultMaterial 0\n                -bufferMode \"double\" \n                -twoSidedLighting 0\n                -backfaceCulling 0\n                -xray 0\n                -jointXray 0\n                -activeComponentsXray 0\n                -displayTextures 0\n                -smoothWireframe 0\n                -lineWidth 1\n                -textureAnisotropic 0\n                -textureHilight 1\n                -textureSampling 2\n                -textureDisplay \"modulate\" \n                -textureMaxSize 32768\n                -fogging 0\n                -fogSource \"fragment\" \n                -fogMode \"linear\" \n                -fogStart 0\n                -fogEnd 100\n                -fogDensity 0.1\n                -fogColor 0.5 0.5 0.5 1 \n                -depthOfFieldPreview 1\n                -maxConstantTransparency 1\n                -rendererOverrideName \"stereoOverrideVP2\" \n                -objectFilterShowInHUD 1\n                -isFiltered 0\n                -colorResolution 4 4 \n"
 		+ "                -bumpResolution 4 4 \n                -textureCompression 0\n                -transparencyAlgorithm \"frontAndBackCull\" \n                -transpInShadows 0\n                -cullingOverride \"none\" \n                -lowQualityLighting 0\n                -maximumNumHardwareLights 0\n                -occlusionCulling 0\n                -shadingModel 0\n                -useBaseRenderer 0\n                -useReducedRenderer 0\n                -smallObjectCulling 0\n                -smallObjectThreshold -1 \n                -interactiveDisableShadows 0\n                -interactiveBackFaceCull 0\n                -sortTransparent 1\n                -controllers 1\n                -nurbsCurves 1\n                -nurbsSurfaces 1\n                -polymeshes 1\n                -subdivSurfaces 1\n                -planes 1\n                -lights 1\n                -cameras 1\n                -controlVertices 1\n                -hulls 1\n                -grid 1\n                -imagePlane 1\n                -joints 1\n                -ikHandles 1\n"
@@ -30376,7 +31192,7 @@ createNode animCurveUU -n "down_skirt_sub_side_R_07_FK_01_CTL_offGRP_pointConstr
 createNode objectSet -n "delete_set";
 	rename -uid "9628DCC2-49A9-8442-CDE8-95A664BA354D";
 	setAttr ".ihi" 0;
-	setAttr -s 41 ".dsm";
+	setAttr -s 42 ".dsm";
 	setAttr -s 112 ".dnsm";
 createNode multiplyDivide -n "L_ankle_loc_mul";
 	rename -uid "277336D9-435E-B47F-7FE2-AFBF60260E84";
@@ -33668,6 +34484,8 @@ connectAttr "skirt_RIG_total_CTL_offGRP_scaleConstraint1.csx" "skirt_RIG_setup_C
 connectAttr "skirt_RIG_total_CTL_offGRP_scaleConstraint1.csy" "skirt_RIG_setup_CTL_offGRP.sy"
 		;
 connectAttr "skirt_RIG_total_CTL_offGRP_scaleConstraint1.csz" "skirt_RIG_setup_CTL_offGRP.sz"
+		;
+connectAttr "down_skirt_RIG_setup_CTL_GRP.Leg_skirt_strength" "skirt_RIG_setup_CTL_GRP.Leg_skirt_strength"
 		;
 connectAttr "down_skirt_RIG_setup_CTL.t" "skirt_RIG_setup_CTL.t";
 connectAttr "skirt_RIG_setup_CTL_offGRP.pim" "skirt_RIG_total_CTL_offGRP_scaleConstraint1.cpim"
@@ -42301,6 +43119,606 @@ connectAttr "low_12_loc.s" "low_12_loc_skinJNT_GRP_scaleConstraint1.tg[0].ts";
 connectAttr "low_12_loc.pm" "low_12_loc_skinJNT_GRP_scaleConstraint1.tg[0].tpm";
 connectAttr "low_12_loc_skinJNT_GRP_scaleConstraint1.w0" "low_12_loc_skinJNT_GRP_scaleConstraint1.tg[0].tw"
 		;
+connectAttr "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.ctx" "ankle_skirt_F_M_FK_01_CTL_offGRP.tx"
+		;
+connectAttr "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.cty" "ankle_skirt_F_M_FK_01_CTL_offGRP.ty"
+		;
+connectAttr "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.ctz" "ankle_skirt_F_M_FK_01_CTL_offGRP.tz"
+		;
+connectAttr "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.crx" "ankle_skirt_F_M_FK_01_CTL_offGRP.rx"
+		;
+connectAttr "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.cry" "ankle_skirt_F_M_FK_01_CTL_offGRP.ry"
+		;
+connectAttr "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.crz" "ankle_skirt_F_M_FK_01_CTL_offGRP.rz"
+		;
+connectAttr "ankle_skirt_F_M_FK_01_CTL_offGRP_scaleConstraint1.csx" "ankle_skirt_F_M_FK_01_CTL_offGRP.sx"
+		;
+connectAttr "ankle_skirt_F_M_FK_01_CTL_offGRP_scaleConstraint1.csy" "ankle_skirt_F_M_FK_01_CTL_offGRP.sy"
+		;
+connectAttr "ankle_skirt_F_M_FK_01_CTL_offGRP_scaleConstraint1.csz" "ankle_skirt_F_M_FK_01_CTL_offGRP.sz"
+		;
+connectAttr "ankle_skirt_F_M_FK_01_CTL_offGRP.ro" "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.cro"
+		;
+connectAttr "ankle_skirt_F_M_FK_01_CTL_offGRP.pim" "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.cpim"
+		;
+connectAttr "ankle_skirt_F_M_FK_01_CTL_offGRP.rp" "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.crp"
+		;
+connectAttr "ankle_skirt_F_M_FK_01_CTL_offGRP.rpt" "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.crt"
+		;
+connectAttr "ankle_M_front_skirt_trans_sub_CTL.t" "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.tg[0].tt"
+		;
+connectAttr "ankle_M_front_skirt_trans_sub_CTL.rp" "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.tg[0].trp"
+		;
+connectAttr "ankle_M_front_skirt_trans_sub_CTL.rpt" "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.tg[0].trt"
+		;
+connectAttr "ankle_M_front_skirt_trans_sub_CTL.r" "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.tg[0].tr"
+		;
+connectAttr "ankle_M_front_skirt_trans_sub_CTL.ro" "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.tg[0].tro"
+		;
+connectAttr "ankle_M_front_skirt_trans_sub_CTL.s" "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_M_front_skirt_trans_sub_CTL.pm" "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.w0" "ankle_skirt_F_M_FK_01_CTL_offGRP_parentConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_F_M_FK_01_CTL_offGRP.pim" "ankle_skirt_F_M_FK_01_CTL_offGRP_scaleConstraint1.cpim"
+		;
+connectAttr "ankle_M_front_skirt_trans_sub_CTL.s" "ankle_skirt_F_M_FK_01_CTL_offGRP_scaleConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_M_front_skirt_trans_sub_CTL.pm" "ankle_skirt_F_M_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_F_M_FK_01_CTL_offGRP_scaleConstraint1.w0" "ankle_skirt_F_M_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.ctx" "ankle_skirt_B_M_FK_01_CTL_offGRP.tx"
+		;
+connectAttr "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.cty" "ankle_skirt_B_M_FK_01_CTL_offGRP.ty"
+		;
+connectAttr "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.ctz" "ankle_skirt_B_M_FK_01_CTL_offGRP.tz"
+		;
+connectAttr "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.crx" "ankle_skirt_B_M_FK_01_CTL_offGRP.rx"
+		;
+connectAttr "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.cry" "ankle_skirt_B_M_FK_01_CTL_offGRP.ry"
+		;
+connectAttr "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.crz" "ankle_skirt_B_M_FK_01_CTL_offGRP.rz"
+		;
+connectAttr "ankle_skirt_B_M_FK_01_CTL_offGRP_scaleConstraint1.csx" "ankle_skirt_B_M_FK_01_CTL_offGRP.sx"
+		;
+connectAttr "ankle_skirt_B_M_FK_01_CTL_offGRP_scaleConstraint1.csy" "ankle_skirt_B_M_FK_01_CTL_offGRP.sy"
+		;
+connectAttr "ankle_skirt_B_M_FK_01_CTL_offGRP_scaleConstraint1.csz" "ankle_skirt_B_M_FK_01_CTL_offGRP.sz"
+		;
+connectAttr "ankle_skirt_B_M_FK_01_CTL_offGRP.ro" "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.cro"
+		;
+connectAttr "ankle_skirt_B_M_FK_01_CTL_offGRP.pim" "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.cpim"
+		;
+connectAttr "ankle_skirt_B_M_FK_01_CTL_offGRP.rp" "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.crp"
+		;
+connectAttr "ankle_skirt_B_M_FK_01_CTL_offGRP.rpt" "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.crt"
+		;
+connectAttr "ankle_M_side_back_skirt_trans_sub_CTL.t" "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.tg[0].tt"
+		;
+connectAttr "ankle_M_side_back_skirt_trans_sub_CTL.rp" "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.tg[0].trp"
+		;
+connectAttr "ankle_M_side_back_skirt_trans_sub_CTL.rpt" "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.tg[0].trt"
+		;
+connectAttr "ankle_M_side_back_skirt_trans_sub_CTL.r" "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.tg[0].tr"
+		;
+connectAttr "ankle_M_side_back_skirt_trans_sub_CTL.ro" "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.tg[0].tro"
+		;
+connectAttr "ankle_M_side_back_skirt_trans_sub_CTL.s" "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_M_side_back_skirt_trans_sub_CTL.pm" "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.w0" "ankle_skirt_B_M_FK_01_CTL_offGRP_parentConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_B_M_FK_01_CTL_offGRP.pim" "ankle_skirt_B_M_FK_01_CTL_offGRP_scaleConstraint1.cpim"
+		;
+connectAttr "ankle_M_side_back_skirt_trans_sub_CTL.s" "ankle_skirt_B_M_FK_01_CTL_offGRP_scaleConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_M_side_back_skirt_trans_sub_CTL.pm" "ankle_skirt_B_M_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_B_M_FK_01_CTL_offGRP_scaleConstraint1.w0" "ankle_skirt_B_M_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.ctx" "ankle_skirt_L_A_FK_01_CTL_offGRP.tx"
+		;
+connectAttr "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.cty" "ankle_skirt_L_A_FK_01_CTL_offGRP.ty"
+		;
+connectAttr "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.ctz" "ankle_skirt_L_A_FK_01_CTL_offGRP.tz"
+		;
+connectAttr "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.crx" "ankle_skirt_L_A_FK_01_CTL_offGRP.rx"
+		;
+connectAttr "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.cry" "ankle_skirt_L_A_FK_01_CTL_offGRP.ry"
+		;
+connectAttr "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.crz" "ankle_skirt_L_A_FK_01_CTL_offGRP.rz"
+		;
+connectAttr "ankle_skirt_L_A_FK_01_CTL_offGRP_scaleConstraint1.csx" "ankle_skirt_L_A_FK_01_CTL_offGRP.sx"
+		;
+connectAttr "ankle_skirt_L_A_FK_01_CTL_offGRP_scaleConstraint1.csy" "ankle_skirt_L_A_FK_01_CTL_offGRP.sy"
+		;
+connectAttr "ankle_skirt_L_A_FK_01_CTL_offGRP_scaleConstraint1.csz" "ankle_skirt_L_A_FK_01_CTL_offGRP.sz"
+		;
+connectAttr "ankle_skirt_L_A_FK_01_CTL_offGRP.ro" "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.cro"
+		;
+connectAttr "ankle_skirt_L_A_FK_01_CTL_offGRP.pim" "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.cpim"
+		;
+connectAttr "ankle_skirt_L_A_FK_01_CTL_offGRP.rp" "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.crp"
+		;
+connectAttr "ankle_skirt_L_A_FK_01_CTL_offGRP.rpt" "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.crt"
+		;
+connectAttr "ankle_L_front_skirt_trans_sub_CTL.t" "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.tg[0].tt"
+		;
+connectAttr "ankle_L_front_skirt_trans_sub_CTL.rp" "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.tg[0].trp"
+		;
+connectAttr "ankle_L_front_skirt_trans_sub_CTL.rpt" "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.tg[0].trt"
+		;
+connectAttr "ankle_L_front_skirt_trans_sub_CTL.r" "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.tg[0].tr"
+		;
+connectAttr "ankle_L_front_skirt_trans_sub_CTL.ro" "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.tg[0].tro"
+		;
+connectAttr "ankle_L_front_skirt_trans_sub_CTL.s" "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_L_front_skirt_trans_sub_CTL.pm" "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.w0" "ankle_skirt_L_A_FK_01_CTL_offGRP_parentConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_L_A_FK_01_CTL_offGRP.pim" "ankle_skirt_L_A_FK_01_CTL_offGRP_scaleConstraint1.cpim"
+		;
+connectAttr "ankle_L_front_skirt_trans_sub_CTL.s" "ankle_skirt_L_A_FK_01_CTL_offGRP_scaleConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_L_front_skirt_trans_sub_CTL.pm" "ankle_skirt_L_A_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_L_A_FK_01_CTL_offGRP_scaleConstraint1.w0" "ankle_skirt_L_A_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.ctx" "ankle_skirt_L_B_FK_01_CTL_offGRP.tx"
+		;
+connectAttr "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.cty" "ankle_skirt_L_B_FK_01_CTL_offGRP.ty"
+		;
+connectAttr "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.ctz" "ankle_skirt_L_B_FK_01_CTL_offGRP.tz"
+		;
+connectAttr "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.crx" "ankle_skirt_L_B_FK_01_CTL_offGRP.rx"
+		;
+connectAttr "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.cry" "ankle_skirt_L_B_FK_01_CTL_offGRP.ry"
+		;
+connectAttr "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.crz" "ankle_skirt_L_B_FK_01_CTL_offGRP.rz"
+		;
+connectAttr "ankle_skirt_L_B_FK_01_CTL_offGRP_scaleConstraint1.csx" "ankle_skirt_L_B_FK_01_CTL_offGRP.sx"
+		;
+connectAttr "ankle_skirt_L_B_FK_01_CTL_offGRP_scaleConstraint1.csy" "ankle_skirt_L_B_FK_01_CTL_offGRP.sy"
+		;
+connectAttr "ankle_skirt_L_B_FK_01_CTL_offGRP_scaleConstraint1.csz" "ankle_skirt_L_B_FK_01_CTL_offGRP.sz"
+		;
+connectAttr "ankle_skirt_L_B_FK_01_CTL_offGRP.ro" "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.cro"
+		;
+connectAttr "ankle_skirt_L_B_FK_01_CTL_offGRP.pim" "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.cpim"
+		;
+connectAttr "ankle_skirt_L_B_FK_01_CTL_offGRP.rp" "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.crp"
+		;
+connectAttr "ankle_skirt_L_B_FK_01_CTL_offGRP.rpt" "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.crt"
+		;
+connectAttr "ankle_L_side_L_01_skirt_trans_sub_CTL.t" "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.tg[0].tt"
+		;
+connectAttr "ankle_L_side_L_01_skirt_trans_sub_CTL.rp" "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.tg[0].trp"
+		;
+connectAttr "ankle_L_side_L_01_skirt_trans_sub_CTL.rpt" "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.tg[0].trt"
+		;
+connectAttr "ankle_L_side_L_01_skirt_trans_sub_CTL.r" "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.tg[0].tr"
+		;
+connectAttr "ankle_L_side_L_01_skirt_trans_sub_CTL.ro" "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.tg[0].tro"
+		;
+connectAttr "ankle_L_side_L_01_skirt_trans_sub_CTL.s" "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_L_side_L_01_skirt_trans_sub_CTL.pm" "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.w0" "ankle_skirt_L_B_FK_01_CTL_offGRP_parentConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_L_B_FK_01_CTL_offGRP.pim" "ankle_skirt_L_B_FK_01_CTL_offGRP_scaleConstraint1.cpim"
+		;
+connectAttr "ankle_L_side_L_01_skirt_trans_sub_CTL.s" "ankle_skirt_L_B_FK_01_CTL_offGRP_scaleConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_L_side_L_01_skirt_trans_sub_CTL.pm" "ankle_skirt_L_B_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_L_B_FK_01_CTL_offGRP_scaleConstraint1.w0" "ankle_skirt_L_B_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.ctx" "ankle_skirt_L_D_FK_01_CTL_offGRP.tx"
+		;
+connectAttr "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.cty" "ankle_skirt_L_D_FK_01_CTL_offGRP.ty"
+		;
+connectAttr "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.ctz" "ankle_skirt_L_D_FK_01_CTL_offGRP.tz"
+		;
+connectAttr "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.crx" "ankle_skirt_L_D_FK_01_CTL_offGRP.rx"
+		;
+connectAttr "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.cry" "ankle_skirt_L_D_FK_01_CTL_offGRP.ry"
+		;
+connectAttr "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.crz" "ankle_skirt_L_D_FK_01_CTL_offGRP.rz"
+		;
+connectAttr "ankle_skirt_L_D_FK_01_CTL_offGRP_scaleConstraint1.csx" "ankle_skirt_L_D_FK_01_CTL_offGRP.sx"
+		;
+connectAttr "ankle_skirt_L_D_FK_01_CTL_offGRP_scaleConstraint1.csy" "ankle_skirt_L_D_FK_01_CTL_offGRP.sy"
+		;
+connectAttr "ankle_skirt_L_D_FK_01_CTL_offGRP_scaleConstraint1.csz" "ankle_skirt_L_D_FK_01_CTL_offGRP.sz"
+		;
+connectAttr "ankle_skirt_L_D_FK_01_CTL_offGRP.ro" "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.cro"
+		;
+connectAttr "ankle_skirt_L_D_FK_01_CTL_offGRP.pim" "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.cpim"
+		;
+connectAttr "ankle_skirt_L_D_FK_01_CTL_offGRP.rp" "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.crp"
+		;
+connectAttr "ankle_skirt_L_D_FK_01_CTL_offGRP.rpt" "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.crt"
+		;
+connectAttr "ankle_L_side_L_03_skirt_trans_sub_CTL.t" "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.tg[0].tt"
+		;
+connectAttr "ankle_L_side_L_03_skirt_trans_sub_CTL.rp" "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.tg[0].trp"
+		;
+connectAttr "ankle_L_side_L_03_skirt_trans_sub_CTL.rpt" "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.tg[0].trt"
+		;
+connectAttr "ankle_L_side_L_03_skirt_trans_sub_CTL.r" "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.tg[0].tr"
+		;
+connectAttr "ankle_L_side_L_03_skirt_trans_sub_CTL.ro" "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.tg[0].tro"
+		;
+connectAttr "ankle_L_side_L_03_skirt_trans_sub_CTL.s" "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_L_side_L_03_skirt_trans_sub_CTL.pm" "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.w0" "ankle_skirt_L_D_FK_01_CTL_offGRP_parentConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_L_D_FK_01_CTL_offGRP.pim" "ankle_skirt_L_D_FK_01_CTL_offGRP_scaleConstraint1.cpim"
+		;
+connectAttr "ankle_L_side_L_03_skirt_trans_sub_CTL.s" "ankle_skirt_L_D_FK_01_CTL_offGRP_scaleConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_L_side_L_03_skirt_trans_sub_CTL.pm" "ankle_skirt_L_D_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_L_D_FK_01_CTL_offGRP_scaleConstraint1.w0" "ankle_skirt_L_D_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.ctx" "ankle_skirt_L_F_FK_01_CTL_offGRP.tx"
+		;
+connectAttr "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.cty" "ankle_skirt_L_F_FK_01_CTL_offGRP.ty"
+		;
+connectAttr "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.ctz" "ankle_skirt_L_F_FK_01_CTL_offGRP.tz"
+		;
+connectAttr "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.crx" "ankle_skirt_L_F_FK_01_CTL_offGRP.rx"
+		;
+connectAttr "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.cry" "ankle_skirt_L_F_FK_01_CTL_offGRP.ry"
+		;
+connectAttr "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.crz" "ankle_skirt_L_F_FK_01_CTL_offGRP.rz"
+		;
+connectAttr "ankle_skirt_L_F_FK_01_CTL_offGRP_scaleConstraint1.csx" "ankle_skirt_L_F_FK_01_CTL_offGRP.sx"
+		;
+connectAttr "ankle_skirt_L_F_FK_01_CTL_offGRP_scaleConstraint1.csy" "ankle_skirt_L_F_FK_01_CTL_offGRP.sy"
+		;
+connectAttr "ankle_skirt_L_F_FK_01_CTL_offGRP_scaleConstraint1.csz" "ankle_skirt_L_F_FK_01_CTL_offGRP.sz"
+		;
+connectAttr "ankle_skirt_L_F_FK_01_CTL_offGRP.ro" "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.cro"
+		;
+connectAttr "ankle_skirt_L_F_FK_01_CTL_offGRP.pim" "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.cpim"
+		;
+connectAttr "ankle_skirt_L_F_FK_01_CTL_offGRP.rp" "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.crp"
+		;
+connectAttr "ankle_skirt_L_F_FK_01_CTL_offGRP.rpt" "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.crt"
+		;
+connectAttr "ankle_L_side_L_05_skirt_trans_sub_CTL.t" "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.tg[0].tt"
+		;
+connectAttr "ankle_L_side_L_05_skirt_trans_sub_CTL.rp" "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.tg[0].trp"
+		;
+connectAttr "ankle_L_side_L_05_skirt_trans_sub_CTL.rpt" "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.tg[0].trt"
+		;
+connectAttr "ankle_L_side_L_05_skirt_trans_sub_CTL.r" "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.tg[0].tr"
+		;
+connectAttr "ankle_L_side_L_05_skirt_trans_sub_CTL.ro" "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.tg[0].tro"
+		;
+connectAttr "ankle_L_side_L_05_skirt_trans_sub_CTL.s" "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_L_side_L_05_skirt_trans_sub_CTL.pm" "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.w0" "ankle_skirt_L_F_FK_01_CTL_offGRP_parentConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_L_F_FK_01_CTL_offGRP.pim" "ankle_skirt_L_F_FK_01_CTL_offGRP_scaleConstraint1.cpim"
+		;
+connectAttr "ankle_L_side_L_05_skirt_trans_sub_CTL.s" "ankle_skirt_L_F_FK_01_CTL_offGRP_scaleConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_L_side_L_05_skirt_trans_sub_CTL.pm" "ankle_skirt_L_F_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_L_F_FK_01_CTL_offGRP_scaleConstraint1.w0" "ankle_skirt_L_F_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.ctx" "ankle_skirt_L_G_FK_01_CTL_offGRP.tx"
+		;
+connectAttr "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.cty" "ankle_skirt_L_G_FK_01_CTL_offGRP.ty"
+		;
+connectAttr "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.ctz" "ankle_skirt_L_G_FK_01_CTL_offGRP.tz"
+		;
+connectAttr "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.crx" "ankle_skirt_L_G_FK_01_CTL_offGRP.rx"
+		;
+connectAttr "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.cry" "ankle_skirt_L_G_FK_01_CTL_offGRP.ry"
+		;
+connectAttr "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.crz" "ankle_skirt_L_G_FK_01_CTL_offGRP.rz"
+		;
+connectAttr "ankle_skirt_L_G_FK_01_CTL_offGRP_scaleConstraint1.csx" "ankle_skirt_L_G_FK_01_CTL_offGRP.sx"
+		;
+connectAttr "ankle_skirt_L_G_FK_01_CTL_offGRP_scaleConstraint1.csy" "ankle_skirt_L_G_FK_01_CTL_offGRP.sy"
+		;
+connectAttr "ankle_skirt_L_G_FK_01_CTL_offGRP_scaleConstraint1.csz" "ankle_skirt_L_G_FK_01_CTL_offGRP.sz"
+		;
+connectAttr "ankle_skirt_L_G_FK_01_CTL_offGRP.ro" "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.cro"
+		;
+connectAttr "ankle_skirt_L_G_FK_01_CTL_offGRP.pim" "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.cpim"
+		;
+connectAttr "ankle_skirt_L_G_FK_01_CTL_offGRP.rp" "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.crp"
+		;
+connectAttr "ankle_skirt_L_G_FK_01_CTL_offGRP.rpt" "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.crt"
+		;
+connectAttr "ankle_L_side_back_skirt_trans_sub_CTL.t" "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.tg[0].tt"
+		;
+connectAttr "ankle_L_side_back_skirt_trans_sub_CTL.rp" "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.tg[0].trp"
+		;
+connectAttr "ankle_L_side_back_skirt_trans_sub_CTL.rpt" "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.tg[0].trt"
+		;
+connectAttr "ankle_L_side_back_skirt_trans_sub_CTL.r" "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.tg[0].tr"
+		;
+connectAttr "ankle_L_side_back_skirt_trans_sub_CTL.ro" "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.tg[0].tro"
+		;
+connectAttr "ankle_L_side_back_skirt_trans_sub_CTL.s" "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_L_side_back_skirt_trans_sub_CTL.pm" "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.w0" "ankle_skirt_L_G_FK_01_CTL_offGRP_parentConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_L_G_FK_01_CTL_offGRP.pim" "ankle_skirt_L_G_FK_01_CTL_offGRP_scaleConstraint1.cpim"
+		;
+connectAttr "ankle_L_side_back_skirt_trans_sub_CTL.s" "ankle_skirt_L_G_FK_01_CTL_offGRP_scaleConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_L_side_back_skirt_trans_sub_CTL.pm" "ankle_skirt_L_G_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_L_G_FK_01_CTL_offGRP_scaleConstraint1.w0" "ankle_skirt_L_G_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.ctx" "ankle_skirt_R_A_FK_01_CTL_offGRP.tx"
+		;
+connectAttr "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.cty" "ankle_skirt_R_A_FK_01_CTL_offGRP.ty"
+		;
+connectAttr "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.ctz" "ankle_skirt_R_A_FK_01_CTL_offGRP.tz"
+		;
+connectAttr "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.crx" "ankle_skirt_R_A_FK_01_CTL_offGRP.rx"
+		;
+connectAttr "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.cry" "ankle_skirt_R_A_FK_01_CTL_offGRP.ry"
+		;
+connectAttr "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.crz" "ankle_skirt_R_A_FK_01_CTL_offGRP.rz"
+		;
+connectAttr "ankle_skirt_R_A_FK_01_CTL_offGRP_scaleConstraint1.csx" "ankle_skirt_R_A_FK_01_CTL_offGRP.sx"
+		;
+connectAttr "ankle_skirt_R_A_FK_01_CTL_offGRP_scaleConstraint1.csy" "ankle_skirt_R_A_FK_01_CTL_offGRP.sy"
+		;
+connectAttr "ankle_skirt_R_A_FK_01_CTL_offGRP_scaleConstraint1.csz" "ankle_skirt_R_A_FK_01_CTL_offGRP.sz"
+		;
+connectAttr "ankle_skirt_R_A_FK_01_CTL_offGRP.ro" "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.cro"
+		;
+connectAttr "ankle_skirt_R_A_FK_01_CTL_offGRP.pim" "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.cpim"
+		;
+connectAttr "ankle_skirt_R_A_FK_01_CTL_offGRP.rp" "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.crp"
+		;
+connectAttr "ankle_skirt_R_A_FK_01_CTL_offGRP.rpt" "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.crt"
+		;
+connectAttr "ankle_R_front_skirt_trans_sub_CTL.t" "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.tg[0].tt"
+		;
+connectAttr "ankle_R_front_skirt_trans_sub_CTL.rp" "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.tg[0].trp"
+		;
+connectAttr "ankle_R_front_skirt_trans_sub_CTL.rpt" "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.tg[0].trt"
+		;
+connectAttr "ankle_R_front_skirt_trans_sub_CTL.r" "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.tg[0].tr"
+		;
+connectAttr "ankle_R_front_skirt_trans_sub_CTL.ro" "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.tg[0].tro"
+		;
+connectAttr "ankle_R_front_skirt_trans_sub_CTL.s" "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_R_front_skirt_trans_sub_CTL.pm" "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.w0" "ankle_skirt_R_A_FK_01_CTL_offGRP_parentConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_R_A_FK_01_CTL_offGRP.pim" "ankle_skirt_R_A_FK_01_CTL_offGRP_scaleConstraint1.cpim"
+		;
+connectAttr "ankle_R_front_skirt_trans_sub_CTL.s" "ankle_skirt_R_A_FK_01_CTL_offGRP_scaleConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_R_front_skirt_trans_sub_CTL.pm" "ankle_skirt_R_A_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_R_A_FK_01_CTL_offGRP_scaleConstraint1.w0" "ankle_skirt_R_A_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.ctx" "ankle_skirt_R_B_FK_01_CTL_offGRP.tx"
+		;
+connectAttr "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.cty" "ankle_skirt_R_B_FK_01_CTL_offGRP.ty"
+		;
+connectAttr "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.ctz" "ankle_skirt_R_B_FK_01_CTL_offGRP.tz"
+		;
+connectAttr "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.crx" "ankle_skirt_R_B_FK_01_CTL_offGRP.rx"
+		;
+connectAttr "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.cry" "ankle_skirt_R_B_FK_01_CTL_offGRP.ry"
+		;
+connectAttr "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.crz" "ankle_skirt_R_B_FK_01_CTL_offGRP.rz"
+		;
+connectAttr "ankle_skirt_R_B_FK_01_CTL_offGRP_scaleConstraint1.csx" "ankle_skirt_R_B_FK_01_CTL_offGRP.sx"
+		;
+connectAttr "ankle_skirt_R_B_FK_01_CTL_offGRP_scaleConstraint1.csy" "ankle_skirt_R_B_FK_01_CTL_offGRP.sy"
+		;
+connectAttr "ankle_skirt_R_B_FK_01_CTL_offGRP_scaleConstraint1.csz" "ankle_skirt_R_B_FK_01_CTL_offGRP.sz"
+		;
+connectAttr "ankle_skirt_R_B_FK_01_CTL_offGRP.ro" "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.cro"
+		;
+connectAttr "ankle_skirt_R_B_FK_01_CTL_offGRP.pim" "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.cpim"
+		;
+connectAttr "ankle_skirt_R_B_FK_01_CTL_offGRP.rp" "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.crp"
+		;
+connectAttr "ankle_skirt_R_B_FK_01_CTL_offGRP.rpt" "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.crt"
+		;
+connectAttr "ankle_R_side_R_01_skirt_trans_sub_CTL.t" "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.tg[0].tt"
+		;
+connectAttr "ankle_R_side_R_01_skirt_trans_sub_CTL.rp" "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.tg[0].trp"
+		;
+connectAttr "ankle_R_side_R_01_skirt_trans_sub_CTL.rpt" "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.tg[0].trt"
+		;
+connectAttr "ankle_R_side_R_01_skirt_trans_sub_CTL.r" "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.tg[0].tr"
+		;
+connectAttr "ankle_R_side_R_01_skirt_trans_sub_CTL.ro" "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.tg[0].tro"
+		;
+connectAttr "ankle_R_side_R_01_skirt_trans_sub_CTL.s" "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_R_side_R_01_skirt_trans_sub_CTL.pm" "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.w0" "ankle_skirt_R_B_FK_01_CTL_offGRP_parentConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_R_B_FK_01_CTL_offGRP.pim" "ankle_skirt_R_B_FK_01_CTL_offGRP_scaleConstraint1.cpim"
+		;
+connectAttr "ankle_R_side_R_01_skirt_trans_sub_CTL.s" "ankle_skirt_R_B_FK_01_CTL_offGRP_scaleConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_R_side_R_01_skirt_trans_sub_CTL.pm" "ankle_skirt_R_B_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_R_B_FK_01_CTL_offGRP_scaleConstraint1.w0" "ankle_skirt_R_B_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.ctx" "ankle_skirt_R_D_FK_01_CTL_offGRP.tx"
+		;
+connectAttr "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.cty" "ankle_skirt_R_D_FK_01_CTL_offGRP.ty"
+		;
+connectAttr "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.ctz" "ankle_skirt_R_D_FK_01_CTL_offGRP.tz"
+		;
+connectAttr "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.crx" "ankle_skirt_R_D_FK_01_CTL_offGRP.rx"
+		;
+connectAttr "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.cry" "ankle_skirt_R_D_FK_01_CTL_offGRP.ry"
+		;
+connectAttr "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.crz" "ankle_skirt_R_D_FK_01_CTL_offGRP.rz"
+		;
+connectAttr "ankle_skirt_R_D_FK_01_CTL_offGRP_scaleConstraint1.csx" "ankle_skirt_R_D_FK_01_CTL_offGRP.sx"
+		;
+connectAttr "ankle_skirt_R_D_FK_01_CTL_offGRP_scaleConstraint1.csy" "ankle_skirt_R_D_FK_01_CTL_offGRP.sy"
+		;
+connectAttr "ankle_skirt_R_D_FK_01_CTL_offGRP_scaleConstraint1.csz" "ankle_skirt_R_D_FK_01_CTL_offGRP.sz"
+		;
+connectAttr "ankle_skirt_R_D_FK_01_CTL_offGRP.ro" "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.cro"
+		;
+connectAttr "ankle_skirt_R_D_FK_01_CTL_offGRP.pim" "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.cpim"
+		;
+connectAttr "ankle_skirt_R_D_FK_01_CTL_offGRP.rp" "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.crp"
+		;
+connectAttr "ankle_skirt_R_D_FK_01_CTL_offGRP.rpt" "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.crt"
+		;
+connectAttr "ankle_R_side_R_03_skirt_trans_sub_CTL.t" "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.tg[0].tt"
+		;
+connectAttr "ankle_R_side_R_03_skirt_trans_sub_CTL.rp" "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.tg[0].trp"
+		;
+connectAttr "ankle_R_side_R_03_skirt_trans_sub_CTL.rpt" "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.tg[0].trt"
+		;
+connectAttr "ankle_R_side_R_03_skirt_trans_sub_CTL.r" "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.tg[0].tr"
+		;
+connectAttr "ankle_R_side_R_03_skirt_trans_sub_CTL.ro" "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.tg[0].tro"
+		;
+connectAttr "ankle_R_side_R_03_skirt_trans_sub_CTL.s" "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_R_side_R_03_skirt_trans_sub_CTL.pm" "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.w0" "ankle_skirt_R_D_FK_01_CTL_offGRP_parentConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_R_D_FK_01_CTL_offGRP.pim" "ankle_skirt_R_D_FK_01_CTL_offGRP_scaleConstraint1.cpim"
+		;
+connectAttr "ankle_R_side_R_03_skirt_trans_sub_CTL.s" "ankle_skirt_R_D_FK_01_CTL_offGRP_scaleConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_R_side_R_03_skirt_trans_sub_CTL.pm" "ankle_skirt_R_D_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_R_D_FK_01_CTL_offGRP_scaleConstraint1.w0" "ankle_skirt_R_D_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.ctx" "ankle_skirt_R_F_FK_01_CTL_offGRP.tx"
+		;
+connectAttr "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.cty" "ankle_skirt_R_F_FK_01_CTL_offGRP.ty"
+		;
+connectAttr "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.ctz" "ankle_skirt_R_F_FK_01_CTL_offGRP.tz"
+		;
+connectAttr "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.crx" "ankle_skirt_R_F_FK_01_CTL_offGRP.rx"
+		;
+connectAttr "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.cry" "ankle_skirt_R_F_FK_01_CTL_offGRP.ry"
+		;
+connectAttr "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.crz" "ankle_skirt_R_F_FK_01_CTL_offGRP.rz"
+		;
+connectAttr "ankle_skirt_R_F_FK_01_CTL_offGRP_scaleConstraint1.csx" "ankle_skirt_R_F_FK_01_CTL_offGRP.sx"
+		;
+connectAttr "ankle_skirt_R_F_FK_01_CTL_offGRP_scaleConstraint1.csy" "ankle_skirt_R_F_FK_01_CTL_offGRP.sy"
+		;
+connectAttr "ankle_skirt_R_F_FK_01_CTL_offGRP_scaleConstraint1.csz" "ankle_skirt_R_F_FK_01_CTL_offGRP.sz"
+		;
+connectAttr "ankle_skirt_R_F_FK_01_CTL_offGRP.ro" "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.cro"
+		;
+connectAttr "ankle_skirt_R_F_FK_01_CTL_offGRP.pim" "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.cpim"
+		;
+connectAttr "ankle_skirt_R_F_FK_01_CTL_offGRP.rp" "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.crp"
+		;
+connectAttr "ankle_skirt_R_F_FK_01_CTL_offGRP.rpt" "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.crt"
+		;
+connectAttr "ankle_R_side_R_05_skirt_trans_sub_CTL.t" "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.tg[0].tt"
+		;
+connectAttr "ankle_R_side_R_05_skirt_trans_sub_CTL.rp" "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.tg[0].trp"
+		;
+connectAttr "ankle_R_side_R_05_skirt_trans_sub_CTL.rpt" "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.tg[0].trt"
+		;
+connectAttr "ankle_R_side_R_05_skirt_trans_sub_CTL.r" "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.tg[0].tr"
+		;
+connectAttr "ankle_R_side_R_05_skirt_trans_sub_CTL.ro" "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.tg[0].tro"
+		;
+connectAttr "ankle_R_side_R_05_skirt_trans_sub_CTL.s" "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_R_side_R_05_skirt_trans_sub_CTL.pm" "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.w0" "ankle_skirt_R_F_FK_01_CTL_offGRP_parentConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_R_F_FK_01_CTL_offGRP.pim" "ankle_skirt_R_F_FK_01_CTL_offGRP_scaleConstraint1.cpim"
+		;
+connectAttr "ankle_R_side_R_05_skirt_trans_sub_CTL.s" "ankle_skirt_R_F_FK_01_CTL_offGRP_scaleConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_R_side_R_05_skirt_trans_sub_CTL.pm" "ankle_skirt_R_F_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_R_F_FK_01_CTL_offGRP_scaleConstraint1.w0" "ankle_skirt_R_F_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.ctx" "ankle_skirt_R_G_FK_01_CTL_offGRP.tx"
+		;
+connectAttr "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.cty" "ankle_skirt_R_G_FK_01_CTL_offGRP.ty"
+		;
+connectAttr "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.ctz" "ankle_skirt_R_G_FK_01_CTL_offGRP.tz"
+		;
+connectAttr "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.crx" "ankle_skirt_R_G_FK_01_CTL_offGRP.rx"
+		;
+connectAttr "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.cry" "ankle_skirt_R_G_FK_01_CTL_offGRP.ry"
+		;
+connectAttr "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.crz" "ankle_skirt_R_G_FK_01_CTL_offGRP.rz"
+		;
+connectAttr "ankle_skirt_R_G_FK_01_CTL_offGRP_scaleConstraint1.csx" "ankle_skirt_R_G_FK_01_CTL_offGRP.sx"
+		;
+connectAttr "ankle_skirt_R_G_FK_01_CTL_offGRP_scaleConstraint1.csy" "ankle_skirt_R_G_FK_01_CTL_offGRP.sy"
+		;
+connectAttr "ankle_skirt_R_G_FK_01_CTL_offGRP_scaleConstraint1.csz" "ankle_skirt_R_G_FK_01_CTL_offGRP.sz"
+		;
+connectAttr "ankle_skirt_R_G_FK_01_CTL_offGRP.ro" "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.cro"
+		;
+connectAttr "ankle_skirt_R_G_FK_01_CTL_offGRP.pim" "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.cpim"
+		;
+connectAttr "ankle_skirt_R_G_FK_01_CTL_offGRP.rp" "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.crp"
+		;
+connectAttr "ankle_skirt_R_G_FK_01_CTL_offGRP.rpt" "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.crt"
+		;
+connectAttr "ankle_R_side_back_skirt_trans_sub_CTL.t" "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.tg[0].tt"
+		;
+connectAttr "ankle_R_side_back_skirt_trans_sub_CTL.rp" "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.tg[0].trp"
+		;
+connectAttr "ankle_R_side_back_skirt_trans_sub_CTL.rpt" "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.tg[0].trt"
+		;
+connectAttr "ankle_R_side_back_skirt_trans_sub_CTL.r" "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.tg[0].tr"
+		;
+connectAttr "ankle_R_side_back_skirt_trans_sub_CTL.ro" "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.tg[0].tro"
+		;
+connectAttr "ankle_R_side_back_skirt_trans_sub_CTL.s" "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_R_side_back_skirt_trans_sub_CTL.pm" "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.w0" "ankle_skirt_R_G_FK_01_CTL_offGRP_parentConstraint1.tg[0].tw"
+		;
+connectAttr "ankle_skirt_R_G_FK_01_CTL_offGRP.pim" "ankle_skirt_R_G_FK_01_CTL_offGRP_scaleConstraint1.cpim"
+		;
+connectAttr "ankle_R_side_back_skirt_trans_sub_CTL.s" "ankle_skirt_R_G_FK_01_CTL_offGRP_scaleConstraint1.tg[0].ts"
+		;
+connectAttr "ankle_R_side_back_skirt_trans_sub_CTL.pm" "ankle_skirt_R_G_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tpm"
+		;
+connectAttr "ankle_skirt_R_G_FK_01_CTL_offGRP_scaleConstraint1.w0" "ankle_skirt_R_G_FK_01_CTL_offGRP_scaleConstraint1.tg[0].tw"
+		;
 relationship "link" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
 relationship "link" ":lightLinker1" ":initialParticleSE.message" ":defaultLightSet.message";
 relationship "shadowLink" ":lightLinker1" ":initialShadingGroup.message" ":defaultLightSet.message";
@@ -46714,6 +48132,7 @@ connectAttr "down_skirt_sub_side_R_06_FK_01_CTL_offGRP_pointConstraint1.iog" "de
 connectAttr "down_skirt_sub_side_R_07_FK_01_CTL_offGRP_pointConstraint1.iog" "delete_set.dsm"
 		 -na;
 connectAttr "skirt_box_long_tmp.iog" "delete_set.dsm" -na;
+connectAttr "ankle_skirt_CTL_delete_GRP.iog" "delete_set.dsm" -na;
 connectAttr "follicle_point17.msg" "delete_set.dnsm" -na;
 connectAttr "follicle_point31.msg" "delete_set.dnsm" -na;
 connectAttr "follicle_point24.msg" "delete_set.dnsm" -na;

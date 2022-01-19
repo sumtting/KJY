@@ -150,8 +150,8 @@ def position_xform(transform):
 
 
 
-def change_number():
-    base_num = cmds.textField('number_tex_box'  , text =1, q=1)
+def change_number(position):
+    base_num = cmds.textField('%s_'%(position) + 'number_tex_box'  , text =1, q=1)
     base_num = int(base_num)
     return base_num
 
@@ -277,9 +277,13 @@ class long_skirt_set():
         #cmds.rowColumnLayout( nc=1 )
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
-        cmds.text(l = u'controller count' ,w = 100)
+        cmds.text(l = u'up controller' ,w = 100)
         #cmds.textField('number_tex_box' , w = 30 , h = 20 , tx = '9', textChangedCommand='skirt_command.change_number()') # textChangedCommand는 ui에서 text를 바꿀때 커멘드입력이 안돼도 실시간으로 쿼리가능
-        cmds.textField('number_tex_box' , w = 30 , h = 20 , tx = '7')
+        cmds.textField('up number_tex_box' , w = 30 , h = 20 , tx = '2')
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.text(l = u'down controller' ,w = 100)
+        cmds.textField('down number_tex_box' , w = 30 , h = 20 , tx = '2')
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
         cmds.text(l = u'total' ,w = 100)
@@ -386,14 +390,20 @@ class long_skirt_set():
         low_loc_y = cmds.xform('low_01_loc',q=1,rp=1, ws=1)[1] # low loc의 Y축값만 쿼리
         low_loc_y = normalize_float(low_loc_y)
 
-        use_num = change_number() #사용자 지정 컨트롤러 갯수
-        num = (use_num-3) / 2 #허벅지 ~ 무릎, 무릎 ~ 발목 파트를 2개로 나눈다 (지정한 컨트롤러갯수 - 고정된컨트롤러(top,mid,low) / 2(윗다리,아랫다리)
-        top_con_num = (top_loc_y - mid_loc_y) / (num + 1)# 허벅지에서 무릎
-        # top Y축과 mid Y축 사이 (허벅지~무릎)에 컨트롤러갯수(num)+1 을 해주어야 등분갯수가 나온다(컨트롤러를 일정한간격으로 배치하기위함)
-        low_con_num = (mid_loc_y - low_loc_y) / (num + 1)# 무릎에서 발목
+        # use_num = change_number() #사용자 지정 컨트롤러 갯수
+        # num = (use_num-3) / 2 #허벅지 ~ 무릎, 무릎 ~ 발목 파트를 2개로 나눈다 (지정한 컨트롤러갯수 - 고정된컨트롤러(top,mid,low) / 2(윗다리,아랫다리)
+        # top_con_num = (top_loc_y - mid_loc_y) / (num + 1)# 허벅지에서 무릎
+        # # top Y축과 mid Y축 사이 (허벅지~무릎)에 컨트롤러갯수(num)+1 을 해주어야 등분갯수가 나온다(컨트롤러를 일정한간격으로 배치하기위함)
+        # low_con_num = (mid_loc_y - low_loc_y) / (num + 1)# 무릎에서 발목
+
+        up_use_num = change_number('up')
+        top_con_num = (top_loc_y - mid_loc_y) / (up_use_num + 1)# 허벅지에서 무릎
+
+        down_use_num = change_number('down')
+        low_con_num = (mid_loc_y - low_loc_y) / (down_use_num + 1)# 무릎에서 발목
 
         top_leg_y_list = []
-        for count in range(num):
+        for count in range(up_use_num):
             con_count = count+1
             top_leg_y = con_count * top_con_num
             top_con_po = top_loc_y - top_leg_y
@@ -402,7 +412,7 @@ class long_skirt_set():
         #print top_leg_y_list
             
         low_leg_y_list = []
-        for count in range(num+1): # 무릎 ~ 발목 은 맨아래컨트롤러가 하나 더 생성되어야 하기때문에 +1 해준다
+        for count in range(down_use_num+1): # 무릎 ~ 발목 은 맨아래컨트롤러가 하나 더 생성되어야 하기때문에 +1 해준다
             con_count = count+1
             low_leg_y = con_count * low_con_num
             low_con_po = mid_loc_y - low_leg_y
