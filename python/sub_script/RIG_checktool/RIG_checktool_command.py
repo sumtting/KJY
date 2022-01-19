@@ -43,20 +43,30 @@ def folderlist(path, include=False): # include - False = 모든 파일, folder =
 
 def load_CTL_list(): # ani_CTL_list.json에서 밸류값(CTL_list)만 추출
     global ani_CTL_list
+    set_list = []
 
     scene_list = cmds.ls(type='objectSet')
+    
+    for i in scene_list:
 
-    if ('human_set') or ('crowd_set') in scene_list:
-        scene_list = ['human_set']
+        if (('human_set') or ('crowd_set')) == i:
+            set_ = ['human_set']
+            set_list.append(set_[0])
 
-    elif 'Facial' in scene_list:
-        scene_list = ['facial_set']
+        elif 'facial_set' == i:
+            set_ = ['facial_set']
+            set_list.append(set_[0])
 
-    else:
-        pass
-
+        else:
+            pass
+    
+  
     json_list = folderlist(json_path) # folderlist 함수 쿼리(json_path 경로 폴더에있는 파일 모두 추출)
-    same_result = [x for x in scene_list if x in json_list] # 오토리깅을 불러왔을때 잡혀있는 set의 이름과 겹치는 json폴더만 쿼리
+    ani_CTL_list = []
+   
+    same_result = list(set(json_list) & set(set_list))
+    #same_result = [x for x in set_ if x in json_list] # 오토리깅을 불러왔을때 잡혀있는 set의 이름과 겹치는 json폴더만 쿼리
+    
     
     for same_ in same_result:
         json_list = folderlist(json_path + same_)
@@ -71,12 +81,21 @@ def load_CTL_list(): # ani_CTL_list.json에서 밸류값(CTL_list)만 추출
 
         for i in json_data:
             
-            ani_CTL_list = i.values()[0] #json데이터 에서 밸류를 추출
+            ani_CTL_ = i.values()[0] #json데이터 에서 밸류를 추출
+            ani_CTL_list.append(ani_CTL_)
 
-        return ani_CTL_list
+    ani_CTL_list = sum(ani_CTL_list, []) # same_result에서 검색된 모든컨트롤러를 하나의 리스트로 합쳐준다(ex. 바디컨트롤러 + 페이셜컨트롤러)
+    ani_CTL_list = set(ani_CTL_list) # 집합set으로 변환 (중복요소 제거)
+    ani_CTL_list = list(ani_CTL_list) # list로 변환 
+    
+ 
+    return ani_CTL_list
+    
     
 
 ani_CTL_list=load_CTL_list() #ani_CTL_list를 정의해준다(ani_CTL_list.json에서 CTL만 추출)
+
+
 
 
 
@@ -139,7 +158,7 @@ def load_json_setkey(name_): #name_은 문자열로 입력, json에있는 딕셔
 
     if 'Body' in name_:
         scene_list = cmds.ls(type='objectSet')
-        if ('human_set') or ('crowd_set') in scene_list :
+        if (('human_set') or ('crowd_set')) in scene_list :
             scene_list = ['human_set']
         
         else:
