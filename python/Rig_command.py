@@ -874,7 +874,7 @@ def LR_copy(): # 선택한 컨트롤러의 어트리뷰트 값을 반대편 컨�
 
 
         elif '_R_' in sel:
-            sel.replace('_R_', '_L_')
+            sel_revers = sel.replace('_R_', '_L_')
             sel_list_revers.append(sel_revers)
 
     
