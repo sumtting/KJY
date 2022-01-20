@@ -590,8 +590,14 @@ def blend_copy():
     main_target_list_re = []
     for i in main_target_list:
         re = i.split('_1_0')[0]
-        cmds.rename(i,re)
-        main_target_list_re.append(re)
+
+        sel_re = cmds.ls(re)
+        if len(sel_re) > 0 :
+            cmds.delete(i)
+        
+        else:
+            cmds.rename(i,re)
+            main_target_list_re.append(re)
 
     sel_main_target = cmds.ls(main_target_list_re)
 
@@ -606,7 +612,6 @@ def blend_copy():
         else:
             pass
             
-   
     t=set([x for x in d if d.count(x) > 1])
     j=list(t)
     k=cmds.ls(j)
@@ -620,7 +625,11 @@ def blend_copy():
         
         sel_target = '|' + count_
         
-        cmds.delete(sel_target)
+        try:
+            cmds.delete(sel_target)
+        
+        except:
+            pass
 
 
     cmds.select( sel_main_target,new_obj)
@@ -680,9 +689,25 @@ def blend_copy():
                 
         else:
             pass
-                
-    new_GRP = cmds.group( main_target_list_re, inbetween_target_list, n='new_target_GRP' )
-    cmds.parent(w=1) # new_target 그룹을 아웃라이너 가장 바깥으로 빼줌
+
+    #new_GRP = cmds.group( main_target_list_re, inbetween_target_list, n='new_target_GRP' )
+    
+    new_GRP = cmds.group(em=1, n='new_target_GRP' )
+
+    for i in main_target_list_re:
+        cmds.parent(i, new_GRP)
+
+    try:
+        for i in inbetween_target_list:
+            cmds.parent(i, new_GRP)
+    except:
+        pass
+
+    new_GRP_pa = cmds.listRelatives(new_GRP,p=1)
+    if not new_GRP_pa == None:
+        cmds.parent(new_GRP, w=1) # new_target 그룹을 아웃라이너 가장 바깥으로 빼줌
+    else:
+        pass
 
     find_deform_list = cmds.findDeformers(new_obj)
     wrap_deform_list = []
