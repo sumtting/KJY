@@ -534,7 +534,7 @@ def blend_copy():
             combination_node = cmds.listConnections( blend_node,  t='combinationShape', d=False, s=True )[0] # 블렌드노드와 연결된 콤비네이션쉐입 노드만 쿼리
             combination_target = cmds.listConnections( combination_node,  t='blendShape', p=True, d=False, s=True )[0] # 콤비네이션된 블렌드타겟 쿼리
 
-            combination_connect_info = cmds.listConnections( combination_node, p=True, d=False, s=True )
+            combination_connect_info = cmds.listConnections( combination_node, p=True, d=False, s=True ) #콤비네이션에 연결된 베이스타겟들을 쿼리
             
             new_combination_node = cmds.duplicate( combination_node )[0]
 
@@ -671,7 +671,7 @@ def blend_copy():
     new_blend_node = new_blend_deform_list[0]
 
 
-    main_num = len(main_target_list)
+    main_num = len(main_target_list_re)
     main_num_list = range(0,main_num)
 
     inbet_list = []
@@ -700,9 +700,9 @@ def blend_copy():
     for main_num, inbet_wei in enumerate(inbet_list):
     
         if len(inbet_wei) >= 1:
-        
+            print main_num 
             inbet_main_target = cmds.ls(main_target_list_re[main_num])[0]
-            
+            print inbet_main_target
             for inbet_weight in inbet_wei:
                 
                 re_ = '%s'%(inbet_weight)
@@ -717,11 +717,11 @@ def blend_copy():
             pass
     
     for combi_name, combi_node, combination_connect_info in zip(blend_combi_list, new_combination_node_list, combination_connect_info_list) :
+        # 콤비네이션 블렌드 타겟네임과 거기에 연결된 베이스 타겟네임, 콤비네이션쉐입노드 쿼리 
         cmds.connectAttr('%s.outputWeight'%(combi_node), 'new_%s'%(combi_name))
-        for num, combi_target in enumerate(combination_connect_info):
-            print num, combi_target
+        for num, combi_target in enumerate(combination_connect_info): 
             cmds.connectAttr('new_%s'%(combi_target), '%s'%(combi_node) + '.inputWeight[%s]'%(num))
-            
+            # 새로운 블렌드쉐입과 콤비네이션 노드를 연결을 해준다 (new_는 새로만든 블렌드쉐입 네임과 맞추기위함)
         
 
 
