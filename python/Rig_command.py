@@ -524,6 +524,32 @@ def blend_copy():
 
     blend_target_list = cmds.listAttr (blend_node + ".w", m=1) # 블랜드타겟 리스트
 
+    blend_combi_list = []
+    new_combination_node_list = []
+    combination_connect_info_list = []
+    for i in blend_target_list: 
+        attr_settable = cmds.getAttr(blend_node + '.' + i, settable=1) # 어트리뷰트가 아무것도 연결되어있지 않은것들만 반환(setAttr에 의해 설정 가능한 attr)
+        if attr_settable == False: # 위의 경우가 아니라면 (어트리뷰트에 어떠한 연결(connect)이 되어있는상태), 블렌드 콤비네이션을 쿼리하기 위함
+            blend_combi_name =  (blend_node + '.' + i) # 블렌드노드이름 + 콤비네이션 네임 쿼리
+            combination_node = cmds.listConnections( blend_node,  t='combinationShape', d=False, s=True )[0] # 블렌드노드와 연결된 콤비네이션쉐입 노드만 쿼리
+            combination_target = cmds.listConnections( combination_node,  t='blendShape', p=True, d=False, s=True )[0] # 콤비네이션된 블렌드타겟 쿼리
+
+            combination_connect_info = cmds.listConnections( combination_node, p=True, d=False, s=True )
+            
+            new_combination_node = cmds.duplicate( combination_node )[0]
+
+            blend_combi_list.append(blend_combi_name)
+            new_combination_node_list.append(new_combination_node)
+            combination_connect_info_list.append(combination_connect_info)
+            
+            
+            cmds.delete(combination_node)
+
+            #cmds.disconnectAttr (combination_node + '.outputWeight', blend_combi_name) # 기존에 블렌드노드에 콤비네이션쉐입이 연결된걸 끊어준다
+            #cmds.disconnectAttr (combination_target, blend_combi_name) # 기존에 블렌드노드에 콤비네이션쉐입이 연결된걸 끊어준다
+
+   
+
     new_target_list = []
     new_target_sh_list = []
     main_target_list = []
@@ -689,6 +715,17 @@ def blend_copy():
                 
         else:
             pass
+    
+    for combi_name, combi_node, combination_connect_info in zip(blend_combi_list, new_combination_node_list, combination_connect_info_list) :
+        cmds.connectAttr('%s.outputWeight'%(combi_node), 'new_%s'%(combi_name))
+        for num, combi_target in enumerate(combination_connect_info):
+            print num, combi_target
+            cmds.connectAttr('new_%s'%(combi_target), '%s'%(combi_node) + '.inputWeight[%s]'%(num))
+            
+        
+
+
+
 
     #new_GRP = cmds.group( main_target_list_re, inbetween_target_list, n='new_target_GRP' )
     
