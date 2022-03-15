@@ -867,9 +867,10 @@ def constraint_copy() :
                 target_controller = cmds.parentConstraint(reference_mod_ , targetList=1, q=1)[0] # 컨스트레인을 걸고있는 컨트롤러 쿼리
                 find_target_controller = target_controller.split(':')[-1] # 마찬가지로 스플릿을 이용해 레퍼런스 네임스페이스 삭제
                 
-                
-                cmds.parentConstraint( find_target_controller, find_mod, mo=1, w=1 ) # 다시 원본씬에서 컨스트레인을 똑같이 걸어준다
-                
+                try:
+                    cmds.parentConstraint( find_target_controller, find_mod, mo=1, w=1 ) # 다시 원본씬에서 컨스트레인을 똑같이 걸어준다
+                except:
+                    pass
             
             elif cmds.objectType(reference_mod_) == 'scaleConstraint' :
                 find_constraint = reference_mod_.split(':')[-1]
@@ -880,8 +881,10 @@ def constraint_copy() :
                 target_controller = cmds.scaleConstraint(reference_mod_ , targetList=1, q=1)[0]
                 find_target_controller = target_controller.split(':')[-1]
                 
-                cmds.scaleConstraint( find_target_controller, find_mod, mo=1, w=1 )
-        
+                try:
+                    cmds.scaleConstraint( find_target_controller, find_mod, mo=1, w=1 )
+                except:
+                    pass
                 
             elif cmds.objectType(reference_mod_) == 'pointConstraint' :
                 find_constraint = reference_mod_.split(':')[-1]
@@ -892,8 +895,10 @@ def constraint_copy() :
                 target_controller = cmds.pointConstraint(reference_mod_ , targetList=1, q=1)[0]
                 find_target_controller = target_controller.split(':')[-1]
                 
-                cmds.pointConstraint( find_target_controller, find_mod, mo=1, w=1 )
-    
+                try:
+                    cmds.pointConstraint( find_target_controller, find_mod, mo=1, w=1 )
+                except:
+                    pass
                 
             elif cmds.objectType(reference_mod_) == 'orientConstraint' : 
                 find_constraint = reference_mod_.split(':')[-1]
@@ -904,8 +909,10 @@ def constraint_copy() :
                 target_controller = cmds.orientConstraint(reference_mod_ , targetList=1, q=1)[0]   
                 find_target_controller = target_controller.split(':')[-1]   
                 
-                cmds.orientConstraint( find_target_controller, find_mod, mo=1, w=1 )
-    
+                try:
+                    cmds.orientConstraint( find_target_controller, find_mod, mo=1, w=1 )
+                except:
+                    pass
                 
             elif cmds.objectType(reference_mod_) == 'aimConstraint' :  
                 find_constraint = reference_mod_.split(':')[-1]
@@ -916,8 +923,10 @@ def constraint_copy() :
                 target_controller = cmds.aimConstraint(reference_mod_ , targetList=1, q=1)[0]    
                 find_target_controller = target_controller.split(':')[-1]
                 
-                cmds.aimConstraint( find_target_controller, find_mod, mo=1, w=1 )
-                
+                try:
+                    cmds.aimConstraint( find_target_controller, find_mod, mo=1, w=1 )
+                except:
+                    pass  
                 
             else:
                 pass
