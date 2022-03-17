@@ -612,18 +612,30 @@ def blend_copy():
                 pass
 
             
+    custom_target = []
+    for i in main_target_list:
+        re = i.split('_1_0')[0]
+    
+        sel_re = cmds.ls(re)
+        if len(sel_re) > 0 :
+            custom_target.append(re)
+        
+        else:
+            pass
+    
+
     # 이대로 진행하면 블렌드쉐입의 네이밍에 '_1_0'이 들어가므로 리네임을 해준다.
     main_target_list_re = []
     for i in main_target_list:
         re = i.split('_1_0')[0]
-
+    
         sel_re = cmds.ls(re)
-        if len(sel_re) > 0 :
-            cmds.delete(i)
+        # if len(sel_re) > 0 :
+        #     cmds.delete(i)
         
-        else:
-            cmds.rename(i,re)
-            main_target_list_re.append(re)
+        # else:
+        cmds.rename(i,re)
+        main_target_list_re.append(re)
 
     sel_main_target = cmds.ls(main_target_list_re)
 
@@ -696,13 +708,15 @@ def blend_copy():
             pass
                 
         inbet_list.append(inbetween_value_list)
-
-    for main_num, inbet_wei in enumerate(inbet_list):
+    count_target = len(main_target_list_re)
     
+    for main_num, inbet_wei in enumerate(inbet_list):
+        #print main_num,inbet_wei
+
         if len(inbet_wei) >= 1:
-            print main_num 
+            #print main_num
+            #print main_target_list_re
             inbet_main_target = cmds.ls(main_target_list_re[main_num])[0]
-            print inbet_main_target
             for inbet_weight in inbet_wei:
                 
                 re_ = '%s'%(inbet_weight)
@@ -722,15 +736,14 @@ def blend_copy():
         for num, combi_target in enumerate(combination_connect_info): 
             cmds.connectAttr('new_%s'%(combi_target), '%s'%(combi_node) + '.inputWeight[%s]'%(num))
             # 새로운 블렌드쉐입과 콤비네이션 노드를 연결을 해준다 (new_는 새로만든 블렌드쉐입 네임과 맞추기위함)
-        
+          
 
-
-
+    main_target_list_re = list(set(main_target_list_re) - set(custom_target))
 
     #new_GRP = cmds.group( main_target_list_re, inbetween_target_list, n='new_target_GRP' )
     
     new_GRP = cmds.group(em=1, n='new_target_GRP' )
-
+    
     for i in main_target_list_re:
         cmds.parent(i, new_GRP)
 
