@@ -969,6 +969,169 @@ def LR_copy(): # 선택한 컨트롤러의 어트리뷰트 값을 반대편 컨�
         for attr in sel_keyable:
             sel_attr = cmds.getAttr(sel + '.' + attr) # 위에서 쿼리한 어트리뷰트의 값을 추출
             sel_reverse_attr = cmds.setAttr(sel_reverse + '.' + attr , sel_attr) # 반대편 컨트롤러 어트리뷰트에 추출한 값을 똑같이 넣어준다
+
+
+
+class motionpath_cv():
+
+    def __init__(self):   
+        ## 윈도우 ID##
+        windowID='motionpath_cv'
+        ##windows reset
+        if cmds.window(windowID, ex=True):
+            cmds.deleteUI(windowID)
+        cmds.window(windowID, t='motionpath_cv', rtf=True, s=True, mnb=True, mxb=True,wh=(30,30))
+        ##master layer
+        master = cmds.columnLayout()
+        cmds.columnLayout()
+        cmds.rowColumnLayout( nr=1 )
+        #cmds.text(l = u'corve - 커브등록 /copy_target  - 카피할 타겟등록/')
+        cmds.setParent (master)
+        cmds.columnLayout()
+        cmds.rowColumnLayout( nr=1 )
+        cmds.text(l = u'    rotate - 커브의 방향에 맞게 타겟을 생성')
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.text(l = u'    attach - 타겟을 커브에 붙임')
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.text(l = '    ')
+        cmds.text(l = u'copy_count' ,w = 70)
+        cmds.text(l = '      ')
+        cmds.intField('tw_int_field' , w = 30 , h = 20 ,v=10)
+        cmds.checkBox( 'rotate_check', l = u'rotate' , v=True )
+        cmds.checkBox( 'attach_check', l = u'attach' , v=False )
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.text(l = u'curve' ,w = 100)
+        cmds.textField('start_tex_box' , w = 150 , h = 20 )
+        cmds.button( l = u'등록' , w = 50,c = pm.Callback(self.sels_tex, 'st_sel'))
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.text(l = u'copy_target' , w = 100)
+        cmds.textField('end_tex_box' , w = 150 , h = 20)
+        cmds.button( l = u'등록' , w = 50,c = pm.Callback(self.sels_tex, 'end_sel'))
+        cmds.setParent (master)
+
+        cmds.button(l=u'연결' , w = 301 , h = 30 ,c = pm.Callback(self.motionPath_command))
+        cmds.setParent (master)
+        cmds.showWindow(windowID)
+
+    def sels_tex(self,part):
+        sels = cmds.ls(sl=1)
+        if part=="st_sel":cmds.textField('start_tex_box' , edit =1, tx= sels[0] )
+        if part=="end_sel":cmds.textField('end_tex_box' , edit =1, tx= sels[0] )
+
+    def motionPath_command(self):
+        ui_rotate_q = cmds.checkBox( 'rotate_check', v=True, q=1)
+        ui_nod_q = cmds.checkBox( 'attach_check',v=True,q=1)
+        ui_copy_count_q = cmds.intField('tw_int_field',v=True, q = 1)
+        ui_cv_q = cmds.textField('start_tex_box' , tx=1,q=1 )
+        ui_target_q = cmds.textField('end_tex_box' , tx=1,q=1)
+
+        if ui_rotate_q ==True:
+            ui_ro_ch = True
+        else:
+            ui_ro_ch = False
+        if ui_nod_q ==True:
+            attach = False
+        else:
+            attach = True
+        go = self.motion_count_cr(ui_cv_q,ui_target_q,ui_copy_count_q,ro =ui_ro_ch,nod_del = attach , dis_conn_r = attach , dis_conn_t = attach )
+        chil = go['target']
+        target_grp = cmds.group(n='%s%s'%(ui_target_q,'_motionPath_copy_grp'),em = 1)
+        cmds.parent(chil,target_grp)
+
+    def motionPath_point(self,cv, number , **bool):
+        '커브의 길이를 1값으로 모션패스 pos rotate 를 추출'
+        ## cv 이름혹은 트랜스폼 / 커브의 위치점 0~1 / 'nod_del' = False 를 사용하여 노드를 지우지않을수잇다
+        sh = cmds.listRelatives(cv, shapes =1, children=1)[0]
+        cre_motionPath = cmds.createNode('motionPath', n = cv + '_motionPath')
+        cmds.setAttr(cre_motionPath + '.fractionMode', 1) 
+        cmds.connectAttr(sh + '.worldSpace' , cre_motionPath + '.geometryPath')
+        cmds.setAttr(cre_motionPath + '.uValue', number)
+        motionPath_tr = cmds.getAttr(cre_motionPath + '.allCoordinates')
+        motionPath_ro = cmds.getAttr(cre_motionPath + '.rotate')
+        if bool.get('nod_del') == None or bool.get('nod_del') == True:
+            cmds.delete(cre_motionPath)
+        else:pass
+        ## 리턴값은 해당포지션의 tr / ro 값   / 모션패스노드
+        return {'t':motionPath_tr[0] , 'r':motionPath_ro[0] , 'nod':cre_motionPath}
+
+    def motion_count_cr(self,cv ,target_transform , count,**bool):
+        ## 커브(해당메인커브) / 타겟(복사해서 붙을 타겟 트랜스폼) /카운트(횟수) /
+        ###**bool명령** ///// 'ro' = False 로테이션 제거 / 'nod_del' = False  노드를 삭제하지 않는다 
+        # ## bool커넥션 명령 해당명령은 'nod_del'= False 일떄만 사용할수있다// 'dis_conn_r' = False   모션패스 노드 로테이트 커넥션 // 'dis_conn_t' = False  모션패스노드 트랜스 커넥션
+        ## 모션패스 커브 포지션에 타겟을 복사해서 붙인다
+        if bool.get('nod_del') == None or bool.get('nod_del') == True:
+            get = True
+        else:
+            get = False
+        target = target_transform
+        tr_xform_lst = []
+        ro_xform_lst = []
+        nod_lst = []
+        st_target = cmds.duplicate(target)[0]
+        target_copy_lst = [st_target]
+        st_pos = self.motionPath_point(cv, 0,nod_del=get)
+        nod_lst.append(st_pos['nod'])
+        st_xform_t = cmds.xform(st_target , t = st_pos['t'])
+        tr_xform_lst.append(st_pos['t'])
+        ro_xform_lst.append(st_pos['r'])
+        f_cn = float(count)
+        div = 1.0/(f_cn-1)
+        cn = 0.0
+        return_lst = [0]
+        for i in range(count-2):
+            cn = cn+div
+            target_copy = cmds.duplicate(target)[0]
+            path = self.motionPath_point(cv, cn,nod_del=get)
+            pos = cmds.xform(target_copy , t = path['t'])
+            if bool.get('ro') == None or bool.get('ro') == True:
+                ro = cmds.xform(target_copy , ro = path['r'])
+            else:pass      
+            return_lst.append(cn)
+            target_copy_lst.append(target_copy)
+            tr_xform_lst.append(path['t'])
+            ro_xform_lst.append(path['r'])  
+            nod_lst.append(path['nod'])
+        end_target = cmds.duplicate(target)[0]
+        end_pos = self.motionPath_point(cv, 1 ,nod_del=get)
+        cmds.xform(end_target , t = end_pos['t'] )
+        if bool.get('ro') == None or bool.get('ro') == True:
+            st_xform_r = cmds.xform(st_target , ro = st_pos['r'])
+            cmds.xform(end_target , ro = end_pos['r'])
+        else:
+            pass
+        nod_lst.append(end_pos['nod'])
+        target_copy_lst.append(end_target)
+        return_lst.append(1)
+        tr_xform_lst.append(end_pos['t'])
+        ro_xform_lst.append(end_pos['r'])
+        if bool.get('dis_conn_t') == None or bool.get('dis_conn_t') == True:
+            pass
+        else:
+            for i in range(len(nod_lst)):
+                cn = 0+i
+                cmds.connectAttr('%s%s%s'%(nod_lst[cn],'.','allCoordinates'),'%s%s%s'%(target_copy_lst[cn],'.','translate'))
+        if bool.get('dis_conn_r') == None or bool.get('dis_conn_r') == True:
+            pass
+        else:
+            for i in range(len(nod_lst)):
+                cn = 0+i
+                cmds.connectAttr('%s%s%s'%(nod_lst[cn],'.','rotate'),'%s%s%s'%(target_copy_lst[cn],'.','rotate'))
+        rev_return_lst=[]
+        for i in return_lst:
+            a = (i-1)*-1
+            rev_return_lst.append(a) 
+        # 리턴값은: 'div' :등분 소수 리스트 / 'div_rev' : 등분소수 뒤집은 반대값/ 'target'카피타겟 리스트/'nod' : 노드 리스트 / 't' 타겟 포지션/ 'r'  타겟 로테이션
+        return {'div':return_lst ,'div_rev':rev_return_lst, 'target':target_copy_lst ,'nod':nod_lst, 't':tr_xform_lst , 'r':ro_xform_lst}
+
+
+
+
+
+
     
 
 

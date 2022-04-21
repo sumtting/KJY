@@ -128,6 +128,7 @@ class KJY_window(QtCore.QObject):
         self.ui.jnt_ps_btn.clicked.connect(pm.Callback( self.jnt_ps_load))
         self.ui.constraint_copy_btn.clicked.connect(pm.Callback( self.constraint_copy_load))
         self.ui.LR_copy_btn.clicked.connect(pm.Callback( self.LR_copy_load))
+        self.ui.motionpath_cv_btn.clicked.connect(pm.Callback( self.motionpath_cv_load))
 
         
         
@@ -209,6 +210,8 @@ class KJY_window(QtCore.QObject):
         self.ui.action_kk_controllers.triggered.connect(pm.Callback( self.kk_controllers_load)) 
         self.ui.action_cv_shape_color.triggered.connect(pm.Callback( self.cv_shape_color_load))
         self.ui.action_symmetry_tool.triggered.connect(pm.Callback( self.symmetry_tool_load))
+        self.ui.action_connect_tool.triggered.connect(pm.Callback( self.connect_tool_load))
+
 
 
 
@@ -363,6 +366,10 @@ class KJY_window(QtCore.QObject):
     def LR_copy_load(self):
         Rig_command.LR_copy()
 
+
+    def motionpath_cv_load(self):
+        Rig_command.motionpath_cv()
+
 ## --------------------------------------------------------------------------------------------------------------------------
 # [blend]
 
@@ -402,6 +409,11 @@ class KJY_window(QtCore.QObject):
 
     def symmetry_tool_load(self):
         External_command.symmetry_tool()
+
+    
+    def connect_tool_load(self):
+        External_command.connect_tool()
+
 
 
 ## --------------------------------------------------------------------------------------------------------------------------

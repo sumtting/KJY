@@ -701,7 +701,7 @@
            <string>--------</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="rename_btn_4">
+         <widget class="QPushButton" name="motionpath_cv_btn">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -714,7 +714,7 @@
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;rename tool 실행&lt;br/&gt;#은 숫자, @는 알파벳, 띄어쓰기는 _로 대체됨&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
-           <string>--------</string>
+           <string>motionpath_cv</string>
           </property>
          </widget>
          <widget class="QPushButton" name="LR_copy_btn">
@@ -990,6 +990,7 @@
     <addaction name="action_kk_controllers"/>
     <addaction name="action_cv_shape_color"/>
     <addaction name="action_symmetry_tool"/>
+    <addaction name="action_connect_tool"/>
    </widget>
    <addaction name="menuMenu"/>
   </widget>
@@ -1022,6 +1023,11 @@
   <action name="action_CurveUtils">
    <property name="text">
     <string>CurveUtils</string>
+   </property>
+  </action>
+  <action name="action_connect_tool">
+   <property name="text">
+    <string>connect tool</string>
    </property>
   </action>
  </widget>
