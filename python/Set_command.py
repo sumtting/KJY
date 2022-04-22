@@ -862,9 +862,3 @@ class short_skirt_set():
             
             i=i+1
 
-
-
-
-
-
-

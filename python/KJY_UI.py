@@ -21,6 +21,7 @@ import Rig_command
 import External_command
 import Asset_command
 import Set_command
+import Body_command
 
 
 
@@ -29,6 +30,7 @@ reload(Rig_command)
 reload(External_command)
 reload(Asset_command)
 reload(Set_command)
+reload(Body_command)
 
 
 
@@ -211,6 +213,8 @@ class KJY_window(QtCore.QObject):
         self.ui.action_cv_shape_color.triggered.connect(pm.Callback( self.cv_shape_color_load))
         self.ui.action_symmetry_tool.triggered.connect(pm.Callback( self.symmetry_tool_load))
         self.ui.action_connect_tool.triggered.connect(pm.Callback( self.connect_tool_load))
+        self.ui.action_mel_to_python.triggered.connect(pm.Callback( self.mel_to_python_load))
+
 
 
 
@@ -220,6 +224,8 @@ class KJY_window(QtCore.QObject):
         self.ui.vehicle_set_btn.clicked.connect(pm.Callback( self.vehicle_set_load))
         self.ui.long_skirt_set_btn.clicked.connect(pm.Callback( self.long_skirt_set_load))
         self.ui.short_skirt_set_btn.clicked.connect(pm.Callback( self.short_skirt_set_load))
+        self.ui.body_set_btn.clicked.connect(pm.Callback( self.body_set_load))
+
 
 
 
@@ -415,6 +421,10 @@ class KJY_window(QtCore.QObject):
         External_command.connect_tool()
 
 
+    def mel_to_python_load(self):
+        External_command.mel_to_python()
+
+
 
 ## --------------------------------------------------------------------------------------------------------------------------
 # [set]
@@ -427,6 +437,9 @@ class KJY_window(QtCore.QObject):
 
     def short_skirt_set_load(self):
         Set_command.short_skirt_set()
+
+    def body_set_load(self):
+        Body_command.body_set()
 
 
 

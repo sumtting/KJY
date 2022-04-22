@@ -36,7 +36,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="Rig_tab">
      <attribute name="title">
@@ -867,7 +867,7 @@
          <property name="title">
           <string>Character</string>
          </property>
-         <widget class="QPushButton" name="bind_skin_copy_btn_3">
+         <widget class="QPushButton" name="body_set_btn">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -991,6 +991,7 @@
     <addaction name="action_cv_shape_color"/>
     <addaction name="action_symmetry_tool"/>
     <addaction name="action_connect_tool"/>
+    <addaction name="action_mel_to_python"/>
    </widget>
    <addaction name="menuMenu"/>
   </widget>
@@ -1028,6 +1029,11 @@
   <action name="action_connect_tool">
    <property name="text">
     <string>connect tool</string>
+   </property>
+  </action>
+  <action name="action_mel_to_python">
+   <property name="text">
+    <string>mel to python</string>
    </property>
   </action>
  </widget>
