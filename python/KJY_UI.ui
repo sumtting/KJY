@@ -36,7 +36,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="Rig_tab">
      <attribute name="title">
@@ -125,6 +125,9 @@
           </property>
           <property name="toolTip">
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 object를 먼저 선택한 object의 위치에 copy한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="styleSheet">
+           <string notr="true">QPushButton{color:rgb(255, 255, 127); }</string>
           </property>
           <property name="text">
            <string>position copy</string>
@@ -229,7 +232,7 @@
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 object로 위치와 방향으로 이동한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton{color:rgb(143, 216, 255); }</string>
+           <string notr="true">QPushButton{color:rgb(170, 255, 127); }</string>
           </property>
           <property name="text">
            <string>AtoB</string>

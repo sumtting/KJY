@@ -16,12 +16,8 @@ class body_set():
         cmds.window('body_set_UI', ret=1, w=264, t='body_set', h=124, s=1, mb=1)
         cmds.columnLayout('body_set_columnLayout', w=262, h=120)
         cmds.separator('body_set_separator1')
-        cmds.text('body_set_text1', l='                                      Pose Import')
-        cmds.separator('body_set_separator2')
         cmds.button('body_set_button1', w=260, h=30, l='Pose Import', c=pm.Callback(self.import_body_pose))
         cmds.separator('body_set_separator3')
-        cmds.text('body_set_text2', l='                                      Build')
-        cmds.separator('body_set_separator4')
         cmds.button('body_set_button2', w=260, h=30, l='Build', c=pm.Callback(self.body_build))
         cmds.showWindow('body_set_UI')
 
@@ -33,16 +29,16 @@ class body_set():
 
 
     def body_build(self):
-        setSpineNeck()
-        setArm()
-        setLeg()
-        setHand()
-        setFoot()
-        delPreAtt()
-        delEmpty()
-        patchUp_20140331()
-        keySet()
-        setEye()
+        self.setSpineNeck()
+        self.setArm()
+        self.setLeg()
+        self.setHand()
+        self.setFoot()
+        self.delPreAtt()
+        #self.delEmpty()
+        self.patchUp_20140331()
+        self.keySet()
+        self.setEye()
 
         #######################
         #ext_ctrl 보이게 한다
@@ -184,24 +180,24 @@ class body_set():
         ################################ # mel체크
         # 커브 스킨 조인트의 위치를 맞춘다.
 
-        changeLoc("neck_ik_jnt01", "neck_crvCtrl_jnt01")
-        changeLoc("neck_ik_jnt03", "neck_crvCtrl_jnt01_1")
-        changeLoc("neck_ik_jntEnd", "neck_crvCtrl_jnt02")
+        self.changeLoc("neck_ik_jnt01", "neck_crvCtrl_jnt01")
+        self.changeLoc("neck_ik_jnt03", "neck_crvCtrl_jnt01_1")
+        self.changeLoc("neck_ik_jntEnd", "neck_crvCtrl_jnt02")
         cmds.select('neck_crvCtrl_jnt01', r=1)
         cmds.joint(zso=1, ch=1, e=1, oj='yxz', secondaryAxisOrient='xup')
         cmds.setAttr("neck_crvCtrl_jnt01_1.jointOrientX", 0)
-        changeLoc("spine_ik_jnt01", "spine_crvCtrl_jnt01")
-        changeLoc("spine_ik_jntEnd", "spine_crvCtrl_jnt02")
+        self.changeLoc("spine_ik_jnt01", "spine_crvCtrl_jnt01")
+        self.changeLoc("spine_ik_jntEnd", "spine_crvCtrl_jnt02")
 
 
         ############################################/
         #fk 조인트들을 ik조인트 위치에 맞춘다.
 
-        changeLoc("hip_ctrl", "pelvis_ctrl_preSet_grp")
-        changeLoc("spine_ik_jnt01", "spine_fk_jnt01_grp")
-        changeLoc("spine_ik_jnt03", "spine_fk_jnt02_grp")
-        changeLoc("spine_ik_jnt05", "spine_fk_jnt03_grp")
-        changeLoc("spine_ik_jntEnd", "spine_fk_jntEnd_grp")
+        self.changeLoc("hip_ctrl", "pelvis_ctrl_preSet_grp")
+        self.changeLoc("spine_ik_jnt01", "spine_fk_jnt01_grp")
+        self.changeLoc("spine_ik_jnt03", "spine_fk_jnt02_grp")
+        self.changeLoc("spine_ik_jnt05", "spine_fk_jnt03_grp")
+        self.changeLoc("spine_ik_jntEnd", "spine_fk_jntEnd_grp")
         cmds.select('spine_fk_jnt01', r=1)
         cmds.joint(zso=1, ch=1, e=1, oj='yxz', secondaryAxisOrient='xup')
         tmpVal=-1 * cmds.getAttr('spine_fk_jntEnd_grp.rotateAxisX')
@@ -220,9 +216,9 @@ class body_set():
         #setAttr "spine_fk_jntEnd.jointOrientX" 0;
 
 
-        changeLoc("neck_ik_jnt01", "neck_jnt_grp")
-        changeLoc("neck_ik_jnt04", "neck_fk_jnt02_grp")
-        changeLoc("neck_ik_jntEnd", "neck_fk_jntEnd_grp")
+        self.changeLoc("neck_ik_jnt01", "neck_jnt_grp")
+        self.changeLoc("neck_ik_jnt04", "neck_fk_jnt02_grp")
+        self.changeLoc("neck_ik_jntEnd", "neck_fk_jntEnd_grp")
         cmds.select('neck_ctrl', r=1)
         cmds.joint(zso=1, ch=1, e=1, oj='yxz', secondaryAxisOrient='xup')
         tmpVal=-1 * cmds.getAttr('neck_fk_jntEnd_grp.rotateAxisX')
@@ -261,9 +257,9 @@ class body_set():
         #############################/
         #fk에 컨트롤을 만든다.
         cmds.select('spine_fk_ctrl01', 'spine_fk_ctrl02', r=1)
-        ctrlCreat(cmds.ls(sl=1), 0, 1, 0, 2)
+        self.ctrlCreat(cmds.ls(sl=1), 0, 1, 0, 2)
         cmds.select('neck_fk_ctrl01', 'neck_fk_ctrl02', r=1)
-        ctrlCreat(cmds.ls(sl=1), 0, 1, 0, 0.7)
+        self.ctrlCreat(cmds.ls(sl=1), 0, 1, 0, 0.7)
         cmds.setAttr("neck_ctrl.visibility", 1)
         cmds.setAttr("spine_fk_jnt01.visibility", 1)
         cmds.select(cl=1)
@@ -281,9 +277,9 @@ class body_set():
         #################################/
         #머리 컨트롤에 회전핀, 위치핀 만들기
 
-        changeLoc_PV("neck_ik_jntEnd", "head_ctrl")
-        changeLoc_PV("neck_ik_jntEnd", "head_ctrl_cnst_grp")
-        changeLoc_PV("neck_ik_jntEnd", "head_ctrl_preSet_grp")
+        self.changeLoc_PV("neck_ik_jntEnd", "head_ctrl")
+        self.changeLoc_PV("neck_ik_jntEnd", "head_ctrl_cnst_grp")
+        self.changeLoc_PV("neck_ik_jntEnd", "head_ctrl_preSet_grp")
         cmds.group(em=1, n='head_worldRot_grp')
         cmds.select('head_worldRot_grp', r=1)
         cmds.select('total_ctrl', add=1)
@@ -293,7 +289,7 @@ class body_set():
         cmds.select('head_worldPos_grp', r=1)
         cmds.select('total_ctrl', add=1)
         cmds.parent()
-        changeLoc("head_ctrl", "head_worldPos_grp")
+        self.changeLoc("head_ctrl", "head_worldPos_grp")
         cmds.makeIdentity(apply=True, s=1, r=1, t=1, n=0)
 
 
@@ -302,7 +298,7 @@ class body_set():
         cmds.setAttr("neckEnd_loc.localScaleX", .5)
         cmds.setAttr("neckEnd_loc.localScaleY", .5)
         cmds.setAttr("neckEnd_loc.localScaleZ", .5)
-        changeLoc("neck_fk_jntEnd", "neckEnd_loc")
+        self.changeLoc("neck_fk_jntEnd", "neckEnd_loc")
         cmds.parent('neckEnd_loc', 'chest_ctrl')
         cmds.makeIdentity(apply=True, s=1, r=1, t=1, n=0)
         cmds.select('neck_fk_jntEnd', r=1)
@@ -549,10 +545,10 @@ class body_set():
 
 
         #ik_ctrl들의 위치를 해당 fk 조인트로 옮긴다.
-        changeLoc("hand_L_fk_ctrl", "hand_L_ik_ctrl_preSet_grp")
-        changeLoc("hand_R_fk_ctrl", "hand_R_ik_ctrl_preSet_grp")
-        changeLoc("lowArm_L_fk_ctrl", "elbow_L_ctrl_preSet_grp")
-        changeLoc("lowArm_R_fk_ctrl", "elbow_R_ctrl_preSet_grp")
+        self.changeLoc("hand_L_fk_ctrl", "hand_L_ik_ctrl_preSet_grp")
+        self.changeLoc("hand_R_fk_ctrl", "hand_R_ik_ctrl_preSet_grp")
+        self.changeLoc("lowArm_L_fk_ctrl", "elbow_L_ctrl_preSet_grp")
+        self.changeLoc("lowArm_R_fk_ctrl", "elbow_R_ctrl_preSet_grp")
 
 
 
@@ -687,10 +683,10 @@ class body_set():
         cmds.keyframe('foot_R_ik_pv_jnt_translateX', valueChange=val_R_foot_03, index=(0,0), absolute=1)
 
         #ik_ctrl들의 위치를 해당 fk 조인트로 옮긴다.
-        changeLoc("foot_L_fk_ctrl", "leg_L_distEnd_preSet_grp")
-        changeLoc("foot_R_fk_ctrl", "leg_R_distEnd_preSet_grp")
-        changeLoc("lowLeg_L_fk_ctrl", "knee_L_ctrl_preSet_grp")
-        changeLoc("lowLeg_R_fk_ctrl", "knee_R_ctrl_preSet_grp")
+        self.changeLoc("foot_L_fk_ctrl", "leg_L_distEnd_preSet_grp")
+        self.changeLoc("foot_R_fk_ctrl", "leg_R_distEnd_preSet_grp")
+        self.changeLoc("lowLeg_L_fk_ctrl", "knee_L_ctrl_preSet_grp")
+        self.changeLoc("lowLeg_R_fk_ctrl", "knee_R_ctrl_preSet_grp")
 
 
 
@@ -737,26 +733,26 @@ class body_set():
 
         #ik_jnt길이를 fk_jnt에 맞춘다.
 
-        changeLoc("thumb_L_fk_jntEnd", "thumb_L_ik_jntEnd")
-        changeLoc("index_L_fk_jntEnd", "index_L_ik_jntEnd")
-        changeLoc("middle_L_fk_jntEnd", "middle_L_ik_jntEnd")
-        changeLoc("ring_L_fk_jntEnd", "ring_L_ik_jntEnd")
-        changeLoc("pinky_L_fk_jntEnd", "pinky_L_ik_jntEnd")
-        changeLoc("thumb_R_fk_jntEnd", "thumb_R_ik_jntEnd")
-        changeLoc("index_R_fk_jntEnd", "index_R_ik_jntEnd")
-        changeLoc("middle_R_fk_jntEnd", "middle_R_ik_jntEnd")
-        changeLoc("ring_R_fk_jntEnd", "ring_R_ik_jntEnd")
-        changeLoc("pinky_R_fk_jntEnd", "pinky_R_ik_jntEnd")
+        self.changeLoc("thumb_L_fk_jntEnd", "thumb_L_ik_jntEnd")
+        self.changeLoc("index_L_fk_jntEnd", "index_L_ik_jntEnd")
+        self.changeLoc("middle_L_fk_jntEnd", "middle_L_ik_jntEnd")
+        self.changeLoc("ring_L_fk_jntEnd", "ring_L_ik_jntEnd")
+        self.changeLoc("pinky_L_fk_jntEnd", "pinky_L_ik_jntEnd")
+        self.changeLoc("thumb_R_fk_jntEnd", "thumb_R_ik_jntEnd")
+        self.changeLoc("index_R_fk_jntEnd", "index_R_ik_jntEnd")
+        self.changeLoc("middle_R_fk_jntEnd", "middle_R_ik_jntEnd")
+        self.changeLoc("ring_R_fk_jntEnd", "ring_R_ik_jntEnd")
+        self.changeLoc("pinky_R_fk_jntEnd", "pinky_R_ik_jntEnd")
 
 
         #in,bend,out_loc의 위치 수정
 
-        changeLoc("index_L_ik_jnt01", "fing_L_inSide_loc")
-        changeLoc("middle_L_ik_jnt01", "fing_L_bend_loc")
-        changeLoc("pinky_L_ik_jnt01", "fing_L_outSide_loc")
-        changeLoc("index_R_ik_jnt01", "fing_R_inSide_loc")
-        changeLoc("middle_R_ik_jnt01", "fing_R_bend_loc")
-        changeLoc("pinky_R_ik_jnt01", "fing_R_outSide_loc")
+        self.changeLoc("index_L_ik_jnt01", "fing_L_inSide_loc")
+        self.changeLoc("middle_L_ik_jnt01", "fing_L_bend_loc")
+        self.changeLoc("pinky_L_ik_jnt01", "fing_L_outSide_loc")
+        self.changeLoc("index_R_ik_jnt01", "fing_R_inSide_loc")
+        self.changeLoc("middle_R_ik_jnt01", "fing_R_bend_loc")
+        self.changeLoc("pinky_R_ik_jnt01", "fing_R_outSide_loc")
 
 
 
@@ -769,16 +765,16 @@ class body_set():
 
 
         #ik손가락에 ikSC를 건다.
-        ikSC("thumb_L_ik_jnt01", "thumb_L_ik_jntEnd", "thumb_L_ikHdl", "thumb_L_ik_efftr")
-        ikSC("index_L_ik_jnt01", "index_L_ik_jntEnd", "index_L_ikHdl", "index_L_ik_efftr")
-        ikSC("middle_L_ik_jnt01", "middle_L_ik_jntEnd", "middle_L_ikHdl", "middle_L_ik_efftr")
-        ikSC("ring_L_ik_jnt01", "ring_L_ik_jntEnd", "ring_L_ikHdl", "ring_L_ik_efftr")
-        ikSC("pinky_L_ik_jnt01", "pinky_L_ik_jntEnd", "pinky_L_ikHdl", "pinky_L_ik_efftr")
-        ikSC("thumb_R_ik_jnt01", "thumb_R_ik_jntEnd", "thumb_R_ikHdl", "thumb_R_ik_efftr")
-        ikSC("index_R_ik_jnt01", "index_R_ik_jntEnd", "index_R_ikHdl", "index_R_ik_efftr")
-        ikSC("middle_R_ik_jnt01", "middle_R_ik_jntEnd", "middle_R_ikHdl", "middle_R_ik_efftr")
-        ikSC("ring_R_ik_jnt01", "ring_R_ik_jntEnd", "ring_R_ikHdl", "ring_R_ik_efftr")
-        ikSC("pinky_R_ik_jnt01", "pinky_R_ik_jntEnd", "pinky_R_ikHdl", "pinky_R_ik_efftr")
+        self.ikSC("thumb_L_ik_jnt01", "thumb_L_ik_jntEnd", "thumb_L_ikHdl", "thumb_L_ik_efftr")
+        self.ikSC("index_L_ik_jnt01", "index_L_ik_jntEnd", "index_L_ikHdl", "index_L_ik_efftr")
+        self.ikSC("middle_L_ik_jnt01", "middle_L_ik_jntEnd", "middle_L_ikHdl", "middle_L_ik_efftr")
+        self.ikSC("ring_L_ik_jnt01", "ring_L_ik_jntEnd", "ring_L_ikHdl", "ring_L_ik_efftr")
+        self.ikSC("pinky_L_ik_jnt01", "pinky_L_ik_jntEnd", "pinky_L_ikHdl", "pinky_L_ik_efftr")
+        self.ikSC("thumb_R_ik_jnt01", "thumb_R_ik_jntEnd", "thumb_R_ikHdl", "thumb_R_ik_efftr")
+        self.ikSC("index_R_ik_jnt01", "index_R_ik_jntEnd", "index_R_ikHdl", "index_R_ik_efftr")
+        self.ikSC("middle_R_ik_jnt01", "middle_R_ik_jntEnd", "middle_R_ikHdl", "middle_R_ik_efftr")
+        self.ikSC("ring_R_ik_jnt01", "ring_R_ik_jntEnd", "ring_R_ikHdl", "ring_R_ik_efftr")
+        self.ikSC("pinky_R_ik_jnt01", "pinky_R_ik_jntEnd", "pinky_R_ikHdl", "pinky_R_ik_efftr")
 
         #ikHdl을 ikHdl_grp에 넣는다.
 
@@ -1046,38 +1042,38 @@ class body_set():
         cmds.parent()
 
         #다른 loc들과 ik_ctrl을 해당 조인트의 위치에 맞춘다.
-        changeLoc("toe_L_fk_ctrl", "foot_L_ball_loc")
-        changeLoc("toe_L_fk_ctrl", "toeWiggle_L_loc")
-        changeLoc("toe_L_fk_jntEnd", "toe_L_loc")
-        changeLoc("foot_L_heel_loc", "foot_L_ik_ctrl_preSet_grp")
-        changeLoc("toe_R_fk_ctrl", "foot_R_ball_loc")
-        changeLoc("toe_R_fk_ctrl", "toeWiggle_R_loc")
-        changeLoc("toe_R_fk_jntEnd", "toe_R_loc")
-        changeLoc("foot_R_heel_loc", "foot_R_ik_ctrl_preSet_grp")
+        self.changeLoc("toe_L_fk_ctrl", "foot_L_ball_loc")
+        self.changeLoc("toe_L_fk_ctrl", "toeWiggle_L_loc")
+        self.changeLoc("toe_L_fk_jntEnd", "toe_L_loc")
+        self.changeLoc("foot_L_heel_loc", "foot_L_ik_ctrl_preSet_grp")
+        self.changeLoc("toe_R_fk_ctrl", "foot_R_ball_loc")
+        self.changeLoc("toe_R_fk_ctrl", "toeWiggle_R_loc")
+        self.changeLoc("toe_R_fk_jntEnd", "toe_R_loc")
+        self.changeLoc("foot_R_heel_loc", "foot_R_ik_ctrl_preSet_grp")
 
 
         #발의 매치 오브젝트도 heel_loc의 위치에 맞춘다.
-        changeLoc("foot_L_heel_loc", "foot_L_ik_ctrl_match")
-        changeLoc("foot_R_heel_loc", "foot_R_ik_ctrl_match")
+        self.changeLoc("foot_L_heel_loc", "foot_L_ik_ctrl_match")
+        self.changeLoc("foot_R_heel_loc", "foot_R_ik_ctrl_match")
 
 
         #ik 조인트들을 fk조인트의 위치에 맞춘다.
-        changeLoc("toe_L_fk_ctrl", "toe_L_ik_jnt")
-        changeLoc("toe_L_fk_jntEnd", "toe_L_ik_jntEnd")
-        changeLoc("toe_R_fk_ctrl", "toe_R_ik_jnt")
-        changeLoc("toe_R_fk_jntEnd", "toe_R_ik_jntEnd")
+        self.changeLoc("toe_L_fk_ctrl", "toe_L_ik_jnt")
+        self.changeLoc("toe_L_fk_jntEnd", "toe_L_ik_jntEnd")
+        self.changeLoc("toe_R_fk_ctrl", "toe_R_ik_jnt")
+        self.changeLoc("toe_R_fk_jntEnd", "toe_R_ik_jntEnd")
 
         #메인 조인트들을 fk조인트의 위치에 맞춘다.
-        changeLoc("toe_L_fk_ctrl", "toe_L_jnt")
-        changeLoc("toe_L_fk_jntEnd", "toe_L_jntEnd")
-        changeLoc("toe_R_fk_ctrl", "toe_R_jnt")
-        changeLoc("toe_R_fk_jntEnd", "toe_R_jntEnd")
+        self.changeLoc("toe_L_fk_ctrl", "toe_L_jnt")
+        self.changeLoc("toe_L_fk_jntEnd", "toe_L_jntEnd")
+        self.changeLoc("toe_R_fk_ctrl", "toe_R_jnt")
+        self.changeLoc("toe_R_fk_jntEnd", "toe_R_jntEnd")
 
         #ikSC를 건다.
-        ikSC("foot_L_ik_jnt", "toe_L_ik_jnt", "foot_L_ikHdl", "foot_L_ik_efftr")
-        ikSC("toe_L_ik_jnt", "toe_L_ik_jntEnd", "toe_L_ikHdl", "toe_L_ik_efftr")
-        ikSC("foot_R_ik_jnt", "toe_R_ik_jnt", "foot_R_ikHdl", "foot_R_ik_efftr")
-        ikSC("toe_R_ik_jnt", "toe_R_ik_jntEnd", "toe_R_ikHdl", "toe_R_ik_efftr")
+        self.ikSC("foot_L_ik_jnt", "toe_L_ik_jnt", "foot_L_ikHdl", "foot_L_ik_efftr")
+        self.ikSC("toe_L_ik_jnt", "toe_L_ik_jntEnd", "toe_L_ikHdl", "toe_L_ik_efftr")
+        self.ikSC("foot_R_ik_jnt", "toe_R_ik_jnt", "foot_R_ikHdl", "foot_R_ik_efftr")
+        self.ikSC("toe_R_ik_jnt", "toe_R_ik_jntEnd", "toe_R_ikHdl", "toe_R_ik_efftr")
 
         #parent구조를 만든다.
         cmds.parent('foot_L_ikHdl', 'foot_L_inside_loc')
@@ -1305,7 +1301,7 @@ class body_set():
         cmds.setAttr("total_ctrl.facialCtrls_vis", 1)
         cmds.setAttr("total_ctrl.accCtrls_vis", 1)
         cmds.setAttr("total_ctrl.model_vis", 1)
-        cmds.setAttr("total_ctrl.disco_boots_vis", 1)
+        #cmds.setAttr("total_ctrl.disco_boots_vis", 1)
         cmds.setAttr("total_ctrl.hair_vis", 1)
 
         #모든 키 데이터를 잠근다.
@@ -1722,7 +1718,7 @@ class body_set():
         #cnst_grp를 하나 만들어서 ik_ctrl_prnt_grp 상위에 놓는다.
 
         cmds.group(em=1, n="hand_L_ik_ctrl_cnst_grp")
-        changeLoc("hand_L_ik_ctrl", "hand_L_ik_ctrl_cnst_grp")
+        self.changeLoc("hand_L_ik_ctrl", "hand_L_ik_ctrl_cnst_grp")
         cmds.parent("hand_L_ik_ctrl_cnst_grp", "hand_L_ik_ctrl_preSet_grp")
         cmds.makeIdentity(apply=True, s=1, r=1, t=1, n=0)
         cmds.parent("hand_L_ik_ctrl_prnt_grp", "hand_L_ik_ctrl_cnst_grp")
@@ -1768,7 +1764,7 @@ class body_set():
         #cnst_grp를 하나 만들어서 ik_ctrl_prnt_grp 상위에 놓는다.
 
         cmds.group(em=1, n="elbow_L_ik_ctrl_cnst_grp")
-        changeLoc("elbow_L_ik_ctrl", "elbow_L_ik_ctrl_cnst_grp")
+        self.changeLoc("elbow_L_ik_ctrl", "elbow_L_ik_ctrl_cnst_grp")
         cmds.parent("elbow_L_ik_ctrl_cnst_grp", "elbow_L_ctrl_preSet_grp")
         cmds.makeIdentity(apply=True, s=1, r=1, t=1, n=0)
         cmds.parent("elbow_L_ik_ctrl", "elbow_L_ik_ctrl_cnst_grp")
@@ -1813,7 +1809,7 @@ class body_set():
         #cnst_grp를 하나 만들어서 ik_ctrl_prnt_grp 상위에 놓는다.
 
         cmds.group(em=1, n="hand_R_ik_ctrl_cnst_grp")
-        changeLoc("hand_R_ik_ctrl", "hand_R_ik_ctrl_cnst_grp")
+        self.changeLoc("hand_R_ik_ctrl", "hand_R_ik_ctrl_cnst_grp")
         cmds.parent("hand_R_ik_ctrl_cnst_grp", "hand_R_ik_ctrl_preSet_grp")
         cmds.makeIdentity(apply=True, s=1, r=1, t=1, n=0)
         cmds.parent("hand_R_ik_ctrl_prnt_grp", "hand_R_ik_ctrl_cnst_grp")
@@ -1859,7 +1855,7 @@ class body_set():
         #cnst_grp를 하나 만들어서 ik_ctrl_prnt_grp 상위에 놓는다.
 
         cmds.group(em=1, n="elbow_R_ik_ctrl_cnst_grp")
-        changeLoc("elbow_R_ik_ctrl", "elbow_R_ik_ctrl_cnst_grp")
+        self.changeLoc("elbow_R_ik_ctrl", "elbow_R_ik_ctrl_cnst_grp")
         cmds.parent("elbow_R_ik_ctrl_cnst_grp", "elbow_R_ctrl_preSet_grp")
         cmds.makeIdentity(apply=True, s=1, r=1, t=1, n=0)
         cmds.parent("elbow_R_ik_ctrl", "elbow_R_ik_ctrl_cnst_grp")
@@ -1902,7 +1898,7 @@ class body_set():
         #cnst_grp를 하나 만들어서 ik_ctrl_prnt_grp 상위에 놓는다.
 
         cmds.group(em=1, n="foot_L_ik_ctrl_cnst_grp")
-        changeLoc("foot_L_ik_ctrl", "foot_L_ik_ctrl_cnst_grp")
+        self.changeLoc("foot_L_ik_ctrl", "foot_L_ik_ctrl_cnst_grp")
         cmds.parent("foot_L_ik_ctrl_cnst_grp", "foot_L_ik_ctrl_preSet_grp")
         cmds.makeIdentity(apply=True, s=1, r=1, t=1, n=0)
         cmds.parent("foot_L_ik_ctrl_prnt_grp", "foot_L_ik_ctrl_cnst_grp")
@@ -1939,7 +1935,7 @@ class body_set():
         #cnst_grp를 하나 만들어서 ik_ctrl_prnt_grp 상위에 놓는다.
 
         cmds.group(em=1, n="knee_L_ctrl_cnst_grp")
-        changeLoc("knee_L_ctrl", "knee_L_ctrl_cnst_grp")
+        self.changeLoc("knee_L_ctrl", "knee_L_ctrl_cnst_grp")
         cmds.parent("knee_L_ctrl_cnst_grp", "knee_L_ctrl_preSet_grp")
         cmds.makeIdentity(apply=True, s=1, r=1, t=1, n=0)
         cmds.parent("knee_L_ctrl", "knee_L_ctrl_cnst_grp")
@@ -1974,7 +1970,7 @@ class body_set():
         #cnst_grp를 하나 만들어서 ik_ctrl_prnt_grp 상위에 놓는다.
 
         cmds.group(em=1, n="foot_R_ik_ctrl_cnst_grp")
-        changeLoc("foot_R_ik_ctrl", "foot_R_ik_ctrl_cnst_grp")
+        self.changeLoc("foot_R_ik_ctrl", "foot_R_ik_ctrl_cnst_grp")
         cmds.parent("foot_R_ik_ctrl_cnst_grp", "foot_R_ik_ctrl_preSet_grp")
         cmds.makeIdentity(apply=True, s=1, r=1, t=1, n=0)
         cmds.parent("foot_R_ik_ctrl_prnt_grp", "foot_R_ik_ctrl_cnst_grp")
@@ -2010,7 +2006,7 @@ class body_set():
         #cnst_grp를 하나 만들어서 ik_ctrl_prnt_grp 상위에 놓는다.
 
         cmds.group(em=1, n="knee_R_ctrl_cnst_grp")
-        changeLoc("knee_R_ctrl", "knee_R_ctrl_cnst_grp")
+        self.changeLoc("knee_R_ctrl", "knee_R_ctrl_cnst_grp")
         cmds.parent("knee_R_ctrl_cnst_grp", "knee_R_ctrl_preSet_grp")
         cmds.makeIdentity(apply=True, s=1, r=1, t=1, n=0)
         cmds.parent("knee_R_ctrl", "knee_R_ctrl_cnst_grp")
@@ -2107,8 +2103,8 @@ class body_set():
 
 
         #각 ofs_jnt를 안구의 위치로 옮긴다.
-        changeLoc("eye_L_loc", "eyeBall_L_ofs_jnt")
-        changeLoc("eye_R_loc", "eyeBall_R_ofs_jnt")
+        self.changeLoc("eye_L_loc", "eyeBall_L_ofs_jnt")
+        self.changeLoc("eye_R_loc", "eyeBall_R_ofs_jnt")
 
 
         #안구의 스케일값과 회전값을 받아놓는다.
@@ -2223,8 +2219,8 @@ class body_set():
 
 
         #각 눈알 컨트롤을 눈알 조인트 위치로 이동.
-        changeLoc("eyeBall_L_ofs_jnt", "eye_L_ctrl")
-        changeLoc("eyeBall_R_ofs_jnt", "eye_R_ctrl")
+        self.changeLoc("eyeBall_L_ofs_jnt", "eye_L_ctrl")
+        self.changeLoc("eyeBall_R_ofs_jnt", "eye_R_ctrl")
 
         #눈알 컨트롤러를 높이비례 반절의 값으로 앞으로 이동.
         eye_ty=float(cmds.getAttr('eye_ctrl.ty'))
