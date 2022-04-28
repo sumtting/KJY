@@ -344,7 +344,6 @@ class KJY_window(QtCore.QObject):
         cmds.rowColumnLayout( nr=1 )
         rename_texfld = cmds.textField(h=20,w=200, aie=1, ec='KJY_UI.rename_command("rename")')
         
-        
         #ec는 엔터로 명령어를 실행하게해줌, aie는 큰엔터로도 실행가능하게 해줌 
 
        # cmds.button(l = 'Rename' , w = 100 , c = 'Rig_command.re_test("test")')
@@ -362,7 +361,6 @@ class KJY_window(QtCore.QObject):
         scale_check = self.ui.jnt_ps_s_cb.isChecked() # joint constraintSacale 체크박스 선택
 
         Rig_command.jnt_ps(parent_check, scale_check)
-
 
 
     def constraint_copy_load(self):
