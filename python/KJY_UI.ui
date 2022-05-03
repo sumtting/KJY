@@ -162,7 +162,7 @@
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 skin된 object의 skin joint을 모두 select한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton{color:rgb(143, 216, 255); }</string>
+           <string notr="true">QPushButton{color:rgb(170, 255, 127); }</string>
           </property>
           <property name="text">
            <string>skin jnt select</string>
@@ -567,7 +567,7 @@
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;ngSkin tool을 실행한다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="styleSheet">
-           <string notr="true">QPushButton{color:rgb(255, 170, 127); }</string>
+           <string notr="true">QPushButton{color:rgb(255, 255, 127); }</string>
           </property>
           <property name="text">
            <string>ngskin_tool</string>
