@@ -280,10 +280,12 @@ class long_skirt_set():
         cmds.text(l = u'up controller' ,w = 100)
         #cmds.textField('number_tex_box' , w = 30 , h = 20 , tx = '9', textChangedCommand='skirt_command.change_number()') # textChangedCommand는 ui에서 text를 바꿀때 커멘드입력이 안돼도 실시간으로 쿼리가능
         cmds.textField('up number_tex_box' , w = 30 , h = 20 , tx = '2')
+        cmds.text(l = u'    *  leg, knee, ankle에 위치한')
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
         cmds.text(l = u'down controller' ,w = 100)
         cmds.textField('down number_tex_box' , w = 30 , h = 20 , tx = '2')
+        cmds.text(l = u'        컨트롤러는 고정 ')
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
         cmds.text(l = u'total' ,w = 100)
@@ -570,8 +572,11 @@ class long_skirt_set():
         for down_FK_firt,con_name in zip(down_FK_firt_list,con_name_list):
             cmds.connectAttr ('down_point_reverse.outputX', down_FK_firt + '_pointConstraint1.' + con_name + '_point_locW0' )
             
+        # 빌드후 리깅 셋팅 관련 어트리뷰트는 하이드            
         cmds.setAttr("down_skirt_RIG_setup_CTL.skirtLength", lock=True, keyable=False, channelBox=False) # 빌드후 skirtLength lock
         cmds.setAttr("down_skirt_RIG_setup_CTL.____Rig____", lock=True, keyable=False, channelBox=False)
+        cmds.setAttr("down_skirt_RIG_setup_CTL.legSkirtStrength", lock=True, keyable=False, channelBox=False)
+        cmds.setAttr("down_skirt_RIG_setup_CTL.middleSkirtStrength", lock=True, keyable=False, channelBox=False)
 
 
 

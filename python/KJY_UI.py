@@ -10,6 +10,7 @@ import sys
 import maya.OpenMayaUI as MayaUI
 
 from PySide2 import QtCore, QtUiTools
+from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import QWidget
 from shiboken2 import wrapInstance
@@ -19,7 +20,7 @@ import xml.etree.ElementTree as ET
 
 import Rig_command
 import External_command
-import Asset_command
+import Sub_command
 import Set_command
 import Body_command
 
@@ -28,7 +29,7 @@ import Body_command
 
 reload(Rig_command)
 reload(External_command)
-reload(Asset_command)
+reload(Sub_command)
 reload(Set_command)
 reload(Body_command)
 
@@ -104,7 +105,12 @@ class KJY_window(QtCore.QObject):
         ui_file.open(QtCore.QFile.ReadOnly)
 
         # create widget from ui file
-        self.ui = ui_loader.load(ui_file, getMayaWindow()) # self == maya main window parent
+        #self.ui = ui_loader.load(ui_file, getMayaWindow()) # self == maya main window parent
+        
+        self.ui = ui_loader.load(ui_file) # self == maya main window parent
+        self.ui.setParent(getMayaWindow())
+        self.ui.setWindowFlags(Qt.Window)
+        
         ui_file.close()
 
         self.ui.setAttribute(QtCore.Qt.WA_DeleteOnClose, True)          
@@ -197,12 +203,13 @@ class KJY_window(QtCore.QObject):
 
 
 ## --------------------------------------------------------------------------------------------------------------------------
-# [asset]
+# [sub]
       
         self.ui.matchname_set_btn.clicked.connect(pm.Callback( self.matchname_set_load))
         self.ui.cleanup_btn.clicked.connect(pm.Callback( self.cleanup_load))
         self.ui.attribute_unlock_btn.clicked.connect(pm.Callback( self.attribute_unlock_load))
         self.ui.ns_remove_btn.clicked.connect(pm.Callback( self.ns_remove_load))
+        self.ui.connect_tool_btn.clicked.connect(pm.Callback( self.connect_tool_load))
         
 
 
@@ -212,7 +219,6 @@ class KJY_window(QtCore.QObject):
         self.ui.action_kk_controllers.triggered.connect(pm.Callback( self.kk_controllers_load)) 
         self.ui.action_cv_shape_color.triggered.connect(pm.Callback( self.cv_shape_color_load))
         self.ui.action_symmetry_tool.triggered.connect(pm.Callback( self.symmetry_tool_load))
-        self.ui.action_connect_tool.triggered.connect(pm.Callback( self.connect_tool_load))
         self.ui.action_mel_to_python.triggered.connect(pm.Callback( self.mel_to_python_load))
 
 
@@ -382,22 +388,26 @@ class KJY_window(QtCore.QObject):
 
 
 ## --------------------------------------------------------------------------------------------------------------------------
-# [asset]
+# [sub]
 
     def matchname_set_load(self):
-        Asset_command.matchname_set()
+        Sub_command.matchname_set()
 
 
     def cleanup_load(self):
-        Asset_command.cleanup()
+        Sub_command.cleanup()
 
 
     def attribute_unlock_load(self):
-        Asset_command.attribute_unlock()
+        Sub_command.attribute_unlock()
 
 
     def ns_remove_load(self):
-        Asset_command.ns_remove()
+        Sub_command.ns_remove()
+
+
+    def connect_tool_load(self):
+        Sub_command.connect_tool()
 
 
 ## --------------------------------------------------------------------------------------------------------------------------
@@ -413,10 +423,6 @@ class KJY_window(QtCore.QObject):
 
     def symmetry_tool_load(self):
         External_command.symmetry_tool()
-
-    
-    def connect_tool_load(self):
-        External_command.connect_tool()
 
 
     def mel_to_python_load(self):

@@ -10,6 +10,7 @@ import sys
 import maya.OpenMayaUI as MayaUI
 
 from PySide2 import QtCore, QtUiTools
+from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import QWidget
 from shiboken2 import wrapInstance
@@ -37,7 +38,6 @@ def getMayaWindow():
     ptr = MayaUI.MQtUtil.mainWindow()
     return wrapInstance(long(ptr), QWidget)
     
-
 
 class RIG_checktool_window(QtCore.QObject):
     #def __init__(self, tap):
@@ -68,7 +68,9 @@ class RIG_checktool_window(QtCore.QObject):
         ui_file.open(QtCore.QFile.ReadOnly)
 
         # create widget from ui file
-        self.ui = ui_loader.load(ui_file, getMayaWindow()) # self == maya main window parent
+        self.ui = ui_loader.load(ui_file) # self == maya main window parent
+        self.ui.setParent(getMayaWindow())
+        self.ui.setWindowFlags(Qt.Window)
         ui_file.close()
 
         self.ui.setAttribute(QtCore.Qt.WA_DeleteOnClose, True)          

@@ -757,9 +757,9 @@
       </layout>
      </widget>
     </widget>
-    <widget class="QWidget" name="Asset_tab">
+    <widget class="QWidget" name="Sub_tab">
      <attribute name="title">
-      <string>Asset</string>
+      <string>Sub</string>
      </attribute>
      <widget class="QWidget" name="verticalLayoutWidget_2">
       <property name="geometry">
@@ -777,7 +777,7 @@
           <bool>true</bool>
          </property>
          <property name="title">
-          <string>Asset_Tool</string>
+          <string>Sub_Tool</string>
          </property>
          <widget class="QPushButton" name="matchname_set_btn">
           <property name="geometry">
@@ -843,6 +843,22 @@
            <string>attribute unlock</string>
           </property>
          </widget>
+         <widget class="QPushButton" name="connect_tool_btn">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>60</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 object의 Attribute를 모두 unlock&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>connect tool</string>
+          </property>
+         </widget>
         </widget>
        </item>
       </layout>
@@ -883,7 +899,7 @@
            <string>body_set</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="bind_skin_copy_btn_4">
+         <widget class="QPushButton" name="facial_set_btn">
           <property name="geometry">
            <rect>
             <x>120</x>
@@ -993,7 +1009,6 @@
     <addaction name="action_kk_controllers"/>
     <addaction name="action_cv_shape_color"/>
     <addaction name="action_symmetry_tool"/>
-    <addaction name="action_connect_tool"/>
     <addaction name="action_mel_to_python"/>
    </widget>
    <addaction name="menuMenu"/>

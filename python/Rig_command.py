@@ -525,6 +525,7 @@ def blend_copy():
     blend_target_list = cmds.listAttr (blend_node + ".w", m=1) # 블랜드타겟 리스트
 
     blend_combi_list = []
+    ori_combination_node_list = []
     new_combination_node_list = []
     combination_connect_info_list = []
     for i in blend_target_list: 
@@ -538,16 +539,14 @@ def blend_copy():
             
             new_combination_node = cmds.duplicate( combination_node )[0]
 
+            ori_combination_node_list.append(combination_node) # 기존의 콤비네이션노드 리스트
+
             blend_combi_list.append(blend_combi_name)
             new_combination_node_list.append(new_combination_node)
             combination_connect_info_list.append(combination_connect_info)
             
-            
-            cmds.delete(combination_node)
-
-            #cmds.disconnectAttr (combination_node + '.outputWeight', blend_combi_name) # 기존에 블렌드노드에 콤비네이션쉐입이 연결된걸 끊어준다
-            #cmds.disconnectAttr (combination_target, blend_combi_name) # 기존에 블렌드노드에 콤비네이션쉐입이 연결된걸 끊어준다
-
+            cmds.disconnectAttr(combination_node + '.outputWeight' , blend_combi_name) # 콤비네이션 노드의 커넥션을 끊어준다(블렌드카피 할때 커넥션된게 없어야하기 때문)
+            # 마지막에 다시 재연결시켜준다
    
 
     new_target_list = []
@@ -736,8 +735,11 @@ def blend_copy():
         for num, combi_target in enumerate(combination_connect_info): 
             cmds.connectAttr('new_%s'%(combi_target), '%s'%(combi_node) + '.inputWeight[%s]'%(num))
             # 새로운 블렌드쉐입과 콤비네이션 노드를 연결을 해준다 (new_는 새로만든 블렌드쉐입 네임과 맞추기위함)
-          
 
+    for combi_sh,combi_target in zip(ori_combination_node_list, blend_combi_list): # 기존에 콤비네이션타겟을 재연결(블렌드 카피때문에 연결을 끊어두었기 때문)
+        cmds.connectAttr(combi_sh + '.outputWeight', combi_target)
+
+    
     main_target_list_re = list(set(main_target_list_re) - set(custom_target))
 
     #new_GRP = cmds.group( main_target_list_re, inbetween_target_list, n='new_target_GRP' )
