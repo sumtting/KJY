@@ -570,7 +570,7 @@
            <string notr="true">QPushButton{color:rgb(255, 255, 127); }</string>
           </property>
           <property name="text">
-           <string>ngskin_tool</string>
+           <string>ngskin tool</string>
           </property>
          </widget>
          <widget class="QPushButton" name="reference_copy_btn">
@@ -589,7 +589,7 @@
            <string notr="true"/>
           </property>
           <property name="text">
-           <string>reference_copy</string>
+           <string>reference copy</string>
           </property>
          </widget>
          <widget class="QPushButton" name="geo_of_jnt_btn">
@@ -669,7 +669,7 @@
            <string notr="true"/>
           </property>
           <property name="text">
-           <string>constraint_copy</string>
+           <string>constraint copy</string>
           </property>
          </widget>
          <widget class="QPushButton" name="rename_btn_2">
@@ -688,7 +688,7 @@
            <string>--------</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="rename_btn_3">
+         <widget class="QPushButton" name="shape_copy_btn">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -701,7 +701,7 @@
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;rename tool 실행&lt;br/&gt;#은 숫자, @는 알파벳, 띄어쓰기는 _로 대체됨&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
-           <string>--------</string>
+           <string>shape copy</string>
           </property>
          </widget>
          <widget class="QPushButton" name="motionpath_cv_btn">
@@ -717,7 +717,7 @@
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;rename tool 실행&lt;br/&gt;#은 숫자, @는 알파벳, 띄어쓰기는 _로 대체됨&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
-           <string>motionpath_cv</string>
+           <string>motionpath cv</string>
           </property>
          </widget>
          <widget class="QPushButton" name="LR_copy_btn">
@@ -733,7 +733,7 @@
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 컨트롤러의 어트리뷰트값을 반대쪽 컨트롤러에 copy&lt;br/&gt;(전체 네이밍은 같고 L/R만 달라야함)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
-           <string>LR_copy</string>
+           <string>LR copy</string>
           </property>
          </widget>
          <widget class="QPushButton" name="blend_copy_btn">
@@ -749,7 +749,7 @@
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 object와 동일하게 blend target을 옮겨준다.&lt;/p&gt;&lt;p&gt;(네이밍이 겹치지 않아야함, 블렌드웨이트에 연결된 커넥션이 없어야함)&lt;/p&gt;&lt;p&gt;* 모양이 다른 object도 가능&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
-           <string>blend_copy</string>
+           <string>blend copy</string>
           </property>
          </widget>
         </widget>
@@ -857,6 +857,22 @@
           </property>
           <property name="text">
            <string>connect tool</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="posereader_btn">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>60</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;namespace Editor의 namespace를 모두 지워준다. ※reference 제외&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>PoseReader</string>
           </property>
          </widget>
         </widget>

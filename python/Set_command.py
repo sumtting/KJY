@@ -379,6 +379,8 @@ class long_skirt_set():
 
 
     def skirt_connect(self):
+        cmds.disconnectAttr ('L_skirt_total_CTL.translateX', 'L_leg_CTL.translateX')
+        cmds.disconnectAttr ('L_skirt_total_CTL.translateZ', 'L_leg_CTL.translateZ')
             
         top_loc_list = cmds.listRelatives('top_loc_GRP', c=1)
         mid_loc_list = cmds.listRelatives('mid_loc_GRP', c=1)

@@ -210,6 +210,7 @@ class KJY_window(QtCore.QObject):
         self.ui.attribute_unlock_btn.clicked.connect(pm.Callback( self.attribute_unlock_load))
         self.ui.ns_remove_btn.clicked.connect(pm.Callback( self.ns_remove_load))
         self.ui.connect_tool_btn.clicked.connect(pm.Callback( self.connect_tool_load))
+        self.ui.posereader_btn.clicked.connect(pm.Callback( self.posereader_load))
         
 
 
@@ -408,6 +409,10 @@ class KJY_window(QtCore.QObject):
 
     def connect_tool_load(self):
         Sub_command.connect_tool()
+
+
+    def posereader_load(self):
+        Sub_command.posereader()
 
 
 ## --------------------------------------------------------------------------------------------------------------------------

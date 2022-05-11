@@ -502,3 +502,893 @@ class connect_tool():
                 pm.warning('Fuck... this is impossible')
         else:
             pass
+
+
+
+class posereader():
+    def __init__(self):
+        if pm.window('createPR', q=1, ex=1):
+            pm.deleteUI('createPR')
+        pm.window('createPR', ret=1, s=0, t='Create PSD v01', w=302, mb=1)
+        pm.tabLayout('tabLay', w=300)
+        pm.columnLayout('Default', w=294)
+        pm.separator('sep01', h=5)
+        pm.text('txtSelJNT', w=293, l='* Select Joints * ')
+        pm.separator('sep02', h=5)
+        pm.rowLayout('rowLay01', nc=100, h=110)
+        pm.rowLayout('rowLay02', nc=100)
+        pm.textScrollList('defaultJNTList', ams=1, h=100, w=210)
+        pm.columnLayout('buttonsLay', p='rowLay01')
+        pm.button('addButton', h=30, w=75, l='<<ADD', command=pm.Callback(self.defaultLoadJNTListAdd))
+        pm.separator('sep03', h=30)
+        pm.button('removeButton', h=30, w=75, l='>>REMOVE', command=pm.Callback(self.defaultLoadJNTListRemove))
+        pm.columnLayout('columnLay03', p='Default')
+        pm.rowLayout('rowLay07', nc=100, h=20)
+        pm.separator('sep12', vis=0, w=55)
+        pm.radioCollection('bendButtons')
+        pm.radioButton('bendRadioButton', l='Bend Joint', sl=1)
+        pm.radioButton('notBendRadioButton', l='Not Bend Joint')
+        pm.rowLayout('rowLay082', p='columnLay03', nc=100, h=20)
+        pm.separator('sep122', vis=0, w=70)
+        pm.radioCollection('hierConstButtons')
+        pm.radioButton('hierRadioButton', l='Hierarchy')
+        pm.radioButton('constRadioButton', l='Constraint', sl=1)
+        pm.rowLayout('rowLay08', p='columnLay03', nc=100, h=25)
+        pm.radioCollection('reverseButtonsD')
+        pm.radioButton('defaultRadioButtonD', w=70, l='Default', sl=1)
+        pm.radioButton('xReverseRadioButtonD', w=70, l='X reverse')
+        pm.radioButton('yReverseRadioButtonD', w=70, l='Y reverse')
+        pm.radioButton('zReverseRadioButtonD', w=70, l='Z reverse')
+        pm.button('defaultApplyButton', p='Default', h=40, w=292, l='Apply', command=pm.Callback(self.defaultPoseReader))
+        pm.columnLayout('Custom', p='tabLay', w=294)
+        pm.separator('sep04', h=5)
+        pm.text('txtSelJNTs', w=293, l='* Select Joint * ')
+        pm.separator('sep05', h=5)
+        pm.rowLayout('rowLay03', nc=100, h=30)
+        pm.text('txtBaseJNT', w=70, l='Base Joint')
+        pm.textScrollList('baseJNTList', w=150, h=25)
+        pm.button('baseJNTbutton', w=65, l='<<', h=23, command=pm.Callback(self.customLoadJNTListBase))
+        pm.separator('sep06', p='Custom', h=5)
+        pm.rowLayout('rowLay10', p='Custom', nc=100)
+        pm.text('txtFollowJNT', w=70, l='Follow Joint')
+        pm.textScrollList('followJNTList', w=150, h=25)
+        pm.button('followJNTbutton', w=65, h=23, l='<<', command=pm.Callback(self.customLoadJNTListFollow))
+        pm.separator('sep07', p='Custom', h=5)
+        pm.rowLayout('rowLay04', p='Custom', nc=100, h=30)
+        pm.text('txtUpJNT', w=70, l='Up Joint')
+        pm.textScrollList('upJNTList', w=150, h=25)
+        pm.button('upJNTbutton', w=65, l='<<', h=23, command=pm.Callback(self.customLoadJNTListUp))
+        pm.separator('sep08', p='Custom', h=5)
+        pm.rowLayout('rowLay05', p='Custom', nc=100, h=30)
+        pm.text('txtDownJNT', w=70, l='Down Joint')
+        pm.textScrollList('downJNTList', w=150, h=25)
+        pm.button('downJNTbutton', w=65, l='<<', h=23, command=pm.Callback(self.customLoadJNTListDown))
+        pm.rowLayout('rowLay09', p='Custom', nc=100, h=25)
+        pm.radioCollection('reverseButtonsC')
+        pm.radioButton('defaultRadioButtonC', l='Default', w=70, sl=1)
+        pm.radioButton('xReverseRadioButtonC', l='X reverse', w=70)
+        pm.radioButton('yReverseRadioButtonC', l='Y reverse', w=70)
+        pm.radioButton('zReverseRadioButtonC', l='Z reverse', w=70)
+        pm.separator('sep13', p='Custom', h=5)
+        pm.button('customApplyButton', p='Custom', w=292, h=40, l='Apply', command=pm.Callback(self.customPoseReader))
+        pm.columnLayout('MirrorPSD', rs=5, w=300, p='tabLay')
+        pm.text('selMesh', w=294, h=20, l='* Select mesh to mirror *')
+        pm.rowLayout('fN', w=294, nc=100)
+        pm.text('findName', w=80, l='Search Name')
+        pm.textField('searchName', w=208, h=25)
+        pm.rowLayout('nN', p='MirrorPSD', nc=100)
+        pm.text('newName', w=80, l='Replace Name')
+        pm.textField('replaceName', w=208, h=25)
+        pm.rowLayout('mB', p='MirrorPSD', nc=100)
+        pm.button('MirrorBS', w=290, h=40, l='Mirror BlendShape', c=pm.Callback(self.MirrorBlendUsingWrap))
+        pm.rowLayout('cB', p='MirrorPSD', nc=100)
+        pm.button('connectBS', w=290, h=40, l='Connect PoseReader', c=pm.Callback(self.connectPSD))
+        pm.rowLayout('dcB', p='MirrorPSD', nc=100)
+        pm.button('disconnectBS', w=290, h=40, l='Disconnect PoseReader', c=pm.Callback(self.disconnectPSD))
+        pm.columnLayout('columnLay01', p='createPR', h=70, w=300)
+        pm.text('txtPoseReaderVis', h=15, w=300, l='PoseReader Vis')
+        pm.separator('sep09')
+        pm.rowLayout('rowLay06', nc=100, h=50)
+        pm.separator('sep10', vis=0, w=70)
+        pm.button('onButton', h=40, w=80, l='ON', command=pm.Callback(self.poseReaderVisOn))
+        pm.separator('sep11', vis=0, w=10)
+        pm.button('offButton', h=40, w=80, l='OFF', command=pm.Callback(self.poseReaderVisOff))
+        pm.showWindow('createPR')
+
+
+    def defaultLoadJNTListAdd(self,*args):
+        currentTargetList = pm.textScrollList('defaultJNTList', q=True, ai=True)
+        for jnt in pm.ls(sl=True, type='joint'):
+            if type(currentTargetList) == list:
+                if currentTargetList.count(jnt):
+                    continue
+            pm.textScrollList('defaultJNTList', e=True, a=jnt)
+
+
+    def defaultLoadJNTListRemove(self,*args):
+        selJntList = pm.textScrollList('defaultJNTList', q=True, si=True)
+        if selJntList:
+            for jnt in selJntList:
+                pm.textScrollList('defaultJNTList', e=True, ri=jnt)
+
+
+    def customLoadJNTListBase(self,*args):
+        currentTargetList = pm.textScrollList('baseJNTList', q=True, ai=True)
+        for jnt in pm.ls(sl=True, type='joint'):
+            if len(pm.ls(sl=True, type='joint')) > 1:
+                pm.warning('select one Joint!!!')
+                continue
+            if type(currentTargetList) == list:
+                if currentTargetList.count(jnt):
+                    continue
+            if currentTargetList:
+                pm.textScrollList('baseJNTList', e=True, ra=True)
+            pm.textScrollList('baseJNTList', e=True, a=jnt, si=jnt)
+
+
+    def customLoadJNTListFollow(self,*args):
+        currentTargetList = pm.textScrollList('followJNTList', q=True, ai=True)
+        for jnt in pm.ls(sl=True, type='joint'):
+            if len(pm.ls(sl=True, type='joint')) > 1:
+                pm.warning('select one Joint!!!')
+                continue
+            if type(currentTargetList) == list:
+                if currentTargetList.count(jnt):
+                    continue
+            if currentTargetList:
+                pm.textScrollList('followJNTList', e=True, ra=True)
+            pm.textScrollList('followJNTList', e=True, a=jnt, si=jnt)
+
+
+    def customLoadJNTListUp(self,*args):
+        currentTargetList = pm.textScrollList('upJNTList', q=True, ai=True)
+        for jnt in pm.ls(sl=True, type='joint'):
+            if len(pm.ls(sl=True, type='joint')) > 1:
+                pm.warning('select one Joint!!!')
+                continue
+            if type(currentTargetList) == list:
+                if currentTargetList.count(jnt):
+                    continue
+            if currentTargetList:
+                pm.textScrollList('upJNTList', e=True, ra=True)
+            pm.textScrollList('upJNTList', e=True, a=jnt, si=jnt)
+
+
+    def customLoadJNTListDown(self,*args):
+        currentTargetList = pm.textScrollList('downJNTList', q=True, ai=True)
+        for jnt in pm.ls(sl=True, type='joint'):
+            if len(pm.ls(sl=True, type='joint')) > 1:
+                pm.warning('select one Joint!!!')
+                continue
+            if type(currentTargetList) == list:
+                if currentTargetList.count(jnt):
+                    continue
+            if currentTargetList:
+                pm.textScrollList('downJNTList', e=True, ra=True)
+            pm.textScrollList('downJNTList', e=True, a=jnt, si=jnt)
+
+
+    def defaultPoseReader(self,*args):
+        selJntList = pm.textScrollList('defaultJNTList', q=True, si=True)
+        selreAxis = pm.radioCollection('reverseButtonsD', q=1, sl=1)
+        for selJnt in selJntList:
+            if selreAxis == 'defaultRadioButtonD':
+                self.crePosereader(selJnt)
+            elif selreAxis == 'xReverseRadioButtonD':
+                self.crePosereader(selJnt, 'rotateX')
+            elif selreAxis == 'yReverseRadioButtonD':
+                self.crePosereader(selJnt, 'rotateY')
+            elif selreAxis == 'zReverseRadioButtonD':
+                self.crePosereader(selJnt, 'rotateZ')
+
+
+    def customPoseReader(self,*args):
+        selJntList = pm.textScrollList('baseJNTList', q=True, si=True)
+        selreAxis = pm.radioCollection('reverseButtonsC', q=1, sl=1)
+        for selJnt in selJntList:
+            if selreAxis == 'defaultRadioButtonC':
+                customPosereader(selJnt)
+            elif selreAxis == 'xReverseRadioButtonC':
+                customPosereader(selJnt, 'rotateX')
+            elif selreAxis == 'yReverseRadioButtonC':
+                customPosereader(selJnt, 'rotateY')
+            elif selreAxis == 'zReverseRadioButtonC':
+                customPosereader(selJnt, 'rotateZ')
+
+
+    def crePosereader(self,name, *args):
+        setList = []
+        pm.select(name)
+        selJnt = pm.ls(sl=True)
+        parentJnt = selJnt[0].listRelatives(p=True, type='joint')
+        childJnt = selJnt[0].listRelatives(c=True, type='joint')
+        print childJnt
+        if len(selJnt) != 1:
+            pm.warnimg('Select Object or Please select one')
+        else:
+            locPkg = {'base': [],
+            'target': [],
+            'pose': []}
+            for i in locPkg:
+                creLoc = pm.spaceLocator(p=(0, 0, 0), n='%s_%s_hiddenLoc' % (selJnt[0], i))
+                setList.append(creLoc)
+                creDecomp = pm.shadingNode('decomposeMatrix', asUtility=True, n='%s_%s_DMpR' % (selJnt[0], i))
+                setList.append(creDecomp)
+                locPkg[i] = (creLoc, creDecomp)
+                locPkg[i][0].worldMatrix >> locPkg[i][1].inputMatrix
+
+            avergPkg = {'avergA': [],
+            'avergB': []}
+            for i in avergPkg:
+                avergPkg[i] = pm.shadingNode('plusMinusAverage', asUtility=True, n='%s_%s_PMApR' % (selJnt[0], i))
+                avergPkg[i].operation.set(2)
+                setList.append(avergPkg[i])
+
+            locPkg['base'][1].outputTranslate >> avergPkg['avergA'].input3D[0]
+            locPkg['base'][1].outputTranslate >> avergPkg['avergB'].input3D[0]
+            locPkg['target'][1].outputTranslate >> avergPkg['avergA'].input3D[1]
+            locPkg['pose'][1].outputTranslate >> avergPkg['avergB'].input3D[1]
+            creAng = pm.shadingNode('angleBetween', asUtility=True, n='%s_ABpR' % selJnt[0])
+            creMulD = pm.shadingNode('multiplyDivide', asUtility=True, n='%s_MDpR' % selJnt[0])
+            creConD = pm.shadingNode('condition', asUtility=True, n='%s_CDpR' % selJnt[0])
+            creSetR = pm.shadingNode('setRange', asUtility=True, n='%s_SRpR' % selJnt[0])
+            creAverg = pm.shadingNode('plusMinusAverage', asUtility=True, n='%s_PMApR' % selJnt[0])
+            setList.append(creAng)
+            setList.append(creMulD)
+            setList.append(creConD)
+            setList.append(creSetR)
+            setList.append(creAverg)
+            avergPkg['avergA'].output3D >> creAng.vector1
+            avergPkg['avergB'].output3D >> creAng.vector2
+            creAng.angle >> creMulD.input1X
+            creMulD.outputX >> creConD.firstTerm
+            creMulD.outputX >> creConD.colorIfFalseR
+            creMulD.operation.set(2)
+            creConD.secondTerm.set(1)
+            creConD.colorIfTrueR.set(1)
+            creConD.operation.set(2)
+            creSetR.oldMaxX.set(1)
+            creSetR.maxX.set(1)
+            creAverg.operation.set(2)
+            creConD.outColorR >> creSetR.valueX
+            creSetR.outValueX >> creAverg.input1D[1]
+            creAverg.input1D[0].set(1)
+            locPkg_t = {'base': [],
+            'target': [],
+            'pose': []}
+            for i in locPkg_t:
+                creLoc = pm.spaceLocator(p=(0, 0, 0), n='%s_%s_twist_hiddenLoc' % (selJnt[0], i))
+                setList.append(creLoc)
+                creDecomp = pm.shadingNode('decomposeMatrix', asUtility=True, n='%s_%s_twist_DMpR' % (selJnt[0], i))
+                setList.append(creDecomp)
+                locPkg_t[i] = (creLoc, creDecomp)
+                locPkg_t[i][0].worldMatrix >> locPkg_t[i][1].inputMatrix
+
+            avergPkg_t = {'avergA': [],
+            'avergB': []}
+            for i in avergPkg_t:
+                avergPkg_t[i] = pm.shadingNode('plusMinusAverage', asUtility=True, n='%s_twist_%s_PMApR' % (selJnt[0], i))
+                setList.append(avergPkg_t[i])
+                avergPkg_t[i].operation.set(2)
+
+            locPkg_t['base'][1].outputTranslate >> avergPkg_t['avergA'].input3D[0]
+            locPkg_t['base'][1].outputTranslate >> avergPkg_t['avergB'].input3D[0]
+            locPkg_t['target'][1].outputTranslate >> avergPkg_t['avergA'].input3D[1]
+            locPkg_t['pose'][1].outputTranslate >> avergPkg_t['avergB'].input3D[1]
+            creAng_t = pm.shadingNode('angleBetween', asUtility=True, n='%s_ABpR' % selJnt[0])
+            creFollowCond_t = pm.shadingNode('condition', asUtility=True, n='%s_follow_CDpR' % selJnt[0])
+            creMulD_t = pm.shadingNode('multiplyDivide', asUtility=True, n='%s_MDpR' % selJnt[0])
+            creConD_t = pm.shadingNode('condition', asUtility=True, n='%s_CDpR' % selJnt[0])
+            creSetR_t = pm.shadingNode('setRange', asUtility=True, n='%s_SRpR' % selJnt[0])
+            creAverg_t = pm.shadingNode('plusMinusAverage', asUtility=True, n='%s_PMApR' % selJnt[0])
+            setList.append(creAng_t)
+            setList.append(creFollowCond_t)
+            setList.append(creMulD_t)
+            setList.append(creConD_t)
+            setList.append(creSetR_t)
+            setList.append(creAverg_t)
+            avergPkg_t['avergA'].output3D >> creAng_t.vector1
+            avergPkg_t['avergB'].output3D >> creAng_t.vector2
+            creAng_t.angle >> creFollowCond_t.colorIfTrueR
+            creFollowCond_t.outColorR >> creMulD_t.input1X
+            creMulD_t.outputX >> creConD_t.firstTerm
+            creMulD_t.outputX >> creConD_t.colorIfFalseR
+            creFollowCond_t.secondTerm.set(0)
+            creFollowCond_t.colorIfFalseR.set(0)
+            creMulD_t.operation.set(2)
+            creConD_t.secondTerm.set(1)
+            creConD_t.colorIfTrueR.set(1)
+            creConD_t.operation.set(2)
+            creSetR_t.oldMaxX.set(1)
+            creSetR_t.maxX.set(1)
+            creAverg_t.operation.set(2)
+            creConD_t.outColorR >> creSetR_t.valueX
+            creSetR_t.outValueX >> creAverg_t.input1D[1]
+            creAverg_t.input1D[0].set(1)
+            creAddAverg = pm.shadingNode('multDoubleLinear', asUtility=True, n='%s_MDLpR' % selJnt[0])
+            creAddReValue = pm.shadingNode('remapValue', asUtility=True, n='%s_RMVpR' % selJnt[0])
+            creAddDbL = pm.shadingNode('addDoubleLinear', asUtility=True, n='%s_ADLpR' % selJnt[0])
+            setList.append(creAddAverg)
+            setList.append(creAddReValue)
+            setList.append(creAddDbL)
+            creAddDbL.input2.set(1)
+            creAverg.output1D >> creAddAverg.input1
+            creAverg_t.output1D >> creAddAverg.input2
+            creAddAverg.output >> creAddReValue.inputValue
+            creAddDbL.output >> creAddReValue.value[0].value_Interp
+            minPkg = {'posAngle': [],
+            'twsitAngle': []}
+            for i in minPkg:
+                creMinCond = pm.shadingNode('condition', asUtility=True, n='%s_%s_CDpR' % (selJnt[0], i))
+                creMinMulD = pm.shadingNode('multiplyDivide', asUtility=True, n='%s_%s_MDpR' % (selJnt[0], i))
+                creMinCondMax = pm.shadingNode('condition', asUtility=True, n='%s_%s_maxSet_CDpR' % (selJnt[0], i))
+                setList.append(creMinCond)
+                setList.append(creMinMulD)
+                setList.append(creMinCondMax)
+                minPkg[i] = (creMinCond, creMinMulD, creMinCondMax)
+                minPkg[i][0].operation.set(3)
+                minPkg[i][1].operation.set(2)
+                minPkg[i][2].colorIfTrueR.set(0.999)
+                minPkg[i][2].secondTerm.set(1)
+
+            minPkg['posAngle'][1].outputX >> minPkg['posAngle'][2].colorIfFalseR
+            minPkg['posAngle'][1].outputX >> minPkg['posAngle'][2].firstTerm
+            minPkg['twsitAngle'][1].outputX >> minPkg['twsitAngle'][2].colorIfFalseR
+            minPkg['twsitAngle'][1].outputX >> minPkg['twsitAngle'][2].firstTerm
+            minPkg['posAngle'][2].outColorR >> creSetR.oldMinX
+            minPkg['twsitAngle'][2].outColorR >> creSetR_t.oldMinX
+            locPkg['target'][0].tx.set(1)
+            locPkg_t['target'][0].ty.set(1)
+            locPkg['target'][0].visibility.set(0)
+            locPkg['pose'][0].visibility.set(0)
+            locPkg_t['base'][0].visibility.set(0)
+            locPkg_t['pose'][0].visibility.set(0)
+            locPkg['pose'][0].tx.set(1)
+            locPkg_t['pose'][0].ty.set(1)
+            locPkg['base'][0].rename('%s_poseReaderLoc' % selJnt[0])
+            creAnno = pm.annotate(locPkg['target'][0], tx='', p=(0, 0, 0))
+            setList.append(creAnno)
+            shapeLoc = locPkg['base'][0].listRelatives(type='shape')
+            shapeLoc[0].visibility.set(0)
+            transAnno = creAnno.listRelatives(type='transform', parent=True)
+            pm.parent(creAnno, locPkg['base'][0], r=True, s=True)
+            pm.delete(transAnno[0])
+            pm.parent(locPkg['target'][0], locPkg['base'][0], r=True)
+            pm.parent(locPkg_t['target'][0], locPkg_t['base'][0], r=True)
+            pm.color(creAnno, locPkg['base'][0], rgb=(255, 0, 0))
+            locPkg['base'][0].addAttr('_____', at='enum', en='POSE', k=True)
+            locPkg['base'][0].addAttr('readAxis', at='enum', en='X-Axis:Y-Axis:Z-Axis', k=True)
+            locPkg['base'][0].addAttr('interpMode', at='enum', en='Linear:Smooth:Curve', k=True)
+            locPkg['base'][0].addAttr('minAngle', at='double', min=0, max=180, dv=0, k=True)
+            locPkg['base'][0].addAttr('maxAngle', at='double', min=0, max=180, dv=90, k=True)
+            locPkg['base'][0].addAttr('allowTwist', at='double', min=0, max=1, dv=1, k=True)
+            locPkg['base'][0].addAttr('minTwist', at='double', min=0, max=180, dv=0, k=True)
+            locPkg['base'][0].addAttr('maxTwist', at='double', min=0, max=180, dv=90, k=True)
+            locPkg['base'][0].addAttr('weight', at='double', dv=0, k=True)
+            locPkg['base'][0].maxAngle >> creMulD.input2X
+            locPkg['base'][0].maxTwist >> creMulD_t.input2X
+            locPkg['base'][0].allowTwist >> creFollowCond_t.firstTerm
+            locPkg['base'][0].interpMode >> creAddDbL.input1
+            locPkg['base'][0].minAngle >> minPkg['posAngle'][0].firstTerm
+            locPkg['base'][0].maxAngle >> minPkg['posAngle'][0].secondTerm
+            locPkg['base'][0].minAngle >> minPkg['posAngle'][0].colorIfFalseR
+            locPkg['base'][0].maxAngle >> minPkg['posAngle'][0].colorIfTrueR
+            locPkg['base'][0].minTwist >> minPkg['twsitAngle'][0].firstTerm
+            locPkg['base'][0].maxTwist >> minPkg['twsitAngle'][0].secondTerm
+            locPkg['base'][0].minTwist >> minPkg['twsitAngle'][0].colorIfFalseR
+            locPkg['base'][0].maxTwist >> minPkg['twsitAngle'][0].colorIfTrueR
+            locPkg['base'][0].maxAngle >> minPkg['posAngle'][1].input2X
+            minPkg['posAngle'][0].outColorR >> minPkg['posAngle'][1].input1X
+            locPkg['base'][0].maxTwist >> minPkg['twsitAngle'][1].input2X
+            minPkg['twsitAngle'][0].outColorR >> minPkg['twsitAngle'][1].input1X
+            condPkg = {'condX': [],
+            'condY': [],
+            'condZ': []}
+            for i in condPkg:
+                creAxisCond = pm.shadingNode('condition', asUtility=True, n='%s_%s_CDpR' % (selJnt[0], i))
+                setList.append(creAxisCond)
+                condPkg[i] = creAxisCond
+                condPkg[i].colorIfTrueR.set(1)
+                condPkg[i].colorIfFalseR.set(0)
+                locPkg['base'][0].readAxis >> condPkg[i].firstTerm
+
+            condPkg['condX'].secondTerm.set(0)
+            condPkg['condY'].secondTerm.set(1)
+            condPkg['condZ'].secondTerm.set(2)
+            condPkg['condX'].outColorR >> locPkg['target'][0].translateX
+            condPkg['condY'].outColorR >> locPkg['target'][0].translateY
+            condPkg['condZ'].outColorR >> locPkg['target'][0].translateZ
+            condPkg['condX'].outColorR >> locPkg['pose'][0].translateX
+            condPkg['condY'].outColorR >> locPkg['pose'][0].translateY
+            condPkg['condZ'].outColorR >> locPkg['pose'][0].translateZ
+            condPkg_t = {'condX': [],
+            'condY': [],
+            'condZ': []}
+            for i in condPkg_t:
+                creAxisCond_t = pm.shadingNode('condition', asUtility=True, n='%s_twist_%s_CDpR' % (selJnt[0], i))
+                setList.append(creAxisCond_t)
+                condPkg_t[i] = creAxisCond_t
+                condPkg_t[i].colorIfTrueR.set(1)
+                condPkg_t[i].colorIfFalseR.set(0)
+                locPkg['base'][0].readAxis >> condPkg_t[i].firstTerm
+
+            condPkg_t['condX'].secondTerm.set(0)
+            condPkg_t['condY'].secondTerm.set(1)
+            condPkg_t['condZ'].secondTerm.set(2)
+            creDb = pm.shadingNode('addDoubleLinear', asUtility=True, n='ADLpR')
+            setList.append(creDb)
+            condPkg_t['condX'].outColorR >> locPkg_t['target'][0].translateY
+            condPkg_t['condY'].outColorR >> creDb.input1
+            condPkg_t['condZ'].outColorR >> creDb.input2
+            creDb.output >> locPkg_t['target'][0].translateX
+            condPkg_t['condX'].outColorR >> locPkg_t['pose'][0].translateY
+            creDb.output >> locPkg_t['pose'][0].translateX
+            consPointBase = pm.parentConstraint(selJnt[0], locPkg['base'][0], mo=False, w=1)
+            consPointBase_t = pm.parentConstraint(selJnt[0], locPkg_t['base'][0], mo=False, w=1)
+            consOrientPose = pm.orientConstraint(selJnt[0], locPkg['pose'][0], mo=False, w=1)
+            consOrientPose_t = pm.orientConstraint(selJnt[0], locPkg_t['pose'][0], mo=False, w=1)
+            selHierConst = pm.radioCollection('hierConstButtons', q=1, sl=1)
+            if selHierConst == 'hierRadioButton':
+                pm.parent(locPkg['base'][0], selJnt[0], r=True)
+                grpBase = pm.group(locPkg['base'][0], a=True)
+                setList.append(grpBase)
+                pm.rename(grpBase, locPkg['base'][0] + '_offset')
+                selreAxis = pm.radioCollection('reverseButtonsD', q=1, sl=1)
+                if selreAxis == 'defaultRadioButtonD':
+                    pass
+                else:
+                    pm.setAttr(grpBase + '.' + args[0], 180)
+                if parentJnt != []:
+                    pm.parent(grpBase, parentJnt[0])
+                pm.parent(locPkg_t['base'][0], locPkg['base'][0], r=True)
+                pm.parent(locPkg['pose'][0], selJnt[0], r=True)
+                pm.parent(locPkg_t['pose'][0], selJnt[0], r=True)
+                grpHidden = pm.group((locPkg['pose'][0], locPkg_t['pose'][0]), a=True)
+                setList.append(grpHidden)
+                pm.rename(grpHidden, locPkg['pose'][0] + '_offset')
+                if selreAxis == 'defaultRadioButtonD':
+                    pass
+                else:
+                    pm.setAttr(grpHidden + '.' + args[0], 180)
+                pm.parent(grpHidden, childJnt[0], a=True)
+                pm.pointConstraint(selJnt[0], grpBase, mo=1, n=locPkg['base'][0] + '_pointConstraint')
+                pm.pointConstraint(selJnt[0], grpHidden, mo=1, n=locPkg['pose'][0] + '_pointConstraint')
+            elif selHierConst == 'constRadioButton':
+                pm.parent(locPkg['base'][0], selJnt[0], r=True)
+                grpBase = pm.group(locPkg['base'][0], a=True)
+                setList.append(grpBase)
+                pm.rename(grpBase, locPkg['base'][0] + '_offset')
+                selreAxis = pm.radioCollection('reverseButtonsD', q=1, sl=1)
+                if selreAxis == 'defaultRadioButtonD':
+                    pass
+                else:
+                    pm.setAttr(grpBase + '.' + args[0], 180)
+                pm.parent(grpBase, world=1)
+                pm.pointConstraint(selJnt[0], grpBase, mo=1, n=locPkg['base'][0] + '_pointConstraint')
+                pm.orientConstraint(parentJnt[0], grpBase, mo=1, n=locPkg['base'][0] + '_orientConstraint')
+                pm.scaleConstraint(parentJnt[0], grpBase, mo=1, n=locPkg['base'][0] + '_scaleConstraint')
+                pm.parent(locPkg_t['base'][0], locPkg['base'][0], r=True)
+                pm.parent(locPkg['pose'][0], selJnt[0], r=True)
+                pm.parent(locPkg_t['pose'][0], selJnt[0], r=True)
+                grpHidden = pm.group((locPkg['pose'][0], locPkg_t['pose'][0]), a=True)
+                setList.append(grpHidden)
+                if selreAxis == 'defaultRadioButtonD':
+                    pass
+                else:
+                    pm.setAttr(grpHidden + '.' + args[0], 180)
+                pm.parent(grpHidden, world=1)
+                pm.pointConstraint(selJnt[0], grpHidden, mo=1, n=locPkg['pose'][0] + '_pointConstraint')
+                bendExist = pm.radioCollection('bendButtons', q=1, sl=1)
+                if bendExist == 'bendRadioButton':
+                    pm.orientConstraint(childJnt[0], grpHidden, mo=1, n=locPkg['pose'][0] + '_orientConstraint')
+                elif bendExist == 'notBendRadioButton':
+                    pm.orientConstraint(selJnt[0], grpHidden, mo=1, n=locPkg['pose'][0] + '_orientConstraint')
+                pm.scaleConstraint(selJnt[0], grpHidden, mo=1, n=locPkg['pose'][0] + '_scaleConstraint')
+                pm.rename(grpHidden, locPkg['pose'][0] + '_offset')
+                grpAll = pm.group((grpBase, grpHidden), a=True)
+                setList.append(grpAll)
+                pm.rename(grpAll, locPkg['base'][0] + '_GRP')
+            selreAxis = pm.radioCollection('reverseButtonsD', q=1, sl=1)
+            if selreAxis == 'defaultRadioButtonD':
+                pass
+            else:
+                pm.setAttr(locPkg['base'][0] + '.' + args[0], 0)
+                pm.setAttr(locPkg_t['pose'][0] + '.' + args[0], 0)
+                pm.setAttr(locPkg['pose'][0] + '.' + args[0], 0)
+            pm.delete(consPointBase)
+            pm.delete(consOrientPose)
+            pm.delete(consPointBase_t)
+            pm.delete(consOrientPose_t)
+            creAddReValue.outValue >> locPkg['base'][0].weight
+            print setList
+            if pm.objExists('pR_SW_set'):
+                pRset = pm.sets(setList, n=selJnt[0] + '_pR_set')
+                pRallSet = pm.ls('pR_SW_set')[0]
+                pm.sets(pRallSet, add=pRset)
+            else:
+                crePRallset = pm.sets(em=1, n='pR_SW_set')
+                pRset = pm.sets(setList, n=selJnt[0] + '_pR_set')
+                pm.sets(crePRallset, add=pRset)
+
+
+    def customPosereader(self,name, *args):
+        setList = []
+        pm.select(name)
+        selJnt = pm.ls(sl=True)
+        followJnt = pm.ls(pm.textScrollList('followJNTList', q=True, si=True), type='joint')[0]
+        parentJnt = pm.ls(pm.textScrollList('upJNTList', q=True, si=True), type='joint')[0]
+        childJnt = pm.ls(pm.textScrollList('downJNTList', q=True, si=True), type='joint')[0]
+        print childJnt
+        if len(selJnt) != 1:
+            pm.warnimg('Select Object or Please select one')
+        else:
+            locPkg = {'base': [],
+            'target': [],
+            'pose': []}
+            for i in locPkg:
+                creLoc = pm.spaceLocator(p=(0, 0, 0), n='%s_%s_hiddenLoc' % (selJnt[0], i))
+                setList.append(creLoc)
+                creDecomp = pm.shadingNode('decomposeMatrix', asUtility=True, n='%s_%s_DMpR' % (selJnt[0], i))
+                setList.append(creDecomp)
+                locPkg[i] = (creLoc, creDecomp)
+                locPkg[i][0].worldMatrix >> locPkg[i][1].inputMatrix
+
+            avergPkg = {'avergA': [],
+            'avergB': []}
+            for i in avergPkg:
+                avergPkg[i] = pm.shadingNode('plusMinusAverage', asUtility=True, n='%s_%s_PMApR' % (selJnt[0], i))
+                setList.append(avergPkg[i])
+                avergPkg[i].operation.set(2)
+
+            locPkg['base'][1].outputTranslate >> avergPkg['avergA'].input3D[0]
+            locPkg['base'][1].outputTranslate >> avergPkg['avergB'].input3D[0]
+            locPkg['target'][1].outputTranslate >> avergPkg['avergA'].input3D[1]
+            locPkg['pose'][1].outputTranslate >> avergPkg['avergB'].input3D[1]
+            creAng = pm.shadingNode('angleBetween', asUtility=True, n='%s_ABpR' % selJnt[0])
+            creMulD = pm.shadingNode('multiplyDivide', asUtility=True, n='%s_MDpR' % selJnt[0])
+            creConD = pm.shadingNode('condition', asUtility=True, n='%s_CDpR' % selJnt[0])
+            creSetR = pm.shadingNode('setRange', asUtility=True, n='%s_SRpR' % selJnt[0])
+            creAverg = pm.shadingNode('plusMinusAverage', asUtility=True, n='%s_PMApR' % selJnt[0])
+            setList.append(creAng)
+            setList.append(creMulD)
+            setList.append(creConD)
+            setList.append(creSetR)
+            setList.append(creAverg)
+            avergPkg['avergA'].output3D >> creAng.vector1
+            avergPkg['avergB'].output3D >> creAng.vector2
+            creAng.angle >> creMulD.input1X
+            creMulD.outputX >> creConD.firstTerm
+            creMulD.outputX >> creConD.colorIfFalseR
+            creMulD.operation.set(2)
+            creConD.secondTerm.set(1)
+            creConD.colorIfTrueR.set(1)
+            creConD.operation.set(2)
+            creSetR.oldMaxX.set(1)
+            creSetR.maxX.set(1)
+            creAverg.operation.set(2)
+            creConD.outColorR >> creSetR.valueX
+            creSetR.outValueX >> creAverg.input1D[1]
+            creAverg.input1D[0].set(1)
+            locPkg_t = {'base': [],
+            'target': [],
+            'pose': []}
+            for i in locPkg_t:
+                creLoc = pm.spaceLocator(p=(0, 0, 0), n='%s_%s_twist_hiddenLoc' % (selJnt[0], i))
+                setList.append(creLoc)
+                creDecomp = pm.shadingNode('decomposeMatrix', asUtility=True, n='%s_%s_twist_DMpR' % (selJnt[0], i))
+                setList.append(creDecomp)
+                locPkg_t[i] = (creLoc, creDecomp)
+                locPkg_t[i][0].worldMatrix >> locPkg_t[i][1].inputMatrix
+
+            avergPkg_t = {'avergA': [],
+            'avergB': []}
+            for i in avergPkg_t:
+                avergPkg_t[i] = pm.shadingNode('plusMinusAverage', asUtility=True, n='%s_twist_%s_PMApR' % (selJnt[0], i))
+                setList.append(avergPkg_t[i])
+                avergPkg_t[i].operation.set(2)
+
+            locPkg_t['base'][1].outputTranslate >> avergPkg_t['avergA'].input3D[0]
+            locPkg_t['base'][1].outputTranslate >> avergPkg_t['avergB'].input3D[0]
+            locPkg_t['target'][1].outputTranslate >> avergPkg_t['avergA'].input3D[1]
+            locPkg_t['pose'][1].outputTranslate >> avergPkg_t['avergB'].input3D[1]
+            creAng_t = pm.shadingNode('angleBetween', asUtility=True, n='%s_ABpR' % selJnt[0])
+            creFollowCond_t = pm.shadingNode('condition', asUtility=True, n='%s_follow_CDpR' % selJnt[0])
+            creMulD_t = pm.shadingNode('multiplyDivide', asUtility=True, n='%s_MDpR' % selJnt[0])
+            creConD_t = pm.shadingNode('condition', asUtility=True, n='%s_CDpR' % selJnt[0])
+            creSetR_t = pm.shadingNode('setRange', asUtility=True, n='%s_SRpR' % selJnt[0])
+            creAverg_t = pm.shadingNode('plusMinusAverage', asUtility=True, n='%s_PMApR' % selJnt[0])
+            setList.append(creAng_t)
+            setList.append(creFollowCond_t)
+            setList.append(creMulD_t)
+            setList.append(creConD_t)
+            setList.append(creSetR_t)
+            setList.append(creAverg_t)
+            avergPkg_t['avergA'].output3D >> creAng_t.vector1
+            avergPkg_t['avergB'].output3D >> creAng_t.vector2
+            creAng_t.angle >> creFollowCond_t.colorIfTrueR
+            creFollowCond_t.outColorR >> creMulD_t.input1X
+            creMulD_t.outputX >> creConD_t.firstTerm
+            creMulD_t.outputX >> creConD_t.colorIfFalseR
+            creFollowCond_t.secondTerm.set(0)
+            creFollowCond_t.colorIfFalseR.set(0)
+            creMulD_t.operation.set(2)
+            creConD_t.secondTerm.set(1)
+            creConD_t.colorIfTrueR.set(1)
+            creConD_t.operation.set(2)
+            creSetR_t.oldMaxX.set(1)
+            creSetR_t.maxX.set(1)
+            creAverg_t.operation.set(2)
+            creConD_t.outColorR >> creSetR_t.valueX
+            creSetR_t.outValueX >> creAverg_t.input1D[1]
+            creAverg_t.input1D[0].set(1)
+            creAddAverg = pm.shadingNode('multDoubleLinear', asUtility=True, n='%s_MDLpR' % selJnt[0])
+            creAddReValue = pm.shadingNode('remapValue', asUtility=True, n='%s_RMVpR' % selJnt[0])
+            creAddDbL = pm.shadingNode('addDoubleLinear', asUtility=True, n='%s_ADLpR' % selJnt[0])
+            setList.append(creAddAverg)
+            setList.append(creAddReValue)
+            setList.append(creAddDbL)
+            creAddDbL.input2.set(1)
+            creAverg.output1D >> creAddAverg.input1
+            creAverg_t.output1D >> creAddAverg.input2
+            creAddAverg.output >> creAddReValue.inputValue
+            creAddDbL.output >> creAddReValue.value[0].value_Interp
+            minPkg = {'posAngle': [],
+            'twsitAngle': []}
+            for i in minPkg:
+                creMinCond = pm.shadingNode('condition', asUtility=True, n='%s_%s_CDpR' % (selJnt[0], i))
+                creMinMulD = pm.shadingNode('multiplyDivide', asUtility=True, n='%s_%s_MDpR' % (selJnt[0], i))
+                creMinCondMax = pm.shadingNode('condition', asUtility=True, n='%s_%s_maxSet_CDpR' % (selJnt[0], i))
+                setList.append(creMinCond)
+                setList.append(creMinMulD)
+                setList.append(creMinCondMax)
+                minPkg[i] = (creMinCond, creMinMulD, creMinCondMax)
+                minPkg[i][0].operation.set(3)
+                minPkg[i][1].operation.set(2)
+                minPkg[i][2].colorIfTrueR.set(0.999)
+                minPkg[i][2].secondTerm.set(1)
+
+            minPkg['posAngle'][1].outputX >> minPkg['posAngle'][2].colorIfFalseR
+            minPkg['posAngle'][1].outputX >> minPkg['posAngle'][2].firstTerm
+            minPkg['twsitAngle'][1].outputX >> minPkg['twsitAngle'][2].colorIfFalseR
+            minPkg['twsitAngle'][1].outputX >> minPkg['twsitAngle'][2].firstTerm
+            minPkg['posAngle'][2].outColorR >> creSetR.oldMinX
+            minPkg['twsitAngle'][2].outColorR >> creSetR_t.oldMinX
+            locPkg['target'][0].tx.set(1)
+            locPkg_t['target'][0].ty.set(1)
+            locPkg['target'][0].visibility.set(0)
+            locPkg['pose'][0].visibility.set(0)
+            locPkg_t['base'][0].visibility.set(0)
+            locPkg_t['pose'][0].visibility.set(0)
+            locPkg['pose'][0].tx.set(1)
+            locPkg_t['pose'][0].ty.set(1)
+            locPkg['base'][0].rename('%s_poseReaderLoc' % selJnt[0])
+            creAnno = pm.annotate(locPkg['target'][0], tx='', p=(0, 0, 0))
+            setList.append(creAnno)
+            shapeLoc = locPkg['base'][0].listRelatives(type='shape')
+            shapeLoc[0].visibility.set(0)
+            transAnno = creAnno.listRelatives(type='transform', parent=True)
+            pm.parent(creAnno, locPkg['base'][0], r=True, s=True)
+            pm.delete(transAnno[0])
+            pm.parent(locPkg['target'][0], locPkg['base'][0], r=True)
+            pm.parent(locPkg_t['target'][0], locPkg_t['base'][0], r=True)
+            pm.color(creAnno, locPkg['base'][0], rgb=(255, 0, 0))
+            locPkg['base'][0].addAttr('_____', at='enum', en='POSE', k=True)
+            locPkg['base'][0].addAttr('readAxis', at='enum', en='X-Axis:Y-Axis:Z-Axis', k=True)
+            locPkg['base'][0].addAttr('interpMode', at='enum', en='Linear:Smooth:Curve', k=True)
+            locPkg['base'][0].addAttr('minAngle', at='double', min=0, max=180, dv=0, k=True)
+            locPkg['base'][0].addAttr('maxAngle', at='double', min=0, max=180, dv=90, k=True)
+            locPkg['base'][0].addAttr('allowTwist', at='double', min=0, max=1, dv=1, k=True)
+            locPkg['base'][0].addAttr('minTwist', at='double', min=0, max=180, dv=0, k=True)
+            locPkg['base'][0].addAttr('maxTwist', at='double', min=0, max=180, dv=90, k=True)
+            locPkg['base'][0].addAttr('weight', at='double', dv=0, k=True)
+            locPkg['base'][0].maxAngle >> creMulD.input2X
+            locPkg['base'][0].maxTwist >> creMulD_t.input2X
+            locPkg['base'][0].allowTwist >> creFollowCond_t.firstTerm
+            locPkg['base'][0].interpMode >> creAddDbL.input1
+            locPkg['base'][0].minAngle >> minPkg['posAngle'][0].firstTerm
+            locPkg['base'][0].maxAngle >> minPkg['posAngle'][0].secondTerm
+            locPkg['base'][0].minAngle >> minPkg['posAngle'][0].colorIfFalseR
+            locPkg['base'][0].maxAngle >> minPkg['posAngle'][0].colorIfTrueR
+            locPkg['base'][0].minTwist >> minPkg['twsitAngle'][0].firstTerm
+            locPkg['base'][0].maxTwist >> minPkg['twsitAngle'][0].secondTerm
+            locPkg['base'][0].minTwist >> minPkg['twsitAngle'][0].colorIfFalseR
+            locPkg['base'][0].maxTwist >> minPkg['twsitAngle'][0].colorIfTrueR
+            locPkg['base'][0].maxAngle >> minPkg['posAngle'][1].input2X
+            minPkg['posAngle'][0].outColorR >> minPkg['posAngle'][1].input1X
+            locPkg['base'][0].maxTwist >> minPkg['twsitAngle'][1].input2X
+            minPkg['twsitAngle'][0].outColorR >> minPkg['twsitAngle'][1].input1X
+            condPkg = {'condX': [],
+            'condY': [],
+            'condZ': []}
+            for i in condPkg:
+                creAxisCond = pm.shadingNode('condition', asUtility=True, n='%s_%s_CDpR' % (selJnt[0], i))
+                setList.append(creAxisCond)
+                condPkg[i] = creAxisCond
+                condPkg[i].colorIfTrueR.set(1)
+                condPkg[i].colorIfFalseR.set(0)
+                locPkg['base'][0].readAxis >> condPkg[i].firstTerm
+
+            condPkg['condX'].secondTerm.set(0)
+            condPkg['condY'].secondTerm.set(1)
+            condPkg['condZ'].secondTerm.set(2)
+            condPkg['condX'].outColorR >> locPkg['target'][0].translateX
+            condPkg['condY'].outColorR >> locPkg['target'][0].translateY
+            condPkg['condZ'].outColorR >> locPkg['target'][0].translateZ
+            condPkg['condX'].outColorR >> locPkg['pose'][0].translateX
+            condPkg['condY'].outColorR >> locPkg['pose'][0].translateY
+            condPkg['condZ'].outColorR >> locPkg['pose'][0].translateZ
+            condPkg_t = {'condX': [],
+            'condY': [],
+            'condZ': []}
+            for i in condPkg_t:
+                creAxisCond_t = pm.shadingNode('condition', asUtility=True, n='%s_twist_%s_CDpR' % (selJnt[0], i))
+                setList.append(creAxisCond_t)
+                condPkg_t[i] = creAxisCond_t
+                condPkg_t[i].colorIfTrueR.set(1)
+                condPkg_t[i].colorIfFalseR.set(0)
+                locPkg['base'][0].readAxis >> condPkg_t[i].firstTerm
+
+            condPkg_t['condX'].secondTerm.set(0)
+            condPkg_t['condY'].secondTerm.set(1)
+            condPkg_t['condZ'].secondTerm.set(2)
+            creDb = pm.shadingNode('addDoubleLinear', asUtility=True, n='ADLpR')
+            setList.append(creDb)
+            condPkg_t['condX'].outColorR >> locPkg_t['target'][0].translateY
+            condPkg_t['condY'].outColorR >> creDb.input1
+            condPkg_t['condZ'].outColorR >> creDb.input2
+            creDb.output >> locPkg_t['target'][0].translateX
+            condPkg_t['condX'].outColorR >> locPkg_t['pose'][0].translateY
+            creDb.output >> locPkg_t['pose'][0].translateX
+            consPointBase = pm.parentConstraint(selJnt[0], locPkg['base'][0], mo=False, w=1)
+            consPointBase_t = pm.parentConstraint(selJnt[0], locPkg_t['base'][0], mo=False, w=1)
+            consOrientPose = pm.orientConstraint(selJnt[0], locPkg['pose'][0], mo=False, w=1)
+            consOrientPose_t = pm.orientConstraint(selJnt[0], locPkg_t['pose'][0], mo=False, w=1)
+            pm.parent(locPkg['base'][0], selJnt[0], r=True)
+            grpBase = pm.group(locPkg['base'][0], a=True)
+            setList.append(grpBase)
+            pm.rename(grpBase, locPkg['base'][0] + '_offset')
+            selreAxis = pm.radioCollection('reverseButtonsC', q=1, sl=1)
+            if selreAxis == 'defaultRadioButtonC':
+                pass
+            else:
+                pm.setAttr(grpBase + '.' + args[0], 180)
+            pm.parent(grpBase, world=1)
+            pm.pointConstraint(followJnt, grpBase, mo=1, n=locPkg['base'][0] + '_pointConstraint')
+            pm.orientConstraint(parentJnt, grpBase, mo=1, n=locPkg['base'][0] + '_orientConstraint')
+            pm.scaleConstraint(parentJnt, grpBase, mo=1, n=locPkg['base'][0] + '_scaleConstraint')
+            pm.parent(locPkg_t['base'][0], locPkg['base'][0], r=True)
+            pm.parent(locPkg['pose'][0], selJnt[0], r=True)
+            pm.parent(locPkg_t['pose'][0], selJnt[0], r=True)
+            grpHidden = pm.group((locPkg['pose'][0], locPkg_t['pose'][0]), a=True)
+            setList.append(grpHidden)
+            if selreAxis == 'defaultRadioButtonC':
+                pass
+            else:
+                pm.setAttr(grpHidden + '.' + args[0], 180)
+            pm.parent(grpHidden, world=1)
+            pm.pointConstraint(followJnt, grpHidden, mo=1, n=locPkg['pose'][0] + '_pointConstraint')
+            pm.orientConstraint(childJnt, grpHidden, mo=1, n=locPkg['pose'][0] + '_orientConstraint')
+            pm.scaleConstraint(followJnt, grpHidden, mo=1, n=locPkg['pose'][0] + '_scaleConstraint')
+            pm.rename(grpHidden, locPkg['pose'][0] + '_offset')
+            grpAll = pm.group((grpBase, grpHidden), a=True)
+            setList.append(grpAll)
+            pm.rename(grpAll, locPkg['base'][0] + '_GRP')
+            selreAxis = pm.radioCollection('reverseButtonsC', q=1, sl=1)
+            if selreAxis == 'defaultRadioButtonC':
+                pass
+            else:
+                pm.setAttr(locPkg['base'][0] + '.' + args[0], 0)
+                pm.setAttr(locPkg_t['pose'][0] + '.' + args[0], 0)
+                pm.setAttr(locPkg['pose'][0] + '.' + args[0], 0)
+            pm.delete(consPointBase)
+            pm.delete(consOrientPose)
+            pm.delete(consPointBase_t)
+            pm.delete(consOrientPose_t)
+            creAddReValue.outValue >> locPkg['base'][0].weight
+            print setList
+            if pm.objExists('pR_SW_set'):
+                pRset = pm.sets(setList, n=selJnt[0] + '_pR_set')
+                pRallSet = pm.ls('pR_SW_set')[0]
+                pm.sets(pRallSet, add=pRset)
+            else:
+                crePRallset = pm.sets(em=1, n='pR_SW_set')
+                pRset = pm.sets(setList, n=selJnt[0] + '_pR_set')
+                pm.sets(crePRallset, add=pRset)
+
+
+    def poseReaderVisOn(self,*args):
+        selPoseLOC = pm.ls('*_poseReaderLoc', '*:*_poseReaderLoc')
+        for i in selPoseLOC:
+            i.visibility.set(1)
+
+
+    def poseReaderVisOff(self,*args):
+        selPoseLOC = pm.ls('*_poseReaderLoc', '*:*_poseReaderLoc')
+        for i in selPoseLOC:
+            i.visibility.set(0)
+
+
+    def MirrorBlendUsingWrap(self,*args):
+        fN = pm.textField('searchName', query=True, text=True)
+        nN = pm.textField('replaceName', query=True, text=True)
+        sA = pm.setAttr
+        lS = pm.ls
+        axis = ['X', 'Y', 'Z']
+        attrs = ['translate', 'rotate', 'scale']
+        selMesh = lS(sl=1, fl=1)
+        mirrorMesh = pm.duplicate(selMesh, name='mirrorMesh_' + selMesh[0])[0]
+        for ax in axis:
+            for attr in attrs:
+                sA(mirrorMesh + '.' + attr + ax, lock=0)
+
+        sA(mirrorMesh + '.scaleX', -1)
+        pm.select(clear=True)
+        pm.select(mirrorMesh, selMesh)
+        mel.eval('CreateWrap;')
+        for i in selMesh:
+            blendList = lS(pm.listHistory(i), type='blendShape')[0]
+            blendWeightList = pm.listAttr(blendList + '.w', m=True)
+            bs = pm.PyNode(blendList)
+            lastCnt = max(bs.weightIndexList()) + 1
+            for j in blendWeightList:
+                if pm.listConnections(blendList + '.' + j, c=1):
+                    pm.disconnectAttr(pm.listConnections(blendList + '.' + j)[0] + '.weight', blendList + '.' + j)
+                newName = j.replace(fN, nN)
+                sA(blendList + '.' + j, 1)
+                mirrorTarget = pm.duplicate(mirrorMesh, n=newName)[0]
+                sA(mirrorTarget + '.scaleX', 1)
+                pm.blendShape(blendList, edit=1, t=[selMesh[0],
+                lastCnt,
+                mirrorTarget,
+                1.0])
+                pm.delete(mirrorTarget, ch=True)
+                pm.delete(mirrorTarget)
+                sA(blendList + '.' + j, 0)
+                lastCnt += 1
+
+            pm.delete(mirrorMesh, ch=True)
+            pm.delete(mirrorMesh)
+            BaseName = i + 'Base'
+            if pm.objExists(BaseName):
+                pm.delete(BaseName)
+
+        pm.select(selMesh)
+
+
+    def connectPSD(self,*args):
+        lS = pm.ls
+        selMesh = lS(sl=1, fl=1)
+        blendList = lS(pm.listHistory(selMesh), type='blendShape')[0]
+        blendWeightList = pm.listAttr(blendList + '.w', m=True)
+        selPRL = pm.ls('*_poseReaderLoc', type='transform')
+        for i in selPRL:
+            reName = i.split('_poseReaderLoc')[0]
+            for j in blendWeightList:
+                if reName == j:
+                    if '_C_' in j:
+                        pass
+                    elif pm.isConnected(reName + '_poseReaderLoc.weight', blendList + '.' + j):
+                        pass
+                    else:
+                        pm.connectAttr(reName + '_poseReaderLoc.weight', blendList + '.' + j)
+
+        for k in blendWeightList:
+            if pm.listConnections(blendList + '.' + k, c=1):
+                pass
+            else:
+                pm.warning('poseReader name and target name are different')
+
+
+    def disconnectPSD(self,*args):
+        lS = pm.ls
+        selMesh = lS(sl=1, fl=1)
+        blendList = lS(pm.listHistory(selMesh), type='blendShape')[0]
+        blendWeightList = pm.listAttr(blendList + '.w', m=True)
+        selPRL = pm.ls('*_poseReaderLoc', type='transform')
+        for i in selPRL:
+            reName = i.split('_poseReaderLoc')[0]
+            for j in blendWeightList:
+                if reName in j:
+                    if pm.isConnected(reName + '_poseReaderLoc.weight', blendList + '.' + j):
+                        pm.disconnectAttr(reName + '_poseReaderLoc.weight', blendList + '.' + j)
+
