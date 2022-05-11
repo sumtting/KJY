@@ -1131,17 +1131,31 @@ class motionpath_cv():
 
 
 def shape_copy():
-##마지막 선택한 쉐입으로 쉐입을 바꾼다
-    sels=cmds.ls(sl=1)
-    
-    for i in sels[0:-1]:
-        copy = cmds.duplicate(sels[-1])
-        copy_shp = cmds.listRelatives(copy,s=1,f=1)
-        or_shp=cmds.listRelatives(i,s=1)
-        cmds.parent(copy_shp,i,s=1,add=1)
-        cmds.delete(copy,or_shp)
-        or_re_shp=cmds.listRelatives(i,s=1)[0]
-        cmds.rename(or_re_shp,'%s%s'%(i,'_Shape'))
+
+    sel = cmds.ls(sl=True)
+
+    new_ctrl = sel[-1]
+    old_ctrls = sel[:-1]
+            
+    for old_ctrl in old_ctrls:
+        dup = cmds.duplicate(new_ctrl, rc=True)
+        cmds.delete(cmds.parentConstraint(old_ctrl, dup))
+        cmds.parent(dup, old_ctrl)
+        cmds.makeIdentity(dup, apply=True)
+        old_shapes = cmds.listRelatives(old_ctrl, type="shape", f=True)
+        ctrl_shapes = cmds.listRelatives(dup, type="shape", f=True) 
+        color = cmds.getAttr(old_shapes[0] + ".overrideColor")                
+        
+        for ctrl_shape in ctrl_shapes:            
+            cmds.setAttr(ctrl_shape + ".overrideEnabled", 1)
+            cmds.setAttr(ctrl_shape + ".overrideColor", color)
+            ren = cmds.rename(ctrl_shape, old_ctrl + "Shape#")
+            cmds.parent(ren, old_ctrl, relative=True, shape=True)
+        
+        cmds.delete(dup)
+        cmds.delete(old_shapes)
+        
+    cmds.select(clear=True)
         
 
 
