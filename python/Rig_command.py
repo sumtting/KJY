@@ -1130,11 +1130,19 @@ class motionpath_cv():
         return {'div':return_lst ,'div_rev':rev_return_lst, 'target':target_copy_lst ,'nod':nod_lst, 't':tr_xform_lst , 'r':ro_xform_lst}
 
 
-
-
-
-
+def shape_copy():
+##마지막 선택한 쉐입으로 쉐입을 바꾼다
+    sels=cmds.ls(sl=1)
     
+    for i in sels[0:-1]:
+        copy = cmds.duplicate(sels[-1])
+        copy_shp = cmds.listRelatives(copy,s=1,f=1)
+        or_shp=cmds.listRelatives(i,s=1)
+        cmds.parent(copy_shp,i,s=1,add=1)
+        cmds.delete(copy,or_shp)
+        or_re_shp=cmds.listRelatives(i,s=1)[0]
+        cmds.rename(or_re_shp,'%s%s'%(i,'_Shape'))
+        
 
 
 ##-------------------------------------------------------------------------------------------------------------------------------------------------------

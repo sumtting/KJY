@@ -137,6 +137,7 @@ class KJY_window(QtCore.QObject):
         self.ui.constraint_copy_btn.clicked.connect(pm.Callback( self.constraint_copy_load))
         self.ui.LR_copy_btn.clicked.connect(pm.Callback( self.LR_copy_load))
         self.ui.motionpath_cv_btn.clicked.connect(pm.Callback( self.motionpath_cv_load))
+        self.ui.shape_copy_btn.clicked.connect(pm.Callback( self.shape_copy_load))
 
         
         
@@ -380,6 +381,11 @@ class KJY_window(QtCore.QObject):
 
     def motionpath_cv_load(self):
         Rig_command.motionpath_cv()
+
+
+    def shape_copy_load(self):
+        Rig_command.shape_copy()
+        
 
 ## --------------------------------------------------------------------------------------------------------------------------
 # [blend]
