@@ -1130,6 +1130,7 @@ class motionpath_cv():
         return {'div':return_lst ,'div_rev':rev_return_lst, 'target':target_copy_lst ,'nod':nod_lst, 't':tr_xform_lst , 'r':ro_xform_lst}
 
 
+
 def shape_copy():
 
     sel = cmds.ls(sl=True)
@@ -1156,6 +1157,273 @@ def shape_copy():
         cmds.delete(old_shapes)
         
     cmds.select(clear=True)
+
+
+
+class insert_jnt():
+
+    def __init__(self):
+
+        # Builds the interface for the splitSelJointUI
+
+        win="js_splitSelJointWin"
+        if cmds.window(win, exists=1):
+            cmds.deleteUI(win)
+            
+        cmds.window(win, t="Split Selected Joints")
+        f=cmds.formLayout(nd=100)
+        segments=cmds.intSliderGrp(field=True, max=20, l="Segments", min=2)
+        b1=cmds.button(l="Okay")
+        b2=cmds.button(l="Cancel")
+        cmds.formLayout(f, ap=[(b1, 'right', 0, 47), (b2, 'left', 0, 52)], e=1, af=[(segments, 'top', 5), (segments, 'left', 5), (segments, 'right', 5), (b1, 'left', 5), (b1, 'bottom', 5), (b2, 'right', 5), (b2, 'bottom', 5)])
+
+
+        # set up callbacks
+        cmds.button(b2, c=lambda *args: cmds.deleteUI(str(win)), e=1)
+        cmds.button(b1, c=lambda *args: self.js_buildSplitJointCmd(str(segments)), e=1)
+
+        # set up defaults
+        segmentOpt=2
+        segmentOpt=int(self.js_getOptionVar(segmentOpt, "js_splitSelSegments"))
+
+
+        # now set the item
+        cmds.intSliderGrp(segments, e=1, value=segmentOpt)
+        cmds.showWindow(win)
+
+    def js_getOptionVar(self, default, optionVar):
+	
+        return_=default
+        # check and see if the optionVar exists
+        if not pm.optionVar(exists=optionVar):
+            pm.optionVar(iv=(optionVar, default))
+            
+        return_=int(pm.optionVar(q=optionVar))
+        return return_
+	
+
+    def js_buildSplitJointCmd(self, segments):
+
+        # get the values
+        segmentVal=cmds.intSliderGrp(segments, q=1, value=1)
+
+        # set the optionVars
+        cmds.optionVar(iv=("js_splitSelSegments", segmentVal))
+
+
+        # build the command
+        cmd=("js_splitSelJoint " + str(segmentVal))
+        cmds.evalEcho(cmd)
+
+
+
+    def js_splitSelJoint(self, numSegments):
+
+        # This proc will split the selected joint into the specified number of segments    #
+        #
+
+        if numSegments<2:
+            cmds.error("The number of segments has to be greater than 1.. ")
+        
+        # VARIABLES
+        #
+
+        joints = [""] * (0)
+        joint = ""
+        newChildJoints = [""] * (0)
+        count=0
+        joints=cmds.ls(type='joint', sl=1)
+        for joint in joints:
+            # first check the rotation order vs. the axis the joint should be rotating around.  In order for this to work
+            # correctly, the child joint of the joint specified must have translation values ONLY IN ONE AXIS.  Let's
+            # and, that axis MUST be the first one in the rotation order.  For example, if the joint structure is:
+            #      upArm->loArm
+            # and the loArm has a translate value of 6 0 0, then upArm should have a rotation order of XYZ or XZY.
+            #
+            child = ""
+            child=str(self.js_getChildJoint(joint))
+
+
+            if len(child) == "":
+                cmds.error("Joint: " + str(joint) + " has no children joints.\n")
+                
+
+            else:
+                axis = ""
+                rotationOrder = ""
+                firstChar = ""
+                radius=float(cmds.getAttr(str(joint) + ".radius"))
+                axis=str(self.js_getJointAxis(child))
+
+                
+                # now that we have the axis, we want to check and make sure the rotation order on $joint is correct.
+                rotOrderIndex=int(cmds.getAttr(str(joint) + ".rotateOrder"))
+                rotationOrder=self.js_getRotOrderString(joint)
+
+                # ** REMOVING CHECK FOR ROTATION ORDER MATCHING
+                # check that the rotaiton order will work.
+                # 
+                #$firstChar = `substring $rotationOrder 1 1`;
+                #if ($axis == $firstChar)
+                if axis == firstChar:
+                
+                    childT=0.0
+                    tVal=0.0
+                    attr = ""
+
+
+                    # the rotation order is correct!  we're set!
+
+                    # get the axis attr
+                    attr=("t" + str(axis))
+
+                    # get the value of the child
+                    childT=cmds.getAttr(str(child) + "." + str(attr))
+                    space=float(childT / numSegments)
+
+                    # create a series of locators along the joint based on the number of segments.
+                    locators = [""] * (0)
+                    for x in range(0,(numSegments - 1)):
+                        tmp=cmds.spaceLocator()
+                        locators[x]=str(tmp[0])
+                        cmds.parent(locators[x], joint)
+                        cmds.setAttr((locators[x] + ".t"), 
+                            0, 0, 0)
+                        cmds.setAttr((locators[x] + "." + str(attr)), (space * (x + 1)))
+        
+                    # We just want to segment the joint, nothing more.
+                
+                    # for each segment, we're going to insert a joint, and then move it to the position of the locator
+                    prevJoint=str(joint)
+                    for x in range(0,len(locators)):
+                        # insert a joint
+                        newJoint=cmds.insertJoint(prevJoint)
+
+                        # get the position of the locator
+                        pos=cmds.xform(locators[x], q=1, rp=1, ws=1)
+
+                        # move the joint there
+                        cmds.move(pos[0], pos[1], pos[2], (str(newJoint) + ".scalePivot"), (str(newJoint) + ".rotatePivot"), a=1, ws=1)
+
+                        
+                        # rename the new joint
+                        newJoint=cmds.rename((newJoint), (str(joint) + "_seg_" + str((x + 1)) + "_joint"))
+                        cmds.setAttr((str(newJoint) + ".radius"), radius)
+
+                        # set the rotation order
+                        cmds.setAttr((str(newJoint) + ".rotateOrder"), rotOrderIndex)
+
+                        # set the prevJoint
+                        prevJoint=newJoint
+
+                    
+
+                    cmds.delete(locators)
+                # ** END ROTATION ORDER CHECK
+                #
+                #else
+                #{
+                    # The rotation order is incorrect.  The user needs to re-orient the joint
+                    #js_orientJointWarning $joint $rotationOrder $axis $firstChar;
+
+                #}
+
+    def js_orientJointWarning(self, joint, rotationOrder, axis, firstChar):
+
+        message = ""
+        message=("Warning!!!!\n\n")
+        message+=("The rotation order and joint orient for " + str(joint) + " do not match up.\n")
+        message+=("The rotation order is: " + str(rotationOrder) + "\n")
+        message+=("The axis aiming down the joint is: " + str(axis) + "\n\n")
+        message+=("In order for this script to work, you need to either change the axis that\n")
+        message+=("aims down the joint to " + str(firstChar) + ", or switch the rotation order to ")
+        if axis == "x":
+            message+=("xyz or xzy.\n")
+            
+            
+        elif axis == "y":
+            message+=("yxz or yzx.\n")
+            
+            
+        elif axis == "z":
+            message+=("zxy or zyx.\n")
+            
+            
+        message+=("\nSkipping Joint: " + str(joint) + "...\n")
+        cmds.confirmDialog(ma="left", m=message)
+        cmds.warning(message)
+
+
+
+    def js_getRotOrderString(self, joint):
+
+        return_ = ""
+        ro = 0
+        ro=int(cmds.getAttr(str(joint) + ".ro"))
+        if ro == 0:
+            return_="xyz"
+            
+            
+        elif ro == 1:
+            return_="yzx"
+            
+            
+        elif ro == 2:
+            return_="zxy"
+            
+            
+        elif ro == 3:
+            return_="xzy"
+            
+            
+        elif ro == 4:
+            return_="yxz"
+            
+            
+        elif ro == 5:
+            return_="zyx"
+            
+            
+        return return_
+
+
+    def js_getJointAxis(self, child):
+
+        axis = ""
+        t = [0.0] * (0)
+        t=cmds.getAttr(str(child) + ".t")
+
+
+        # get the translation values of the $child joint
+        # now check and see which one is greater than 0.  We should have a tolerance value just in case
+        tol=0.0001
+        for x in range(0,2+1):
+            if (t[x]>tol) or (t[x]<(-1 * tol)):
+                if x == 0:
+                    axis="x"
+                    
+                    
+                elif x == 1:
+                    axis="y"
+                    
+                    
+                elif x == 2:
+                    axis="z"
+                    
+        if axis == "":
+            cmds.error("The child joint is too close to the parent joint. Cannot determine the proper axis to segment.")
+            
+        return axis
+
+
+    def js_getChildJoint(self, joint):
+        
+        tmp = [""] * (0)
+        tmp=cmds.listRelatives(joint, c=1, type='joint', f=1)
+        return (tmp[0])
+        
+
+
         
 
 

@@ -138,6 +138,7 @@ class KJY_window(QtCore.QObject):
         self.ui.LR_copy_btn.clicked.connect(pm.Callback( self.LR_copy_load))
         self.ui.motionpath_cv_btn.clicked.connect(pm.Callback( self.motionpath_cv_load))
         self.ui.shape_copy_btn.clicked.connect(pm.Callback( self.shape_copy_load))
+        self.ui.insert_jnt_btn.clicked.connect(pm.Callback( self.insert_jnt_load))
 
         
         
@@ -385,6 +386,10 @@ class KJY_window(QtCore.QObject):
 
     def shape_copy_load(self):
         Rig_command.shape_copy()
+
+
+    def insert_jnt_load(self):
+        Rig_command.insert_jnt()
         
 
 ## --------------------------------------------------------------------------------------------------------------------------

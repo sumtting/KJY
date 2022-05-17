@@ -150,8 +150,9 @@ def position_xform(transform):
 
 
 
-def change_number(position):
-    base_num = cmds.textField('%s_'%(position) + 'number_tex_box'  , text =1, q=1)
+def change_number(segments):
+    #base_num = cmds.textField('%s_'%(position) + 'number_tex_box'  , text =1, q=1)
+    base_num=cmds.intSliderGrp(segments, q=1, value=1)
     base_num = int(base_num)
     return base_num
 
@@ -277,15 +278,22 @@ class long_skirt_set():
         #cmds.rowColumnLayout( nc=1 )
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
-        cmds.text(l = u'up controller' ,w = 100)
-        #cmds.textField('number_tex_box' , w = 30 , h = 20 , tx = '9', textChangedCommand='skirt_command.change_number()') # textChangedCommand는 ui에서 text를 바꿀때 커멘드입력이 안돼도 실시간으로 쿼리가능
-        cmds.textField('up number_tex_box' , w = 30 , h = 20 , tx = '2')
-        cmds.text(l = u'    *  leg, knee, ankle에 위치한')
+        cmds.text(l = u'    *  leg, knee, ankle에 위치한 컨트롤러는 고정')
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
-        cmds.text(l = u'down controller' ,w = 100)
-        cmds.textField('down number_tex_box' , w = 30 , h = 20 , tx = '2')
-        cmds.text(l = u'        컨트롤러는 고정 ')
+        #cmds.text(l = u'up controller' ,w = 100)
+        #cmds.textField('number_tex_box' , w = 30 , h = 20 , tx = '9', textChangedCommand='skirt_command.change_number()') # textChangedCommand는 ui에서 text를 바꿀때 커멘드입력이 안돼도 실시간으로 쿼리가능
+        #cmds.textField('up number_tex_box' , w = 30 , h = 20 , tx = '2') # 기존 텍스트필드에 숫자입력방식
+        cmds.intSliderGrp('up_segments', w=300, columnAttach = (1, 'left', 0), columnWidth =(1,97), field=True, l="    Up Segments", max=10, min=1, value=2)
+        # 슬라이드바 방식, columnAttach와 columnWidth는 정렬 옵션
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        # cmds.text(l = u'down controller' ,w = 100)
+        # cmds.textField('down number_tex_box' , w = 30 , h = 20 , tx = '2') # 기존 텍스트필드에 숫자입력방식
+        cmds.intSliderGrp('down_segments', w=300, columnAttach = (1, 'left', 0), columnWidth =(1,97), field=True, l="    Down Segments", max=10, min=1, value=2) # 슬라이드바 방식
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.text(l = u'   -----------------------------------------------------------------------')
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
         cmds.text(l = u'total' ,w = 100)
@@ -400,10 +408,10 @@ class long_skirt_set():
         # # top Y축과 mid Y축 사이 (허벅지~무릎)에 컨트롤러갯수(num)+1 을 해주어야 등분갯수가 나온다(컨트롤러를 일정한간격으로 배치하기위함)
         # low_con_num = (mid_loc_y - low_loc_y) / (num + 1)# 무릎에서 발목
 
-        up_use_num = change_number('up')
+        up_use_num = change_number('up_segments')
         top_con_num = (top_loc_y - mid_loc_y) / (up_use_num + 1)# 허벅지에서 무릎
 
-        down_use_num = change_number('down')
+        down_use_num = change_number('down_segments')
         low_con_num = (mid_loc_y - low_loc_y) / (down_use_num + 1)# 무릎에서 발목
 
         top_leg_y_list = []
