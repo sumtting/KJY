@@ -573,7 +573,7 @@
            <string>ngskin tool</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="reference_copy_btn">
+         <widget class="QPushButton" name="mmmmm">
           <property name="geometry">
            <rect>
             <x>120</x>
@@ -589,7 +589,7 @@
            <string notr="true"/>
           </property>
           <property name="text">
-           <string>reference copy</string>
+           <string>--------</string>
           </property>
          </widget>
          <widget class="QPushButton" name="geo_of_jnt_btn">
@@ -653,7 +653,7 @@
            <string>S</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="constraint_copy_btn">
+         <widget class="QPushButton" name="bbbb">
           <property name="geometry">
            <rect>
             <x>120</x>
@@ -669,7 +669,7 @@
            <string notr="true"/>
           </property>
           <property name="text">
-           <string>constraint copy</string>
+           <string>--------</string>
           </property>
          </widget>
          <widget class="QPushButton" name="insert_jnt_btn">
@@ -720,7 +720,7 @@
            <string>motionpath cv</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="LR_copy_btn">
+         <widget class="QPushButton" name="dddd">
           <property name="geometry">
            <rect>
             <x>120</x>
@@ -733,10 +733,10 @@
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 컨트롤러의 어트리뷰트값을 반대쪽 컨트롤러에 copy&lt;br/&gt;(전체 네이밍은 같고 L/R만 달라야함)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
-           <string>LR copy</string>
+           <string>--------</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="blend_copy_btn">
+         <widget class="QPushButton" name="vvv">
           <property name="geometry">
            <rect>
             <x>120</x>
@@ -749,7 +749,7 @@
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 object와 동일하게 blend target을 옮겨준다.&lt;/p&gt;&lt;p&gt;(네이밍이 겹치지 않아야함, 블렌드웨이트에 연결된 커넥션이 없어야함)&lt;/p&gt;&lt;p&gt;* 모양이 다른 object도 가능&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
-           <string>blend copy</string>
+           <string>--------</string>
           </property>
          </widget>
         </widget>
@@ -873,6 +873,70 @@
           </property>
           <property name="text">
            <string>PoseReader</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="reference_copy_btn">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>82</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;레퍼런스로 불러온 object를 원본object에 bindskin &amp;amp; skincopy&lt;/p&gt;&lt;p&gt;스킨을 옮길 '레퍼런스 object' 를 선택하고 실행.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>reference copy</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="constraint_copy_btn">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>82</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;레퍼런스로 불러온 object를 원본object에 constraint copy 해준다&lt;/p&gt;&lt;p&gt;컨스트레인을 옮길 '레퍼런스 MOD의 그룹 최상단' 을 선택하고 실행.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>constraint copy</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="blend_copy_btn">
+          <property name="geometry">
+           <rect>
+            <x>10</x>
+            <y>104</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 object와 동일하게 blend target을 옮겨준다.&lt;/p&gt;&lt;p&gt;(네이밍이 겹치지 않아야함, 블렌드웨이트에 연결된 커넥션이 없어야함)&lt;/p&gt;&lt;p&gt;* 모양이 다른 object도 가능&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>blend copy</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="LR_copy_btn">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>104</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 컨트롤러의 어트리뷰트값을 반대쪽 컨트롤러에 copy&lt;br/&gt;(전체 네이밍은 같고 L/R만 달라야함)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>LR copy</string>
           </property>
          </widget>
         </widget>

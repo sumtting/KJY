@@ -134,8 +134,6 @@ class KJY_window(QtCore.QObject):
         self.ui.jnt_on_btn.clicked.connect(pm.Callback( self.joint_on_off_load, 0))
         self.ui.jnt_off_btn.clicked.connect(pm.Callback( self.joint_on_off_load, 2))
         self.ui.jnt_ps_btn.clicked.connect(pm.Callback( self.jnt_ps_load))
-        self.ui.constraint_copy_btn.clicked.connect(pm.Callback( self.constraint_copy_load))
-        self.ui.LR_copy_btn.clicked.connect(pm.Callback( self.LR_copy_load))
         self.ui.motionpath_cv_btn.clicked.connect(pm.Callback( self.motionpath_cv_load))
         self.ui.shape_copy_btn.clicked.connect(pm.Callback( self.shape_copy_load))
         self.ui.insert_jnt_btn.clicked.connect(pm.Callback( self.insert_jnt_load))
@@ -174,15 +172,7 @@ class KJY_window(QtCore.QObject):
         self.ui.bind_skin_copy_btn.clicked.connect(pm.Callback( self.bind_skin_copy_load))
         self.ui.skin_copy_many_btn.clicked.connect(pm.Callback( self.skin_copy_many_load))
         self.ui.rewei_btn.clicked.connect(pm.Callback( self.rewei_load))
-        self.ui.reference_copy_btn.clicked.connect(pm.Callback( self.reference_copy_load))
         self.ui.ngskin_tool_btn.clicked.connect(pm.Callback( self.ngskin_tool_load))
-
-
-
-## --------------------------------------------------------------------------------------------------------------------------
-# [blend]
-
-        self.ui.blend_copy_btn.clicked.connect(pm.Callback( self.blend_copy_load))
 
 
 
@@ -213,11 +203,16 @@ class KJY_window(QtCore.QObject):
         self.ui.ns_remove_btn.clicked.connect(pm.Callback( self.ns_remove_load))
         self.ui.connect_tool_btn.clicked.connect(pm.Callback( self.connect_tool_load))
         self.ui.posereader_btn.clicked.connect(pm.Callback( self.posereader_load))
+        self.ui.blend_copy_btn.clicked.connect(pm.Callback( self.blend_copy_load))
+        self.ui.constraint_copy_btn.clicked.connect(pm.Callback( self.constraint_copy_load))
+        self.ui.LR_copy_btn.clicked.connect(pm.Callback( self.LR_copy_load))
+        self.ui.reference_copy_btn.clicked.connect(pm.Callback( self.reference_copy_load))
         
 
 
 ## --------------------------------------------------------------------------------------------------------------------------
 # [external]
+
         #UI에서 메뉴를 사용하려면 triggered 명령어를 사용
         self.ui.action_kk_controllers.triggered.connect(pm.Callback( self.kk_controllers_load)) 
         self.ui.action_cv_shape_color.triggered.connect(pm.Callback( self.cv_shape_color_load))
@@ -230,6 +225,7 @@ class KJY_window(QtCore.QObject):
 
 ## --------------------------------------------------------------------------------------------------------------------------
 # [set]
+
         self.ui.vehicle_set_btn.clicked.connect(pm.Callback( self.vehicle_set_load))
         self.ui.long_skirt_set_btn.clicked.connect(pm.Callback( self.long_skirt_set_load))
         self.ui.short_skirt_set_btn.clicked.connect(pm.Callback( self.short_skirt_set_load))
@@ -323,10 +319,6 @@ class KJY_window(QtCore.QObject):
         Rig_command.remove_skin_weight( weight )
 
 
-    def reference_copy_load(self):
-        Rig_command.reference_copy()
-        
-
     def ngskin_tool_load(self):
         Rig_command.ngskin_tool()
 
@@ -372,14 +364,6 @@ class KJY_window(QtCore.QObject):
         Rig_command.jnt_ps(parent_check, scale_check)
 
 
-    def constraint_copy_load(self):
-        Rig_command.constraint_copy()
-
-
-    def LR_copy_load(self):
-        Rig_command.LR_copy()
-
-
     def motionpath_cv_load(self):
         Rig_command.motionpath_cv()
 
@@ -391,12 +375,6 @@ class KJY_window(QtCore.QObject):
     def insert_jnt_load(self):
         Rig_command.insert_jnt()
         
-
-## --------------------------------------------------------------------------------------------------------------------------
-# [blend]
-
-    def blend_copy_load(self):
-        Rig_command.blend_copy()
 
 
 ## --------------------------------------------------------------------------------------------------------------------------
@@ -424,6 +402,22 @@ class KJY_window(QtCore.QObject):
 
     def posereader_load(self):
         Sub_command.posereader()
+
+
+    def blend_copy_load(self):
+        Sub_command.blend_copy()
+
+
+    def constraint_copy_load(self):
+        Sub_command.constraint_copy()
+
+
+    def LR_copy_load(self):
+        Sub_command.LR_copy()
+
+
+    def reference_copy_load(self):
+        Sub_command.reference_copy()
 
 
 ## --------------------------------------------------------------------------------------------------------------------------
