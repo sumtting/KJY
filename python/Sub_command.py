@@ -434,7 +434,7 @@ class connect_tool():
                 if currentTargetList.count(item): continue
             pm.textScrollList('Const_ToList', e=True, a=item)
 
-    def constToRemove():
+    def constToRemove(self):
         selItemList = pm.textScrollList('Const_ToList', q=True, si=True)
         if selItemList:
             for item in selItemList:

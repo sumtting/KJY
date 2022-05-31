@@ -149,10 +149,9 @@ def position_xform(transform):
     return cmds.xform( transform, q=1, ws=1, rp=1)
 
 
-
-def change_number(segments):
+def change_number(part):
     #base_num = cmds.textField('%s_'%(position) + 'number_tex_box'  , text =1, q=1)
-    base_num=cmds.intSliderGrp(segments, q=1, value=1)
+    base_num=cmds.intSliderGrp(part, q=1, value=1)
     base_num = int(base_num)
     return base_num
 
@@ -877,3 +876,92 @@ class short_skirt_set():
             
             i=i+1
 
+
+
+# [hair_set]
+class hair_set():
+
+    def __init__(self):
+        self.create_UI()
+
+    def create_UI(self):
+        ## 윈도우 ID##
+        windowID='hair_UI'
+        ##windows reset
+        if cmds.window(windowID, ex=True):
+            cmds.deleteUI(windowID)
+        cmds.window(windowID, t='hair_UI', rtf=True, s=True, mnb=True, mxb=True,wh=(30,30))
+        ##master layer
+        master = cmds.columnLayout()
+        cmds.columnLayout()
+        ##싱글 텍스트필드
+        #cmds.text(l = u'    *  leg, knee, ankle에 위치한 컨트롤러는 고정')
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        #cmds.text(l = u'   -----------------------------------------------------------------------')
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.text(l = u'prefix name' ,w = 100)
+        cmds.textField('prefix_tex_box' , w = 150 , h = 20 , tx = 'hair_')
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.intSliderGrp('CTL', w=300, columnAttach = (1, 'left', 0), columnWidth =(1,97), field=True, l="       CTL", max=20, min=3, value=3)
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.button(l=u'create controller' , w = 300 , h = 30 , c = pm.Callback(self.cre_bindpose))
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.intSliderGrp('skinJNT', w=300, columnAttach = (1, 'left', 0), columnWidth =(1,97), field=True, l="       skinJNT", max=20, min=3, value=3)
+        #cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'total'))
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.setParent (master)
+        #cmds.button(l=u'연결' , w = 301 , h = 30 , c = pm.Callback(self.skirt_connect))
+        cmds.setParent (master)
+        cmds.showWindow(windowID)
+
+
+    def change_number(part):
+        base_num=cmds.intSliderGrp(part, q=1, value=1)
+        base_num = int(base_num)
+        return base_num
+
+    def cre_bindpose(self):
+        cre_loc_grp = []
+        segments = change_number('CTL')
+        loc_prefix = cmds.textField('prefix_tex_box' , tx=1,q=1 )
+        for i in range(segments):
+          
+            #cre_loc = cmds.spaceLocator(n = loc_prefix + '%02d'%(i+1) + '_bindpose')[0]
+            cre_loc = self.con_shape('locator', loc_prefix + '%02d'%(i+1) + '_bindpose')
+            
+            cmds.setAttr(cre_loc + '.translateY', -i)
+            cmds.setAttr(cre_loc + '.scaleX', 0.1)
+            cmds.setAttr(cre_loc + '.scaleY', 0.1)
+            cmds.setAttr(cre_loc + '.scaleZ', 0.1)
+            cre_loc_grp.append(cre_loc)
+
+        cre_loc_grp = list(reversed(cre_loc_grp))
+        cre_loc_num = len(cre_loc_grp)
+
+        for i in range(cre_loc_num):
+            try:
+                cmds.parent(cre_loc_grp[i], cre_loc_grp[i+1])
+            except:
+                pass
+
+    def con_shape(self,shape,name):
+        if shape == 'locator':
+            cre_curve = cmds.curve(d=1, n=name, p=[(0.0, 2.001501540839854, 0.0),
+            (0.0, -2.001501540839854, 0.0),
+            (0.0, 0.0, 0.0),
+            (0.0, 0.0, -2.001501540839854),
+            (0.0, 0.0, 2.001501540839854),
+            (0.0, 0.0, 0.0),
+            (2.001501540839854, 0.0, 0.0),
+            (-2.001501540839854, 0.0, 0.0)])
+
+            return cre_curve
+        
+        else:
+            pass

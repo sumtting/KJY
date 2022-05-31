@@ -514,6 +514,23 @@ def joint_on_off(i):
 
 
 
+def axis_on_off(i):
+    'joint axis on off'
+    print('-----------------------------------------')
+    sels = cmds.ls(typ='joint')
+    if i == 0:
+        choice = ' ON '
+    else:
+        choice = ' OFF '
+
+
+    for sel in sels :
+        cmds.setAttr( sel + '.displayLocalAxis', i )
+        
+    #print(u'joint' + choice + u'개수: ' + str(len(sels)))
+
+
+
 def jnt_ps(parent, scale):
     '선택한 object에 joint, joint group 을 만들고 parent 한다.'
     a=cmds.ls(sl=1)
@@ -621,6 +638,15 @@ class motionpath_cv():
         ## cv 이름혹은 트랜스폼 / 커브의 위치점 0~1 / 'nod_del' = False 를 사용하여 노드를 지우지않을수잇다
         sh = cmds.listRelatives(cv, shapes =1, children=1)[0]
         cre_motionPath = cmds.createNode('motionPath', n = cv + '_motionPath')
+
+        cmds.setAttr(cre_motionPath + '.follow', 1)
+        cmds.setAttr(cre_motionPath + '.frontAxis', 0)
+        cmds.setAttr(cre_motionPath + '.upAxis', 1)
+        
+        cmds.setAttr(cre_motionPath + '.worldUpVectorX', 1)
+        cmds.setAttr(cre_motionPath + '.worldUpVectorY', 0)
+        cmds.setAttr(cre_motionPath + '.worldUpVectorZ', 0)  # 모션패스노드의 업벡터
+
         cmds.setAttr(cre_motionPath + '.fractionMode', 1) 
         cmds.connectAttr(sh + '.worldSpace' , cre_motionPath + '.geometryPath')
         cmds.setAttr(cre_motionPath + '.uValue', number)
@@ -778,6 +804,7 @@ class insert_jnt():
 
         # get the values
         segmentVal=cmds.intSliderGrp(segments, q=1, value=1)
+        segmentVal = segmentVal + 1 # 기존 스크립트에서는 (segments-1)이 생성되는 조인트 갯수였기 때문에 segments에 입력한대로 조인트가 생성되게 하기위해 +1을 해준다.
 
         # set the optionVars
         cmds.optionVar(iv=("js_splitSelSegments", segmentVal))

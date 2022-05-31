@@ -137,6 +137,9 @@ class KJY_window(QtCore.QObject):
         self.ui.motionpath_cv_btn.clicked.connect(pm.Callback( self.motionpath_cv_load))
         self.ui.shape_copy_btn.clicked.connect(pm.Callback( self.shape_copy_load))
         self.ui.insert_jnt_btn.clicked.connect(pm.Callback( self.insert_jnt_load))
+        self.ui.axis_on_btn.clicked.connect(pm.Callback( self.axis_on_off_load, 1))
+        self.ui.axis_off_btn.clicked.connect(pm.Callback( self.axis_on_off_load, 0))
+
 
         
         
@@ -230,6 +233,7 @@ class KJY_window(QtCore.QObject):
         self.ui.long_skirt_set_btn.clicked.connect(pm.Callback( self.long_skirt_set_load))
         self.ui.short_skirt_set_btn.clicked.connect(pm.Callback( self.short_skirt_set_load))
         self.ui.body_set_btn.clicked.connect(pm.Callback( self.body_set_load))
+        self.ui.hair_set_btn.clicked.connect(pm.Callback( self.hair_set_load))
 
 
 
@@ -374,6 +378,9 @@ class KJY_window(QtCore.QObject):
 
     def insert_jnt_load(self):
         Rig_command.insert_jnt()
+
+    def axis_on_off_load(self,vis):
+        Rig_command.axis_on_off(vis)
         
 
 
@@ -439,7 +446,6 @@ class KJY_window(QtCore.QObject):
         External_command.mel_to_python()
 
 
-
 ## --------------------------------------------------------------------------------------------------------------------------
 # [set]
 
@@ -454,6 +460,9 @@ class KJY_window(QtCore.QObject):
 
     def body_set_load(self):
         Body_command.body_set()
+
+    def hair_set_load(self):
+        Set_command.hair_set()
 
 
 

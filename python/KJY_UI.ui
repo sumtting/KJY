@@ -36,7 +36,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>2</number>
     </property>
     <widget class="QWidget" name="Rig_tab">
      <attribute name="title">
@@ -223,7 +223,7 @@
           <property name="geometry">
            <rect>
             <x>120</x>
-            <y>104</y>
+            <y>82</y>
             <width>51</width>
             <height>23</height>
            </rect>
@@ -242,7 +242,7 @@
           <property name="geometry">
            <rect>
             <x>170</x>
-            <y>104</y>
+            <y>82</y>
             <width>51</width>
             <height>23</height>
            </rect>
@@ -653,25 +653,6 @@
            <string>S</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="bbbb">
-          <property name="geometry">
-           <rect>
-            <x>120</x>
-            <y>82</y>
-            <width>101</width>
-            <height>23</height>
-           </rect>
-          </property>
-          <property name="toolTip">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;레퍼런스로 불러온 object를 원본object에 constraint copy 해준다&lt;/p&gt;&lt;p&gt;컨스트레인을 옮길 '레퍼런스 MOD의 그룹 최상단' 을 선택하고 실행.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-          <property name="styleSheet">
-           <string notr="true"/>
-          </property>
-          <property name="text">
-           <string>--------</string>
-          </property>
-         </widget>
          <widget class="QPushButton" name="insert_jnt_btn">
           <property name="geometry">
            <rect>
@@ -750,6 +731,38 @@
           </property>
           <property name="text">
            <string>--------</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="axis_off_btn">
+          <property name="geometry">
+           <rect>
+            <x>170</x>
+            <y>104</y>
+            <width>51</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;모든 joint의 Axis를 off 시킨다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>Axis off</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="axis_on_btn">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>104</y>
+            <width>51</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;모든 joint의 Axis를 on 시킨다.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>Axis on</string>
           </property>
          </widget>
         </widget>
@@ -872,7 +885,7 @@
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;namespace Editor의 namespace를 모두 지워준다. ※reference 제외&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
-           <string>PoseReader</string>
+           <string>poseReader</string>
           </property>
          </widget>
          <widget class="QPushButton" name="reference_copy_btn">
@@ -1027,7 +1040,7 @@
            <string>short_skirt</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="pushButton_18">
+         <widget class="QPushButton" name="hair_set_btn">
           <property name="geometry">
            <rect>
             <x>10</x>
@@ -1132,6 +1145,11 @@
   <action name="action_mel_to_python">
    <property name="text">
     <string>mel to python</string>
+   </property>
+  </action>
+  <action name="action_bsControls">
+   <property name="text">
+    <string>bsControls</string>
    </property>
   </action>
  </widget>
