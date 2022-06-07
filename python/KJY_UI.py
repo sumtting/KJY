@@ -139,6 +139,7 @@ class KJY_window(QtCore.QObject):
         self.ui.insert_jnt_btn.clicked.connect(pm.Callback( self.insert_jnt_load))
         self.ui.axis_on_btn.clicked.connect(pm.Callback( self.axis_on_off_load, 1))
         self.ui.axis_off_btn.clicked.connect(pm.Callback( self.axis_on_off_load, 0))
+        self.ui.connect_tool_btn.clicked.connect(pm.Callback( self.connect_tool_load))
 
 
         
@@ -204,12 +205,12 @@ class KJY_window(QtCore.QObject):
         self.ui.cleanup_btn.clicked.connect(pm.Callback( self.cleanup_load))
         self.ui.attribute_unlock_btn.clicked.connect(pm.Callback( self.attribute_unlock_load))
         self.ui.ns_remove_btn.clicked.connect(pm.Callback( self.ns_remove_load))
-        self.ui.connect_tool_btn.clicked.connect(pm.Callback( self.connect_tool_load))
         self.ui.posereader_btn.clicked.connect(pm.Callback( self.posereader_load))
         self.ui.blend_copy_btn.clicked.connect(pm.Callback( self.blend_copy_load))
         self.ui.constraint_copy_btn.clicked.connect(pm.Callback( self.constraint_copy_load))
         self.ui.LR_copy_btn.clicked.connect(pm.Callback( self.LR_copy_load))
         self.ui.reference_copy_btn.clicked.connect(pm.Callback( self.reference_copy_load))
+        self.ui.tex_manager_btn.clicked.connect(pm.Callback( self.tex_manager_load))
         
 
 
@@ -379,8 +380,13 @@ class KJY_window(QtCore.QObject):
     def insert_jnt_load(self):
         Rig_command.insert_jnt()
 
+
     def axis_on_off_load(self,vis):
         Rig_command.axis_on_off(vis)
+
+
+    def connect_tool_load(self):
+        Rig_command.connect_tool()
         
 
 
@@ -403,10 +409,6 @@ class KJY_window(QtCore.QObject):
         Sub_command.ns_remove()
 
 
-    def connect_tool_load(self):
-        Sub_command.connect_tool()
-
-
     def posereader_load(self):
         Sub_command.posereader()
 
@@ -425,6 +427,10 @@ class KJY_window(QtCore.QObject):
 
     def reference_copy_load(self):
         Sub_command.reference_copy()
+
+
+    def tex_manager_load(self):
+        Sub_command.tex_manager()
 
 
 ## --------------------------------------------------------------------------------------------------------------------------

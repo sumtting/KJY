@@ -883,6 +883,8 @@ class hair_set():
 
     def __init__(self):
         self.create_UI()
+        global prefix_name
+        prefix_name = cmds.textField('prefix_tex_box' , tx=1,q=1 )
 
     def create_UI(self):
         ## 윈도우 ID##
@@ -908,10 +910,13 @@ class hair_set():
         cmds.intSliderGrp('CTL', w=300, columnAttach = (1, 'left', 0), columnWidth =(1,97), field=True, l="       CTL", max=20, min=3, value=3)
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
-        cmds.button(l=u'create controller' , w = 300 , h = 30 , c = pm.Callback(self.cre_bindpose))
+        cmds.button(l=u'create controller' , w = 300 , h = 30 , c = pm.Callback(self.set_bindpose))
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
         cmds.intSliderGrp('skinJNT', w=300, columnAttach = (1, 'left', 0), columnWidth =(1,97), field=True, l="       skinJNT", max=20, min=3, value=3)
+        cmds.setParent (master)
+        cmds.rowColumnLayout( nr=1 )
+        cmds.button(l=u'Build' , w = 300 , h = 30 , c = pm.Callback(self.set_build))
         #cmds.button( l = u'등록' , w = 50 , c = pm.Callback(self.sels_tex, 'total'))
         cmds.setParent (master)
         cmds.rowColumnLayout( nr=1 )
@@ -926,29 +931,40 @@ class hair_set():
         base_num = int(base_num)
         return base_num
 
-    def cre_bindpose(self):
+    def set_bindpose(self):
+        global cre_loc_grp
         cre_loc_grp = []
         segments = change_number('CTL')
-        loc_prefix = cmds.textField('prefix_tex_box' , tx=1,q=1 )
+        prefix_name = cmds.textField('prefix_tex_box' , tx=1,q=1 )
         for i in range(segments):
           
-            #cre_loc = cmds.spaceLocator(n = loc_prefix + '%02d'%(i+1) + '_bindpose')[0]
-            cre_loc = self.con_shape('locator', loc_prefix + '%02d'%(i+1) + '_bindpose')
+            #cre_loc = cmds.spaceLocator(n = prefix_name + '%02d'%(i+1) + '_bindpose')[0]
+            cre_loc = self.con_shape('locator', prefix_name + '%02d'%(i+1) + '_bindpose')
             
             cmds.setAttr(cre_loc + '.translateY', -i)
             cmds.setAttr(cre_loc + '.scaleX', 0.1)
             cmds.setAttr(cre_loc + '.scaleY', 0.1)
             cmds.setAttr(cre_loc + '.scaleZ', 0.1)
+            cmds.makeIdentity(apply=True, s=1, pn=1, n=0)
+
+            cmds.setAttr(cre_loc + '.overrideEnabled' , 1)
+            cmds.setAttr(cre_loc + '.overrideColor' , 17)
             cre_loc_grp.append(cre_loc)
 
         cre_loc_grp = list(reversed(cre_loc_grp))
         cre_loc_num = len(cre_loc_grp)
+        
 
         for i in range(cre_loc_num):
             try:
                 cmds.parent(cre_loc_grp[i], cre_loc_grp[i+1])
             except:
                 pass
+        
+        cmds.select(cre_loc_grp[-1])
+
+        
+            
 
     def con_shape(self,shape,name):
         if shape == 'locator':
@@ -961,7 +977,75 @@ class hair_set():
             (2.001501540839854, 0.0, 0.0),
             (-2.001501540839854, 0.0, 0.0)])
 
-            return cre_curve
+            
+
+        if shape == 'box':
+            cre_curve = cmds.curve(d=1, n=name, p=[ (-2.001501540839854, 2.001501540839854, 2.001501540839854),
+        (-2.001501540839854, -2.001501540839854, 2.001501540839854),
+        (2.001501540839854, -2.001501540839854, 2.001501540839854),
+        (2.001501540839854, 2.001501540839854, 2.001501540839854),
+        (-2.001501540839854, 2.001501540839854, 2.001501540839854),
+        (-2.001501540839854, 2.001501540839854, -2.001501540839854),
+        (-2.001501540839854, -2.001501540839854, -2.001501540839854),
+        (-2.001501540839854, -2.001501540839854, 2.001501540839854),
+        (2.001501540839854, -2.001501540839854, 2.001501540839854),
+        (2.001501540839854, -2.001501540839854, -2.001501540839854),
+        (2.001501540839854, 2.001501540839854, -2.001501540839854),
+        (2.001501540839854, 2.001501540839854, 2.001501540839854),
+        (-2.001501540839854, 2.001501540839854, 2.001501540839854),
+        (-2.001501540839854, 2.001501540839854, -2.001501540839854),
+        (2.001501540839854, 2.001501540839854, -2.001501540839854),
+        (2.001501540839854, -2.001501540839854, -2.001501540839854),
+        (-2.001501540839854, -2.001501540839854, -2.001501540839854)])
         
         else:
             pass
+
+        return cre_curve
+
+
+    def nubs_match(self, name):
+        global cluster_grp
+        global cre_nub
+        global segments
+
+        cluster_grp = []
+        segments = change_number('CTL')
+        cre_nub = cmds.nurbsPlane(ch=1, d=1, v=segments-1, p=(0, 0, 0), u=1, w=1, ax=(0, 1, 0), lr=1, n=name)[0]
+
+        for i in range(segments):
+            cre_cluster = cmds.cluster(cre_nub + '.cv[0:1][%s]'%(i))[0]
+            cluster_grp.append(cre_cluster)
+        
+        
+    def A2B(self, fir,sec):
+        'A를 B로 이동한다.'
+
+        a= cmds.ls(fir, sec)
+        
+        rot = cmds.xform(a[-1], q=1, ws=1, ro=1)
+        pos = cmds.xform(a[-1], q=1, ws=1, rp=1)
+        
+        for c in a[0:-1]:        
+        
+            cmds.xform(c, ws=1, ro= rot)
+            cmds.move(pos[0],pos[1], pos[2] ,c,rpr=1)
+
+
+    def set_build(self):
+        self.nubs_match('hair_linear_nub')
+        cre_loc_grp_ = list(reversed(cre_loc_grp))
+
+        for cluster_, loc_ in zip(cluster_grp, cre_loc_grp_):
+            self.A2B(cluster_ + 'Handle', loc_)
+
+        cmds.rebuildSurface(cre_nub, rt=0, kc=0, fr=0, ch=1, end=1, sv=segments-1, su=1, kr=0, dir=2, kcp=0, tol=0.01, dv=3, du=3, rpo=1)    
+        cmds.delete(cre_nub, constructionHistory = True)
+
+        first_po = cre_loc_grp_[0]
+        second_po = cre_loc_grp_[-1]
+        
+      
+        first_con = self.con_shape('box', prefix_name)
+            
+      

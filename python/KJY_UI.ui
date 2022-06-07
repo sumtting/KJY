@@ -36,7 +36,7 @@
      </rect>
     </property>
     <property name="currentIndex">
-     <number>2</number>
+     <number>0</number>
     </property>
     <widget class="QWidget" name="Rig_tab">
      <attribute name="title">
@@ -717,7 +717,7 @@
            <string>--------</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="vvv">
+         <widget class="QPushButton" name="connect_tool_btn">
           <property name="geometry">
            <rect>
             <x>120</x>
@@ -730,7 +730,7 @@
            <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;마지막에 선택한 object와 동일하게 blend target을 옮겨준다.&lt;/p&gt;&lt;p&gt;(네이밍이 겹치지 않아야함, 블렌드웨이트에 연결된 커넥션이 없어야함)&lt;/p&gt;&lt;p&gt;* 모양이 다른 object도 가능&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
           </property>
           <property name="text">
-           <string>--------</string>
+           <string>connect tool</string>
           </property>
          </widget>
          <widget class="QPushButton" name="axis_off_btn">
@@ -856,27 +856,11 @@
            <string>attribute unlock</string>
           </property>
          </widget>
-         <widget class="QPushButton" name="connect_tool_btn">
-          <property name="geometry">
-           <rect>
-            <x>10</x>
-            <y>60</y>
-            <width>101</width>
-            <height>23</height>
-           </rect>
-          </property>
-          <property name="toolTip">
-           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 object의 Attribute를 모두 unlock&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-          </property>
-          <property name="text">
-           <string>connect tool</string>
-          </property>
-         </widget>
          <widget class="QPushButton" name="posereader_btn">
           <property name="geometry">
            <rect>
             <x>120</x>
-            <y>60</y>
+            <y>190</y>
             <width>101</width>
             <height>23</height>
            </rect>
@@ -892,7 +876,7 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>82</y>
+            <y>250</y>
             <width>101</width>
             <height>23</height>
            </rect>
@@ -908,7 +892,7 @@
           <property name="geometry">
            <rect>
             <x>120</x>
-            <y>82</y>
+            <y>250</y>
             <width>101</width>
             <height>23</height>
            </rect>
@@ -924,7 +908,7 @@
           <property name="geometry">
            <rect>
             <x>10</x>
-            <y>104</y>
+            <y>270</y>
             <width>101</width>
             <height>23</height>
            </rect>
@@ -940,7 +924,7 @@
           <property name="geometry">
            <rect>
             <x>120</x>
-            <y>104</y>
+            <y>270</y>
             <width>101</width>
             <height>23</height>
            </rect>
@@ -950,6 +934,22 @@
           </property>
           <property name="text">
            <string>LR copy</string>
+          </property>
+         </widget>
+         <widget class="QPushButton" name="tex_manager_btn">
+          <property name="geometry">
+           <rect>
+            <x>120</x>
+            <y>300</y>
+            <width>101</width>
+            <height>23</height>
+           </rect>
+          </property>
+          <property name="toolTip">
+           <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;선택한 컨트롤러의 어트리뷰트값을 반대쪽 컨트롤러에 copy&lt;br/&gt;(전체 네이밍은 같고 L/R만 달라야함)&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+          </property>
+          <property name="text">
+           <string>Tex manager</string>
           </property>
          </widget>
         </widget>
